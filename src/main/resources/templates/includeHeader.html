@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RedBook</title>
+
+</head>
+<body>
+    <header class="header_area" th:fragment="header">
+        <div class="classy-nav-container breakpoint-off d-flex align-items-center justify-content-between">
+            <nav class="classy-navbar" id="essenceNav">
+                <a class="nav-brand" href="index.html"><img src="img/logo/logo.png" width="85" height="85" alt=""></a>
+                <div class="classy-navbar-toggler">
+                    <span class="navbarToggler"><span></span><span></span><span></span></span>
+                </div>
+                <div class="classy-menu">
+                    <div class="classycloseIcon">
+                        <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                    </div>
+                    <div class="classynav">
+                        <ul>
+                            <li><a href="interBook.html">국내도서</a>
+                            </li>
+                            <li><a href="outerBook.html">외국도서</a>
+                            </li>
+                            <li><a href="#">eBook</a>
+
+                                <div class="megamenu">
+                                    <ul class="single-mega cn-col-4">
+                                    </ul>
+                                    <ul class="single-mega cn-col-4">
+                                        <li><a href="#">일반도서</a></li>
+                                        <li><a href="#">로맨스/BL</a></li>
+                                        <li><a href="#">판타지/무협</a></li>
+                                        <li><a href="#">sam</a></li>
+                                        <li><a href="#">코믹스</a></li>
+                                        <li><a href="#">학술논문</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li><a href="contact.html">회사소개</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="header-meta d-flex clearfix justify-content-end">
+                <div class="user-login-info">
+                    <a href="https://github.com/YunDongGeon/RedBook"><img src="img/core-img/github.png" alt=""></a>
+                </div>
+                <div class="cart-area">
+                    <a href="search_ajax.html" id="essenceCartBtn"><i class="fa fa-search" aria-hidden="true"></i><span></span></a>
+                    <!--<a href="search.html" id="essenceCartBtn"><i class="fa fa-search" aria-hidden="true"></i><span></span></a>-->
+                </div>
+            </div>
+        </div>
+    </header>
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/classy-nav.min.js"></script>
+    <script src="js/active.js"></script>
+</body>
+</html>

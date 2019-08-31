@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>검색</title>
+<link rel="icon" href="img/core-img/favicon.png">
+<link rel="stylesheet" href="css/core-style.css">
+<link rel="stylesheet" href="style.css">
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/interBook.css">
+
+<script src="js/jquery/jquery-2.2.4.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/classy-nav.min.js"></script>
+<script src="js/active.js"></script>
+<script src="js/includeHTML.js"></script>
+</head>
+<body>
+<!--        <form method="post" action="/search.html">-->
+<!--            <input type="text" name="keyword"> <br>-->
+<!--            <button type="submit">입력</button>-->
+<!--        </form>-->
+       <div id="headers"></div>
+<!-- ##### Breadcumb Area Start ##### -->
+<div class="breadcumb_area bg-img" style="background-image: url(img/bg-img/breadcumb.jpg);">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-12">
+                <div class="page-title text-center">
+                    <h2>책 찾아보기</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="shop_grid_area section-padding-80">
+    <div class="container" align="center">
+            <div class="col-12 col-md-8 col-lg-9">
+                <div class="shop_grid_product_area">
+                    <div class="row">
+                        <div align="center">
+                            <table border="0">
+                                <tr>
+                                    <td class="search_table" align="center">
+                                        <span class="window">
+                                            <input id="keyword" type="text" name="keyword" class="search_keyword_input" placeholder="검색어를 입력해주세요">
+                                        </span>
+                                        <button id="search" class="search_button">검색</button>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br><br><br>
+                            <table id="header">
+                            </table>
+                            <ul>
+                                <li class="searchResult"></li>
+                            </ul>
+                            <br><br><br>
+                            <div id="moreBtn">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+</section>
+<div id="footers"></div>
+<script type="text/javascript">
+  keyword = '';
+
+  $("#search").click(function(e){
+    e.preventDefault();
+    page = 0;
+    count = 0;
+    keyword = $('#keyword').val();
+
+    $.ajax({
+      url: 'http://127.0.0.1:5000/getSearchCount/'+keyword,
+      success: function(data) {
+        count = data[0].count
+      }
+    });
+    $.ajax({
+      url: 'http://127.0.0.1:5000/search/'+keyword+'/'+page,
+      success: function(data) {
+        if (data.length==0) {
+          $('#header').empty().append(
+            noResult(keyword)
+          );
+          $('.searchResult').empty()
+          $('#moreBtn').empty()
+        }else{
+          $('#header').empty().append(
+            header(keyword, count)
+          );
+          $('.searchResult').empty()
+          for (var i = 0; i < data.length; i++) {
+            if (data[i].bookList.length == 1){
+               $('.searchResult').append(
+                  result1(
+                     data[i].bookList[0].books[0].img,
+                     data[i].bookList[0].books[0].url,
+                     data[i].bookList[0].books[0].title,
+                     data[i].bookList[0].books[0].author,
+                     data[i].bookList[0].books[0].publish,
+                     data[i].bookList[0].books[0].publish_date,
+                     data[i].bookList[0].books[0].category,
+                     data[i].bookList[0].site,
+                     data[i].bookList[0].books[0].price,
+                  )
+               );
+            }else if (data[i].bookList.length == 2){
+               $('.searchResult').append(
+                  result2(
+                     data[i].bookList[0].books[0].img,
+                     data[i].bookList[0].books[0].url,
+                     data[i].bookList[0].books[0].title,
+                     data[i].bookList[0].books[0].author,
+                     data[i].bookList[0].books[0].publish,
+                     data[i].bookList[0].books[0].publish_date,
+                     data[i].bookList[0].books[0].category,
+                     data[i].bookList[0].site,
+                     data[i].bookList[1].site,
+                     data[i].bookList[0].books[0].price,
+                     data[i].bookList[1].books[0].price,
+                  )
+               );
+            }else{
+               $('.searchResult').append(
+                  result3(
+                     data[i].bookList[0].books[0].img,
+                     data[i].bookList[0].books[0].url,
+                     data[i].bookList[0].books[0].title,
+                     data[i].bookList[0].books[0].author,
+                     data[i].bookList[0].books[0].publish,
+                     data[i].bookList[0].books[0].publish_date,
+                     data[i].bookList[0].books[0].category,
+                     data[i].bookList[0].site,
+                     data[i].bookList[1].site,
+                     data[i].bookList[2].site,
+                     data[i].bookList[0].books[0].price,
+                     data[i].bookList[1].books[0].price,
+                     data[i].bookList[2].books[0].price,
+                  )
+                );
+              }
+            }
+            $('#moreBtn').empty().append(
+              moreBtn()
+            )
+          }
+        }
+      });
+    page++;
+  });
+
+  $("#button").click(function(e){
+    e.preventDefault();
+    $.ajax({
+      url: 'http://127.0.0.1:5000/search/'+keyword+'/'+page,
+      success: function(data) {
+          $('#header').append(
+            header(keyword)
+          );
+          for (var i = 0; i < data.length; i++) {
+            result(
+
+            )
+          }
+          $('#moreBtn').append(
+            moreBtn()
+          )
+        }
+    });
+    page++;
+  });
+
+  function moreBtn(){
+    return `
+      <button id="button" class="button1">더보기</button>
+    `;
+  }
+
+  function noResult(keyword){
+    return `
+      <tr class="keyword_result_none_tr">
+          <td class="keyword_result_none">
+              <span class="keyword_none">"${keyword}"</span>
+              <span class="keyword_none_text">의 검색결과가 없습니다.</span>
+          </td>
+      </tr>
+    `;
+  }
+
+  function header(keyword, count){
+    return `
+      <tr>
+          <td class="search_top">
+              <strong class="search_top_font">
+                  도서&nbsp;:&nbsp;
+                  <span class="search_keyword">"${keyword}"</span>
+                  &nbsp;검색결과&nbsp;&nbsp;
+              </strong>
+              /&nbsp;&nbsp;
+              <span class="search_count">${count}<!-- 검색결과 개수 --></span>
+              건
+          </td>
+      </tr>
+      <tr class="blank_tr">
+          <td colspan="4"></td>
+      </tr>
+      <tr class="search_bottom_tr">
+          <td class="search_bottom">
+              <div>
+                  <span class="search_df3"><a href="#" class="search_a">정확도</a></span>
+                  <span class="search_df1">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                  <span class="search_df2"><a href="#" class="search_a">최저가</a></span>
+                  <span class="search_df1">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                  <span class="search_df2"><a href="#" class="search_a">최고가</a></span>
+              </div>
+          </td>
+      </tr>
+    `;
+  }
+
+  function result1(img, url, title, author, publish, publish_date, category, site, price){
+    return `<table border="0" id="search_table"> <!-- 밑줄부터 반복-->
+              <tr class="interTr1">
+                  <td class="interTd1" rowspan="2">
+                      <a href="${url}">
+                          <img src = "${img}" width="140px"s alt="">
+                      </a>
+                  </td>
+                  <td class="interTd2">
+                          <span>
+                              <a href="${url}" class="book_title" title="책제목">${title}</a>
+                          </span>
+                  </td>
+                  <td class="interTd3" colspan="2">
+                      <span class="shop_font">쇼핑몰별 최저가</span>
+                  </td>
+              </tr>
+              <tr class="interTr2">
+                  <td class="interTd6">
+                      <div class="author_div">
+                          <span class="author_font" title="저자">${author}<!--저자 --></span>
+                          <span class="publish_font">저</span>&nbsp;
+                          <span class="publish_font" >|</span>&nbsp;
+                          <span class="publish_font" title="출판사">${publish}<!--출판사 --></span>&nbsp;
+                          <span class="publish_font">|</span>&nbsp;
+                          <span class="publish_font" title="출판일">${publish_date}<!--출판일 --></span>
+                      </div>
+                      <div class="min_price_div">
+                          <span class="min_price_nothing">최저</span>&nbsp;
+                          <span class="min_price_font" title="최저가격">${price}<!--책 가격 --></span>
+                          <span class="min_price_nothing">원</span>
+                      </div>
+                      <div class="cat_div">
+                          <span class="cat_font" title="카테고리">${category}<!--카테고리--></span>
+                      </div>
+                      <div class="release_div">
+                          <span class="release_font">출고&nbsp;예상일&nbsp;:&nbsp;1&nbsp;일&nbsp;이내</span>
+                      </div>
+                  </td>
+                  <td class="interTd4" align="left">
+                      <span class="site_font1" title="사이트1">${site}<!--사이트1 --></span>
+                  </td>
+                  <td class="interTd5" align="right">
+                      <span>
+                          <a href="#" class="price_font1" title="사이트1 가격">${price}<!-- 사이트1 가격 --></a>
+                      </span>
+                      <br>
+                  </td>
+              </tr> <!-- 여기까지 -->
+          </table>`;
+  }
+  function result2(img, url, title, author, publish, publish_date, category, site1, site2, price1, price2){
+    return `<table border="0" id="search_table"> <!-- 밑줄부터 반복-->
+              <tr class="interTr1">
+                  <td class="interTd1" rowspan="2">
+                      <a href="${url}">
+                          <img src = "${img}" width="140px"s alt="">
+                      </a>
+                  </td>
+                  <td class="interTd2">
+                          <span>
+                              <a href="${url}" class="book_title" title="책제목">${title}</a>
+                          </span>
+                  </td>
+                  <td class="interTd3" colspan="2">
+                      <span class="shop_font">쇼핑몰별 최저가</span>
+                  </td>
+              </tr>
+              <tr class="interTr2">
+                  <td class="interTd6">
+                      <div class="author_div">
+                          <span class="author_font" title="저자">${author}<!--저자 --></span>
+                          <span class="publish_font">저</span>&nbsp;
+                          <span class="publish_font" >|</span>&nbsp;
+                          <span class="publish_font" title="출판사">${publish}<!--출판사 --></span>&nbsp;
+                          <span class="publish_font">|</span>&nbsp;
+                          <span class="publish_font" title="출판일">${publish_date}<!--출판일 --></span>
+                      </div>
+                      <div class="min_price_div">
+                          <span class="min_price_nothing">최저</span>&nbsp;
+                          <span class="min_price_font" title="최저가격">${price1}<!--책 가격 --></span>
+                          <span class="min_price_nothing">원</span>
+                      </div>
+                      <div class="cat_div">
+                          <span class="cat_font" title="카테고리">${category}<!--카테고리--></span>
+                      </div>
+                      <div class="release_div">
+                          <span class="release_font">출고&nbsp;예상일&nbsp;:&nbsp;1&nbsp;일&nbsp;이내</span>
+                      </div>
+                  </td>
+                  <td class="interTd4" align="left">
+                      <span class="site_font1" title="사이트1">${site1}<!--사이트1 --></span>
+                      <br>
+                      <span class="site_font1" title="사이트2">${site2}<!--사이트2 --></span>
+                  </td>
+                  <td class="interTd5" align="right">
+                      <span>
+                          <a href="#" class="price_font1" title="사이트1 가격">${price1}<!-- 사이트1 가격 --></a>
+                      </span>
+                      <br>
+                      <span>
+                          <a href="#" class="price_font1" title="사이트2 가격">${price2}<!-- 사이트2 가격 --></a>
+                      </span>
+                      <br>
+                  </td>
+              </tr> <!-- 여기까지 -->
+          </table>`;
+  }
+  function result3(img, url, title, author, publish, publish_date, category, site1, site2, site3, price1, price2, price3){
+    return `<table border="0" id="search_table"> <!-- 밑줄부터 반복-->
+              <tr class="interTr1">
+                  <td class="interTd1" rowspan="2">
+                      <a href="${url}">
+                          <img src = "${img}" width="140px"s alt="">
+                      </a>
+                  </td>
+                  <td class="interTd2">
+                          <span>
+                              <a href="${url}" class="book_title" title="책제목">${title}</a>
+                          </span>
+                  </td>
+                  <td class="interTd3" colspan="2">
+                      <span class="shop_font">쇼핑몰별 최저가</span>
+                  </td>
+              </tr>
+              <tr class="interTr2">
+                  <td class="interTd6">
+                      <div class="author_div">
+                          <span class="author_font" title="저자">${author}<!--저자 --></span>
+                          <span class="publish_font">저</span>&nbsp;
+                          <span class="publish_font" >|</span>&nbsp;
+                          <span class="publish_font" title="출판사">${publish}<!--출판사 --></span>&nbsp;
+                          <span class="publish_font">|</span>&nbsp;
+                          <span class="publish_font" title="출판일">${publish_date}<!--출판일 --></span>
+                      </div>
+                      <div class="min_price_div">
+                          <span class="min_price_nothing">최저</span>&nbsp;
+                          <span class="min_price_font" title="최저가격">${price1}<!--책 가격 --></span>
+                          <span class="min_price_nothing">원</span>
+                      </div>
+                      <div class="cat_div">
+                          <span class="cat_font" title="카테고리">${category}<!--카테고리--></span>
+                      </div>
+                      <div class="release_div">
+                          <span class="release_font">출고&nbsp;예상일&nbsp;:&nbsp;1&nbsp;일&nbsp;이내</span>
+                      </div>
+                  </td>
+                  <td class="interTd4" align="left">
+                      <span class="site_font1" title="사이트1">${site1}<!--사이트1 --></span>
+                      <br>
+                      <span class="site_font1" title="사이트2">${site2}<!--사이트2 --></span>
+                      <br>
+                      <span class="site_font1" title="사이트3">${site3}<!--사이트3 --></span>
+                  </td>
+                  <td class="interTd5" align="right">
+                      <span>
+                          <a href="#" class="price_font1" title="사이트1 가격">${price1}<!-- 사이트1 가격 --></a>
+                      </span>
+                      <br>
+                      <span>
+                          <a href="#" class="price_font1" title="사이트2 가격">${price2}<!-- 사이트2 가격 --></a>
+                      </span>
+                      <br>
+                      <span>
+                          <a href="#" class="price_font1" title="사이트3 가격">${price3}<!-- 사이트3 가격 --></a>
+                      </span>
+                      <br>
+                  </td>
+              </tr> <!-- 여기까지 -->
+          </table>`;
+  }
+</script>
+</body>
+</html>
