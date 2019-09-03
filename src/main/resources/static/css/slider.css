@@ -1,4 +1,15 @@
 .slider {
-    width: 50%;
+    width: 2000px;
+    height: 600px;
     margin: 100px auto;
+}
+.slider-item{
+	width: auto;
+	height: 600px;
+	overflow: hidden;
+}
+.slider-item-img{
+	width: 100%;
+	heigth: auto;
+
 }

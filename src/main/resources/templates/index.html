@@ -26,27 +26,22 @@
     <script th:src="@{js/slider.js}"></script>
 </head>
 <body>
-    <div id="headers" th:replace="includeHeader::header"></div>
+    <div id="headers" th:replace="includeHeader::header"></div>    
     <section class="slider">
-    	<button type="button" class="slick-prev">
-    		왜 안나와
-    	</button>
-		<div>
-			<img th:src="@{img/bg-img/background1.jpg}">
+		<div class="slider-item">
+			<img class="slider-item-img" th:src="@{img/bg-img/background1.jpg}">
 	    </div>
-	    <div>
-			<img th:src="@{img/bg-img/background2.jpg}">
+	    <div class="slider-item">
+			<img class="slider-item-img" th:src="@{img/bg-img/background2.jpg}">
 	    </div>
-	    <div>
-			<img th:src="@{img/bg-img/background3.png}">
+	    <div class="slider-item">
+			<img class="slider-item-img" th:src="@{img/bg-img/background3.png}">
 	    </div>	    
-	    <div>
-			<img th:src="@{img/bg-img/background4.jpg}">
-	    </div>	    
-	    <button type="button" class="slick-next">
-	    	왜 안나와
-	    </button>	    
+	    <div class="slider-item">
+			<img class="slider-item-img" th:src="@{img/bg-img/background4.jpg}">
+	    </div>	  
   	</section>
+  	
     <section class="new_arrivals_area section-padding-80 clearfix">
         <div class="container">
             <div class="row">
