@@ -3,11 +3,6 @@
     height: 600px;
     margin: 130px auto;
 }
- @media (max-width: 991.98px) {
-    .slider {
-      width: 100%;
-      height: 600px;
-      margin: 0px auto; } }
 .slider-item{
 	width: auto;
 	height: 600px;
@@ -17,4 +12,12 @@
 	width: 100%;
 	heigth: auto;
 
+}
+@media (max-width: 991.98px) {
+   .slider {
+	   width: 100%;
+	   height: 600px;
+	   margin: 0px auto; 
+   } 
+   
 }
