@@ -30,7 +30,7 @@
   --breakpoint-sm: 576px;
   --breakpoint-md: 768px;
   --breakpoint-lg: 992px;
-  --breakpoint-xl: 1200px;
+  --breakpoint-xl: 1200px;  
   --font-family-sans-serif: "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
 
@@ -2517,7 +2517,6 @@ input[type="button"].btn-block {
   float: left;
   min-width: 10rem;
   padding: 0.5rem 0;
-  margin: 0.125rem 0 0;
   font-size: 1rem;
   color: #212529;
   text-align: left;
@@ -3240,6 +3239,7 @@ input[type="button"].btn-block {
   display: block; }
 
 .navbar {
+  font-family: 'Agency FB', Arial;
   position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -7287,7 +7287,7 @@ a {
   color: #f1b8c4; }
   a:hover {
     text-decoration: none;
-    color: #f1b8c4; }
+    color: #484848; }
 
 h1, h2, h3, h4, h5,
 .h1, .h2, .h3, .h4, .h5 {
@@ -7301,11 +7301,12 @@ h1, h2, h3, h4, h5,
 .ftco-navbar-light {
   background: #ffffff !important;
   position: absolute;
-  top: 20px;
+  top: 10px;
   left: 0;
   right: 0;
   z-index: 3;
-  padding: 0; }
+  padding: 0; 
+  display: block;}
   @media (max-width: 991.98px) {
     .ftco-navbar-light {
       background: #ffffff !important;
@@ -7326,7 +7327,7 @@ h1, h2, h3, h4, h5,
     .ftco-navbar-light .navbar-nav {
       padding-bottom: 10px; } }
   .ftco-navbar-light .navbar-nav > .nav-item > .nav-link {
-    font-size: 14px;
+    font-size: 22px;
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
     padding-left: 20px;
@@ -7393,10 +7394,9 @@ h1, h2, h3, h4, h5,
   .ftco-navbar-light .navbar-toggler {
     border: none;
     color: rgba(0, 0, 0, 0.7) !important;
-    cursor: pointer;
-    padding-right: 0;
+    cursor: pointer;    
     text-transform: uppercase;
-    font-size: 16px;
+    font-size: 22px;
     letter-spacing: .1em; }
     .ftco-navbar-light .navbar-toggler:focus {
       outline: none !important; }
@@ -7410,10 +7410,10 @@ h1, h2, h3, h4, h5,
     -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1); }
     .ftco-navbar-light.scrolled .nav-item.active > a {
-      color: #f1b8c4 !important; }
+      color: #000 !important; }
     .ftco-navbar-light.scrolled .nav-item.cta > a {
       color: #fff !important;
-      background: #f1b8c4;
+      background: #000;
       border: none !important; }
       .ftco-navbar-light.scrolled .nav-item.cta > a span {
         display: inline-block;

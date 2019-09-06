@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">  
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700" rel="stylesheet">
+    <link href="https://allfont.net/allfont.css?fonts=agency-fb" rel="stylesheet" type="text/css" />
     <link rel="icon" th:href="@{img/logo/favicon.png}">
     <link rel="stylesheet" th:href="@{css/open-iconic-bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{css/animate.css}">  
@@ -22,10 +23,11 @@
     <link rel="stylesheet" th:href="@{slick/slick.css}">
     <link rel="stylesheet" th:href="@{slick/slick-theme.css}">
     <link rel="stylesheet" th:href="@{css/slider.css}">
+    <link rel="stylesheet" th:href="@{css/nav.css}">
     
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar" th:replace="includeHeader::nav"></nav>
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar" th:replace="sewNav::nav"></nav>
     <!-- END nav -->
 	<section class="slider">
 		<div class="slider-item">
@@ -439,7 +441,8 @@
 
 
   <script th:src="@{js/jquery.min.js}"></script>
-  <script th:src="@{js/jquery-migrate-3.0.1.min.js}"></script>
+  <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+  
   <script th:src="@{js/popper.min.js}"></script>
   <script th:src="@{js/bootstrap.min.js}"></script>
   <script th:src="@{js/jquery.easing.1.3.js}"></script>
