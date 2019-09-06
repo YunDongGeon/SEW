@@ -2,63 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>RedBook</title>
-
+    <title>Sew</title>
 </head>
 <body>
-    <header class="header_area" th:fragment="header">
-        <div class="classy-nav-container breakpoint-off d-flex align-items-center justify-content-between">
-            <nav class="classy-navbar" id="essenceNav">
-                <a class="nav-brand" href="index.html"><img src="img/logo/logo.png" width="85" height="85" alt=""></a>
-                <div class="classy-navbar-toggler">
-                    <span class="navbarToggler"><span></span><span></span><span></span></span>
-                </div>
-                <div class="classy-menu">
-                    <div class="classycloseIcon">
-                        <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
-                    </div>
-                    <div class="classynav">
-                        <ul>
-                            <li><a href="interBook.html">국내도서</a>
-                            </li>
-                            <li><a href="outerBook.html">외국도서</a>
-                            </li>
-                            <li><a href="#">eBook</a>
-
-                                <div class="megamenu">
-                                    <ul class="single-mega cn-col-4">
-                                    </ul>
-                                    <ul class="single-mega cn-col-4">
-                                        <li><a href="#">일반도서</a></li>
-                                        <li><a href="#">로맨스/BL</a></li>
-                                        <li><a href="#">판타지/무협</a></li>
-                                        <li><a href="#">sam</a></li>
-                                        <li><a href="#">코믹스</a></li>
-                                        <li><a href="#">학술논문</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li><a href="contact.html">회사소개</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-            <div class="header-meta d-flex clearfix justify-content-end">
-                <div class="user-login-info">
-                    <a href="https://github.com/YunDongGeon/RedBook"><img src="img/core-img/github.png" alt=""></a>
-                </div>
-                <div class="cart-area">
-                    <a href="search_ajax.html" id="essenceCartBtn"><i class="fa fa-search" aria-hidden="true"></i><span></span></a>
-                    <!--<a href="search.html" id="essenceCartBtn"><i class="fa fa-search" aria-hidden="true"></i><span></span></a>-->
-                </div>
-            </div>
-        </div>
-    </header>
-    <script src="js/jquery/jquery-2.2.4.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/plugins.js"></script>
-    <script src="js/classy-nav.min.js"></script>
-    <script src="js/active.js"></script>
+	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar" th:fragment="nav">
+	  <div class="container">
+	    <a class="navbar-brand" href="index.html">
+	    	<img th:src="@{img/logo/logo.png}" width="200px" height="auto" />
+	    </a>
+	    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	      <span class="oi oi-menu"></span> Menu
+	    </button>
+	
+	    <div class="collapse navbar-collapse" id="ftco-nav">
+	      <ul class="navbar-nav ml-auto">
+	        <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
+	        <li class="nav-item dropdown">
+	           <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
+	           <div class="dropdown-menu" aria-labelledby="dropdown04">
+	           	<a class="dropdown-item" href="shop.html">Shop</a>
+	             <a class="dropdown-item" href="product-single.html">Single Product</a>
+	             <a class="dropdown-item" href="cart.html">Cart</a>
+	             <a class="dropdown-item" href="checkout.html">Checkout</a>
+	           </div>
+	         </li>
+	        <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+	        <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+	        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+	        <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+	
+	      </ul>
+	    </div>
+	  </div>
+	</nav>
+	<script src="js/jquery/jquery-2.2.4.min.js"></script>
+	<script src="js/popper.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/plugins.js"></script>
+	<script src="js/classy-nav.min.js"></script>
+	<script src="js/active.js"></script>
 </body>
 </html>
