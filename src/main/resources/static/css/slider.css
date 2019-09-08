@@ -19,5 +19,7 @@
 	   height: 600px;
 	   margin: 0px auto; 
    } 
-   
+   .slick-dots {
+	   visibility: hidden;
+   }
 }

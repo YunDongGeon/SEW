@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Sew</title>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link
+	href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700"
+	rel="stylesheet">
+<link href="http://allfont.net/allfont.css?fonts=agency-fb"
+	rel="stylesheet" type="text/css" />
+<link rel="icon" th:href="@{img/logo/favicon.png}">
+<link rel="stylesheet" th:href="@{css/open-iconic-bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{css/animate.css}">
+<link rel="stylesheet" th:href="@{css/owl.carousel.min.css}">
+<link rel="stylesheet" th:href="@{css/owl.theme.default.min.css}">
+<link rel="stylesheet" th:href="@{css/magnific-popup.css}">
+<link rel="stylesheet" th:href="@{css/aos.css}">
+<link rel="stylesheet" th:href="@{css/ionicons.min.css}">
+<link rel="stylesheet" th:href="@{css/bootstrap-datepicker.css}">
+<link rel="stylesheet" th:href="@{css/jquery.timepicker.css}">
+<link rel="stylesheet" th:href="@{css/flaticon.css}">
+<link rel="stylesheet" th:href="@{css/icomoon.css}">
+<link rel="stylesheet" th:href="@{css/style.css}">
+<link rel="stylesheet" th:href="@{slick/slick.css}">
+<link rel="stylesheet" th:href="@{slick/slick-theme.css}">
+<link rel="stylesheet" th:href="@{css/slider.css}">
+<link rel="stylesheet" th:href="@{css/nav.css}">
+<link rel="stylesheet" th:href="@{css/join.css}">
+
+</head>
+<body>
+	<nav
+		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
+		id="ftco-navbar" th:replace="sewNav::nav"></nav>
+	<!-- END nav -->
+	
+	<!-- Login Form -->
+	<section class="ftco-section ftco-product">
+		<div class="container">
+			<div class="joinTit">
+				<h2>회원가입</h2>
+				<ol>
+					<li class="onPage">
+						<span>01</span>
+						약관동의
+						<span class="arrows">></span>	
+					</li>
+					<li>
+						<span>02</span>
+						정보입력
+						<span class="arrows">></span>
+					</li>					
+					<li>
+						<span>03</span>
+						가입완료
+					</li>
+				</ol>
+			</div>
+			<div class="joinContainer">
+				<div class="joinBox">
+					<h5 class="termsTit">약관동의</h5>					
+					<hr>					
+			</div>		
+		</div>
+	</section>	
+	<!-- END Login Form -->
+	
+	<footer th:replace="sewFooter::footer"
+		class="ftco-footer bg-light ftco-section"></footer>
+	<!-- loader -->
+	<div id="ftco-loader" class="show fullscreen">
+		<svg class="circular" width="48px" height="48px">
+			<circle class="path-bg" cx="24" cy="24" r="22" fill="none"
+				stroke-width="4" stroke="#eeeeee" />
+			<circle class="path" cx="24" cy="24" r="22" fill="none"
+				stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg>
+	</div>
+
+
+	<script th:src="@{js/jquery.min.js}"></script>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+	<script th:src="@{js/popper.min.js}"></script>
+	<script th:src="@{js/bootstrap.min.js}"></script>
+	<script th:src="@{js/jquery.easing.1.3.js}"></script>
+	<script th:src="@{js/jquery.waypoints.min.js}"></script>
+	<script th:src="@{js/jquery.stellar.min.js}"></script>
+	<script th:src="@{js/owl.carousel.min.js}"></script>
+	<script th:src="@{js/jquery.magnific-popup.min.js}"></script>
+	<script th:src="@{js/aos.js}"></script>
+	<script th:src="@{js/jquery.animateNumber.min.js}"></script>
+	<script th:src="@{js/bootstrap-datepicker.js}"></script>
+	<script th:src="@{js/scrollax.min.js}"></script>
+	<script
+		th:src="@{https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false}"></script>
+	<script th:src="@{js/google-map.js}"></script>
+	<script th:src="@{js/main.js}"></script>
+	<script th:src="@{slick/slick.js}"></script>
+	<script th:src="@{slick/slick.min.js}"></script>
+	<script th:src="@{js/slider.js}"></script>
+</body>
+</html>

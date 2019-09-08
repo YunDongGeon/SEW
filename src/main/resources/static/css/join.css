@@ -1,0 +1,65 @@
+.joinTit {	
+	overflow: hidden;
+	border-bottom: 0.5px solid #08080890;
+}
+
+.joinTit h2 {
+	float: left;
+	margin-top: 1.5rem !important;
+	font-weight: bold;	
+}
+
+.joinTit ol {
+	float: right;
+	list-style: none;
+	margin-top: 40px;
+	margin-bottom: 0 !important;	
+}
+
+.joinTit ol li{
+	color: #d1d1d1;
+	font-size: 15px;
+	float: left;		
+}
+
+.joinTit ol span{
+	font-size: 18px;
+	font-weight: bold;	
+}
+
+.joinTit ol .onPage{
+	font-size: 15px;
+	float: left;	
+	color: #000;		
+}
+
+.joinTit ol .onPage span{
+	font-size: 18px;
+	font-weight: bold;	
+	color: #000;
+}
+
+.arrows {
+	margin: 0 10px;
+}
+
+.termsTit {
+	margin-top: 1.5rem !important;
+}
+
+hr {
+	border: 0.5px solid #08080830;
+}
+
+.joinContainer {
+	width: 100%;
+    padding-right: 20%;
+    padding-left: 20%;
+    margin-right: auto;
+    margin-left: auto;	
+}
+
+.joinBox {
+	
+}
+

@@ -44,7 +44,7 @@
 		<div class="container">
 			<div class="row justify-content-center mb-3 pb-3">
 				<div class="col-md-12 heading-section text-center">					
-					<h2 class="mb-4">LOGIN</h2>
+					<h2 class="loginTitle">LOGIN</h2>
 				</div>				
 			</div>
 			<div class="loginContainer">
@@ -60,11 +60,11 @@
 						</form>
 					</div>
 					<hr>
-					<ul class="buttonList">
-						<li class="nav-item"><button id="joinBtn">회원가입</button></li>
-						<li class="nav-item"><button id="findIdBtn">아아디 찾기</button></li>
-						<li class="nav-item"><button id="findPwBtn">비밀번호 찾기</button></li>
-					</ul>
+					<div class="buttonList">
+						<a th:href="@{join}"><button class="buttonItem" id="joinBtn">회원가입</button></a>
+						<button class="buttonItem" id="findIdBtn">아아디 찾기</button>
+						<button class="buttonItem" id="findPwBtn">비밀번호 찾기</button>
+					</div>
 				</div>
 			</div>
 		</div>
