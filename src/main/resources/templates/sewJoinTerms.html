@@ -215,7 +215,7 @@
 							</div>
 						</div>
 						<div class="joinAgreementBox">
-							<input type="checkbox" name="smallBox"  class="smallBox" id="termsAgree2"> <label class="check" for="termsAgree1"> 
+							<input type="checkbox" name="smallBox"  class="smallBox" id="termsAgree2"> <label class="check" for="termsAgree2"> 
 								<em>
 									<strong>(필수)</strong> 개인정보 수집 및 이용
 								</em>
@@ -237,7 +237,7 @@
 						<hr>
 						<div class="buttonsBox">
 							<input type="button" name="cancel" value="취소" onclick="history.back(-1)">
-							<input type="button" name="next" value="다음">
+							<input type="submit" name="next" value="다음" onclick="termsChk(this.form)">
 						</div>
 					</div>
 				</div>

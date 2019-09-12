@@ -10,16 +10,12 @@ public class SewLinkController {
 	public String index() {
 		return "index";
 	}
-	@PostMapping("/index")
-	public String postIndex() {
-		return "redirect:/index";
-	}
 	@GetMapping("/login")
 	public String login() {
 		return "sewLogin";
 	}
-	@GetMapping("/join")
-	public String join() {
+	@GetMapping("/joinTerms")
+	public String joinTerms() {
 		return "sewJoinTerms";
 	}
 }
