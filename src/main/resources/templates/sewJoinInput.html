@@ -38,38 +38,89 @@
 		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
 		id="ftco-navbar" th:replace="sewNav::nav"></nav>
 	<!-- END nav -->
-	
-	<!-- Login Form -->
+
+	<!-- Join Form -->
 	<section class="ftco-section ftco-product">
 		<div class="container">
 			<div class="joinTit">
 				<h2>회원가입</h2>
 				<ol>
-					<li class="onPage">
-						<span>01</span>
-						약관동의
-						<span class="arrows">></span>	
+					<li class="onPage"><span>01</span> 약관동의 <span class="arrows">></span>
 					</li>
-					<li>
-						<span>02</span>
-						정보입력
-						<span class="arrows">></span>
-					</li>					
-					<li>
-						<span>03</span>
-						가입완료
-					</li>
+					<li><span>02</span> 정보입력 <span class="arrows">></span></li>
+					<li><span>03</span> 가입완료</li>
 				</ol>
 			</div>
-			<div class="joinContainer">
-				<div class="joinBox">
-					<h5 class="termsTit">약관동의</h5>					
-					<hr>					
-			</div>		
+			<form method="post">
+				<div class="joinContainer">
+					<div class="joinBox">
+						<h5 class="termsTit">회원정보</h5>
+						<table>
+							<tbody>
+								<tr>
+									<th scope="row">
+										아이디
+										<img class="icon" th:src="@{/img/icon/icoRequired.png}" alt="필수">										
+									</th>
+									<td>
+										<input type="text" name="id">
+										<span class="subMsg">(영문소문자/숫자, 4~16자)</span>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">
+										비밀번호
+										<img class="icon" th:src="@{/img/icon/icoRequired.png}" alt="필수">
+									</th>
+									<td>
+										<input type="password" name="pw">
+										<span class="subMsg">(영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 8자~16자)</span>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">
+										비밀번호 확인
+										<img class="icon" th:src="@{/img/icon/icoRequired.png}" alt="필수">
+									</th>
+									<td><input type="password" name="pwChk"></td>
+								</tr>
+								<tr>
+									<th scope="row">
+										이름
+										<img class="icon" th:src="@{/img/icon/icoRequired.png}" alt="필수">
+									</th>
+									<td><input type="text" name="name"></td>
+								</tr>
+								<tr>
+									<th scope="row">
+										생년월일
+										<img class="icon" th:src="@{/img/icon/icoRequired.png}" alt="필수">
+									</th>
+									<td class="ymd">
+										<input type="text" name="year"> 년
+										<input type="text" name="mon"> 월
+										<input type="text" name="day"> 일
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">
+										이메일
+										<img class="icon" th:src="@{/img/icon/icoRequired.png}" alt="필수">
+									</th>
+									<td>
+										<input type="text" name="email1"> @
+										<input type="text" name="email2">
+									</td>
+								</tr>											
+							</tbody>
+						</table>			
+					</div>					
+				</div>
+			</form>
 		</div>
-	</section>	
-	<!-- END Login Form -->
-	
+	</section>
+	<!-- END Join Form -->
+
 	<footer th:replace="sewFooter::footer"
 		class="ftco-footer bg-light ftco-section"></footer>
 	<!-- loader -->
@@ -96,12 +147,12 @@
 	<script th:src="@{js/jquery.animateNumber.min.js}"></script>
 	<script th:src="@{js/bootstrap-datepicker.js}"></script>
 	<script th:src="@{js/scrollax.min.js}"></script>
-	<script
-		th:src="@{https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false}"></script>
+	<script th:src="@{https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false}"></script>
 	<script th:src="@{js/google-map.js}"></script>
 	<script th:src="@{js/main.js}"></script>
 	<script th:src="@{slick/slick.js}"></script>
 	<script th:src="@{slick/slick.min.js}"></script>
 	<script th:src="@{js/slider.js}"></script>
+	<script th:src="@{js/sewJoin.js}"></script>
 </body>
 </html>
