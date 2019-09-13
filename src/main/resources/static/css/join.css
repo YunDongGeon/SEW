@@ -256,3 +256,7 @@ input[name="cancel"] {
     margin-right: 5%;
     cursor: pointer;
 }
+
+.inputTitBox {
+	display: inlline;
+}

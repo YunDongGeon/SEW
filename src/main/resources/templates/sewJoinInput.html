@@ -45,16 +45,19 @@
 			<div class="joinTit">
 				<h2>회원가입</h2>
 				<ol>
-					<li class="onPage"><span>01</span> 약관동의 <span class="arrows">></span>
-					</li>
-					<li><span>02</span> 정보입력 <span class="arrows">></span></li>
+					<li><span>01</span> 약관동의 <span class="arrows">></span></li>
+					<li class="onPage"><span>02</span> 정보입력 <span class="arrows">></span></li>
 					<li><span>03</span> 가입완료</li>
 				</ol>
 			</div>
 			<form method="post">
 				<div class="joinContainer">
 					<div class="joinBox">
-						<h5 class="termsTit">회원정보</h5>
+						<div class="inputTitBox">
+							<h5 class="inputTit">회원정보</h5>
+							<img class="icon" th:src="@{/img/icon/icoRequired.png}" alt="필수">
+							<span class="subMsg">필수 입력사항</span>
+						</div>						
 						<table>
 							<tbody>
 								<tr>

@@ -5,5 +5,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class JoinController {
-
+	@PostMapping("joinInput")
+	public String termsAgree() {
+		return "sewJoinInput";
+	}
 }
