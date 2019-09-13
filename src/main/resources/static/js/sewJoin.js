@@ -22,10 +22,8 @@ $(".smallBox").click(function(){
 
 function termsChk(form){
 	if($("#allAgree").prop("checked")){
-		form.action="joinInput";
 		form.submit();
 	}else if($("#termsAgree1").prop("checked") && $("#termsAgree2").prop("checked")){
-		form.action="joinInput";
 		form.submit();
 	}else{
 		alert("(필수) 이용약관을 체크해주세요.");
