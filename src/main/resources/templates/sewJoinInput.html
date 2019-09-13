@@ -53,8 +53,8 @@
 			<form method="post">
 				<div class="joinContainer">
 					<div class="joinBox">
-						<div class="inputTitBox">
-							<h5 class="inputTit">회원정보</h5>
+						<h5 class="inputTit">회원정보</h5>
+						<div class="subMsgBox">
 							<img class="icon" th:src="@{/img/icon/icoRequired.png}" alt="필수">
 							<span class="subMsg">필수 입력사항</span>
 						</div>						
@@ -66,7 +66,7 @@
 										<img class="icon" th:src="@{/img/icon/icoRequired.png}" alt="필수">										
 									</th>
 									<td>
-										<input type="text" name="id">
+										<input type="text" name="id" style="IME-MODE: disabled">
 										<span class="subMsg">(영문소문자/숫자, 4~16자)</span>
 									</td>
 								</tr>
@@ -100,9 +100,9 @@
 										<img class="icon" th:src="@{/img/icon/icoRequired.png}" alt="필수">
 									</th>
 									<td class="ymd">
-										<input type="text" name="year"> 년
-										<input type="text" name="mon"> 월
-										<input type="text" name="day"> 일
+										<input type="text" name="year" maxlength="4" numberOnly> 년
+										<input type="text" name="mon" maxlength="2" numberOnly> 월
+										<input type="text" name="day" maxlength="2" numberOnly> 일
 									</td>
 								</tr>
 								<tr>
@@ -114,9 +114,38 @@
 										<input type="text" name="email1"> @
 										<input type="text" name="email2">
 									</td>
-								</tr>											
+								</tr>	
+								<tr>
+									<th scope="row">
+										휴대폰번호										
+									</th>
+									<td>
+										<input type="text" id="cellPhone" name="cellPhone" maxlength="11" placeholder="- 없이 입력하세요." numberOnly>
+									</td>
+								</tr>	
+								<tr>
+									<th scope="row">
+										주소										
+									</th>
+									<td>
+										<div class="postCodeBox">
+											<input type="text" id="postcode" name="postCode" readonly>
+											<button type="button" class="findPostCode" onClick="findPostCode()">
+												우편번호찾기
+											</button>
+										</div>
+										<div class="addrBox">
+											<input type="text" class="addrInput" id="addr1" name="addr1">
+											<input type="text" class="addrInput" id="addr2" name="addr2">
+										</div>																		
+									</td>
+								</tr>									
 							</tbody>
-						</table>			
+						</table>
+						<div class="buttonsBox" style="margin-top: 1.5rem !important;">
+							<input type="button" name="cancel" value="취소" onclick="location.href='/'">
+							<input type="submit" name="next" value="회원가입">
+						</div>			
 					</div>					
 				</div>
 			</form>
@@ -135,10 +164,8 @@
 				stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg>
 	</div>
 
-
 	<script th:src="@{js/jquery.min.js}"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-
 	<script th:src="@{js/popper.min.js}"></script>
 	<script th:src="@{js/bootstrap.min.js}"></script>
 	<script th:src="@{js/jquery.easing.1.3.js}"></script>
@@ -157,5 +184,6 @@
 	<script th:src="@{slick/slick.min.js}"></script>
 	<script th:src="@{js/slider.js}"></script>
 	<script th:src="@{js/sewJoin.js}"></script>
+	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </body>
 </html>
