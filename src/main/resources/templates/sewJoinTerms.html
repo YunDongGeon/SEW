@@ -51,7 +51,7 @@
 					<li><span>03</span> 가입완료</li>
 				</ol>
 			</div>
-			<form method="post">
+			<form method="post" onsubmit="return termsChk(this.form)">
 				<div class="joinContainer">
 					<div class="joinBox">
 						<h5 class="termsTit">약관동의</h5>
@@ -237,7 +237,7 @@
 						<hr>
 						<div class="buttonsBox">
 							<input type="button" name="cancel" value="취소" onclick="history.back(-1)">
-							<input type="submit" name="next" value="다음" onclick="termsChk(this.form)">
+							<input type="submit" name="next" value="다음">
 						</div>
 					</div>
 				</div>
