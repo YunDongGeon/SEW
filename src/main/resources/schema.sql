@@ -1,4 +1,5 @@
-CREATE TABLE member (
+drop table if exists user;
+CREATE TABLE user(
 	memId varchar(20) primary key,
 	memPw varchar(20) not null,
 	memName varchar(20) not null,

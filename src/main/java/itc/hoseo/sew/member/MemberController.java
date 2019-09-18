@@ -13,4 +13,12 @@ public class MemberController {
 	public String termsAgree() {
 		return "sewJoinInput";
 	}
+	
+	@PostMapping("/sewJoinDone")
+	public String inputDong(Member m) {
+		if (service.addMember(m)) {
+			return "redirect:/";
+		}
+		return "redirect:/joinInput";
+	}
 }

@@ -33,9 +33,9 @@ public class MybatisXMLConfigTest {
 	
 	@Before
 	public void init() throws Exception{
-		//final String ddl = Files.readAllLines(Paths.get(ClassLoader.getSystemResource("schema.sql").toURI()))
-		//		.stream()
-		//		.collect(Collectors.joining("\n"));
+		final String ddl = Files.readAllLines(Paths.get(ClassLoader.getSystemResource("schema.sql").toURI()))
+				.stream()
+				.collect(Collectors.joining("\n"));
 		
 		//final String data = Files.readAllLines(Paths.get(ClassLoader.getSystemResource("sql/data.sql").toURI()))
 		//		.stream()
@@ -43,7 +43,7 @@ public class MybatisXMLConfigTest {
 				
 		try(Connection con = DriverManager.getConnection("jdbc:h2:mem:testdb", "sa", "");
 				Statement stmt = con.createStatement();) {			
-		//	stmt.execute(ddl);
+			stmt.execute(ddl);
 		//	stmt.execute(data);
 		}
 		
@@ -54,20 +54,27 @@ public class MybatisXMLConfigTest {
 	
 	@Test
 	public void test() throws Exception {
-		try(SqlSession session = sessionFactory.openSession()){
-			XMLConfigMemberMapper memberMapper = session.getMapper(XMLConfigMemberMapper.class);
-			Member mem = new Member();
-			mem.setMemId("admin");
-			mem.setMemPw("admin");
-			mem.setMemName("관리자");
-			mem.setMemBirth("19980325");
-			mem.setMemEmail("admin"); 			
-			mem.setMemPhone("01043219876"); 			
-			mem.setMemZipcode("00000"); 
-			mem.setMemAddr("서울시");
-			memberMapper.addMember(mem);
-			//assertEquals(1, memberMapper.getMemberCount());
-			//assertEquals("관리자", memberMapper.getMemberName("admin"));
+		try(SqlSession session = sessionFactory.openSession()){ 
+			System.out.println(session); 
+		}catch(Exception e){
+			e.printStackTrace(); 
 		}
+
+		
+//		try(SqlSession session = sessionFactory.openSession()){
+//			XMLConfigMemberMapper memberMapper = session.getMapper(XMLConfigMemberMapper.class);
+//			Member mem = new Member();
+//			mem.setMemId("admin");
+//			mem.setMemPw("admin");
+//			mem.setMemName("관리자");
+//			mem.setMemBirth("19980325");
+//			mem.setMemEmail("admin"); 			
+//			mem.setMemPhone("01043219876"); 			
+//			mem.setMemZipcode("00000"); 
+//			mem.setMemAddr("서울시");
+//			memberMapper.addMember(mem);
+//			assertEquals(1, memberMapper.getMemberCount());
+//			assertEquals("관리자", memberMapper.getMemberName("admin"));
+//		}
 	}
 }

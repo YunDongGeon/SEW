@@ -50,7 +50,7 @@
 					<li><span>03</span> 가입완료</li>
 				</ol>
 			</div>
-			<form method="post">
+			<form method="post" action="sewJoinDone" onsubmit="return inputsChk(this.form)">
 				<div class="joinContainer">
 					<div class="joinBox">
 						<h5 class="inputTit">회원정보</h5>
@@ -66,7 +66,7 @@
 										<img class="icon" th:src="@{/img/icon/icoRequired.png}" alt="필수">										
 									</th>
 									<td>
-										<input type="text" name="id" style="IME-MODE: disabled">
+										<input type="text" name="memId" style="IME-MODE: disabled">
 										<span class="subMsg">(영문소문자/숫자, 4~16자)</span>
 									</td>
 								</tr>
@@ -76,7 +76,7 @@
 										<img class="icon" th:src="@{/img/icon/icoRequired.png}" alt="필수">
 									</th>
 									<td>
-										<input type="password" name="pw">
+										<input type="password" name="memPw">
 										<span class="subMsg">(영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 8자~16자)</span>
 									</td>
 								</tr>
@@ -92,7 +92,7 @@
 										이름
 										<img class="icon" th:src="@{/img/icon/icoRequired.png}" alt="필수">
 									</th>
-									<td><input type="text" name="name"></td>
+									<td><input type="text" name="memName"></td>
 								</tr>
 								<tr>
 									<th scope="row">
@@ -100,7 +100,7 @@
 										<img class="icon" th:src="@{/img/icon/icoRequired.png}" alt="필수">
 									</th>
 									<td class="ymd">
-										<input type="text" name="year" maxlength="4" numberOnly> 년
+										<input type="text" name="memBirth" maxlength="4" numberOnly> 년
 										<input type="text" name="mon" maxlength="2" numberOnly> 월
 										<input type="text" name="day" maxlength="2" numberOnly> 일
 									</td>
@@ -111,7 +111,7 @@
 										<img class="icon" th:src="@{/img/icon/icoRequired.png}" alt="필수">
 									</th>
 									<td>
-										<input type="text" name="email1"> @
+										<input type="text" name="memEmail"> @
 										<input type="text" name="email2">
 									</td>
 								</tr>	
@@ -120,7 +120,7 @@
 										휴대폰번호										
 									</th>
 									<td>
-										<input type="text" id="cellPhone" name="cellPhone" maxlength="11" placeholder="- 없이 입력하세요." numberOnly>
+										<input type="text" id="cellPhone" name="memPhone" maxlength="11" placeholder="- 없이 입력하세요." numberOnly>
 									</td>
 								</tr>	
 								<tr>
@@ -129,13 +129,13 @@
 									</th>
 									<td>
 										<div class="postCodeBox">
-											<input type="text" id="postcode" name="postCode" readonly>
+											<input type="text" id="postcode" name="memZipCode" readonly>
 											<button type="button" class="findPostCode" onClick="findPostCode()">
 												우편번호찾기
 											</button>
 										</div>
 										<div class="addrBox">
-											<input type="text" class="addrInput" id="addr1" name="addr1">
+											<input type="text" class="addrInput" id="addr1" name="memAddr">
 											<input type="text" class="addrInput" id="addr2" name="addr2">
 										</div>																		
 									</td>

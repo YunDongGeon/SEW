@@ -10,6 +10,6 @@ public class Member {
 	private String memBirth;
 	private String memEmail;	
 	private String memPhone;	
-	private String memZipcode;
+	private String memZipCode;
 	private String memAddr;
 }

@@ -35,6 +35,10 @@ function termsChk(form){
 	}	
 }
 
+function inputsChk(form){
+	form.submit();	
+}
+
 //Daum postCode api
 function findPostCode() {
     new daum.Postcode({

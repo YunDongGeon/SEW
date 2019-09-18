@@ -2,15 +2,15 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="itc.hoseo.oversea.member.MemberRepository">
+<mapper namespace="itc.hoseo.sew.member.MemberRepository">
 	<insert id="addMember" parameterType="Member">
-		INSERT INTO member VALUES 
-			(#{memId}, #{memPw}, #{memName}, #{memBirth}, #{memEmail}, #{memPhone}, #{memZipcode}, #{memAddr})
+		INSERT INTO user VALUES 
+			(#{memId}, #{memPw}, #{memName}, #{memBirth}, #{memEmail}, #{memPhone}, #{memZipCode}, #{memAddr})
     </insert>	
-	<select id="getMember" resultType="Member">
-		select memName from member where memId = #{memId}
+	<select id="getMember" resultType="String">
+		select memName from user where memId = #{memId}
 	</select>
     <select id="getMemberCount" resultType="int">
-    	select count(*) from member
+    	select count(*) from user
     </select>      
 </mapper>
