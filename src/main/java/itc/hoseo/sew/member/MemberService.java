@@ -2,6 +2,7 @@ package itc.hoseo.sew.member;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import itc.hoseo.sew.member.Member;
 import itc.hoseo.sew.member.MemberRepository;

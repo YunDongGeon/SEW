@@ -5,7 +5,7 @@
 <mapper namespace="itc.hoseo.sew.member.MemberRepository">
 	<insert id="addMember" parameterType="Member">
 		INSERT INTO user VALUES 
-			(#{memId}, #{memPw}, #{memName}, #{memBirth}, #{memEmail}, #{memPhone}, #{memZipCode}, #{memAddr})
+			(#{memId}, #{memPw}, #{memName}, #{memBirth}, #{memEmail}, #{memPhone}, #{memZipCode}, #{memAddr1}, #{memAddr2})
     </insert>
     <select id="memIdChk" parameterType="String" resultType="int">
     	select count(*) from user where memId = #{memId}

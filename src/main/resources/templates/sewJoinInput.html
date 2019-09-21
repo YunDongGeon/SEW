@@ -50,7 +50,7 @@
 					<li><span>03</span> 가입완료</li>
 				</ol>
 			</div>
-			<form method="post" action="sewJoinDone">
+			<form id="joinInputForm" method="post" th:action="@{sewJoinFinPage}" th:object="${member}">
 				<div class="joinContainer">
 					<div class="joinBox">
 						<h5 class="inputTit">회원정보</h5>
@@ -67,7 +67,7 @@
 									</th>
 									<td>
 										<div>
-											<input id="memId" type="text" name="memId" style="IME-MODE: disabled" onchange="inputsChk(this)">
+											<input th:field="*{memId}" id="memId" type="text" name="memId" style="IME-MODE: disabled">
 											<span class="subMsg">(영문소문자/숫자 포함 4~16자)</span>
 										</div>
 										<div class="inputChkBox" id="idChkBox1">
@@ -76,7 +76,7 @@
 										<div class="inputChkBox" id="idChkBox2">
 											<span>증복된 아이디입니다.</span>	
 										</div>		
-										<div class="inputChkBox" id="idChkBox3">
+										<div class="idChk" id="idChkBox3">
 											<span>사용 가능한 아이디입니다.</span>
 										</div>						
 									</td>
@@ -88,7 +88,7 @@
 									</th>
 									<td>
 										<div>
-											<input id="memPw" type="password" name="memPw">
+											<input th:field="*{memPw}" id="memPw" type="password" name="memPw">
 											<span class="subMsg">(영문 대소문자, 특수문자, 숫자 포함 8자~16자)</span>
 										</div>
 										<div class="inputChkBox" id="pwChkBox">
@@ -120,7 +120,7 @@
 									</th>
 									<td>
 										<div>
-											<input id="memName" type="text" name="memName">
+											<input th:field="*{memName}" id="memName" type="text" name="memName">
 										</div>
 										<div class="inputChkBox" id="nameChkBox"> 
 											<span>이름을 확인해주세요.</span>
@@ -134,7 +134,7 @@
 									</th>
 									<td class="ymd">
 										<div>
-											<input id="memBirth" type="text" name="memBirth" maxlength="8" placeholder="19900101" numberOnly>
+											<input th:field="*{memBirth}" id="memBirth" type="text" name="memBirth" maxlength="8" placeholder="19900101" numberOnly>
 										</div>
 										<div class="inputChkBox" id="birthChkBox">
 											<span>생년월일을 확인해주세요.</span>
@@ -148,7 +148,7 @@
 									</th>
 									<td>
 										<div>
-											<input id="memEmail" type="text" name="memEmail">
+											<input th:field="*{memEmail}" id="memEmail" type="text" name="memEmail">
 										</div>
 										<div class="inputChkBox" id="emailChkBox">
 											<span>이메일를 확인해주세요.</span>
@@ -161,7 +161,7 @@
 									</th>
 									<td>
 										<div>
-											<input type="text" id="cellPhone" name="memPhone" maxlength="11" placeholder="- 없이 입력하세요." numberOnly>
+											<input th:field="*{memPhone}" type="text" id="cellPhone" name="memPhone" maxlength="11" placeholder="- 없이 입력하세요." numberOnly>
 										</div>										
 									</td>
 								</tr>								
@@ -171,14 +171,14 @@
 									</th>
 									<td>
 										<div class="postCodeBox">
-											<input type="text" id="postcode" name="memZipCode" readonly>
+											<input th:field="*{memZipCode}" type="text" id="postcode" name="memZipCode" readonly>
 											<button type="button" class="findPostCode" onClick="findPostCode()">
 												우편번호찾기
 											</button>
 										</div>
 										<div class="addrBox">
-											<input type="text" class="addrInput" id="addr1" name="memAddr">
-											<input type="text" class="addrInput" id="addr2" name="addr2">
+											<input th:field="*{memAddr1}" type="text" class="addrInput" id="addr1" name="memAddr1" readonly>
+											<input th:field="*{memAddr2}" type="text" class="addrInput" id="addr2" name="memAddr2">
 										</div>																		
 									</td>
 								</tr>									
@@ -186,7 +186,7 @@
 						</table>
 						<div class="buttonsBox" style="margin-top: 1.5rem !important;">
 							<input type="button" name="cancel" value="취소" onclick="location.href='/'">
-							<input id="memInputSubmit" type="submit" name="next" value="회원가입" disabled="disabled">
+							<input type="submit" id="memInputSubmit" value="회원가입" disabled="disabled">
 						</div>			
 					</div>					
 				</div>

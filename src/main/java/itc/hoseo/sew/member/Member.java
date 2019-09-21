@@ -11,5 +11,6 @@ public class Member {
 	private String memEmail;	
 	private String memPhone;	
 	private String memZipCode;
-	private String memAddr;
+	private String memAddr1;
+	private String memAddr2;
 }

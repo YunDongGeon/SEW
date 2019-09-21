@@ -248,7 +248,6 @@ input[name="next"] {
     text-decoration: none;
     font-size: 15px;
     font-weight: bold;
-    margin-right: 5%;
     cursor: pointer;
 }
 
@@ -257,6 +256,20 @@ input[name="cancel"] {
     background-color: #fff;
     border: 0.5px solid black;
     color:#000;
+    padding: 10px 0;
+    text-align: center;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: bold;
+    margin-right: 5%;
+    cursor: pointer;
+}
+
+#memInputSubmit {
+	width: 30%;
+    background-color: #525252;
+    border: none;
+    color:#fff;
     padding: 10px 0;
     text-align: center;
     text-decoration: none;
@@ -325,8 +338,19 @@ input[name="id"] {
 	font-size: 12px;
 	color: red;
 }
-
-#idChkBox3 {
+.idChk {
+	display: none;
+	font-size: 12px;
 	color: green;
+		
 }
 
+.fa-check {
+	color: black !important;
+	font-size: 100px !important;
+	margin: 20px, 0px !important;
+}
+
+.joinFinBox {
+	text-align: center;
+}

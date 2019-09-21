@@ -7,5 +7,6 @@ CREATE TABLE user(
 	memEmail varchar(50) not null,
 	memPhone varchar(11) default null,
 	memZipCode varchar(5) default null,
-	memAddr varchar(200) default null
+	memAddr1 varchar(200) default null,
+	memAddr2 varchar(200) default null
 );

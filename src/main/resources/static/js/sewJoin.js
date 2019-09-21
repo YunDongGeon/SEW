@@ -9,7 +9,7 @@ $("#allAgree").click(function(){
         //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 false로 정의
         $("input[name='smallBox']").prop("checked",false);
     }
-})
+});
 
 // 한개의 체크박스 선택 해제시 전체선택 체크박스도 해제
 $(".smallBox").click(function(){
@@ -18,7 +18,7 @@ $(".smallBox").click(function(){
 	}else{
 		$("input[id='allAgree']").prop("checked", false);
 	}
-})
+});
 
 $("input:text[numberOnly]").on("keyup", function() {
     $(this).val($(this).val().replace(/[^0-9]/g,""));
@@ -37,9 +37,9 @@ function termsChk(form){
 
 //아이디 유효성검사
 var idRegx = /^[a-zA-Z0-9]$/;
-$("#memId").blur(function() {	
+$("#memId").on("change keyup paste", function() {	
 	var memId = $("#memId").val();
-	if($("#memId").val().length<5){
+	if($("#memId").val().length<4){
 		$("#idChkBox1").show();
     	$("#idChkBox2").hide();
     	$("#idChkBox3").hide();
@@ -88,7 +88,7 @@ $("#memId").blur(function() {
 
 //비밀번호 유효성검사
 var pwRegx = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
-$("#memPw").blur(function() {
+$("#memPw").on("change keyup paste", function() {
     if ($("#memPw").val() == ""){    	
     	$("#pwChkBox").show();
     	$("#memInputSubmit").attr("disabled", true);
@@ -102,7 +102,7 @@ $("#memPw").blur(function() {
 });
 
 //비밀번호 확인 유효성검사
-$("#pwChk").blur(function() {
+$("#pwChk").on("change keyup paste", function() {
     if ($("#pwChk").val() == ""){
     	$("#rePwChkBox1").show();
     	$("#memInputSubmit").attr("disabled", true);
@@ -118,7 +118,7 @@ $("#pwChk").blur(function() {
 });
 
 // 이름 유효성검사
-$("#memName").blur(function() {
+$("#memName").on("change keyup paste", function() {
     if ($("#memName").val() == ""){    	
     	$("#nameChkBox").show();
     	$("#memInputSubmit").attr("disabled", true);
@@ -129,7 +129,7 @@ $("#memName").blur(function() {
 });
 
 // 생년월일 유효성검사
-$("#memBirth").blur(function() {
+$("#memBirth").on("change keyup paste", function() {
 	var dateStr = $("#memBirth").val();		
     var year = Number(dateStr.substr(0,4)); // 입력한 값의 0~4자리까지 (연)
     var month = Number(dateStr.substr(4,2)); // 입력한 값의 4번째 자리부터 2자리 숫자 (월)
@@ -180,10 +180,11 @@ $("#memBirth").blur(function() {
 	}
 });
 
+
 // 이메일  유효성  검사
 var emailRegx =  /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
 
-$("#memEmail").blur(function() {
+$("#memEmail").on("change keyup paste", function() {
 	if ($("#memEmail").val() == ""){    	
     	$("#emailChkBox").show();
     	$("#memInputSubmit").attr("disabled", true);
