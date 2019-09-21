@@ -35,8 +35,92 @@ function termsChk(form){
 	}	
 }
 
+var idRegx = /^[a-zA-Z0-9]{4,12}$/;
+
+$("#memId").blur(function() {
+    if ($("#memId").val() == ""){
+    	$("#")
+    	$("#idChkBox1").show();
+    }
+});
+
+
+// 회원가입 유효성 검사
 function inputsChk(form){
-	form.submit();	
+	var idRegx = /^[a-zA-Z0-9]{4,12}$/;
+	var pwRegx = /^[a-zA-Z0-9]{4,12}$/;
+	var emailRegx =  /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	var phoneRegx = /^[0-9]*$/;
+	
+	$("#memId").on("propertychange change keyup paste input", function() {
+	    var currentVal = $(this).val();
+	    if(currentVal == oldVal) {
+	        return;
+	    }
+	 
+	    oldVal = currentVal;
+	    alert("changed!");
+	});
+	
+	if(form.memId.value==""){
+		
+		
+	}
+
+	if(form.memEmail.value==""){
+		alert("이메일을 입력하십시오.");
+		return false;
+	}
+	if (!emailRegx.test(form.memEmail.value)){
+	  alert("이메일은 형식으로 입력해주세요.");
+	  form.memEmail.focus();
+	  return false;
+	}
+	
+	var password = form.memPw;
+	var re_password = form.pwChk;
+	
+	if(password.value==""){
+		alert("비밀번호를 입력하십시오.");
+		return false;
+	}
+	
+	if(password.length<8 && password.length>16){
+		alert("비밀번호를 8자~16자 내로 입력하십시오.")
+		return false;
+	}
+	
+
+	if(!password.value==re_password.value){
+		alert("비밀번호가 다릅니다.");
+		return false;
+	}
+	 
+	if(form.phone.value==""){
+		 alert("핸드폰번호를 입력하십시오");
+		 return false;
+		 
+	}
+	if(!phoneRegx.test(form.phone.value)){
+		alert("형식에 맞게 입력하십시오");
+		return false;		 
+	}
+	 
+	if(form.birth.value==""){
+		alert("생년월일을 입력하십시오.")
+		return false;
+	}
+	 
+	if(form.zipcode.value==""){
+		alert("주소를 입력하십시오");
+		return false; 
+	}
+	if(form.addr2.value==""){
+		alert("상세주소를 입력하십시오.");
+		return false;
+	}
+
+	form.submit();
 }
 
 //Daum postCode api

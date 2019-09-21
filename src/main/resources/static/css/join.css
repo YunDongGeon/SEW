@@ -67,10 +67,14 @@ tr:nth-child(1) {
 	border-top: 1px solid #08080870;	
 }
 
+tr:nth-child(-1) {
+	border-bottom: 1px solid #08080870;	
+}
+
 tr {
 	margin-top: 10px;
 	border-top: 1px solid #08080830;
-	border-bottom: 1px solid #08080830;
+	/*border-bottom: 1px solid #08080830;*/
 }
 
 th {
@@ -82,6 +86,10 @@ th {
     text-align: left;
     font-weight: normal;
     font-size: 13px;
+}
+
+.inputChkBox {
+	border: 0;
 }
 
 .subMsg {
@@ -105,11 +113,15 @@ input[type=text], input[type=password]{
     font-size: 12px;
 }
 
-input[name="year"] {
+input[name="memEmail"] {
+	width: 250px;
+}
+
+input[name="memYear"] {
 	width: 80px;
 }
 
-input[name="mon"], input[name="day"]{
+input[name="memMon"], input[name="memDay"]{
 	margin-left: 10px;
 	width: 40px;
 }
@@ -309,5 +321,15 @@ input[name="id"] {
 
 .joinAddr {
 	display: table-cell;
+}
+
+.inputChkBox {
+	display: none;
+	font-size: 12px;
+	color: red;
+}
+
+#idChkBox3 {
+	color: green;
 }
 
