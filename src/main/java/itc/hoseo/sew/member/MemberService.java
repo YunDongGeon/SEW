@@ -15,6 +15,9 @@ public class MemberService {
 	public boolean addMember(Member member) {
 		return memberRepositoty.addMember(member)==1;
 	}
+	public int memIdChk(String memId) {					
+		return memberRepositoty.memIdChk(memId);
+	}
 	public String getMember(String id) {					
 		return memberRepositoty.getMember(id);
 	}

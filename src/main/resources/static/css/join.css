@@ -67,7 +67,7 @@ tr:nth-child(1) {
 	border-top: 1px solid #08080870;	
 }
 
-tr:nth-child(-1) {
+tr:nth-child(8) {
 	border-bottom: 1px solid #08080870;	
 }
 
@@ -77,15 +77,18 @@ tr {
 	/*border-bottom: 1px solid #08080830;*/
 }
 
-th {
+th{
 	width: 25%;
-	color: #080808;
-	padding: 15px 0 14px 18px;    
+	color: #080808; 
     border-bottom-width: 0;
     border-right-width: 0;
     text-align: left;
     font-weight: normal;
     font-size: 13px;
+}
+
+td{	
+	padding: 15px 0 14px 18px;   
 }
 
 .inputChkBox {
@@ -120,12 +123,6 @@ input[name="memEmail"] {
 input[name="memYear"] {
 	width: 80px;
 }
-
-input[name="memMon"], input[name="memDay"]{
-	margin-left: 10px;
-	width: 40px;
-}
-
 .ymd {
 	font-size: 12px;
 }

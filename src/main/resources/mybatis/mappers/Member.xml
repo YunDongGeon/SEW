@@ -6,8 +6,11 @@
 	<insert id="addMember" parameterType="Member">
 		INSERT INTO user VALUES 
 			(#{memId}, #{memPw}, #{memName}, #{memBirth}, #{memEmail}, #{memPhone}, #{memZipCode}, #{memAddr})
-    </insert>	
-	<select id="getMember" resultType="String">
+    </insert>
+    <select id="memIdChk" parameterType="String" resultType="int">
+    	select count(*) from user where memId = #{memId}
+    </select>
+	<select id="getMember" parameterType="String" resultType="String">
 		select memName from user where memId = #{memId}
 	</select>
     <select id="getMemberCount" resultType="int">

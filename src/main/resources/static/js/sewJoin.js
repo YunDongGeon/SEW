@@ -35,93 +35,166 @@ function termsChk(form){
 	}	
 }
 
-var idRegx = /^[a-zA-Z0-9]{4,12}$/;
+//아이디 유효성검사
+var idRegx = /^[a-zA-Z0-9]$/;
+$("#memId").blur(function() {	
+	var memId = $("#memId").val();
+	if($("#memId").val().length<5){
+		$("#idChkBox1").show();
+    	$("#idChkBox2").hide();
+    	$("#idChkBox3").hide();
+	} else {
+		$.ajax({		
+	        async: true,
+	        type : 'POST',
+	        data : memId,
+	        url : "memInputIdChk",
+	        dataType : "json",
+	        contentType: "application/json; charset=UTF-8",
+	        success : function(data) {
+	            if (data.cnt > 0) {                
+	                //아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
+	            	$("#idChkBox1").hide(); 
+	            	$("#idChkBox2").show();
+	            	$("#idChkBox3").hide();      
+	            	$("#memInputSubmit").attr("disabled", true);
+	            } else {
+	                //아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
+	                //아이디가 중복하지 않으면  idck = 1
+	            	$("#idChkBox1").hide(); 
+	            	$("#idChkBox2").hide();
+	            	$("#idChkBox3").show();
+	            	$("#memInputSubmit").attr("disabled", false);
+	            }
+	        },
+	        error : function(error) {            
+	            alert("error : " + error);
+	        }
+	    });
+		
+	    if ($("#memId").val() == ""){    	
+	    	$("#idChkBox1").show();
+	    	$("#idChkBox2").hide();
+	    	$("#idChkBox3").hide();
+	    	$("#memInputSubmit").attr("disabled", true);
+	    } else if(!idRegx.test($("#memId").val())){
+	    	$("#idChkBox1").show();
+	    	$("#idChkBox2").hide();
+	    	$("#idChkBox3").hide();
+	    	$("#memInputSubmit").attr("disabled", true);
+	    }
+	}	
+});
 
-$("#memId").blur(function() {
-    if ($("#memId").val() == ""){
-    	$("#")
-    	$("#idChkBox1").show();
+//비밀번호 유효성검사
+var pwRegx = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
+$("#memPw").blur(function() {
+    if ($("#memPw").val() == ""){    	
+    	$("#pwChkBox").show();
+    	$("#memInputSubmit").attr("disabled", true);
+    } else if(!pwRegx.test($("#memPw").val())) { 
+    	$("#pwChkBox").show();
+    	$("#memInputSubmit").attr("disabled", true);
+	} else {
+    	$("#pwChkBox").hide();
+    	$("#memInputSubmit").attr("disabled", false);
+    }   
+});
+
+//비밀번호 확인 유효성검사
+$("#pwChk").blur(function() {
+    if ($("#pwChk").val() == ""){
+    	$("#rePwChkBox1").show();
+    	$("#memInputSubmit").attr("disabled", true);
+    } else if($("#pwChk").val() != $("#memPw").val()) {
+    	$("#rePwChkBox1").hide();
+    	$("#rePwChkBox2").show();
+    	$("#memInputSubmit").attr("disabled", true);
+    } else {
+    	$("#rePwChkBox1").hide();
+    	$("#rePwChkBox2").hide();
+    	$("#memInputSubmit").attr("disabled", false);
     }
 });
 
+// 이름 유효성검사
+$("#memName").blur(function() {
+    if ($("#memName").val() == ""){    	
+    	$("#nameChkBox").show();
+    	$("#memInputSubmit").attr("disabled", true);
+    } else {
+    	$("#nameChkBox").hide();
+    	$("#memInputSubmit").attr("disabled", false);
+    }   
+});
 
-// 회원가입 유효성 검사
-function inputsChk(form){
-	var idRegx = /^[a-zA-Z0-9]{4,12}$/;
-	var pwRegx = /^[a-zA-Z0-9]{4,12}$/;
-	var emailRegx =  /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-	var phoneRegx = /^[0-9]*$/;
-	
-	$("#memId").on("propertychange change keyup paste input", function() {
-	    var currentVal = $(this).val();
-	    if(currentVal == oldVal) {
-	        return;
-	    }
-	 
-	    oldVal = currentVal;
-	    alert("changed!");
-	});
-	
-	if(form.memId.value==""){
-		
-		
-	}
+// 생년월일 유효성검사
+$("#memBirth").blur(function() {
+	var dateStr = $("#memBirth").val();		
+    var year = Number(dateStr.substr(0,4)); // 입력한 값의 0~4자리까지 (연)
+    var month = Number(dateStr.substr(4,2)); // 입력한 값의 4번째 자리부터 2자리 숫자 (월)
+    var day = Number(dateStr.substr(6,2)); // 입력한 값 6번째 자리부터 2자리 숫자 (일)
+    var today = new Date(); // 날짜 변수 선언
+    var yearNow = today.getFullYear(); // 올해 연도 가져옴
 
-	if(form.memEmail.value==""){
-		alert("이메일을 입력하십시오.");
-		return false;
+    if (dateStr.length <=8) {
+		// 연도의 경우 1900 보다 작거나 yearNow 보다 크다면 false를 반환합니다.
+	    if (1900 > year || year > yearNow){
+	    	
+	    	$('#birthChkBox').show();
+	    	$("#memInputSubmit").attr("disabled", true);
+	    	
+	    }else if (month < 1 || month > 12) {
+	    		
+	    	$('#birthChkBox').show();
+	    	$("#memInputSubmit").attr("disabled", true);
+	    
+	    }else if (day < 1 || day > 31) {
+	    	
+	    	$('#birthChkBox').show();
+	    	$("#memInputSubmit").attr("disabled", true);
+	    	
+	    }else if ((month==4 || month==6 || month==9 || month==11) && day==31) {
+	    	 
+	    	$('#birthChkBox').show();
+	    	$("#memInputSubmit").attr("disabled", true);
+	    	 
+	    }else if (month == 2) {
+	    	 
+	       	var isleap = (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
+	       	
+	     	if (day>29 || (day==29 && !isleap)) {
+	     		
+	     		$('#birthChkBox').show();
+	     		$("#memInputSubmit").attr("disabled", true);
+	    	
+			}else{
+				$('#birthChkBox').hide();
+				$("#memInputSubmit").attr("disabled", false);
+			}//end of if (day>29 || (day==29 && !isleap))
+	     	
+	    }else{	    	
+	    	$('#birthChkBox').hide();
+	    	$("#memInputSubmit").attr("disabled", false);
+		}//end of if		
 	}
-	if (!emailRegx.test(form.memEmail.value)){
-	  alert("이메일은 형식으로 입력해주세요.");
-	  form.memEmail.focus();
-	  return false;
-	}
-	
-	var password = form.memPw;
-	var re_password = form.pwChk;
-	
-	if(password.value==""){
-		alert("비밀번호를 입력하십시오.");
-		return false;
-	}
-	
-	if(password.length<8 && password.length>16){
-		alert("비밀번호를 8자~16자 내로 입력하십시오.")
-		return false;
-	}
-	
+});
 
-	if(!password.value==re_password.value){
-		alert("비밀번호가 다릅니다.");
-		return false;
-	}
-	 
-	if(form.phone.value==""){
-		 alert("핸드폰번호를 입력하십시오");
-		 return false;
-		 
-	}
-	if(!phoneRegx.test(form.phone.value)){
-		alert("형식에 맞게 입력하십시오");
-		return false;		 
-	}
-	 
-	if(form.birth.value==""){
-		alert("생년월일을 입력하십시오.")
-		return false;
-	}
-	 
-	if(form.zipcode.value==""){
-		alert("주소를 입력하십시오");
-		return false; 
-	}
-	if(form.addr2.value==""){
-		alert("상세주소를 입력하십시오.");
-		return false;
-	}
+// 이메일  유효성  검사
+var emailRegx =  /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
 
-	form.submit();
-}
+$("#memEmail").blur(function() {
+	if ($("#memEmail").val() == ""){    	
+    	$("#emailChkBox").show();
+    	$("#memInputSubmit").attr("disabled", true);
+    } else if(!emailRegx.test($("#memEmail").val())){
+    	$("#emailChkBox").show();
+    	$("#memInputSubmit").attr("disabled", true);
+    } else {
+    	$("#emailChkBox").hide();
+    	$("#memInputSubmit").attr("disabled", false);
+    }
+});
 
 //Daum postCode api
 function findPostCode() {

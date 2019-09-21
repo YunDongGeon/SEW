@@ -50,7 +50,7 @@
 					<li><span>03</span> 가입완료</li>
 				</ol>
 			</div>
-			<form method="post" action="sewJoinDone" onsubmit="return inputsChk(this.form)">
+			<form method="post" action="sewJoinDone">
 				<div class="joinContainer">
 					<div class="joinBox">
 						<h5 class="inputTit">회원정보</h5>
@@ -66,42 +66,34 @@
 										<img class="icon" th:src="@{/img/icon/icoRequired.png}" alt="필수">										
 									</th>
 									<td>
-										<input id="memId" type="text" name="memId" style="IME-MODE: disabled" onchange="inputsChk(this)">
-										<span class="subMsg">(영문소문자/숫자, 4~16자)</span>										
+										<div>
+											<input id="memId" type="text" name="memId" style="IME-MODE: disabled" onchange="inputsChk(this)">
+											<span class="subMsg">(영문소문자/숫자 포함 4~16자)</span>
+										</div>
+										<div class="inputChkBox" id="idChkBox1">
+											<span>아이디를 확인해주세요.</span>
+										</div>	
+										<div class="inputChkBox" id="idChkBox2">
+											<span>증복된 아이디입니다.</span>	
+										</div>		
+										<div class="inputChkBox" id="idChkBox3">
+											<span>사용 가능한 아이디입니다.</span>
+										</div>						
 									</td>
-								</tr>
-								<tr class="inputChkBox" id="idChkBox1">
-									<th></th>
-									<td>
-										<span>영문소문자/숫자, 4~16자로 입력해주세요.</span>
-									</td>
-								</tr>
-								<tr class="inputChkBox" id="idChkBox2">
-									<th></th>
-									<td>
-										<span>증복된 아이디입니다.</span>
-									</td>
-								</tr>
-								<tr class="inputChkBox" id="idChkBox3">
-									<th></th>
-									<td>
-										<span>사용 가능한 아이디입니다.</span>
-									</td>
-								</tr>
+								</tr>																
 								<tr>
 									<th scope="row">
 										비밀번호
 										<img class="icon" th:src="@{/img/icon/icoRequired.png}" alt="필수">
 									</th>
 									<td>
-										<input type="password" name="memPw">
-										<span class="subMsg">(영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 8자~16자)</span>
-									</td>
-								</tr>
-								<tr class="inputChkBox" id="pwChkBox1">
-									<th></th>
-									<td>
-										<span>영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 8자~16자로 입력해주세요.</span>
+										<div>
+											<input id="memPw" type="password" name="memPw">
+											<span class="subMsg">(영문 대소문자, 특수문자, 숫자 포함 8자~16자)</span>
+										</div>
+										<div class="inputChkBox" id="pwChkBox">
+											<span>비밀번호를  확인해주세요.</span>
+										</div>
 									</td>
 								</tr>
 								<tr>
@@ -109,42 +101,44 @@
 										비밀번호 확인
 										<img class="icon" th:src="@{/img/icon/icoRequired.png}" alt="필수">
 									</th>
-									<td><input type="password" name="pwChk"></td>
-								</tr>
-								<tr class="inputChkBox" id="rePwChkBox1">
-									<th></th>
 									<td>
-										<span>비밀번호를 입력해주세요.</span>
+										<div>
+											<input id="pwChk" type="password" name="pwChk">
+										</div>
+										<div class="inputChkBox" id="rePwChkBox1">
+											<span>비밀번호를 확인해주세요.</span>
+										</div>
+										<div class="inputChkBox" id="rePwChkBox2">
+											<span>비밀번호가 다릅니다.</span>
+										</div>
 									</td>
-								</tr>
-								<tr class="inputChkBox" id="rePwChkBox2">
-									<th></th>
-									<td>
-										<span>비밀번호가 다릅니다.</span>
-									</td>
-								</tr>								
+								</tr>															
 								<tr>
 									<th scope="row">
 										이름
 										<img class="icon" th:src="@{/img/icon/icoRequired.png}" alt="필수">
 									</th>
-									<td><input type="text" name="memName"></td>
-								</tr>
+									<td>
+										<div>
+											<input id="memName" type="text" name="memName">
+										</div>
+										<div class="inputChkBox" id="nameChkBox"> 
+											<span>이름을 확인해주세요.</span>
+										</div>
+									</td>
+								</tr>								
 								<tr>
 									<th scope="row">
 										생년월일
 										<img class="icon" th:src="@{/img/icon/icoRequired.png}" alt="필수">
 									</th>
 									<td class="ymd">
-										<input type="text" name="memYear" maxlength="4" numberOnly> 년
-										<input type="text" name="memMon" maxlength="2" numberOnly> 월
-										<input type="text" name="memDay" maxlength="2" numberOnly> 일
-									</td>
-								</tr>
-								<tr class="inputChkBox" id="birthChkBox">
-									<th></th>
-									<td>
-										<span>올바른 생년월일이 아닙니다.</span>
+										<div>
+											<input id="memBirth" type="text" name="memBirth" maxlength="8" placeholder="19900101" numberOnly>
+										</div>
+										<div class="inputChkBox" id="birthChkBox">
+											<span>생년월일을 확인해주세요.</span>
+										</div>										
 									</td>
 								</tr>
 								<tr>
@@ -153,27 +147,22 @@
 										<img class="icon" th:src="@{/img/icon/icoRequired.png}" alt="필수">
 									</th>
 									<td>
-										<input type="text" name="memEmail">
+										<div>
+											<input id="memEmail" type="text" name="memEmail">
+										</div>
+										<div class="inputChkBox" id="emailChkBox">
+											<span>이메일를 확인해주세요.</span>
+										</div>
 									</td>
-								</tr>
-								<tr class="inputChkBox" id="emailChkBox1">
-									<th></th>
-									<td>
-										<span>올바른 이메일 형식이 아닙니다.</span>
-									</td>
-								</tr>
-								<tr class="inputChkBox" id="emailChkBox2">
-									<th></th>
-									<td>
-										<span>이메일를 입력해주세요.</span>
-									</td>
-								</tr>	
+								</tr>								
 								<tr>
 									<th scope="row">
 										휴대폰번호										
 									</th>
 									<td>
-										<input type="text" id="cellPhone" name="memPhone" maxlength="11" placeholder="- 없이 입력하세요." numberOnly>
+										<div>
+											<input type="text" id="cellPhone" name="memPhone" maxlength="11" placeholder="- 없이 입력하세요." numberOnly>
+										</div>										
 									</td>
 								</tr>								
 								<tr>
@@ -197,7 +186,7 @@
 						</table>
 						<div class="buttonsBox" style="margin-top: 1.5rem !important;">
 							<input type="button" name="cancel" value="취소" onclick="location.href='/'">
-							<input type="submit" name="next" value="회원가입">
+							<input id="memInputSubmit" type="submit" name="next" value="회원가입" disabled="disabled">
 						</div>			
 					</div>					
 				</div>
