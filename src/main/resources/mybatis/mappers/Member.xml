@@ -10,8 +10,11 @@
     <select id="memIdChk" parameterType="String" resultType="int">
     	select count(*) from user where memId = #{memId}
     </select>
-	<select id="getMember" parameterType="String" resultType="String">
-		select memName from user where memId = #{memId}
+    <select id="loginChk" parameterType="Member" resultType="Member">
+    	select * from user where memId = #{memId} and memPw = #{memPw}
+    </select>
+	<select id="getMember" parameterType="String" resultType="Member">
+		select memId, memName from user where memId = #{memId}
 	</select>
     <select id="getMemberCount" resultType="int">
     	select count(*) from user

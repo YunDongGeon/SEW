@@ -1,7 +1,7 @@
 drop table if exists user;
 CREATE TABLE user(
 	memId varchar(20) primary key,
-	memPw varchar(20) not null,
+	memPw varchar(64) not null,
 	memName varchar(20) not null,
 	memBirth varchar(8) not null,
 	memEmail varchar(50) not null,

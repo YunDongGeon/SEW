@@ -35,15 +35,78 @@ function termsChk(form){
 	}	
 }
 
+var idChk = 0;
+var pwChk = 0;
+var rePwChk = 0;
+var nameChk = 0;
+var birthChk = 0;
+var emailChk = 0;
+
+// onsubmit
+function joinInputChk(){
+	// 아이디 체크
+	if(idChk==0){
+		$("#idChkBox1").show();
+    	$("#idChkBox2").hide();
+    	$("#idChkBox3").hide();
+		return false;
+	}else if(idChk==1){
+		return false;
+	}
+	// 비밀번호 체크
+	if(pwChk==0){
+		$("#pwChkBox").show();
+		return false;
+	}
+	// 비밀번호 확인 체크
+	if(rePwChk==0){
+		$("#rePwChkBox1").show();
+    	$("#rePwChkBox2").hide();
+		return false;
+	}else if(rePwChk==1){		
+		return false;
+	}
+	// 이름 체크
+	if(nameChk==0){
+		$("#nameChkBox").show();
+		return false;
+	}
+	// 생년월일 체크
+	if(birthChk==0){
+		$("#birthChkBox").show();
+		return false;
+	}
+	// 이메일 체크
+	if(emailChk==0){
+		$("#emailChkBox").show();
+		return false;
+	}
+	if(idChk && pwChk && rePwChk && nameChk && birthChk && emailChk){
+		return true;
+	}
+	return false;
+}
+
 //아이디 유효성검사
-var idRegx = /^[a-zA-Z0-9]$/;
+var idRegx =  /^[a-z0-9+]*$/;
 $("#memId").on("change keyup paste", function() {	
 	var memId = $("#memId").val();
 	if($("#memId").val().length<4){
 		$("#idChkBox1").show();
     	$("#idChkBox2").hide();
     	$("#idChkBox3").hide();
-	} else {
+    	idChk=0;
+	} else if ($("#memId").val() == ""){    	
+    	$("#idChkBox1").show();
+    	$("#idChkBox2").hide();
+    	$("#idChkBox3").hide();
+    	idChk=0;
+    } else if(!idRegx.test($("#memId").val())){
+    	$("#idChkBox1").show();
+    	$("#idChkBox2").hide();
+    	$("#idChkBox3").hide();
+    	idChk=0;
+    } else {
 		$.ajax({		
 	        async: true,
 	        type : 'POST',
@@ -56,34 +119,22 @@ $("#memId").on("change keyup paste", function() {
 	                //아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
 	            	$("#idChkBox1").hide(); 
 	            	$("#idChkBox2").show();
-	            	$("#idChkBox3").hide();      
-	            	$("#memInputSubmit").attr("disabled", true);
+	            	$("#idChkBox3").hide();
+	            	idChk=1;
 	            } else {
 	                //아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
 	                //아이디가 중복하지 않으면  idck = 1
 	            	$("#idChkBox1").hide(); 
 	            	$("#idChkBox2").hide();
 	            	$("#idChkBox3").show();
-	            	$("#memInputSubmit").attr("disabled", false);
+	            	idChk=2;
 	            }
 	        },
 	        error : function(error) {            
 	            alert("error : " + error);
 	        }
 	    });
-		
-	    if ($("#memId").val() == ""){    	
-	    	$("#idChkBox1").show();
-	    	$("#idChkBox2").hide();
-	    	$("#idChkBox3").hide();
-	    	$("#memInputSubmit").attr("disabled", true);
-	    } else if(!idRegx.test($("#memId").val())){
-	    	$("#idChkBox1").show();
-	    	$("#idChkBox2").hide();
-	    	$("#idChkBox3").hide();
-	    	$("#memInputSubmit").attr("disabled", true);
-	    }
-	}	
+    }
 });
 
 //비밀번호 유효성검사
@@ -91,13 +142,13 @@ var pwRegx = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
 $("#memPw").on("change keyup paste", function() {
     if ($("#memPw").val() == ""){    	
     	$("#pwChkBox").show();
-    	$("#memInputSubmit").attr("disabled", true);
+    	pwChk=0;
     } else if(!pwRegx.test($("#memPw").val())) { 
     	$("#pwChkBox").show();
-    	$("#memInputSubmit").attr("disabled", true);
+    	pwChk=0;
 	} else {
     	$("#pwChkBox").hide();
-    	$("#memInputSubmit").attr("disabled", false);
+    	pwChk=1;
     }   
 });
 
@@ -105,15 +156,16 @@ $("#memPw").on("change keyup paste", function() {
 $("#pwChk").on("change keyup paste", function() {
     if ($("#pwChk").val() == ""){
     	$("#rePwChkBox1").show();
-    	$("#memInputSubmit").attr("disabled", true);
+    	$("#rePwChkBox2").hide();
+    	rePwChk=0;
     } else if($("#pwChk").val() != $("#memPw").val()) {
     	$("#rePwChkBox1").hide();
     	$("#rePwChkBox2").show();
-    	$("#memInputSubmit").attr("disabled", true);
+    	rePwChk=1;
     } else {
     	$("#rePwChkBox1").hide();
     	$("#rePwChkBox2").hide();
-    	$("#memInputSubmit").attr("disabled", false);
+    	rePwChk=2;
     }
 });
 
@@ -121,10 +173,10 @@ $("#pwChk").on("change keyup paste", function() {
 $("#memName").on("change keyup paste", function() {
     if ($("#memName").val() == ""){    	
     	$("#nameChkBox").show();
-    	$("#memInputSubmit").attr("disabled", true);
+    	nameChk=0;
     } else {
     	$("#nameChkBox").hide();
-    	$("#memInputSubmit").attr("disabled", false);
+    	nameChk=1;
     }   
 });
 
@@ -142,22 +194,20 @@ $("#memBirth").on("change keyup paste", function() {
 	    if (1900 > year || year > yearNow){
 	    	
 	    	$('#birthChkBox').show();
-	    	$("#memInputSubmit").attr("disabled", true);
-	    	
+	    	birthChk=0;
 	    }else if (month < 1 || month > 12) {
 	    		
 	    	$('#birthChkBox').show();
-	    	$("#memInputSubmit").attr("disabled", true);
-	    
+	    	birthChk=0;
 	    }else if (day < 1 || day > 31) {
 	    	
 	    	$('#birthChkBox').show();
-	    	$("#memInputSubmit").attr("disabled", true);
+	    	birthChk=0;
 	    	
 	    }else if ((month==4 || month==6 || month==9 || month==11) && day==31) {
 	    	 
 	    	$('#birthChkBox').show();
-	    	$("#memInputSubmit").attr("disabled", true);
+	    	birthChk=0;
 	    	 
 	    }else if (month == 2) {
 	    	 
@@ -166,16 +216,16 @@ $("#memBirth").on("change keyup paste", function() {
 	     	if (day>29 || (day==29 && !isleap)) {
 	     		
 	     		$('#birthChkBox').show();
-	     		$("#memInputSubmit").attr("disabled", true);
+	     		birthChk=0;
 	    	
 			}else{
 				$('#birthChkBox').hide();
-				$("#memInputSubmit").attr("disabled", false);
+				birthChk=0;
 			}//end of if (day>29 || (day==29 && !isleap))
 	     	
 	    }else{	    	
 	    	$('#birthChkBox').hide();
-	    	$("#memInputSubmit").attr("disabled", false);
+	    	birthChk=1;
 		}//end of if		
 	}
 });
@@ -187,13 +237,13 @@ var emailRegx =  /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
 $("#memEmail").on("change keyup paste", function() {
 	if ($("#memEmail").val() == ""){    	
     	$("#emailChkBox").show();
-    	$("#memInputSubmit").attr("disabled", true);
+    	emailChk=0;
     } else if(!emailRegx.test($("#memEmail").val())){
     	$("#emailChkBox").show();
-    	$("#memInputSubmit").attr("disabled", true);
+    	emailChk=0;
     } else {
     	$("#emailChkBox").hide();
-    	$("#memInputSubmit").attr("disabled", false);
+    	emailChk=1;
     }
 });
 

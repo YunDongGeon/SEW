@@ -50,7 +50,7 @@
 					<li><span>03</span> 가입완료</li>
 				</ol>
 			</div>
-			<form id="joinInputForm" method="post" th:action="@{sewJoinFinPage}" th:object="${member}">
+			<form name="joinInputForm" id="joinInputForm" method="post" th:action="@{sewJoinFinPage}" th:object="${member}" onsubmit="return joinInputChk()">
 				<div class="joinContainer">
 					<div class="joinBox">
 						<h5 class="inputTit">회원정보</h5>
@@ -67,8 +67,8 @@
 									</th>
 									<td>
 										<div>
-											<input th:field="*{memId}" id="memId" type="text" name="memId" style="IME-MODE: disabled">
-											<span class="subMsg">(영문소문자/숫자 포함 4~16자)</span>
+											<input th:field="*{memId}" id="memId" type="text" name="memId" maxlength="16">
+											<span class="subMsg">(영문소문자/숫자 조함 4~16자)</span>
 										</div>
 										<div class="inputChkBox" id="idChkBox1">
 											<span>아이디를 확인해주세요.</span>
@@ -89,7 +89,7 @@
 									<td>
 										<div>
 											<input th:field="*{memPw}" id="memPw" type="password" name="memPw">
-											<span class="subMsg">(영문 대소문자, 특수문자, 숫자 포함 8자~16자)</span>
+											<span class="subMsg">(영문 소문자, 특수문자, 숫자 포함 8자~16자)</span>
 										</div>
 										<div class="inputChkBox" id="pwChkBox">
 											<span>비밀번호를  확인해주세요.</span>
@@ -186,7 +186,7 @@
 						</table>
 						<div class="buttonsBox" style="margin-top: 1.5rem !important;">
 							<input type="button" name="cancel" value="취소" onclick="location.href='/'">
-							<input type="submit" id="memInputSubmit" value="회원가입" disabled="disabled">
+							<input type="submit" id="memInputSubmit" value="회원가입">
 						</div>			
 					</div>					
 				</div>
