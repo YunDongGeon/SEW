@@ -20,6 +20,26 @@ public class MemberService {
 	
 	@Autowired
 	private MemberRepository memberRepositoty;
+		
+	public Member encryp(Member member) {
+		MessageDigest digest;
+		
+		try {
+			digest = MessageDigest.getInstance("SHA-256");
+		}catch(NoSuchAlgorithmException nae) {
+			log.error("암호화 알고리즘 초기화 에러",nae);
+			throw new RuntimeException(nae);
+		}
+		
+		digest.update(member.getMemPw().getBytes());
+		StringBuilder sb = new StringBuilder();
+		for(byte b: digest.digest()) {
+			sb.append(Integer.toString((b & 0xff) + 0x100, 16).substring(1));
+		}		
+		member.setMemPw(sb.toString()); 
+		
+		return member; 
+	}
 	
 	public boolean addMember(Member member){
 		MessageDigest digest;

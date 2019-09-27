@@ -9,7 +9,7 @@
 		<div class="container">
 		    <ul class="top-navbar-nav ml-auto">		      			      
 	      		<li class="nav-item">
-	      			<a th:if="${session.mem!=null}" th:text="${session.mem.memName}" th:href="@{login}" class="top-nav-link"></a>
+	      			<a th:if="${session.mem!=null}" th:href="@{logOut}" class="top-nav-link">LOGOUT</a>
 		      		<a th:unless="${session.mem!=null}" th:href="@{login}" class="top-nav-link">LOGIN</a>		      				      	
       		  	</li>
 		      <li class="nav-item"><a th:href="@{joinTerms}" class="top-nav-link">JOIN US</a></li>

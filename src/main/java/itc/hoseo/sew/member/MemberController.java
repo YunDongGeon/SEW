@@ -59,25 +59,35 @@ public class MemberController {
 		return "sewLogin";
 	}
 	
-	@PostMapping("/vaildIdPw")
+	@PostMapping("/validIdPw")
 	@ResponseBody
-    public Map<Object, Object> vaildIdPw(
-    		@RequestBody Member member) {
-		int count = 0;
+    public Map<Object, Object> vaildIdPw(@RequestBody Member member) {
+		boolean isValid = false;
         Map<Object, Object> map = new HashMap<Object, Object>();
+        member = service.encryp(member);
         if(service.loginChk(member)) {
-        	count = 1;
-        	map.put("cnt", count);        	
+        	isValid = true;
+        	map.put("valid", isValid);
         } else {
-        	map.put("cnt", count);
+        	map.put("valid", isValid);
         }
         return map;
     }
 	
 	@PostMapping("/sewLogin")
 	public String loginChk(Member mem, HttpSession session) {
-		mem = service.getMember(mem);
-		session.setAttribute("mem", mem);			
+		mem = service.encryp(mem);
+		if(service.getMember(mem)!=null) {
+			mem = service.getMember(mem);
+			session.setAttribute("mem", mem);			
+			return "redirect:/";
+		}
+		return "/";
+	}
+	
+	@GetMapping("/logOut")
+	public String logOut(HttpSession session) {
+		session.invalidate();
 		return "redirect:/";
 	}
 }

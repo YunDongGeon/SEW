@@ -11,9 +11,9 @@
     	select count(*) from user where memId = #{memId}
     </select>
     <select id="loginChk" parameterType="Member" resultType="Member">
-    	select * from user where memId = #{memId} and memPw = #{memPw}
+    	select memId from user where memId = #{memId} and memPw = #{memPw}
     </select>
-	<select id="getMember" parameterType="String" resultType="Member">
+	<select id="getMember" parameterType="Member" resultType="Member">
 		select memId, memName from user where memId = #{memId} and memPw = #{memPw} 
 	</select>
     <select id="getMemberCount" resultType="int">
