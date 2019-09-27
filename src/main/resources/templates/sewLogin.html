@@ -53,8 +53,8 @@
 					<div>
 						<form name="loginForm" method="post" action="sewLogin">
 							<div class="loginInputSec">
-								<input type="text" id="loginId" name="loginId" placeholder="아이디" >
-								<input type="password" id="loginPw" name="loginPw" placeholder="비밀번호">
+								<input type="text" id="loginId" name="memId" placeholder="아이디" >
+								<input type="password" id="loginPw" name="memPw" placeholder="비밀번호">
 								<div>									
 								</div>
 							</div>
@@ -110,41 +110,40 @@
 	<script th:src="@{js/slider.js}"></script>	
 	<script type="text/javascript">
 		$("form").submit(function(e){
-			e.preventDefault();
-			var loginId = document.loginForm.loginId.value;
-			var loginPw = document.loginForm.loginPw.value;
-			if (loginId==""){		
+			var loginId = document.loginForm.memId.value;
+			var loginPw = document.loginForm.memPw.value;
+			if (loginId==""){						
 				$("#idChkBox1").show()
-				return false;
-			}
-			if (loginPw==""){
+				e.preventDefault();
+			} else if (loginPw=="") {				
 				$("#idChkBox1").show()
-				return false;
-			}		
-			
-			$.ajax({
-			    async: true,
-			    type : 'POST',
-			    data : JSON.stringify({"memId": loginId, "memPw": loginPw}),
-			    url : "vaildIdPw",
-			    dataType : "json",
-			    contentType: "application/json; charset=UTF-8",
-			    success : function(data) {
-			        if (data.cnt > 0) {                
-			            //아이디가 존재할 경우
-			        	return true;        		
-			        } else {
-			            //아이디가 존제안할 경우
-			        	$("#idChkBox1").show()
-			    		return false;
-			        }
-			    },
-			    error : function(error) {            
-			        alert("error : " + error);
-			        return false;
-			    }
-			});	
-			return false;
+				e.preventDefault();
+			} else {
+				$.ajax({
+					async: true,
+				    type : 'POST',
+				    data : JSON.stringify({"memId": loginId, "memPw": loginPw}),
+				    url : "vaildIdPw",
+				    dataType : "json",
+				    contentType: "application/json; charset=UTF-8",
+				    success : function(data) {
+				        if (data.cnt == 1) {                
+				            //아이디가 존재 안할 경우
+				        	$("#idChkBox1").hide()
+				        } else if(data.cnt == 0) {
+				            //아이디가 존재할 경우
+				            $("#idChkBox1").show()
+				            e.preventDefault();
+				        } else {
+				        	e.preventDefault();
+				        }
+				    },
+				    error : function(error) {
+				        alert("error : " + error);
+				        e.preventDefault();
+				    }
+				});								
+			}				   			
 		});
 	</script>
 </body>

@@ -68,15 +68,16 @@ public class MemberController {
         if(service.loginChk(member)) {
         	count = 1;
         	map.put("cnt", count);        	
-        }          
+        } else {
+        	map.put("cnt", count);
+        }
         return map;
     }
 	
 	@PostMapping("/sewLogin")
 	public String loginChk(Member mem, HttpSession session) {
-		mem = service.getMember(mem.getMemId());
-		session.setAttribute("memId", mem.getMemId());
-		session.setAttribute("memPw", mem.getMemPw());
-		return "/";
+		mem = service.getMember(mem);
+		session.setAttribute("mem", mem);			
+		return "redirect:/";
 	}
 }

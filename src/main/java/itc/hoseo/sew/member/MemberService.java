@@ -45,8 +45,8 @@ public class MemberService {
 	public boolean loginChk(Member member) {
 		return memberRepositoty.loginChk(member)!=null;
 	}
-	public Member getMember(String memId) {					
-		return memberRepositoty.getMember(memId);
+	public Member getMember(Member member) {					
+		return memberRepositoty.getMember(member);
 	}
 	public int getMemberCount() {
 		return memberRepositoty.getMemberCount();
