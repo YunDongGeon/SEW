@@ -9,5 +9,5 @@ public interface MemberRepository {
 	public int memIdChk(String memId);
 	public Member loginChk(Member member);
 	public Member getMember(Member member);
-	public int getMemberCount();
+	public Member findMemId(Member member);
 }

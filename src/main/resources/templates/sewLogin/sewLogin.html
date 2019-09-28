@@ -54,14 +54,13 @@
 			</div>
 			<div class="loginContainer">
 				<div class="loginBox">
-					<h5 class="mb-4">회원 로그인</h5>					
+					<h5 class="mb-4">회원 로그인</h5>
+					<hr>					
 					<div>
 						<form name="loginForm" method="post" action="sewLogin">
 							<div class="loginInputSec">
 								<input type="text" id="loginId" name="memId" placeholder="아이디" >
 								<input type="password" id="loginPw" name="memPw" placeholder="비밀번호">
-								<div>									
-								</div>
 							</div>
 							<input type="submit" id="loginBtn" name="loginBtn" value="로그인"> 
 						</form>
@@ -72,7 +71,7 @@
 					<hr>
 					<div class="buttonList">
 						<a th:href="@{joinTerms}"><button class="buttonItem" id="joinBtn">회원가입</button></a>
-						<button class="buttonItem" id="findIdBtn">아아디 찾기</button>
+						<a th:href="@{findId}" ><button class="buttonItem" id="findIdBtn">아아디 찾기</button></a>
 						<button class="buttonItem" id="findPwBtn">비밀번호 찾기</button>
 					</div>
 				</div>
@@ -119,11 +118,9 @@
 			
 			if (loginId==""){						
 				$("#idChkBox1").show()
-				e.preventDefault();
 			}
 			if (loginPw=="") {				
 				$("#idChkBox1").show()
-				e.preventDefault();
 			}
 			if (loginId!="" && loginPw!=""){
 				$.ajax({

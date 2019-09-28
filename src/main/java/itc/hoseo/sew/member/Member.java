@@ -13,4 +13,7 @@ public class Member {
 	private String memZipCode;
 	private String memAddr1;
 	private String memAddr2;
+	private String subject;
+	private String content;
+	private String receiver;
 }

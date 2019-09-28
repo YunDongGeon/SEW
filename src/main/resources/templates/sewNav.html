@@ -10,10 +10,15 @@
 		    <ul class="top-navbar-nav ml-auto">		      			      
 	      		<li class="nav-item">
 	      			<a th:if="${session.mem!=null}" th:href="@{logOut}" class="top-nav-link">LOGOUT</a>
-		      		<a th:unless="${session.mem!=null}" th:href="@{login}" class="top-nav-link">LOGIN</a>		      				      	
-      		  	</li>
-		      <li class="nav-item"><a th:href="@{joinTerms}" class="top-nav-link">JOIN US</a></li>
-		      <li class="nav-item"><a href="contact.html" class="top-nav-link">HELP</a></li>
+	      			<a th:unless="${session.mem!=null}" th:href="@{login}" class="top-nav-link">LOGIN</a>
+      			</li>
+		      	<li class="nav-item">
+		      		<a th:unless="${session.mem!=null}" th:href="@{joinTerms}" class="top-nav-link">JOIN US</a>
+		      		<a th:if="${session.mem!=null}" th:href="@{myPage}" class="top-nav-link">MY PAGE</a>
+	      		</li>				
+		      	<li class="nav-item">
+	      			<a href="contact.html" class="top-nav-link">HELP</a>
+      			</li>
 		    </ul>
 		</div>
 		<div class="nav-line"></div>		

@@ -27,21 +27,21 @@ public class MemberController {
 	
 	@PostMapping("/sewJoinInput")
 	public String termsAgree(@ModelAttribute("member") Member member) {
-		return "sewJoinInput";
+		return "sewJoin/sewJoinInput";
 	}
 	
 	@GetMapping("/sewJoinFinPage")
 	public String joinFin(Model model) {
 		model.addAttribute("member", new Member());		
-		return "sewJoinFinPage";
+		return "sewJoin/sewJoinFinPage";
 	}
 	
 	@PostMapping("/sewJoinFinPage")
 	public String joinFin(@ModelAttribute("member") Member member) {		
 		if (service.addMember(member)) {
-			return "sewJoinFin";
+			return "/sewJoin/sewJoinFin";
 		} 
-		return "sewJoinInput";		
+		return "sewJoin/sewJoinInput";		
 	}	
 	
 	@PostMapping("/memInputIdChk")
@@ -53,11 +53,6 @@ public class MemberController {
         map.put("cnt", count);
         return map;
     }	
-	
-	@PostMapping("/joinFin")
-	public String sewGoLogin() {
-		return "sewLogin";
-	}
 	
 	@PostMapping("/validIdPw")
 	@ResponseBody
@@ -84,10 +79,24 @@ public class MemberController {
 		}
 		return "/";
 	}
-	
-	@GetMapping("/logOut")
-	public String logOut(HttpSession session) {
-		session.invalidate();
-		return "redirect:/";
+
+	@GetMapping("/findId")
+	public String goFindId() {
+		return "sewLogin/sewFindId";
 	}
+	
+	@PostMapping("/findMemberId")
+	@ResponseBody
+    public Map<Object, Object> findId(@RequestBody Member member) {
+        Map<Object, Object> map = new HashMap<Object, Object>();
+        if(service.findMemId(member)!=null) {
+        	member = service.findMemId(member);
+        	map.put("memId", member.getMemId());
+        	map.put("memName", member.getMemName());
+        } else {
+        	map.put("memId", "");
+        	map.put("memName", "");
+        }
+        return map;
+    }
 }

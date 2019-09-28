@@ -15,14 +15,22 @@ public class SewApplicationTests {
 	@Autowired
 	MemberService memService;
 	@Test
-	public void encryption() {
+	public void sendEmail() {
 		Member mem = new Member();
+		mem.setMemEmail("dbsehdrjs20@gmail.com");
+		mem.setMemId("admin");
+		mem.setMemPw("임시비밀번호");
 		
-		mem.setMemPw("admin");
-		
-		mem = memService.encryp(mem);
-		
-		System.out.println(mem.getMemPw());
+		memService.sendEmail(mem);
 	}
+//	public void encryption() {
+//		Member mem = new Member();
+//		
+//		mem.setMemPw("tmdwls12");
+//		
+//		mem = memService.encryp(mem);
+//		
+//		System.out.println(mem.getMemPw());
+//	}
 
 }
