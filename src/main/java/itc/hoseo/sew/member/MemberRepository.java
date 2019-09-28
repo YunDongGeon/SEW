@@ -10,4 +10,6 @@ public interface MemberRepository {
 	public Member loginChk(Member member);
 	public Member getMember(Member member);
 	public Member findMemId(Member member);
+	public Member findMemPw(Member member);
+	public int updateTempPw(Member member);
 }

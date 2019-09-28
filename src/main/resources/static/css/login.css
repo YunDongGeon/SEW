@@ -141,8 +141,18 @@ hr {
 	display: none;
 }
 
+#findPwInputId {
+	padding-left: 10px;
+	height: 40px;
+}
+
 .inputChkBox {
 	display: none;
 	font-size: 12px;
 	color: red;
+}
+
+#findPwEmailSended{
+	font-size: 12px;
+	color: green;	
 }

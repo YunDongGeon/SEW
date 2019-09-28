@@ -20,10 +20,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import itc.hoseo.sew.find.FindService;
+
 @Controller
 public class MemberController {
 	@Autowired
 	MemberService service;
+	@Autowired
+	FindService findService;
 	
 	@PostMapping("/sewJoinInput")
 	public String termsAgree(@ModelAttribute("member") Member member) {
@@ -85,6 +89,11 @@ public class MemberController {
 		return "sewLogin/sewFindId";
 	}
 	
+	@GetMapping("/findPw")
+	public String goFindPw() {
+		return "sewLogin/sewFindPw";
+	}
+	
 	@PostMapping("/findMemberId")
 	@ResponseBody
     public Map<Object, Object> findId(@RequestBody Member member) {
@@ -96,6 +105,27 @@ public class MemberController {
         } else {
         	map.put("memId", "");
         	map.put("memName", "");
+        }
+        return map;
+    }
+	
+	@PostMapping("/findMemberPw")
+	@ResponseBody
+    public Map<Object, Object> findPw(@RequestBody Member member) {
+        Map<Object, Object> map = new HashMap<Object, Object>();
+        String tempPw = "";
+        if(service.findMemPw(member)!=null) {        	
+        	member = service.findMemPw(member);
+        	tempPw = findService.randomPw();
+        	member.setMemPw(tempPw);
+        	member = service.encryp(member);
+        	if(service.updateTempPw(member)) {
+        		member.setMemPw(tempPw);
+        		findService.sendEmail(member);
+            	map.put("sendEmail", true);
+        	}
+        } else {
+        	map.put("sendEmail", false);
         }
         return map;
     }

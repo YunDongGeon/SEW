@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="itc.hoseo.sew.member.MemberRepository">
 	<insert id="addMember" parameterType="Member">
-		INSERT INTO user VALUES 
+		INSERT INTO user(memId, memPw, memName, memBirth, memEmail, memPhone, memZipCode, memAddr1, memAddr2) VALUES 
 			(#{memId}, #{memPw}, #{memName}, #{memBirth}, #{memEmail}, #{memPhone}, #{memZipCode}, #{memAddr1}, #{memAddr2})
     </insert>
     <select id="memIdChk" parameterType="String" resultType="int">
@@ -18,5 +18,11 @@
 	</select>
     <select id="findMemId" parameterType="Member" resultType="Member">
     	select memId, memName from user where memName = #{memName} and memEmail = #{memEmail}
-    </select>    
+    </select>
+    <select id="findMemPw" parameterType="Member" resultType="Member">
+		select memId, memEmail from user where memId = #{memId} 
+	</select>
+    <update id="updateTempPw" parameterType="Member">
+    	update user set memStat='yes', memPw = #{memPw} where memId = #{memId}
+    </update>
 </mapper>

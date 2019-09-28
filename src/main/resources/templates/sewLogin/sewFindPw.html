@@ -50,26 +50,25 @@
 				</div>				
 			</div>
 			<div class="loginContainer">
-			<h3 style="font-weight: bold;">아이디 찾기</h3>
+			<h3 style="font-weight: bold;">비밀번호 찾기</h3>
+			<div id="idChkBox1">
+				<span>회원가입시 등록된 이메일로 임시 비밀번호가 발송됩니다.</span>
+			</div>
 				<div class="findIdBox">
-					<h5 class="mb-4">회원 아이디 찾기</h5>
+					<h5 class="mb-4">회원 비밀번호 찾기</h5>					
 					<div>
-						<h4 id="findResult">							
-							<strong id="findedName"></strong>님의 아이디는 <strong style="margin-left: 5px;" id="findedId">아이디</strong>입니다.
-						</h4>
-						<form id="findIdForm" name="findIdForm" method="post" action="#">
+						<form id="findPwForm" name="findPwForm" method="post">
 							<div class="loginInputSec">
-								<input type="text" id="loginId" name="memName" placeholder="이름" >
-								<input type="text" id="loginPw" name="memEmail" placeholder="이메일">
+								<input type="text" id="findPwInputId" name="memId" placeholder="아이디" >
 							</div>
-							<input type="submit" id="loginBtn" name="loginBtn" value="아이디 찾기"> 
+							<input type="submit" id="loginBtn" name="loginBtn" value="전송"> 
 						</form>
 					</div>
 					<div class="inputChkBox" id="idChkBox1">
-						<span>이름을 입력해주세요.</span>
+						<span>아이디를 입력해주세요.</span>
 					</div>
-					<div class="inputChkBox" id="idChkBox2">
-						<span>이메일을 입력해주세요.</span>
+					<div class="inputChkBox" id="findPwEmailSended">
+						<span>이메일로 임시비밀번호가 전송되었습니다.</span>
 					</div>
 					<div class="inputChkBox" id="idChkBox3">
 						<span>등록되지 않은 회원입니다.</span>
@@ -77,7 +76,7 @@
 					<hr>
 					<div class="buttonList">
 						<a th:href="@{login}"><button id="goLoginBtn">로그인하기</button></a>
-						<a th:href="@{findPw}"><button id="goFindPwBtn">비밀번호 찾기</button></a>
+						<a th:href="@{findId}"><button id="goFindPwBtn">아이디 찾기</button></a>
 					</div>
 				</div>
 			</div>
@@ -117,39 +116,30 @@
 	<script th:src="@{js/slider.js}"></script>	
 	<script type="text/javascript">
 		$("form").submit(function(e){
-			var findName = document.findIdForm.memName.value;
-			var findEmail = document.findIdForm.memEmail.value;
+			var findId = document.findPwForm.memId.value;
 			e.preventDefault();
 			
-			if (findName==""){						
+			if (findId==""){						
 				$("#idChkBox1").show()
-				$("#idChkBox2").hide()
+				$("#findPwEmailSended").hide()
 				$("#idChkBox3").hide()
-			}else if (findEmail=="") {				
-				$("#idChkBox1").hide()
-				$("#idChkBox2").show()
-				$("#idChkBox3").hide()
-			} else if (findName!="" && findEmail!=""){
+			} else if (findId!=""){
 				$.ajax({
 					async: true,
 				    type : 'POST',
-				    data : JSON.stringify({"memName": findName, "memEmail": findEmail}),
-				    url : "findMemberId",
+				    data : JSON.stringify({"memId": findId}),
+				    url : "findMemberPw",
 				    dataType : "json",
 				    contentType: "application/json; charset=UTF-8",
 				    success : function(data) {
-				        if (data.memId!="" && data.memName!="") {
-				        	$("#idChkBox1").hide();
-							$("#idChkBox2").hide();
-							$("#idChkBox3").hide();
-				        	$("#findIdForm").hide();
-				        	$("#findResult").show();
-				        	$("#findedName").text(data.memName);
-				        	$("#findedId").text(data.memId);
+				        if (data.sendEmail) {
+				        	$("#idChkBox1").hide()
+							$("#findPwEmailSended").show()
+							$("#idChkBox3").hide()
 				        } else {
-							$("#idChkBox1").hide();
-							$("#idChkBox2").hide();
-							$("#idChkBox3").show();
+				        	$("#idChkBox1").hide()
+							$("#findPwEmailSended").hide()
+							$("#idChkBox3").show()
 				        }
 				    },
 				    error : function(error) {

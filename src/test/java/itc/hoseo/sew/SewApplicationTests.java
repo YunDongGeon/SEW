@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import itc.hoseo.sew.find.FindService;
 import itc.hoseo.sew.member.Member;
 import itc.hoseo.sew.member.MemberService;
 
@@ -13,15 +14,14 @@ import itc.hoseo.sew.member.MemberService;
 @SpringBootTest
 public class SewApplicationTests {
 	@Autowired
-	MemberService memService;
+	FindService service;
 	@Test
 	public void sendEmail() {
 		Member mem = new Member();
 		mem.setMemEmail("dbsehdrjs20@gmail.com");
 		mem.setMemId("admin");
-		mem.setMemPw("임시비밀번호");
 		
-		memService.sendEmail(mem);
+		service.sendEmail(mem);
 	}
 //	public void encryption() {
 //		Member mem = new Member();
