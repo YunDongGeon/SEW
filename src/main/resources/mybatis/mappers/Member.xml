@@ -14,7 +14,7 @@
     	select memId from user where memId = #{memId} and memPw = #{memPw}
     </select>
 	<select id="getMember" parameterType="Member" resultType="Member">
-		select memId, memName from user where memId = #{memId} and memPw = #{memPw} 
+		select memId, memName, memStat from user where memId = #{memId} and memPw = #{memPw} 
 	</select>
     <select id="findMemId" parameterType="Member" resultType="Member">
     	select memId, memName from user where memName = #{memName} and memEmail = #{memEmail}

@@ -58,13 +58,13 @@ hr {
     cursor: pointer;
 }
 
-#loginId {
+#loginId, #memPw {
 	padding-left: 10px;
 	height: 40px;
 	margin-bottom: 10px;
 }
 
-#loginPw {
+#loginPw, #pwChk {
 	padding-left: 10px;
 	height: 40px;
 }

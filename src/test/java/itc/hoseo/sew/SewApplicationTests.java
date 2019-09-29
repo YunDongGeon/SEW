@@ -15,22 +15,24 @@ import itc.hoseo.sew.member.MemberService;
 public class SewApplicationTests {
 	@Autowired
 	FindService service;
+	@Autowired
+	MemberService memService;
 	@Test
-	public void sendEmail() {
-		Member mem = new Member();
-		mem.setMemEmail("dbsehdrjs20@gmail.com");
-		mem.setMemId("admin");
-		
-		service.sendEmail(mem);
-	}
-//	public void encryption() {
+//	public void sendEmail() {
 //		Member mem = new Member();
+//		mem.setMemEmail("dbsehdrjs20@gmail.com");
+//		mem.setMemId("test");
 //		
-//		mem.setMemPw("tmdwls12");
-//		
-//		mem = memService.encryp(mem);
-//		
-//		System.out.println(mem.getMemPw());
+//		service.sendEmail(mem);
 //	}
+	public void encryption() {
+		Member mem = new Member();
+		
+		mem.setMemPw("tmdwls12");
+		
+		mem = memService.encryp(mem);
+		
+		System.out.println(mem.getMemPw());
+	}
 
 }

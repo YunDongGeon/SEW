@@ -4,6 +4,8 @@ import java.security.MessageDigest;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import itc.hoseo.sew.find.FindService;
 
@@ -27,7 +30,7 @@ public class MemberController {
 	@Autowired
 	MemberService service;
 	@Autowired
-	FindService findService;
+	FindService findService;	
 	
 	@PostMapping("/sewJoinInput")
 	public String termsAgree(@ModelAttribute("member") Member member) {
@@ -78,7 +81,9 @@ public class MemberController {
 		mem = service.encryp(mem);
 		if(service.getMember(mem)!=null) {
 			mem = service.getMember(mem);
-			session.setAttribute("mem", mem);			
+			session.setAttribute("memId", mem.getMemId());
+			session.setAttribute("memName", mem.getMemName());
+			session.setAttribute("memStat", mem.getMemStat());
 			return "redirect:/";
 		}
 		return "/";
@@ -129,4 +134,9 @@ public class MemberController {
         }
         return map;
     }
+	
+	@GetMapping("/sewChangePw")
+	public String goChangePw() {
+		return "sewLogin/sewChangePw";
+	}
 }
