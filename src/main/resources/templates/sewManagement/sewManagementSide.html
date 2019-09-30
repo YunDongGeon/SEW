@@ -29,16 +29,19 @@
 			id="accordionSidebar" th:fragment="side">
 
 			<!-- Sidebar - Brand -->
-			<a class="navbar-brand" th:href="@{/index.do}"> <img
-				th:src="@{img/logo/logoRev.png}" width="200px" height="auto" />
+			<a class="navbar-brand" th:href="@{/index.do}"> 
+				<img th:src="@{img/logo/logoRev.png}" width="200px" height="auto" />
 			</a>
 
 			<!-- Divider -->
 			<hr class="sidebar-divider my-0">
 
 			<!-- Nav Item - Dashboard -->
-			<li class="nav-item active"><a class="nav-link"
-				href="index.html"> <i class="fas fa-fw fa-tachometer-alt"></i> <span>Dashboard</span></a>
+			<li class="nav-item active">
+				<a class="nav-link" th:href="@{/management.do}"> 
+					<i class="fas fa-fw fa-tachometer-alt"></i> 
+					<span>Dashboard</span>
+				</a>
 			</li>
 
 			<!-- Divider -->
@@ -48,9 +51,9 @@
 			<div class="sidebar-heading">Interface</div>
 
 			<!-- Nav Item - Pages Collapse Menu -->
-			<li class="nav-item">
-				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo"> 
-					<i class="far fa-edit"></i>
+			<li class="nav-item">				
+				<a class="nav-link" th:href="@{sewAddProd.do}">
+					<i class="fas fa-fw fa-table"></i> 
 					<span>상품 등록</span>
 				</a>
 			</li>

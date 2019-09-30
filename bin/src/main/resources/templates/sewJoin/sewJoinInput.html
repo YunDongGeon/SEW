@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Sew</title>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link
+	href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700"
+	rel="stylesheet">
+<link href="http://allfont.net/allfont.css?fonts=agency-fb"
+	rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300&display=swap" rel="stylesheet">
+<link href="http://allfont.net/allfont.css?fonts=agency-fb" rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Teko:300&display=swap&subset=devanagari,latin-ext" rel="stylesheet">
+<link rel="icon" th:href="@{img/logo/favicon.png}">
+<link rel="stylesheet" th:href="@{css/open-iconic-bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{css/animate.css}">
+<link rel="stylesheet" th:href="@{css/owl.carousel.min.css}">
+<link rel="stylesheet" th:href="@{css/owl.theme.default.min.css}">
+<link rel="stylesheet" th:href="@{css/magnific-popup.css}">
+<link rel="stylesheet" th:href="@{css/aos.css}">
+<link rel="stylesheet" th:href="@{css/ionicons.min.css}">
+<link rel="stylesheet" th:href="@{css/bootstrap-datepicker.css}">
+<link rel="stylesheet" th:href="@{css/jquery.timepicker.css}">
+<link rel="stylesheet" th:href="@{css/flaticon.css}">
+<link rel="stylesheet" th:href="@{css/icomoon.css}">
+<link rel="stylesheet" th:href="@{css/style.css}">
+<link rel="stylesheet" th:href="@{slick/slick.css}">
+<link rel="stylesheet" th:href="@{slick/slick-theme.css}">
+<link rel="stylesheet" th:href="@{css/slider.css}">
+<link rel="stylesheet" th:href="@{css/nav.css}">
+<link rel="stylesheet" th:href="@{css/join.css}">
+
+</head>
+<body>
+	<nav
+		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
+		id="ftco-navbar" th:replace="sewNav::nav"></nav>
+	<!-- END nav -->
+
+	<!-- Join Form -->
+	<section class="ftco-section ftco-product">
+		<div class="container">
+			<div class="joinTit">
+				<h2>회원가입</h2>
+				<ol>
+					<li><span>01</span> 약관동의 <span class="arrows">></span></li>
+					<li class="onPage"><span>02</span> 정보입력 <span class="arrows">></span></li>
+					<li><span>03</span> 가입완료</li>
+				</ol>
+			</div>
+			<form name="joinInputForm" id="joinInputForm" method="post" th:action="@{sewJoinFinPage.do}" th:object="${member}" onsubmit="return joinInputChk()">
+				<div class="joinContainer">
+					<div class="joinBox">
+						<h5 class="inputTit">회원정보</h5>
+						<div class="subMsgBox">
+							<img class="icon" th:src="@{/img/icon/icoRequired.png}" alt="필수">
+							<span class="subMsg">필수 입력사항</span>
+						</div>						
+						<table>
+							<tbody>
+								<tr>
+									<th scope="row">
+										아이디
+										<img class="icon" th:src="@{/img/icon/icoRequired.png}" alt="필수">										
+									</th>
+									<td>
+										<div>
+											<input th:field="*{memId}" id="memId" type="text" name="memId" maxlength="16">
+											<span class="subMsg">(영문소문자/숫자 조함 4~16자)</span>
+										</div>
+										<div class="inputChkBox" id="idChkBox1">
+											<span>아이디를 확인해주세요.</span>
+										</div>	
+										<div class="inputChkBox" id="idChkBox2">
+											<span>증복된 아이디입니다.</span>	
+										</div>		
+										<div class="idChk" id="idChkBox3">
+											<span>사용 가능한 아이디입니다.</span>
+										</div>						
+									</td>
+								</tr>																
+								<tr>
+									<th scope="row">
+										비밀번호
+										<img class="icon" th:src="@{/img/icon/icoRequired.png}" alt="필수">
+									</th>
+									<td>
+										<div>
+											<input th:field="*{memPw}" id="memPw" type="password" name="memPw">
+											<span class="subMsg">(영문 소문자, 특수문자, 숫자 포함 8자~16자)</span>
+										</div>
+										<div class="inputChkBox" id="pwChkBox">
+											<span>비밀번호를  확인해주세요.</span>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">
+										비밀번호 확인
+										<img class="icon" th:src="@{/img/icon/icoRequired.png}" alt="필수">
+									</th>
+									<td>
+										<div>
+											<input id="pwChk" type="password" name="pwChk">
+										</div>
+										<div class="inputChkBox" id="rePwChkBox1">
+											<span>비밀번호를 확인해주세요.</span>
+										</div>
+										<div class="inputChkBox" id="rePwChkBox2">
+											<span>비밀번호가 다릅니다.</span>
+										</div>
+									</td>
+								</tr>															
+								<tr>
+									<th scope="row">
+										이름
+										<img class="icon" th:src="@{/img/icon/icoRequired.png}" alt="필수">
+									</th>
+									<td>
+										<div>
+											<input th:field="*{memName}" id="memName" type="text" name="memName">
+										</div>
+										<div class="inputChkBox" id="nameChkBox"> 
+											<span>이름을 확인해주세요.</span>
+										</div>
+									</td>
+								</tr>								
+								<tr>
+									<th scope="row">
+										생년월일
+										<img class="icon" th:src="@{/img/icon/icoRequired.png}" alt="필수">
+									</th>
+									<td class="ymd">
+										<div>
+											<input th:field="*{memBirth}" id="memBirth" type="text" name="memBirth" maxlength="8" placeholder="19900101" numberOnly>
+										</div>
+										<div class="inputChkBox" id="birthChkBox">
+											<span>생년월일을 확인해주세요.</span>
+										</div>										
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">
+										이메일
+										<img class="icon" th:src="@{/img/icon/icoRequired.png}" alt="필수">
+									</th>
+									<td>
+										<div>
+											<input th:field="*{memEmail}" id="memEmail" type="text" name="memEmail">
+										</div>
+										<div class="inputChkBox" id="emailChkBox">
+											<span>이메일를 확인해주세요.</span>
+										</div>
+									</td>
+								</tr>								
+								<tr>
+									<th scope="row">
+										휴대폰번호										
+									</th>
+									<td>
+										<div>
+											<input th:field="*{memPhone}" type="text" id="cellPhone" name="memPhone" maxlength="11" placeholder="- 없이 입력하세요." numberOnly>
+										</div>										
+									</td>
+								</tr>								
+								<tr>
+									<th scope="row">
+										주소										
+									</th>
+									<td>
+										<div class="postCodeBox">
+											<input th:field="*{memZipCode}" type="text" id="postcode" name="memZipCode" readonly>
+											<button type="button" class="findPostCode" onClick="findPostCode()">
+												우편번호찾기
+											</button>
+										</div>
+										<div class="addrBox">
+											<input th:field="*{memAddr1}" type="text" class="addrInput" id="addr1" name="memAddr1" readonly>
+											<input th:field="*{memAddr2}" type="text" class="addrInput" id="addr2" name="memAddr2">
+										</div>																		
+									</td>
+								</tr>									
+							</tbody>
+						</table>
+						<div class="buttonsBox" style="margin-top: 1.5rem !important;">
+							<input type="button" name="cancel" value="취소" onclick="location.href='/'">
+							<input type="submit" id="memInputSubmit" value="회원가입">
+						</div>			
+					</div>					
+				</div>
+			</form>
+		</div>
+	</section>
+	<!-- END Join Form -->
+
+	<footer th:replace="sewFooter::footer"
+		class="ftco-footer bg-light ftco-section"></footer>
+	<!-- loader -->
+	<div id="ftco-loader" class="show fullscreen">
+		<svg class="circular" width="48px" height="48px">
+			<circle class="path-bg" cx="24" cy="24" r="22" fill="none"
+				stroke-width="4" stroke="#eeeeee" />
+			<circle class="path" cx="24" cy="24" r="22" fill="none"
+				stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg>
+	</div>
+	
+	<script th:src="@{js/jquery.min.js}"></script>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script th:src="@{js/popper.min.js}"></script>
+	<script th:src="@{js/bootstrap.min.js}"></script>
+	<script th:src="@{js/jquery.easing.1.3.js}"></script>
+	<script th:src="@{js/jquery.waypoints.min.js}"></script>
+	<script th:src="@{js/jquery.stellar.min.js}"></script>
+	<script th:src="@{js/owl.carousel.min.js}"></script>
+	<script th:src="@{js/jquery.magnific-popup.min.js}"></script>
+	<script th:src="@{js/aos.js}"></script>
+	<script th:src="@{js/jquery.animateNumber.min.js}"></script>
+	<script th:src="@{js/bootstrap-datepicker.js}"></script>
+	<script th:src="@{js/scrollax.min.js}"></script>
+	<script th:src="@{https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false}"></script>
+	<script th:src="@{js/google-map.js}"></script>
+	<script th:src="@{js/main.js}"></script>
+	<script th:src="@{slick/slick.js}"></script>
+	<script th:src="@{slick/slick.min.js}"></script>
+	<script th:src="@{js/slider.js}"></script>
+	<script th:src="@{js/sewJoin.js}"></script>
+	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+</body>
+</html>
