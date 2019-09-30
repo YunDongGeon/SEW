@@ -56,7 +56,7 @@
 				<div class="loginBox">
 					<h5 class="mb-4">회원 로그인</h5>
 					<div>
-						<form name="loginForm" method="post" action="sewLogin">
+						<form name="loginForm" method="post" action="sewLogin.do">
 							<div class="loginInputSec">
 								<input type="text" id="loginId" name="memId" placeholder="아이디" >
 								<input type="password" id="loginPw" name="memPw" placeholder="비밀번호">
@@ -69,9 +69,9 @@
 					</div>
 					<hr>
 					<div class="buttonList">
-						<a th:href="@{joinTerms}"><button class="buttonItem" id="joinBtn">회원가입</button></a>
-						<a th:href="@{findId}" ><button class="buttonItem" id="findIdBtn">아아디 찾기</button></a>
-						<a th:href="@{findPw}"><button class="buttonItem" id="findPwBtn">비밀번호 찾기</button></a>
+						<a th:href="@{joinTerms.do}"><button class="buttonItem" id="joinBtn">회원가입</button></a>
+						<a th:href="@{findId.do}" ><button class="buttonItem" id="findIdBtn">아아디 찾기</button></a>
+						<a th:href="@{findPw.do}"><button class="buttonItem" id="findPwBtn">비밀번호 찾기</button></a>
 					</div>
 				</div>
 			</div>
@@ -126,7 +126,7 @@
 					async: true,
 				    type : 'POST',
 				    data : JSON.stringify({"memId": loginId, "memPw": loginPw}),
-				    url : "validIdPw",
+				    url : "validIdPw.do",
 				    dataType : "json",
 				    contentType: "application/json; charset=UTF-8",
 				    success : function(data) {

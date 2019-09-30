@@ -75,8 +75,8 @@
 					</div>
 					<hr>
 					<div class="buttonList">
-						<a th:href="@{login}"><button id="goLoginBtn">로그인하기</button></a>
-						<a th:href="@{findId}"><button id="goFindPwBtn">아이디 찾기</button></a>
+						<a th:href="@{login.do}"><button id="goLoginBtn">로그인하기</button></a>
+						<a th:href="@{findId.do}"><button id="goFindPwBtn">아이디 찾기</button></a>
 					</div>
 				</div>
 			</div>
@@ -128,7 +128,7 @@
 					async: true,
 				    type : 'POST',
 				    data : JSON.stringify({"memId": findId}),
-				    url : "findMemberPw",
+				    url : "findMemberPw.do",
 				    dataType : "json",
 				    contentType: "application/json; charset=UTF-8",
 				    success : function(data) {

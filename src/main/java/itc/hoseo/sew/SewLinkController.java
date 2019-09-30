@@ -11,28 +11,28 @@ import itc.hoseo.sew.member.Member;
 
 @Controller
 public class SewLinkController {	
-	@GetMapping("/")
+	@GetMapping("/index.do")
 	public String index() {
 		return "index";
 	}
-	@GetMapping("/login")
+	@GetMapping("/login.do")
 	public String getGoLogin() {
 		return "sewLogin/sewLogin";
 	}
-	@PostMapping("/login")
+	@PostMapping("/login.do")
 	public String postGoLogin() {
 		return "sewLogin/sewLogin";
 	}
-	@GetMapping("/logOut")
+	@GetMapping("/logOut.do")
 	public String logOut(HttpSession session) {
 		session.invalidate();
-		return "redirect:/";
+		return "redirect:/index.do";
 	}
-	@GetMapping("/joinTerms")
+	@GetMapping("/joinTerms.do")
 	public String joinTerms() {
 		return "sewJoin/sewJoinTerms";
 	}
-	@GetMapping("/myPage")
+	@GetMapping("/myPage.do")
 	public String myPage() {
 		return "sewMyPage";		
 	}

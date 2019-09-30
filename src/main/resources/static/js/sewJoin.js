@@ -43,6 +43,21 @@ var birthChk = 0;
 var emailChk = 0;
 
 // onsubmit
+function updatePw(){
+	if(pwChk==0){
+		$("#pwChkBox").show();
+		return false;
+	}
+	// 비밀번호 확인 체크
+	if(rePwChk==0){
+		$("#rePwChkBox1").show();
+    	$("#rePwChkBox2").hide();
+		return false;
+	}else if(rePwChk==1){		
+		return false;
+	}
+}
+
 function joinInputChk(){
 	// 아이디 체크
 	if(idChk==0){
@@ -142,12 +157,18 @@ var pwRegx = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
 $("#memPw").on("change keyup paste", function() {
     if ($("#memPw").val() == ""){    	
     	$("#pwChkBox").show();
+    	$("#rePwChkBox1").hide();
+    	$("#rePwChkBox2").hide();
     	pwChk=0;
     } else if(!pwRegx.test($("#memPw").val())) { 
     	$("#pwChkBox").show();
+    	$("#rePwChkBox1").hide();
+    	$("#rePwChkBox2").hide();
     	pwChk=0;
 	} else {
     	$("#pwChkBox").hide();
+    	$("#rePwChkBox1").hide();
+    	$("#rePwChkBox2").hide();
     	pwChk=1;
     }   
 });
@@ -155,14 +176,22 @@ $("#memPw").on("change keyup paste", function() {
 //비밀번호 확인 유효성검사
 $("#pwChk").on("change keyup paste", function() {
     if ($("#pwChk").val() == ""){
+    	$("#pwChkBox").hide();
     	$("#rePwChkBox1").show();
     	$("#rePwChkBox2").hide();
     	rePwChk=0;
+    } else if(!pwRegx.test($("#memPw").val())) { 
+    	$("#pwChkBox").show();
+    	$("#rePwChkBox1").hide();
+    	$("#rePwChkBox2").hide();
+    	pwChk=0;
     } else if($("#pwChk").val() != $("#memPw").val()) {
+    	$("#pwChkBox").hide();
     	$("#rePwChkBox1").hide();
     	$("#rePwChkBox2").show();
     	rePwChk=1;
     } else {
+    	$("#pwChkBox").hide();
     	$("#rePwChkBox1").hide();
     	$("#rePwChkBox2").hide();
     	rePwChk=2;

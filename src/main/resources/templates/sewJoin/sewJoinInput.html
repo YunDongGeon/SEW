@@ -54,7 +54,7 @@
 					<li><span>03</span> 가입완료</li>
 				</ol>
 			</div>
-			<form name="joinInputForm" id="joinInputForm" method="post" th:action="@{sewJoinFinPage}" th:object="${member}" onsubmit="return joinInputChk()">
+			<form name="joinInputForm" id="joinInputForm" method="post" th:action="@{sewJoinFinPage.do}" th:object="${member}" onsubmit="return joinInputChk()">
 				<div class="joinContainer">
 					<div class="joinBox">
 						<h5 class="inputTit">회원정보</h5>

@@ -14,7 +14,7 @@
     	select memId from user where memId = #{memId} and memPw = #{memPw}
     </select>
 	<select id="getMember" parameterType="Member" resultType="Member">
-		select memId, memName, memStat from user where memId = #{memId} and memPw = #{memPw} 
+		select memId, memName, memStat, memAuth from user where memId = #{memId} and memPw = #{memPw} 
 	</select>
     <select id="findMemId" parameterType="Member" resultType="Member">
     	select memId, memName from user where memName = #{memName} and memEmail = #{memEmail}
@@ -24,5 +24,8 @@
 	</select>
     <update id="updateTempPw" parameterType="Member">
     	update user set memStat='yes', memPw = #{memPw} where memId = #{memId}
+    </update>
+    <update id="updateNewPw" parameterType="Member">
+    	update user set memStat='no', memPw = #{memPw} where memId = #{memId}
     </update>
 </mapper>

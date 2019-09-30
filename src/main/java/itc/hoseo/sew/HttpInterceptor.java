@@ -5,34 +5,31 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+
+import itc.hoseo.sew.member.Member;
 
 @Component
 public class HttpInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-			throws Exception {		
-		try {
-			HttpSession session = request.getSession(false);
-			if(session!=null) {
-				String memId = session.getAttribute("memId").toString();
-				String memName = session.getAttribute("memName").toString();
-				String memStat = session.getAttribute("memStat").toString();
-				
-				if(memStat=="yes") {
-					response.sendRedirect("/sewChangePw");
-					return false;
-				}else {
-					return true;
-				}			
-			}else {
-				return true;
+			throws Exception {
+		
+		HttpSession session = request.getSession();
+		if(session.getAttribute("mem") != null) {
+			Member member = (Member)session.getAttribute("mem");
+			
+			if(member.getMemStat().equals("yes")) {
+				response.sendRedirect("/sewChangePw.do");
+				return false;
 			}
-		} catch (NullPointerException e) {
-			return true;
-		}		
+		}
+		
+		return true;				
 	}
+	
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {

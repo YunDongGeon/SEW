@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">="en">
 <head>
     <meta charset="UTF-8">
     <title>Sew</title>
@@ -9,12 +9,15 @@
 		<div class="container">
 		    <ul class="top-navbar-nav ml-auto">		      			      
 	      		<li class="nav-item">
-	      			<a th:if="${session.memId!=null}" th:href="@{logOut}" class="top-nav-link">LOGOUT</a>
-	      			<a th:unless="${session.memId!=null}" th:href="@{login}" class="top-nav-link">LOGIN</a>
+	      			<a th:if="${session.mem!=null}" th:href="@{logOut.do}" class="top-nav-link">LOGOUT</a>
+	      			<a th:unless="${session.mem!=null}" th:href="@{login.do}" class="top-nav-link">LOGIN</a>
       			</li>	
 		      	<li class="nav-item">
-		      		<a th:unless="${session.memId!=null}" th:href="@{joinTerms}" class="top-nav-link">JOIN US</a>
-		      		<a th:if="${session.memId!=null}" th:href="@{myPage}" class="top-nav-link">MY PAGE</a>
+		      		<a th:unless="${session.mem!=null}" th:href="@{joinTerms.do}" class="top-nav-link">JOIN US</a>
+		      		<a th:if="${session.mem!=null}" th:href="@{myPage.do}" class="top-nav-link">MY PAGE</a>
+	      		</li>
+	      		<li class="nav-item" >		      		
+		      		<a th:if="${session.mem!=null && session.mem.memAuth == 'yes'}" th:href="@{management.do}" class="top-nav-link">MANAGEMENT</a>
 	      		</li>				
 		      	<li class="nav-item">
 	      			<a href="contact.html" class="top-nav-link">HELP</a>
@@ -23,7 +26,7 @@
 		</div>
 		<div class="nav-line"></div>		
 		<div class="container">
-		  <a class="navbar-brand" th:href="@{/}">
+		  <a class="navbar-brand" th:href="@{/index.do}">
 		  	<img th:src="@{img/logo/logo.png}" width="200px" height="auto" />
 		  </a>
 		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">

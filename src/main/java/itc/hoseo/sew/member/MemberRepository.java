@@ -12,4 +12,6 @@ public interface MemberRepository {
 	public Member findMemId(Member member);
 	public Member findMemPw(Member member);
 	public int updateTempPw(Member member);
+	public int updateNewPw(Member member);
 }
+

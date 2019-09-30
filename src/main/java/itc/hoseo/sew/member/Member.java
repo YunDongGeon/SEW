@@ -14,6 +14,7 @@ public class Member {
 	private String memAddr1;
 	private String memAddr2;
 	private String memStat;
+	private String memAuth;
 	private String subject;
 	private String content;
 	private String receiver;

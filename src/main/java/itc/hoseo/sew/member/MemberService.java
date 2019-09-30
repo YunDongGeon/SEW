@@ -61,4 +61,7 @@ public class MemberService {
 	public boolean updateTempPw(Member member) {
 		return memberRepositoty.updateTempPw(member)!=0;
 	}
+	public boolean updateNewPw(Member member) {
+		return memberRepositoty.updateNewPw(member)!=0;
+	}
 }
