@@ -4,7 +4,11 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="itc.hoseo.sew.management.ManagementRepository">
 	<insert id="addMenProd" parameterType="Management">
-		INSERT INTO menProd(prodType, prodCat, prodName, prodListP, prodPrice, prodDeli, prodCode, prodOrigin, prodCont) VALUES 
-			(#{prodType}, #{prodCat}, #{prodName}, #{prodListP}, #{prodPrice}, #{prodDeli}, #{prodCode}, #{prodOrigin}, #{prodCont})
+		INSERT INTO menProd(prodType, prodCat, prodName, prodListP, prodPrice, prodDeli, prodCode, prodOrigin, 
+				prodThumb, prodThumbOriName, prodThumbUrl, 
+				prodCont, prodContOriName, prodContUrl) VALUES 
+			(#{prodType}, #{prodCat}, #{prodName}, #{prodListP}, #{prodPrice}, #{prodDeli}, #{prodCode}, #{prodOrigin}, 
+				#{prodThumb}, #{prodThumbOriName}, #{prodThumbUrl}, 
+				#{prodCont}, #{prodContOriName}, #{prodContUrl})
     </insert>
 </mapper>

@@ -23,7 +23,12 @@ CREATE TABLE menProd(
 	prodDeli int default 2500,
 	prodCode varchar(20) not null,	
 	prodOrigin varchar(20) not null,
-	prodCont varchar(100) not null
+    prodThumb varchar(100) not null,
+    prodThumbOriName varchar(100) not null,
+    prodThumbUrl varchar(100) not null,
+	prodCont varchar(100) not null,
+    prodContOriName varchar(100) not null,
+    prodContUrl varchar(100) not null
 );
 
 CREATE TABLE menTopInven(
