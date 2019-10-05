@@ -1,14 +1,97 @@
 package itc.hoseo.sew.management;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Iterator;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @Service
 public class ManagementService {
 	@Autowired
 	ManagementRepository managementRepository;
 	
-	public boolean addMenProd(Management manage) {
-		return managementRepository.addMenProd(manage)!=0;
+	public int addMenProd(Management m) {
+		return managementRepository.addMenProd(m);
 	}
+	
+	public boolean addMenTopSize(Management m) {
+		return managementRepository.addMenTopSize(m)!=0;
+	}
+	
+	public boolean addMenBotSize(Management m) {
+		return managementRepository.addMenBotSize(m)!=0;
+	}
+	
+	public boolean addMenProdImg(Management m) {
+		return managementRepository.addMenProdImg(m)!=0;
+	}
+	
+	public int addWomenProd(Management m) {
+		return managementRepository.addWomenProd(m);
+	}
+	
+	public boolean addWomenTopSize(Management m) {
+		return managementRepository.addWomenTopSize(m)!=0;
+	}
+	
+	public boolean addWomenBotSize(Management m) {
+		return managementRepository.addWomenBotSize(m)!=0;
+	}
+	
+	public boolean addWomenProdImg(Management m) {
+		return managementRepository.addWomenProdImg(m)!=0;
+	}	
+	
+	@Autowired
+	private Environment env;
+	
+	public Management imgUpload(Management m, HttpServletRequest request, MultipartHttpServletRequest multi){
+    	Iterator<String> imgs = multi.getFileNames();
+		String path = env.getProperty("upload-folder");
+		String folderName1 = "prodThumb/";
+		String folderName2 = "prodCont/";        
+        String thumb = "yes";            
+        File destinationFile = null;
+        MultipartFile mFile = null;     
+        
+		while (imgs.hasNext()) {
+			String uploadFile = imgs.next();			
+			mFile = multi.getFile(uploadFile);
+			String sourceFileName = mFile.getOriginalFilename();
+			String sourceFileNameExtension = FilenameUtils.getExtension(sourceFileName).toLowerCase();
+	        String destinationFileName;	        	        
+			do { 
+	            destinationFileName = RandomStringUtils.randomAlphanumeric(32) + "." + sourceFileNameExtension;
+	            if(thumb.equals("yes")) {	            	
+	            	destinationFile = new File(path + folderName1 +destinationFileName);
+	            	m.setProdThumb(destinationFileName);
+	            	m.setProdThumbOriName(sourceFileName);
+	            	m.setProdThumbUrl(path+folderName1);	
+	            	thumb = "no";
+	            } else {
+	            	destinationFile = new File(path + folderName2 +destinationFileName);
+	            	m.setProdCont(destinationFileName);
+	            	m.setProdContOriName(sourceFileName);
+	            	m.setProdContUrl(path+folderName2);
+	            }
+	        } while (destinationFile.exists()); 
+			destinationFile.getParentFile().mkdirs();
+	        try {
+	        	mFile.transferTo(destinationFile);	        	
+			} catch (IllegalStateException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();				
+			}
+		}
+		return m;		
+    }
 }

@@ -67,7 +67,7 @@
 
 				<!-- Begin Page Content -->
 				<div id="sewAddProdContainer">				
-					<form id="sewAddProdForm" method="post" action="addProd.do" enctype="multipart/form-data">
+					<form id="sewAddProdForm" name="sewAddProdForm" method="post" action="addProd.do" enctype="multipart/form-data">
 						<table>
 							<tbody>
 								<tr>
@@ -75,34 +75,98 @@
 										상품명
 									</th>
 									<td>
-										<input class="form-control" id="addProdName" type="text" name="prodName" required="required">
+										<input class="form-control" id="addProdName" type="text" name="prodName">
 									</td>									
 								</tr>
+								<tr>
+									<th scope="row">
+										성별
+									</th>
+									<td>
+										<select id="prodGen" name="prodGen" class="browser-default custom-select">
+											<option value="none" selected="selected">성별</option>								    
+										    <option value="남성">남성</option>
+										    <option value="여성">여성</option>
+										</select>										
+									</td>									
+								</tr>								
 								<tr>
 									<th scope="row">
 										분류
 									</th>
 									<td>
-										<select name="prodType" class="browser-default custom-select" required="required">										    
-										    <option value="상의">상의</option>
+										<select id="prodType" name="prodType" class="browser-default custom-select">										    
+										    <option value="none" selected="selected">상의 / 하의</option>
+										    <option value="상의">상의</option>										    
 										    <option value="하의">하의</option>
 										</select>										
 									</td>									
 								</tr>
-								<tr>
+								<tr id="topCat" style="display: none">
 									<th scope="row">
 										카테고리
 									</th>
 									<td>
-										<select name="prodCat" class="browser-default custom-select" required="required">										    
+										<select name="prodCat" class="browser-default custom-select">										    
+										    <option value="none" selected="selected">카테고리</option>
 										    <option value="자켓/코트/점퍼">자켓/코트/점퍼</option>
-										    <option value="bot">니트/가디건/스웨터</option>
-										    <option value="bot">셔츠</option>
-										    <option value="bot">맨투맨/후드</option>
-										    <option value="bot">티셔츠</option>
-										    <option value="bot">데님</option>
-										    <option value="bot">팬츠</option>
+										    <option value="니트/가디건/스웨터">니트/가디건/스웨터</option>
+										    <option value="셔츠">셔츠</option>
+										    <option value="맨투맨/후드">맨투맨/후드</option>
+										    <option value="티셔츠">티셔츠</option>
 										</select>
+									</td>									
+								</tr>
+								<tr id="botCat" style="display: none">
+									<th scope="row">
+										카테고리
+									</th>
+									<td>
+										<select name="prodCat" class="browser-default custom-select">										    
+										    <option value="none" selected="selected">카테고리</option>
+										    <option value="데님">데님</option>
+										    <option value="팬츠">팬츠</option>
+										</select>
+									</td>									
+								</tr>								
+								<tr id="menTopSize" style="display: none">
+									<th scope="row">
+										사이즈별 수량
+									</th>
+									<td>
+										95 사이즈 <input class="form-control" type="text" name="prodMsize" numberOnly>																				
+										100 사이즈 <input class="form-control" type="text" name="prodLsize" numberOnly>
+										105 사이즈 <input class="form-control" type="text" name="prodXLsize" numberOnly>
+									</td>									
+								</tr>
+								<tr id="menBotSize" style="display: none">
+									<th scope="row">
+										사이즈별 수량
+									</th>
+									<td>
+										28 사이즈 <input class="form-control" type="text" name="prodMsize" numberOnly>																				
+										30 사이즈 <input class="form-control" type="text" name="prodLsize" numberOnly>
+										32 사이즈 <input class="form-control" type="text" name="prodXLsize" numberOnly>																				
+									</td>									
+								</tr>
+								<tr id="womenTopSize" style="display: none">
+									<th scope="row">
+										사이즈별 수량
+									</th>
+									<td>
+										90 사이즈 <input class="form-control" type="text" name="prodMsize" numberOnly>																				
+										95 사이즈 <input class="form-control" type="text" name="prodLsize" numberOnly>
+										100 사이즈 <input class="form-control" type="text" name="prodXLsize" numberOnly>																				
+									</td>									
+								</tr>
+								<tr id="womenBotSize" style="display: none">
+									<th scope="row">
+										사이즈별 수량
+									</th>
+									<td>
+										26 사이즈 <input class="form-control" type="text" name="prodMsize" numberOnly>																				
+										28 사이즈 <input class="form-control" type="text" name="prodLsize" numberOnly>
+										30 사이즈 <input class="form-control" type="text" name="prodXLsize" numberOnly>																				
 									</td>									
 								</tr>
 								<tr>
@@ -110,7 +174,7 @@
 										정가
 									</th>
 									<td>
-										<input class="form-control" id="addProdName" type="text" name="prodListP" required="required" numberOnly>
+										<input class="form-control" id="addProdName" type="text" name="prodListP" numberOnly>
 									</td>									
 								</tr>
 								<tr>
@@ -118,7 +182,7 @@
 										판매가
 									</th>
 									<td>
-										<input class="form-control" id="addProdName" type="text" name="prodPrice" required="required" numberOnly>
+										<input class="form-control" id="addProdName" type="text" name="prodPrice" numberOnly>
 									</td>									
 								</tr>
 								<tr>
@@ -126,7 +190,7 @@
 										배송비
 									</th>
 									<td>
-										<input class="form-control" id="addProdName" type="text" name="prodDeli" required="required" numberOnly>
+										<input class="form-control" id="addProdName" type="text" name="prodDeli" numberOnly>
 									</td>									
 								</tr>
 								<tr>
@@ -134,7 +198,7 @@
 										제품 코드
 									</th>
 									<td>
-										<input class="form-control" id="addProdName" type="text" name="prodCode" required="required">
+										<input class="form-control" id="addProdName" type="text" name="prodCode">
 									</td>									
 								</tr>
 								<tr>
@@ -142,7 +206,7 @@
 										원산지
 									</th>
 									<td>
-										<input class="form-control" id="addProdName" type="text" name="prodOrigin" required="required">
+										<input class="form-control" id="addProdName" type="text" name="prodOrigin">
 									</td>									
 								</tr>
 								<tr>
@@ -150,7 +214,7 @@
 										섬네일 이미지
 									</th>
 									<td>
-										<input class="form-control" id="addProdName" type="file" name="files1" required="required">										
+										<input class="form-control" id="addProdName" type="file" name="files1">										
 									</td>							
 								</tr>
 								<tr>
@@ -158,14 +222,14 @@
 										상세내용 이미지
 									</th>
 									<td>
-										<input class="form-control" id="addProdName" type="file" name="files2" required="required">										
+										<input class="form-control" id="addProdName" type="file" name="files2">										
 									</td>							
 								</tr>
 							</tbody>
 						</table>
 						<div class="buttonsBox" style="margin-top: 1.5rem !important;">
 							<input type="submit" id="addProdSubmit" value="등록하기">
-							<input type="button" name="cancel" value="취소" onclick="location.href='/'">							
+							<input type="button" name="cancel" value="취소" onclick="location.href='/management.do'">							
 						</div>						
 					</form>
 				</div>
@@ -234,24 +298,32 @@
 	<!-- Page level custom scripts -->
 	<script th:src="@{js/demo/chart-area-demo.js}"></script>
 	<script th:src="@{js/demo/chart-pie-demo.js}"></script>
-	<script th:src="@{js/sewJoin.js}"></script>
+	<script th:src="@{js/sewAddProd.js}"></script>
 	<script type="text/javascript">
 		$("form").submit(function(e){
-			var catVaild = 0;
-			var typeVaild = 0;
-			var typeValue = document.sewAddProdForm.prodType.value;
-			var catValue = document.sewAddProdForm.prodCat.value;
 			e.preventDefault();
-			if (typeValue != "분류") {
-				typeVaild = 1;
-			}			
-			if (catValue != "카테고리") {
-				catVaild = 1;
-			}
-			if (typeVaild == 1 && catValue == 1){
+			var prodName = document.sewAddProdForm.prodName.value;			
+			var prodGen = document.sewAddProdForm.prodGen.value;
+			var prodType = document.sewAddProdForm.prodType.value;
+			var prodCat = document.sewAddProdForm.prodCat.value;
+			var prodMsize = document.sewAddProdForm.prodMsize.value;  
+			var prodLsize = document.sewAddProdForm.prodLsize.value;
+			var prodXLsize = document.sewAddProdForm.prodXLsize.value;
+			var prodListP = document.sewAddProdForm.prodListP.value;
+			var prodPrice = document.sewAddProdForm.prodPrice.value;
+			var prodDeli = document.sewAddProdForm.prodDeli.value;
+			var prodOrigin = document.sewAddProdForm.prodOrigin.value;
+			var file1 = document.sewAddProdForm.file1.value;
+			var file2 = document.sewAddProdForm.file2.value;		
+			
+			if (prodGen!="none" && prodType!="none" && prodCat!="none" &&
+				prodName!="" && prodMsize!="" && prodLsize!="" && prodXLsize!="" &&
+				prodListP!="" && prodPrice!="" && prodDeli!="" && prodOrigin!="" &&
+				file1!="" && file2!=""){									
 				$("form").unbind("submit").submit();
 			}
-		});
+			e.preventDefault();
+		}
 	</script>
 
 </body>

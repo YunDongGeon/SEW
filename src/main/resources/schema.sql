@@ -22,18 +22,11 @@ CREATE TABLE menProd(
 	prodPrice int not null,
 	prodDeli int default 2500,
 	prodCode varchar(20) not null,	
-	prodOrigin varchar(20) not null,
-    prodThumb varchar(100) not null,
-    prodThumbOriName varchar(100) not null,
-    prodThumbUrl varchar(100) not null,
-	prodCont varchar(100) not null,
-    prodContOriName varchar(100) not null,
-    prodContUrl varchar(100) not null
+	prodOrigin varchar(20) not null
 );
 
 CREATE TABLE menTopInven(
-	topInvenNo int primary key auto_increment,
-	prodNo int not null,
+	prodNo int primary key,
 	mSize int not null,
 	lSize int not null,
 	xlSize int not null,	
@@ -41,12 +34,22 @@ CREATE TABLE menTopInven(
 );
 
 CREATE TABLE menBotInven(
-	botInvenNo int primary key auto_increment,
-	prodNo int not null,
+	prodNo int primary key,
 	mSize int not null,
 	lSize int not null,
 	xlSize int not null,	
 	foreign key (prodNo) references menProd(prodNo)
+);
+
+CREATE TABLE menProdImage(
+	prodNo int primary key,
+	prodThumb varchar(100) not null,
+    prodThumbOriName varchar(100) not null,
+    prodThumbUrl varchar(100) not null,
+	prodCont varchar(100) not null,
+    prodContOriName varchar(100) not null,
+    prodContUrl varchar(100) not null,
+    foreign key(prodNo) references menProd(prodNo)
 );
 
 CREATE TABLE womenProd(
@@ -60,12 +63,10 @@ CREATE TABLE womenProd(
 	prodDeli int default 2500,
 	prodCode varchar(20) not null,	
 	prodOrigin varchar(20) not null,
-	prodCont varchar(100) not null
 );
 
 CREATE TABLE womenTopInven(
-	topInvenNo int primary key auto_increment,
-	prodNo int not null,
+	prodNo int primary key,
 	mSize int not null,
 	lSize int not null,
 	xlSize int not null,	
@@ -73,10 +74,20 @@ CREATE TABLE womenTopInven(
 );
 
 CREATE TABLE womenBotInven(
-	botInvenNo int primary key auto_increment,
-	prodNo int not null,
+	prodNo int primary key,
 	mSize int not null,
 	lSize int not null,
-	xlSize int not null,	
+	xlSize int not null,
 	foreign key (prodNo) references womenProd(prodNo)
+);
+
+CREATE TABLE womenProdImage(
+	prodNo int primary key,
+	prodThumb varchar(100) not null,
+    prodThumbOriName varchar(100) not null,
+    prodThumbUrl varchar(100) not null,
+	prodCont varchar(100) not null,
+    prodContOriName varchar(100) not null,
+    prodContUrl varchar(100) not null,
+    foreign key(prodNo) references womenProd(prodNo)
 );
