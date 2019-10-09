@@ -2,17 +2,24 @@ package itc.hoseo.sew;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import itc.hoseo.sew.management.ManagementService;
 import itc.hoseo.sew.member.Member;
 
 @Controller
 public class SewLinkController {	
+	@Autowired
+	ManagementService service;
+	
 	@GetMapping("/index.do")
-	public String index() {
+	public String index(ModelMap m) {
+		m.put("newProdList", service.getNewProd());
 		return "index";
 	}
 	@GetMapping("/login.do")

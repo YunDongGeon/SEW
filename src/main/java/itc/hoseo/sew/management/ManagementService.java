@@ -3,6 +3,7 @@ package itc.hoseo.sew.management;
 import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -19,9 +20,13 @@ public class ManagementService {
 	@Autowired
 	ManagementRepository managementRepository;
 	
-	public int addMenProd(Management m) {
-		return managementRepository.addMenProd(m);
+	public int addProd(Management m) {
+		return managementRepository.addProd(m);
 	}
+	
+	public boolean addProdImg(Management m) {
+		return managementRepository.addProdImg(m)!=0;
+	}	
 	
 	public boolean addMenTopSize(Management m) {
 		return managementRepository.addMenTopSize(m)!=0;
@@ -30,15 +35,7 @@ public class ManagementService {
 	public boolean addMenBotSize(Management m) {
 		return managementRepository.addMenBotSize(m)!=0;
 	}
-	
-	public boolean addMenProdImg(Management m) {
-		return managementRepository.addMenProdImg(m)!=0;
-	}
-	
-	public int addWomenProd(Management m) {
-		return managementRepository.addWomenProd(m);
-	}
-	
+
 	public boolean addWomenTopSize(Management m) {
 		return managementRepository.addWomenTopSize(m)!=0;
 	}
@@ -47,16 +44,20 @@ public class ManagementService {
 		return managementRepository.addWomenBotSize(m)!=0;
 	}
 	
-	public boolean addWomenProdImg(Management m) {
-		return managementRepository.addWomenProdImg(m)!=0;
-	}	
+	public List<Management> getNewProd() {
+		return managementRepository.getNewProd();
+	}
+	
+	public List<Management> getNewProdImg() {
+		return managementRepository.getNewProdImg();
+	}
 	
 	@Autowired
 	private Environment env;
 	
 	public Management imgUpload(Management m, HttpServletRequest request, MultipartHttpServletRequest multi){
     	Iterator<String> imgs = multi.getFileNames();
-		String path = env.getProperty("upload-folder");
+		String path = env.getProperty("desktop-upload-folder");
 		String folderName1 = "prodThumb/";
 		String folderName2 = "prodCont/";        
         String thumb = "yes";            
@@ -75,13 +76,13 @@ public class ManagementService {
 	            	destinationFile = new File(path + folderName1 +destinationFileName);
 	            	m.setProdThumb(destinationFileName);
 	            	m.setProdThumbOriName(sourceFileName);
-	            	m.setProdThumbUrl(path+folderName1);	
+	            	m.setProdThumbUrl(folderName1);	
 	            	thumb = "no";
 	            } else {
 	            	destinationFile = new File(path + folderName2 +destinationFileName);
 	            	m.setProdCont(destinationFileName);
 	            	m.setProdContOriName(sourceFileName);
-	            	m.setProdContUrl(path+folderName2);
+	            	m.setProdContUrl(folderName2);
 	            }
 	        } while (destinationFile.exists()); 
 			destinationFile.getParentFile().mkdirs();

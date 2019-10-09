@@ -13,8 +13,9 @@ CREATE TABLE user(
     memAuth varchar(10) default 'no'
 );
 
-CREATE TABLE menProd(
+CREATE TABLE product(
 	prodNo int primary key auto_increment,
+	prodGen varchar(4) not null,
 	prodType varchar(3) not null,
 	prodCat varchar(20) not null,
 	prodName varchar(40) not null,
@@ -25,12 +26,23 @@ CREATE TABLE menProd(
 	prodOrigin varchar(20) not null
 );
 
+CREATE TABLE prodImage(
+	prodNo int primary key,
+	prodThumb varchar(100) not null,
+    prodThumbOriName varchar(100) not null,
+    prodThumbUrl varchar(100) not null,
+	prodCont varchar(100) not null,
+    prodContOriName varchar(100) not null,
+    prodContUrl varchar(100) not null,
+    foreign key(prodNo) references product(prodNo)
+);
+
 CREATE TABLE menTopInven(
 	prodNo int primary key,
 	mSize int not null,
 	lSize int not null,
 	xlSize int not null,	
-	foreign key (prodNo) references menProd(prodNo)
+	foreign key (prodNo) references product(prodNo)
 );
 
 CREATE TABLE menBotInven(
@@ -38,31 +50,7 @@ CREATE TABLE menBotInven(
 	mSize int not null,
 	lSize int not null,
 	xlSize int not null,	
-	foreign key (prodNo) references menProd(prodNo)
-);
-
-CREATE TABLE menProdImage(
-	prodNo int primary key,
-	prodThumb varchar(100) not null,
-    prodThumbOriName varchar(100) not null,
-    prodThumbUrl varchar(100) not null,
-	prodCont varchar(100) not null,
-    prodContOriName varchar(100) not null,
-    prodContUrl varchar(100) not null,
-    foreign key(prodNo) references menProd(prodNo)
-);
-
-CREATE TABLE womenProd(
-	prodNo int primary key auto_increment,
-	prodType varchar(3) not null,
-	prodCat varchar(20) not null,
-	prodName varchar(40) not null,
-	prodListP int not null,
-	prodPrice int not null,
-	prodLimit int default 1,
-	prodDeli int default 2500,
-	prodCode varchar(20) not null,	
-	prodOrigin varchar(20) not null,
+	foreign key (prodNo) references product(prodNo)
 );
 
 CREATE TABLE womenTopInven(
@@ -70,7 +58,7 @@ CREATE TABLE womenTopInven(
 	mSize int not null,
 	lSize int not null,
 	xlSize int not null,	
-	foreign key (prodNo) references womenProd(prodNo)
+	foreign key (prodNo) references product(prodNo)
 );
 
 CREATE TABLE womenBotInven(
@@ -78,16 +66,13 @@ CREATE TABLE womenBotInven(
 	mSize int not null,
 	lSize int not null,
 	xlSize int not null,
-	foreign key (prodNo) references womenProd(prodNo)
+	foreign key (prodNo) references product(prodNo)
 );
 
-CREATE TABLE womenProdImage(
-	prodNo int primary key,
-	prodThumb varchar(100) not null,
-    prodThumbOriName varchar(100) not null,
-    prodThumbUrl varchar(100) not null,
-	prodCont varchar(100) not null,
-    prodContOriName varchar(100) not null,
-    prodContUrl varchar(100) not null,
-    foreign key(prodNo) references womenProd(prodNo)
+CREATE TABLE buyList(
+	buyNo int primary key auto_increment,
+	prodNo int not null,
+	buyType varchar(10) not null,
+	buyStat varchar(10) not null,
+	buyDate Timestamp not null
 );

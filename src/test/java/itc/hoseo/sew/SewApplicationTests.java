@@ -30,7 +30,7 @@ public class SewApplicationTests {
 		manage.setProdOrigin("기타국가");
 		manage.setProdCont("내용");
 		
-		service.addMenProd(manage);
+		service.addProd(manage);
 		
 		
 	}

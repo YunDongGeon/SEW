@@ -3,28 +3,21 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="itc.hoseo.sew.management.ManagementRepository">
-	<insert id="addMenProd" parameterType="Management">
-		INSERT INTO menProd(prodType, prodCat, prodName, prodListP, prodPrice, prodDeli, prodCode, prodOrigin) VALUES 
-			(#{prodType}, #{prodCat}, #{prodName}, #{prodListP}, #{prodPrice}, #{prodDeli}, #{prodCode}, #{prodOrigin})
+	<insert id="addProd" parameterType="Management">
+		INSERT INTO product(prodGen, prodType, prodCat, prodName, prodListP, prodPrice, prodDeli, prodCode, prodOrigin) VALUES 
+			(#{prodGen}, #{prodType}, #{prodCat}, #{prodName}, #{prodListP}, #{prodPrice}, #{prodDeli}, #{prodCode}, #{prodOrigin})
 		<selectKey resultType="int" keyProperty="prodNo" order="AFTER">
 			select last_insert_id() from DUAL
 		</selectKey>
     </insert>
+    <insert id="addProdImg" parameterType="Management">
+    	INSERT INTO prodImage VALUES(#{prodNo}, #{prodThumb}, #{prodThumbOriName}, #{prodThumbUrl}, #{prodCont}, #{prodContOriName}, #{prodContUrl})   	
+    </insert>  
     <insert id="addMenTopSize" parameterType="Management">
     	INSERT INTO menTopInven VALUES(#{prodNo}, #{prodMsize}, #{prodLsize}, #{prodXLsize})   	
     </insert>
     <insert id="addMenBotSize" parameterType="Management">
     	INSERT INTO menBotInven VALUES(#{prodNo}, #{prodMsize}, #{prodLsize}, #{prodXLsize})   	
-    </insert>
-    <insert id="addMenProdImg" parameterType="Management">
-    	INSERT INTO menProdImage VALUES(#{prodNo}, #{prodThumb}, #{prodThumbOriName}, #{prodThumbUrl}, #{prodCont}, #{prodContOriName}, #{prodContUrl})   	
-    </insert>
-    <insert id="addWomenProd" parameterType="Management">
-		INSERT INTO womenProd(prodType, prodCat, prodName, prodListP, prodPrice, prodDeli, prodCode, prodOrigin) VALUES 
-			(#{prodType}, #{prodCat}, #{prodName}, #{prodListP}, #{prodPrice}, #{prodDeli}, #{prodCode}, #{prodOrigin})
-		<selectKey resultType="int" keyProperty="prodNo" order="AFTER">
-			select last_insert_id() from DUAL
-		</selectKey>
     </insert>
     <insert id="addWomenTopSize" parameterType="Management">
     	INSERT INTO womenTopInven VALUES(#{prodNo}, #{prodMsize}, #{prodLsize}, #{prodXLsize})   	
@@ -32,7 +25,11 @@
     <insert id="addWomenBotSize" parameterType="Management">
     	INSERT INTO womenBotInven VALUES(#{prodNo}, #{prodMsize}, #{prodLsize}, #{prodXLsize})   	
     </insert>
-    <insert id="addWomenProdImg" parameterType="Management">
-    	INSERT INTO womenProdImage VALUES(#{prodNo}, #{prodThumb}, #{prodThumbOriName}, #{prodThumbUrl}, #{prodCont}, #{prodContOriName}, #{prodContUrl})   	
-    </insert>
+    <select id="getNewProd" resultType="Management">
+    	SELECT prod.*, img.* 
+		FROM product as prod
+		JOIN prodimage as img
+		on prod.prodNo = img.prodNo
+		order by prodNo desc limit 4
+    </select>
 </mapper>

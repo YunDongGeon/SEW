@@ -25,8 +25,8 @@ public class WebMvcConfig implements WebMvcConfigurer{
 	}
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		String uploadUrl = env.getProperty("upload-folder");  
-		registry.addResourceHandler("/prodCont/**", "/prodThumb/**")
+		String uploadUrl = env.getProperty("desktop-upload-folder");  
+		registry.addResourceHandler("/prodThumb/*.jpg", "/prodCont/*.jpg")
 			.addResourceLocations("file:///" + uploadUrl);
 	}
 	
