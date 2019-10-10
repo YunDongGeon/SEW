@@ -44,6 +44,10 @@ public class ManagementController {
 		m.put("newProdList", service.getNewProd());
 		return "/index";
 	}
+	@GetMapping("/sewProdDetail.do")
+	public String goDetailPage() {
+		return "sewProduct/sewProductDetail";
+	}
 	
 	// 상품 추가
 	@PostMapping("/addProd.do")

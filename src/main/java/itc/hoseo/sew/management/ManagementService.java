@@ -57,7 +57,7 @@ public class ManagementService {
 	
 	public Management imgUpload(Management m, HttpServletRequest request, MultipartHttpServletRequest multi){
     	Iterator<String> imgs = multi.getFileNames();
-		String path = env.getProperty("desktop-upload-folder");
+		String path = env.getProperty("laptop-upload-folder");
 		String folderName1 = "prodThumb/";
 		String folderName2 = "prodCont/";        
         String thumb = "yes";            
