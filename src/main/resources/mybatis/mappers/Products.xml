@@ -13,23 +13,31 @@
     <insert id="addProdImg" parameterType="Management">
     	INSERT INTO prodImage VALUES(#{prodNo}, #{prodThumb}, #{prodThumbOriName}, #{prodThumbUrl}, #{prodCont}, #{prodContOriName}, #{prodContUrl})   	
     </insert>  
-    <insert id="addMenTopSize" parameterType="Management">
-    	INSERT INTO menTopInven VALUES(#{prodNo}, #{prodMsize}, #{prodLsize}, #{prodXLsize})   	
+    <insert id="addProdInven" parameterType="Management">
+    	INSERT INTO prodInven VALUES(#{prodNo}, #{prodColor} #{prodMsize}, #{prodLsize}, #{prodXLsize})   	
     </insert>
-    <insert id="addMenBotSize" parameterType="Management">
-    	INSERT INTO menBotInven VALUES(#{prodNo}, #{prodMsize}, #{prodLsize}, #{prodXLsize})   	
-    </insert>
-    <insert id="addWomenTopSize" parameterType="Management">
-    	INSERT INTO womenTopInven VALUES(#{prodNo}, #{prodMsize}, #{prodLsize}, #{prodXLsize})   	
-    </insert>
-    <insert id="addWomenBotSize" parameterType="Management">
-    	INSERT INTO womenBotInven VALUES(#{prodNo}, #{prodMsize}, #{prodLsize}, #{prodXLsize})   	
-    </insert>
+    <select id="getProd" resultType="Management" parameterType="Management">
+    	SELECT prod.*, img.* 
+		FROM product as prod
+		JOIN prodimage as img
+		on prod.prodNo = img.prodNo
+		WHERE prod.prodNo = #{prodNo}
+    </select>
     <select id="getNewProd" resultType="Management">
     	SELECT prod.*, img.* 
 		FROM product as prod
 		JOIN prodimage as img
 		on prod.prodNo = img.prodNo
 		order by prodNo desc limit 4
+    </select>
+    <select id="getOption" resultType="Management" parameterType="Management">
+    	SELECT * FROM 
+    	<if test="prodType.equals('상의')">
+    		topInven
+    	</if>
+    	<if test="prodType.equals('하의')">
+    		botInven
+    	</if>
+    	WHERE prodNo = #{prodNo}
     </select>
 </mapper>

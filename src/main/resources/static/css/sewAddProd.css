@@ -8,6 +8,16 @@ body{
 	padding: 20px;
 	box-shadow: 1px 1px 10px;
 }
+
+ul {
+	list-style: none;
+	padding-left: 0px;
+}
+
+li {
+	margin-bottom: 50px;
+}
+
 table {
 	width: 50%;
 	height: auto;
@@ -31,6 +41,8 @@ tr {
 }
 
 th{
+	vertical-align: text-top;
+	padding-top: 17px;
 	width:30%;
 	color: #080808; 
     border-bottom-width: 0;
@@ -93,4 +105,9 @@ input[name="cancel"] {
 
 .custom-select {
 	width: 80%;
+}
+
+#delColor {
+	background-color: transparent;
+	border: 0;
 }

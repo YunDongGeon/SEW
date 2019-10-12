@@ -28,28 +28,20 @@ public class ManagementService {
 		return managementRepository.addProdImg(m)!=0;
 	}	
 	
-	public boolean addMenTopSize(Management m) {
-		return managementRepository.addMenTopSize(m)!=0;
-	}
-	
-	public boolean addMenBotSize(Management m) {
-		return managementRepository.addMenBotSize(m)!=0;
+	public boolean addProdInven(Management m) {
+		return managementRepository.addProdInven(m)!=0;
 	}
 
-	public boolean addWomenTopSize(Management m) {
-		return managementRepository.addWomenTopSize(m)!=0;
-	}
-	
-	public boolean addWomenBotSize(Management m) {
-		return managementRepository.addWomenBotSize(m)!=0;
-	}
-	
 	public List<Management> getNewProd() {
 		return managementRepository.getNewProd();
 	}
 	
-	public List<Management> getNewProdImg() {
-		return managementRepository.getNewProdImg();
+	public Management getProd(Management m) {
+		return managementRepository.getProd(m);
+	}
+	
+	public Management getOption(Management m) {
+		return managementRepository.getOption(m);
 	}
 	
 	@Autowired
@@ -57,7 +49,7 @@ public class ManagementService {
 	
 	public Management imgUpload(Management m, HttpServletRequest request, MultipartHttpServletRequest multi){
     	Iterator<String> imgs = multi.getFileNames();
-		String path = env.getProperty("laptop-upload-folder");
+		String path = env.getProperty("upload-folder");
 		String folderName1 = "prodThumb/";
 		String folderName2 = "prodCont/";        
         String thumb = "yes";            

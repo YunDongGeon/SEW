@@ -8,10 +8,8 @@ import org.apache.ibatis.annotations.Mapper;
 public interface ManagementRepository {
 	public int addProd(Management m);
 	public int addProdImg(Management m);
-	public int addMenTopSize(Management m);
-	public int addMenBotSize(Management m);
-	public int addWomenTopSize(Management m);
-	public int addWomenBotSize(Management m);	
+	public int addProdInven(Management m);
 	public List<Management> getNewProd();
-	public List<Management> getNewProdImg();
+	public Management getProd(Management m);
+	public Management getOption(Management m);
 }

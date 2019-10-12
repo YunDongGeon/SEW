@@ -1,5 +1,7 @@
 package itc.hoseo.sew.management;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -14,6 +16,8 @@ public class Management {
 	private int prodDeli;
 	private String prodCode;
 	private String prodOrigin;
+	private String prodColor;
+	private int prodSsize;
 	private int prodMsize;
 	private int prodLsize;
 	private int prodXLsize;
@@ -23,5 +27,4 @@ public class Management {
 	private String prodCont;
 	private String prodContOriName;
 	private String prodContUrl;
-	
 }

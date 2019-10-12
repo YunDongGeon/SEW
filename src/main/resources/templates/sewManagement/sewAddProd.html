@@ -128,46 +128,23 @@
 										    <option value="팬츠">팬츠</option>
 										</select>
 									</td>									
-								</tr>								
-								<tr id="menTopSize" style="display: none">
-									<th scope="row">
-										사이즈별 수량
-									</th>
-									<td>
-										95 사이즈 <input class="form-control" type="text" name="prodMsize" numberOnly>																				
-										100 사이즈 <input class="form-control" type="text" name="prodLsize" numberOnly>
-										105 사이즈 <input class="form-control" type="text" name="prodXLsize" numberOnly>
-									</td>									
 								</tr>
-								<tr id="menBotSize" style="display: none">
+								<tr class="prodInven" style="display: none">
 									<th scope="row">
-										사이즈별 수량
+										색상 사이즈별 수량
 									</th>
 									<td>
-										28 사이즈 <input class="form-control" type="text" name="prodMsize" numberOnly>																				
-										30 사이즈 <input class="form-control" type="text" name="prodLsize" numberOnly>
-										32 사이즈 <input class="form-control" type="text" name="prodXLsize" numberOnly>																				
-									</td>									
-								</tr>
-								<tr id="womenTopSize" style="display: none">
-									<th scope="row">
-										사이즈별 수량
-									</th>
-									<td>
-										90 사이즈 <input class="form-control" type="text" name="prodMsize" numberOnly>																				
-										95 사이즈 <input class="form-control" type="text" name="prodLsize" numberOnly>
-										100 사이즈 <input class="form-control" type="text" name="prodXLsize" numberOnly>																				
-									</td>									
-								</tr>
-								<tr id="womenBotSize" style="display: none">
-									<th scope="row">
-										사이즈별 수량
-									</th>
-									<td>
-										26 사이즈 <input class="form-control" type="text" name="prodMsize" numberOnly>																				
-										28 사이즈 <input class="form-control" type="text" name="prodLsize" numberOnly>
-										30 사이즈 <input class="form-control" type="text" name="prodXLsize" numberOnly>																				
-									</td>									
+										<ul id="itemList">
+											<li>											
+												색상 <input class="form-control" type="text" name="prodColor">										
+												S 사이즈 <input class="form-control" type="text" name="prodSsize" numberOnly>																				
+												M 사이즈 <input class="form-control" type="text" name="prodMsize" numberOnly>
+												L 사이즈 <input class="form-control" type="text" name="prodLsize" numberOnly>
+												XL 사이즈 <input class="form-control" type="text" name="prodXLsize" numberOnly>
+											</li>										
+										</ul>	
+										<button id="addColor" style="margin-left:125px;" type="button" class="btn btn-outline-dark">색상 추가하기</button>
+									</td>
 								</tr>
 								<tr>
 									<th scope="row">
@@ -209,6 +186,7 @@
 										<input class="form-control" id="addProdName" type="text" name="prodOrigin">
 									</td>									
 								</tr>
+								<!-- 
 								<tr>
 									<th scope="row">
 										섬네일 이미지
@@ -225,6 +203,7 @@
 										<input class="form-control" id="addProdName" type="file" name="files2">										
 									</td>							
 								</tr>
+								 -->
 							</tbody>
 						</table>
 						<div class="buttonsBox" style="margin-top: 1.5rem !important;">
@@ -319,10 +298,22 @@
 			if (prodGen!="none" && prodType!="none" && prodCat!="none" &&
 				prodName!="" && prodMsize!="" && prodLsize!="" && prodXLsize!="" &&
 				prodListP!="" && prodPrice!="" && prodDeli!="" && prodOrigin!="" &&
-				file1!="" && file2!=""){									
-				$("form").unbind("submit").submit();
+				file1!="" && file2!=""){
+				var jsonData = $(this).serializeObject();
+				 $.ajax({
+			            type : 'post',
+			            url : '/testJson.do',
+			            data : JSON.stringify(jsonData),
+			            dataType : 'application/json',
+			            error: function(xhr, status, error){
+			                alert(error);
+			            }
+			            success : function(json){
+			                alert(json)
+			            },
+			        });
+				//$("form").unbind("submit").submit();
 			}
-			e.preventDefault();
 		}
 	</script>
 

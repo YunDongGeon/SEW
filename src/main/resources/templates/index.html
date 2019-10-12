@@ -243,7 +243,7 @@
 			<div class="row">
 				<div class="col-sm col-md-6 col-lg " th:each="newProd : ${newProdList}">
 					<div class="product">
-						<a href="#" class="img-prod">
+						<a th:href="@{'sewDetail?prodNo='+${newProd.prodNo}}" class="img-prod">
 							<img class="img-fluid" th:src="@{'/prodThumb/'+${newProd.prodThumb}}" alt="Colorlib Template"></a>
 						<div class="text py-3 px-3">
 							<h3>
@@ -252,7 +252,7 @@
 							<div class="d-flex">
 								<div class="pricing">
 									<p class="price">
-										<span th:text="${newProd.prodPrice}"></span>
+										<span class="format-money" th:text="${newProd.prodPrice}"></span>
 									</p>
 								</div>
 								<div class="rating">
@@ -405,5 +405,28 @@
 	<script th:src="@{slick/slick.js}"></script>
 	<script th:src="@{slick/slick.min.js}"></script>
 	<script th:src="@{js/slider.js}"></script>
+	<script type="text/javascript">
+		Number.prototype.format = function(){
+		    if(this==0) return 0;
+	
+		    var reg = /(^[+-]?\d+)(\d{3})/;
+		    var n = (this + '');
+	
+		    while (reg.test(n)) n = n.replace(reg, '$1' + ',' + '$2');
+	
+		    return n;
+		};
+		String.prototype.format = function(){
+		    var num = parseFloat(this);
+		    if( isNaN(num) ) return "0";
+
+		    return num.format();
+		};
+		jQuery('.format-money').text(function() {
+		    jQuery(this).text(
+		        jQuery(this).text().format()
+		    );
+		});
+	</script> 
 </body>
 </html>

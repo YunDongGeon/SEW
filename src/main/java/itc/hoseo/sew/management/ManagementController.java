@@ -3,6 +3,7 @@ package itc.hoseo.sew.management;
 import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,11 +16,14 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import ch.qos.logback.classic.Logger;
 
 @Controller
 public class ManagementController {
@@ -44,8 +48,15 @@ public class ManagementController {
 		m.put("newProdList", service.getNewProd());
 		return "/index";
 	}
-	@GetMapping("/sewProdDetail.do")
-	public String goDetailPage() {
+	@GetMapping("/sewDetail")
+	public String goDetailPage(
+			@RequestParam(value="prodNo") int prodNo,
+			ModelMap m) {
+		Management manage = new Management();
+		manage.setProdNo(prodNo);
+		manage = service.getProd(manage);
+		m.put("prodDetail", manage);		
+		m.put("prodOption", service.getOption(manage));
 		return "sewProduct/sewProductDetail";
 	}
 	
@@ -53,36 +64,21 @@ public class ManagementController {
 	@PostMapping("/addProd.do")
 	public String addProd(Management m, HttpServletRequest r, MultipartHttpServletRequest mh) {
 		int prodNo = 0;
-		String prodGen = m.getProdGen();
 		String prodType = m.getProdType();
 		prodNo = service.addProd(m);
-		if(prodGen.equals("남성")) {			
+		m.setProdNo(prodNo);
+		if(prodNo!=0) {
+			service.addProdInven(m);
+			m = service.imgUpload(m, r, mh);
 			m.setProdNo(prodNo);
-			if(prodNo!=0) {
-				if(prodType.equals("상의")) {
-					service.addMenTopSize(m);
-				} else {
-					service.addMenBotSize(m);
-				}				
-				m = service.imgUpload(m, r, mh);
-				m.setProdNo(prodNo);
-				service.addProdImg(m);
-				return "redirect:/management.do";
-			}
-		} else {
-			m.setProdNo(prodNo);
-			if(prodNo!=0) {
-				if(prodType.equals("상의")) {
-					service.addWomenTopSize(m);
-				} else {
-					service.addWomenBotSize(m);
-				}
-				m = service.imgUpload(m, r, mh);
-				m.setProdNo(prodNo);
-				service.addProdImg(m);
-				return "redirect:/management.do";
-			}
+			service.addProdImg(m);
+			return "redirect:/management.do";
 		}
 		return "/sewAddProd.do"; 
+	}	
+	@PostMapping("/testJson.do")
+	@ResponseBody
+	public void testJson(@RequestBody Map<String, Object> json) {
+		
 	}	
 }

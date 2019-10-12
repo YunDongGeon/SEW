@@ -49,12 +49,12 @@
 			<div class="prodContainer">
 				<form method="post" action="sewJoinInput.do" onsubmit="return termsChk(this.form)">				
 					<div class="productImgBox">
-						<img th:src="@{prodthumb/register-detail-049.jpg}">
+						<img th:src="@{'/prodthumb/'+${prodDetail.prodThumb}}">
 					</div>
 					<div class="productBox">
 						<hr>
 						<div class="prodHeader">
-							<h3>제목</h3>
+							<h3 th:text="${prodDetail.prodName}"></h3>
 						</div>		
 						<div class="prodDetailList">
 							<table>
@@ -62,7 +62,7 @@
 									<th>정가</th>
 									<td>
 										<del>
-											199,000 <span>원</span>
+											 <span class="format-money" th:text="${prodDetail.prodListP}"></span><span>원</span>
 										</del>
 									</td>
 								</tr>
@@ -70,39 +70,32 @@
 									<th>판매가</th>
 									<td>
 										<h4>
-											<span>84,900</span><span>원</span>
+											<span class="format-money" th:text="${prodDetail.prodPrice}"></span><span>원</span>
 										</h4>
 									</td>
 								</tr>
 								<tr>
 									<th>배송비</th>
 									<td>
-										2,500 <span>원 / 주문시결제(선결제)</span>
+										<span class="format-money" th:text="${prodDetail.prodDeli}"></span> <span>원 / 주문시결제(선결제)</span>
 									</td>
 								</tr>
 								<tr>
 									<th>상품코드</th>
-									<td>
-										KA9S1-MJK010
-									</td>
-								</tr>
-								<tr>
-									<th>제조사</th>
-									<td>
-										상세페이지표기
-									</td>
-								</tr>
+									<td th:text="${prodDetail.prodCode}"></td>
+								</tr>							
 								<tr>
 									<th>원산지</th>
-									<td>
-										기타국가
-									</td>
+									<td th:text="${prodDetail.prodOrigin}"></td>
 								</tr>
 								<tr>
 									<th>옵션</th>
 									<td>
 										<select class="browser-default custom-select">
 											<option value="default">=옵션 =</option>
+											<option value="mSize" th:text="${prodOption.prodMsize}"></option>
+											<option value="lSize" th:text="${prodOption.prodLsize}"></option>
+											<option value="xlSize" th:text="${prodOption.prodXLsize}"></option>											
 										</select>
 									</td>
 								</tr>							
@@ -119,7 +112,7 @@
 				<h3>상품제품정보</h3>				
 			</div>
 			<div class="prodDetailCont">
-				<img th:src="@{prodcont/KA9S1-MJK010-1.jpg}">
+				<img th:src="@{'/prodcont/'+${prodDetail.prodCont}}">
 			</div>
 		</div>
 	</section>
@@ -158,5 +151,28 @@
 	<script th:src="@{slick/slick.min.js}"></script>
 	<script th:src="@{js/slider.js}"></script>
 	<script th:src="@{js/sewJoin.js}"></script>
+	<script type="text/javascript">
+		Number.prototype.format = function(){
+		    if(this==0) return 0;
+	
+		    var reg = /(^[+-]?\d+)(\d{3})/;
+		    var n = (this + '');
+	
+		    while (reg.test(n)) n = n.replace(reg, '$1' + ',' + '$2');
+	
+		    return n;
+		};
+		String.prototype.format = function(){
+		    var num = parseFloat(this);
+		    if( isNaN(num) ) return "0";
+
+		    return num.format();
+		};
+		jQuery('.format-money').text(function() {
+		    jQuery(this).text(
+		        jQuery(this).text().format()
+		    );
+		});
+	</script> 
 </body>
 </html>

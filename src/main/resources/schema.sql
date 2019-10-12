@@ -37,35 +37,13 @@ CREATE TABLE prodImage(
     foreign key(prodNo) references product(prodNo)
 );
 
-CREATE TABLE menTopInven(
-	prodNo int primary key,
-	mSize int not null,
-	lSize int not null,
-	xlSize int not null,	
-	foreign key (prodNo) references product(prodNo)
-);
-
-CREATE TABLE menBotInven(
-	prodNo int primary key,
-	mSize int not null,
-	lSize int not null,
-	xlSize int not null,	
-	foreign key (prodNo) references product(prodNo)
-);
-
-CREATE TABLE womenTopInven(
-	prodNo int primary key,
-	mSize int not null,
-	lSize int not null,
-	xlSize int not null,	
-	foreign key (prodNo) references product(prodNo)
-);
-
-CREATE TABLE womenBotInven(
-	prodNo int primary key,
-	mSize int not null,
-	lSize int not null,
-	xlSize int not null,
+CREATE TABLE prodInven(
+	prodNo int not null,
+	prodColor varchar(40) not null,
+	prodSsize int not null,
+	prodMsize int not null,
+	prodLsize int not null,
+	prodXLsize int not null,	
 	foreign key (prodNo) references product(prodNo)
 );
 

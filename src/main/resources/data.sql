@@ -19,7 +19,9 @@ VALUES(3, 'register_detail_083.jpg', 'register_detail_083.jpg', 'prodThumb/', 'K
 INSERT INTO prodImage 
 VALUES(4, 'register_detail_078.jpg', 'register_detail_078.jpg', 'prodThumb/', 'KA8S1-MPL050_1.jpg', 'KA8S1-MPL050_1.jpg', 'prodCont/');
 
-INSERT INTO menTopInven VALUES(1, 100, 96, 84);
-INSERT INTO menTopInven VALUES(2, 200, 150, 70);
-INSERT INTO menBotInven VALUES(3, 172, 164, 88);
-INSERT INTO menBotInven VALUES(4, 0, 90, 6);
+INSERT INTO prodInven VALUES(1, '화이트', 100, 96, 84, 94);
+INSERT INTO prodInven VALUES(1, '베이지', 100, 96, 84, 20);
+INSERT INTO prodInven VALUES(2, '블랙', 200, 150, 70, 0);
+INSERT INTO prodInven VALUES(3, '연청', 172, 164, 88, 0);
+INSERT INTO prodInven VALUES(4, '블랙', 0, 90, 6, 4);
+INSERT INTO prodInven VALUES(4, '챠콜', 0, 90, 6, 9);
