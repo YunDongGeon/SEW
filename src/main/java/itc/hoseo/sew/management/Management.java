@@ -21,10 +21,8 @@ public class Management {
 	private int prodMsize;
 	private int prodLsize;
 	private int prodXLsize;
-	private String prodThumb;
-	private String prodThumbOriName;
+	private String prodThumbName;
 	private String prodThumbUrl;
-	private String prodCont;
-	private String prodContOriName;
+	private String prodContName;
 	private String prodContUrl;
 }

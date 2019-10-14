@@ -37,8 +37,8 @@ $("#prodType").on("change keyup paste", function() {
 			$("#botCat").show();
 			$(".prodInven").show();
 		}else if(prodType=="상의" && prodGen=="여성"){
-			$("#topCat").hide();
-			$("#botCat").show();
+			$("#topCat").show();
+			$("#botCat").hide();
 			$(".prodInven").show();
 		}else if(prodType=="하의" && prodGen=="여성"){
 			$("#topCat").hide();
@@ -68,11 +68,5 @@ $("#addColor").on("click", function(){
 			</li>`);
 });
 function deleteBox(self){
-	$($(self).parent("li")[0]).remove();
-	
-	//debugger;
-	/*
-	var doc = document.getElementById("itemList");
-	doc.removeChild(doc.childNodes[]);
-	*/
+	$($(self).parent("li")[0]).remove();	
 }

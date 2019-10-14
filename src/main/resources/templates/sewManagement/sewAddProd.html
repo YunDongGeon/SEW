@@ -186,7 +186,6 @@
 										<input class="form-control" id="addProdName" type="text" name="prodOrigin">
 									</td>									
 								</tr>
-								<!-- 
 								<tr>
 									<th scope="row">
 										섬네일 이미지
@@ -203,7 +202,6 @@
 										<input class="form-control" id="addProdName" type="file" name="files2">										
 									</td>							
 								</tr>
-								 -->
 							</tbody>
 						</table>
 						<div class="buttonsBox" style="margin-top: 1.5rem !important;">
@@ -299,20 +297,7 @@
 				prodName!="" && prodMsize!="" && prodLsize!="" && prodXLsize!="" &&
 				prodListP!="" && prodPrice!="" && prodDeli!="" && prodOrigin!="" &&
 				file1!="" && file2!=""){
-				var jsonData = $(this).serializeObject();
-				 $.ajax({
-			            type : 'post',
-			            url : '/testJson.do',
-			            data : JSON.stringify(jsonData),
-			            dataType : 'application/json',
-			            error: function(xhr, status, error){
-			                alert(error);
-			            }
-			            success : function(json){
-			                alert(json)
-			            },
-			        });
-				//$("form").unbind("submit").submit();
+				$("form").unbind("submit").submit();
 			}
 		}
 	</script>

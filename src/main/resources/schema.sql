@@ -28,12 +28,10 @@ CREATE TABLE product(
 
 CREATE TABLE prodImage(
 	prodNo int primary key,
-	prodThumb varchar(100) not null,
-    prodThumbOriName varchar(100) not null,
-    prodThumbUrl varchar(100) not null,
-	prodCont varchar(100) not null,
-    prodContOriName varchar(100) not null,
+	prodThumbUrl varchar(100) not null,
+    prodThumbName varchar(100) not null,
     prodContUrl varchar(100) not null,
+    prodContName varchar(100) not null,    
     foreign key(prodNo) references product(prodNo)
 );
 

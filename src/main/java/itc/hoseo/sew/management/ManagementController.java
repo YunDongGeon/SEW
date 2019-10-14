@@ -2,6 +2,7 @@ package itc.hoseo.sew.management;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -56,29 +57,43 @@ public class ManagementController {
 		manage.setProdNo(prodNo);
 		manage = service.getProd(manage);
 		m.put("prodDetail", manage);		
-		m.put("prodOption", service.getOption(manage));
+		//m.put("prodInven", service.getProdInven(manage));
 		return "sewProduct/sewProductDetail";
 	}
 	
 	// 상품 추가
 	@PostMapping("/addProd.do")
-	public String addProd(Management m, HttpServletRequest r, MultipartHttpServletRequest mh) {
+	public String addProd(Management m, HttpServletRequest r, MultipartHttpServletRequest mh) {		
 		int prodNo = 0;
+		String [] prodColor = r.getParameterValues("prodColor");
+		
+		String [] sSize = r.getParameterValues("prodSsize");				
+		String [] mSize = r.getParameterValues("prodMsize");
+		String [] lSize = r.getParameterValues("prodLsize");
+		String [] xlSize = r.getParameterValues("prodXLsize");		
+		int [] prodSsize = Arrays.stream(sSize).mapToInt(Integer::parseInt).toArray();
+		int [] prodMsize = Arrays.stream(mSize).mapToInt(Integer::parseInt).toArray();
+		int [] prodLsize = Arrays.stream(lSize).mapToInt(Integer::parseInt).toArray();
+		int [] prodXLsize = Arrays.stream(xlSize).mapToInt(Integer::parseInt).toArray();
+		
 		String prodType = m.getProdType();
-		prodNo = service.addProd(m);
+		service.addProd(m);
+		prodNo = service.getMaxNo();
 		m.setProdNo(prodNo);
 		if(prodNo!=0) {
-			service.addProdInven(m);
 			m = service.imgUpload(m, r, mh);
-			m.setProdNo(prodNo);
+			m.setProdNo(prodNo);			
 			service.addProdImg(m);
+			for (int i = 0; i < prodColor.length; i++) {
+				m.setProdColor(prodColor[i]);
+				m.setProdSsize(prodSsize[i]);
+				m.setProdMsize(prodMsize[i]);
+				m.setProdLsize(prodLsize[i]);
+				m.setProdXLsize(prodXLsize[i]);
+				service.addProdInven(m);
+			}	
 			return "redirect:/management.do";
 		}
 		return "/sewAddProd.do"; 
-	}	
-	@PostMapping("/testJson.do")
-	@ResponseBody
-	public void testJson(@RequestBody Map<String, Object> json) {
-		
-	}	
+	}		
 }

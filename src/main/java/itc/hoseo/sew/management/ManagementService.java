@@ -24,6 +24,10 @@ public class ManagementService {
 		return managementRepository.addProd(m);
 	}
 	
+	public int getMaxNo() {
+		return managementRepository.getMaxNo();
+	}
+	
 	public boolean addProdImg(Management m) {
 		return managementRepository.addProdImg(m)!=0;
 	}	
@@ -40,8 +44,8 @@ public class ManagementService {
 		return managementRepository.getProd(m);
 	}
 	
-	public Management getOption(Management m) {
-		return managementRepository.getOption(m);
+	public Management getProdInven(Management m) {
+		return managementRepository.getProdInven(m);
 	}
 	
 	@Autowired
@@ -61,19 +65,17 @@ public class ManagementService {
 			mFile = multi.getFile(uploadFile);
 			String sourceFileName = mFile.getOriginalFilename();
 			String sourceFileNameExtension = FilenameUtils.getExtension(sourceFileName).toLowerCase();
-	        String destinationFileName;	        	        
+	        //String destinationFileName;	        	        
 			do { 
-	            destinationFileName = RandomStringUtils.randomAlphanumeric(32) + "." + sourceFileNameExtension;
+	            //destinationFileName = RandomStringUtils.randomAlphanumeric(32) + "." + sourceFileNameExtension;
 	            if(thumb.equals("yes")) {	            	
-	            	destinationFile = new File(path + folderName1 +destinationFileName);
-	            	m.setProdThumb(destinationFileName);
-	            	m.setProdThumbOriName(sourceFileName);
+	            	destinationFile = new File(path + folderName1 +sourceFileName);
+	            	m.setProdThumbName(sourceFileName);
 	            	m.setProdThumbUrl(folderName1);	
 	            	thumb = "no";
 	            } else {
-	            	destinationFile = new File(path + folderName2 +destinationFileName);
-	            	m.setProdCont(destinationFileName);
-	            	m.setProdContOriName(sourceFileName);
+	            	destinationFile = new File(path + folderName2 +sourceFileName);
+	            	m.setProdContName(sourceFileName);
 	            	m.setProdContUrl(folderName2);
 	            }
 	        } while (destinationFile.exists()); 

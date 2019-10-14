@@ -28,7 +28,7 @@ public class SewApplicationTests {
 		manage.setProdDeli(2500);
 		manage.setProdCode("KA9S1-MKL010");
 		manage.setProdOrigin("기타국가");
-		manage.setProdCont("내용");
+		manage.setProdContName("내용");
 		
 		service.addProd(manage);
 		

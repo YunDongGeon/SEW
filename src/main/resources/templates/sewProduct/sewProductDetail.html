@@ -49,13 +49,13 @@
 			<div class="prodContainer">
 				<form method="post" action="sewJoinInput.do" onsubmit="return termsChk(this.form)">				
 					<div class="productImgBox">
-						<img th:src="@{'/prodthumb/'+${prodDetail.prodThumb}}">
+						<img th:src="@{'/prodthumb/'+${prodDetail.prodThumbName}}">
 					</div>
 					<div class="productBox">
 						<hr>
 						<div class="prodHeader">
 							<h3 th:text="${prodDetail.prodName}"></h3>
-						</div>		
+						</div>
 						<div class="prodDetailList">
 							<table>
 								<tr>
@@ -93,9 +93,12 @@
 									<td>
 										<select class="browser-default custom-select">
 											<option value="default">=옵션 =</option>
-											<option value="mSize" th:text="${prodOption.prodMsize}"></option>
-											<option value="lSize" th:text="${prodOption.prodLsize}"></option>
-											<option value="xlSize" th:text="${prodOption.prodXLsize}"></option>											
+											<!-- 
+											<option value="sSize" th:text="${prodInven.prodColor}"></option>
+											<option value="mSize" th:text="${prodInven.prodMsize}"></option>
+											<option value="lSize" th:text="${prodInven.prodLsize}"></option>
+											<option value="xlSize" th:text="${prodInven.prodXLsize}"></option>
+											 -->											
 										</select>
 									</td>
 								</tr>							
@@ -112,7 +115,7 @@
 				<h3>상품제품정보</h3>				
 			</div>
 			<div class="prodDetailCont">
-				<img th:src="@{'/prodcont/'+${prodDetail.prodCont}}">
+				<img th:src="@{'/prodcont/'+${prodDetail.prodContName}}">
 			</div>
 		</div>
 	</section>

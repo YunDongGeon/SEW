@@ -5,17 +5,17 @@
 <mapper namespace="itc.hoseo.sew.management.ManagementRepository">
 	<insert id="addProd" parameterType="Management">
 		INSERT INTO product(prodGen, prodType, prodCat, prodName, prodListP, prodPrice, prodDeli, prodCode, prodOrigin) VALUES 
-			(#{prodGen}, #{prodType}, #{prodCat}, #{prodName}, #{prodListP}, #{prodPrice}, #{prodDeli}, #{prodCode}, #{prodOrigin})
-		<selectKey resultType="int" keyProperty="prodNo" order="AFTER">
-			select last_insert_id() from DUAL
-		</selectKey>
+			(#{prodGen}, #{prodType}, #{prodCat}, #{prodName}, #{prodListP}, #{prodPrice}, #{prodDeli}, #{prodCode}, #{prodOrigin})		
     </insert>
     <insert id="addProdImg" parameterType="Management">
-    	INSERT INTO prodImage VALUES(#{prodNo}, #{prodThumb}, #{prodThumbOriName}, #{prodThumbUrl}, #{prodCont}, #{prodContOriName}, #{prodContUrl})   	
+    	INSERT INTO prodImage VALUES(#{prodNo}, #{prodThumbUrl}, #{prodThumbName}, #{prodContUrl}, #{prodContName})   	
     </insert>  
     <insert id="addProdInven" parameterType="Management">
-    	INSERT INTO prodInven VALUES(#{prodNo}, #{prodColor} #{prodMsize}, #{prodLsize}, #{prodXLsize})   	
+    	INSERT INTO prodInven VALUES(#{prodNo}, #{prodColor}, #{prodSsize}, #{prodMsize}, #{prodLsize}, #{prodXLsize})   	
     </insert>
+    <select id="getMaxNo" resultType="int">
+    	SELECT MAX(prodNo) FROM product
+    </select>
     <select id="getProd" resultType="Management" parameterType="Management">
     	SELECT prod.*, img.* 
 		FROM product as prod
@@ -23,21 +23,14 @@
 		on prod.prodNo = img.prodNo
 		WHERE prod.prodNo = #{prodNo}
     </select>
+    <select id="getProdInven" resultType="Management" parameterType="Management">
+		SELECT * FROM prodInven WHERE prodNo = #{prodNo}    	
+    </select>
     <select id="getNewProd" resultType="Management">
     	SELECT prod.*, img.* 
 		FROM product as prod
 		JOIN prodimage as img
 		on prod.prodNo = img.prodNo
 		order by prodNo desc limit 4
-    </select>
-    <select id="getOption" resultType="Management" parameterType="Management">
-    	SELECT * FROM 
-    	<if test="prodType.equals('상의')">
-    		topInven
-    	</if>
-    	<if test="prodType.equals('하의')">
-    		botInven
-    	</if>
-    	WHERE prodNo = #{prodNo}
-    </select>
+    </select>    
 </mapper>
