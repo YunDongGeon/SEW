@@ -456,7 +456,7 @@ pre {
   overflow-y: scroll; }
 
 .container {
-  font-family: 'Teko', sans-serif, 'Noto Sans KR', sans-serif;
+  font-family: 'Teko', sans-serif, 'Do Hyeon', sans-serif;
   width: 100%;
   padding-right: 15px;
   padding-left: 15px;
@@ -3241,7 +3241,7 @@ input[type="button"].btn-block {
   display: block; }
 
 .navbar {
-  font-family: 'Teko', sans-serif, 'Noto Sans KR', sans-serif;
+  font-family: 'Teko', sans-serif, 'Do Hyeon', sans-serif;
   position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -7270,7 +7270,7 @@ a.text-dark:hover, a.text-dark:focus {
     border: 1px solid #dee2e6 !important; } }
 
 body {
-  font-family: 'Teko', sans-serif, 'Noto Sans KR', sans-serif;
+  font-family: 'Teko', sans-serif, 'Do Hyeon', sans-serif;
   background: #fff;
   font-size: 15px;
   line-height: 1.8;

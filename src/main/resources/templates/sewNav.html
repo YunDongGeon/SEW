@@ -8,17 +8,20 @@
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar" th:fragment="nav">		
 		<div class="container">
 		    <ul class="top-navbar-nav ml-auto">		      			      
-	      		<li class="nav-item">
-	      			<a th:if="${session.mem!=null}" th:href="@{logOut.do}" class="top-nav-link">LOGOUT</a>
-	      			<a th:unless="${session.mem!=null}" th:href="@{login.do}" class="top-nav-link">LOGIN</a>
-      			</li>	
-		      	<li class="nav-item">
-		      		<a th:unless="${session.mem!=null}" th:href="@{joinTerms.do}" class="top-nav-link">JOIN US</a>
-		      		<a th:if="${session.mem!=null}" th:href="@{myPage.do}" class="top-nav-link">MY PAGE</a>
+	      		<li class="nav-item" th:unless="${session.mem!=null}">
+	      			<a th:href="@{login.do}" class="top-nav-link">LOGIN</a>
+      			</li>
+      			<li class="nav-item dropdown" th:if="${session.mem!=null}">
+			        <a class="top-nav-link" th:text="${session.mem.memName}" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+			        <div class="dropdown-menu" aria-labelledby="dropdown04">
+		         		<a class="dropdown-item" th:href="@{myPage.do}">MY PAGE</a>
+		         		<a class="dropdown-item" th:href="@{management.do}" th:if="${session.mem!=null && session.mem.memAuth == 'yes'}">MANAGEMENT</a>
+		           		<a class="dropdown-item" th:href="@{logOut.do}">LOGOUT</a>				            	           	
+			         </div>
+		      	</li>    			
+		      	<li class="nav-item" th:unless="${session.mem!=null}">
+		      		<a th:href="@{joinTerms.do}" class="top-nav-link">JOIN US</a>		      		
 	      		</li>
-	      		<li class="nav-item" >		      		
-		      		<a th:if="${session.mem!=null && session.mem.memAuth == 'yes'}" th:href="@{management.do}" class="top-nav-link">MANAGEMENT</a>
-	      		</li>				
 		      	<li class="nav-item">
 	      			<a href="contact.html" class="top-nav-link">HELP</a>
       			</li>
@@ -61,8 +64,9 @@
 		         </div>
 		      </li>
 		      <li class="nav-item"><a href="contact.html" class="nav-link">SALE</a></li>
+		      <!-- 
 		      <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
-		
+		       -->	
 		    </ul>
 		  </div>
 		</div>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Sew</title>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link
+	href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700"
+	rel="stylesheet">
+<link href="http://allfont.net/allfont.css?fonts=agency-fb"
+	rel="stylesheet" type="text/css" />
+<link
+	href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300&display=swap"
+	rel="stylesheet">
+<link href="http://allfont.net/allfont.css?fonts=agency-fb"
+	rel="stylesheet" type="text/css" />
+<link
+	href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300&display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Teko:300&display=swap&subset=devanagari,latin-ext"
+	rel="stylesheet">
+<link rel="icon" th:href="@{img/logo/favicon.png}">
+<link rel="stylesheet" th:href="@{css/open-iconic-bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{css/animate.css}">
+<link rel="stylesheet" th:href="@{css/owl.carousel.min.css}">
+<link rel="stylesheet" th:href="@{css/owl.theme.default.min.css}">
+<link rel="stylesheet" th:href="@{css/magnific-popup.css}">
+<link rel="stylesheet" th:href="@{css/aos.css}">
+<link rel="stylesheet" th:href="@{css/ionicons.min.css}">
+<link rel="stylesheet" th:href="@{css/bootstrap-datepicker.css}">
+<link rel="stylesheet" th:href="@{css/jquery.timepicker.css}">
+<link rel="stylesheet" th:href="@{css/flaticon.css}">
+<link rel="stylesheet" th:href="@{css/icomoon.css}">
+<link rel="stylesheet" th:href="@{css/style.css}">
+<link rel="stylesheet" th:href="@{slick/slick.css}">
+<link rel="stylesheet" th:href="@{slick/slick-theme.css}">
+<link rel="stylesheet" th:href="@{css/slider.css}">
+<link rel="stylesheet" th:href="@{css/nav.css}">
+<link rel="stylesheet" th:href="@{css/join.css}">
+<link rel="stylesheet" th:href="@{css/sewMyPage.css}">
+
+</head>
+<body>
+	<nav
+		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
+		id="ftco-navbar" th:replace="sewNav::nav"></nav>
+	<!-- END nav -->
+
+	<!-- Join Form -->
+	<section class="ftco-section ftco-product">
+		<div class="container">
+			<div class="joinTit">
+				<h2>MY PAGE</h2>
+			</div>
+			<form name="joinInputForm" id="joinInputForm" method="post"
+				th:action="@{sewJoinFinPage.do}" th:object="${member}"
+				onsubmit="return joinInputChk()">
+				<div class="myPageContainer">
+					<div class="joinBox">
+						<div id="aside" class="_3t4FKVbdls">
+							<div class="_3xCwh_oiO3">
+								<h2 class="blind">내정보</h2>
+								<a href="javascript:void(0)" class="_1nbfpBVkK4 N=a:men.set"><img
+									style="height:"
+									src="https://phinf.pstatic.net/contact/profile/blog/46/45/dbswlgh20.jpg?type=s160"
+									data-src="https://phinf.pstatic.net/contact/profile/blog/46/45/dbswlgh20.jpg?type=s160"
+									width="94" height="94" class="_profile_img"><span
+									class="_3SGYre7m-E">설정변경</span></a>
+								<div class="_26ELn6EukB">
+									<span class="_2ImVEIoyYn _profile_name">은후<!-- -->님
+									</span><em class="_1IAiTB3uR9">dbsw****</em>
+									<div class="_2D_uDEqP8k">
+										<a href="javascript:void(0)"
+											class="_98c-gUIYsG N=a:men.mysizebtn">내 사이즈 등록</a>
+										<div class="_3RgDbsur5E">
+											<div class="_1NYmm1JH6u">
+												<em class="_3fUAbG7pYt">내 사이즈 등록하기</em>
+												<p class="_1X9UIRgZqf">
+													정보 등록시 나에게 가장 적합한 사이즈 가이드가 제공됩니다. 입력하고 네이버 포인트 <em>150원</em>
+													<!-- -->
+													적립 받으세요.
+												</p>
+												<button class="iIVV7onG7Z N=a:men.clsmysizetip">
+													<span class="blind">레이어 닫기</span>
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<a
+								href="https://pointplus.pay.naver.com/purchaseDecision/information"
+								class="PjSFBSdTUS"><div class="_1XQWLqyUkW">월간혜택</div>
+								<div class="_1lSYnbVdkX">
+									10
+									<!-- -->
+									월 목표 달성하고<em> 1% 더 받으세요!</em>
+								</div></a>
+							<ul id="snb" class="_1OMiVkNM0d">
+								<li class="INtHJdWKCe active"><a href="/my/home"
+									class="N=a:men.home">쇼핑MY</a></li>
+								<li class="INtHJdWKCe"><a href="/my/keep-products"
+									class="N=a:men.product">관심 상품</a>
+								<ul>
+										<li class="N=a:men.zzimtitle"><a href="/my/keep-products">찜한
+												상품</a></li>
+										<li class="N=a:men.recent"><a
+											href="/my/recently-viewed-products">최근 본 상품</a></li>
+									</ul></li>
+								<li class="INtHJdWKCe"><a href="/my/keep-stores"
+									class="N=a:men.store">찜한 스토어</a></li>
+								<li class="INtHJdWKCe"><a href="/my/writable-reviews"
+									class="N=a:men.review"> <!-- -->상품 리뷰
+								</a>
+								<ul>
+										<li class=""><a href="/my/writable-reviews"
+											class="N=a:men.prv">작성 가능한 리뷰</a></li>
+										<li class=""><a href="/my/written-reviews"
+											class="N=a:men.mrv">내가 작성한 리뷰</a></li>
+									</ul></li>
+								<li class="INtHJdWKCe"><a href="/my/p/qna/index.nhn"
+									class="N=a:men.qna">상품 Q&amp;A</a></li>
+								<li class="INtHJdWKCe"><a href="/my/p/experience/index.nhn"
+									class="N=a:men.free">무료체험</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</section>
+	<!-- END Join Form -->
+
+	<footer th:replace="sewFooter::footer"
+		class="ftco-footer bg-light ftco-section"></footer>
+	<!-- loader -->
+	<div id="ftco-loader" class="show fullscreen">
+		<svg class="circular" width="48px" height="48px">
+			<circle class="path-bg" cx="24" cy="24" r="22" fill="none"
+				stroke-width="4" stroke="#eeeeee" />
+			<circle class="path" cx="24" cy="24" r="22" fill="none"
+				stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg>
+	</div>
+
+	<script th:src="@{js/jquery.min.js}"></script>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script th:src="@{js/popper.min.js}"></script>
+	<script th:src="@{js/bootstrap.min.js}"></script>
+	<script th:src="@{js/jquery.easing.1.3.js}"></script>
+	<script th:src="@{js/jquery.waypoints.min.js}"></script>
+	<script th:src="@{js/jquery.stellar.min.js}"></script>
+	<script th:src="@{js/owl.carousel.min.js}"></script>
+	<script th:src="@{js/jquery.magnific-popup.min.js}"></script>
+	<script th:src="@{js/aos.js}"></script>
+	<script th:src="@{js/jquery.animateNumber.min.js}"></script>
+	<script th:src="@{js/bootstrap-datepicker.js}"></script>
+	<script th:src="@{js/scrollax.min.js}"></script>
+	<script
+		th:src="@{https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false}"></script>
+	<script th:src="@{js/google-map.js}"></script>
+	<script th:src="@{js/main.js}"></script>
+	<script th:src="@{slick/slick.js}"></script>
+	<script th:src="@{slick/slick.min.js}"></script>
+	<script th:src="@{js/slider.js}"></script>
+	<script th:src="@{js/sewJoin.js}"></script>
+	<script
+		src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+</body>
+</html>

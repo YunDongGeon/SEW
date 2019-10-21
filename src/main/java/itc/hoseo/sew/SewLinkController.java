@@ -41,6 +41,6 @@ public class SewLinkController {
 	}
 	@GetMapping("/myPage.do")
 	public String myPage() {
-		return "sewMyPage";		
+		return "sewMyPage/sewMyPageHome";		
 	}
 }
