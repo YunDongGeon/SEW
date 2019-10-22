@@ -1,5 +1,116 @@
+.myPageTit {	
+	overflow: hidden;
+}
+
+.myPageTit h2 {
+	font-family: 'Teko', sans-serif;
+	float: left;
+	margin-top: 1.5rem !important;
+	font-weight: bold;	
+}
+
 .myPageContainer {
+	overflow: hidden;
+	margin-top: 20px;
+	position: relative;
+    width: auto;    
+    height: auto;    
+    padding: 1px;
+}
+
+.myPageSide {
+	float: left;
+    width: 220px;
+}
+
+.memInfo {
+	text-align: center;
+	position: relative;
+    margin: -1px 0 0 -1px;
+    padding: 27px 0;    
+    z-index: 20;
+    border: 1px solid #e5e5e5;
+}
+
+.memName {	
+	display: block;
+    font-size: 30px;
+    word-wrap: normal;
+    word-break: break-all;
+    color: #080808;
+}
+
+.memPoint, .won{
+	font-size: 30px;
+	color: #080808;
+}
+
+.won {
+	margin-left: 2px;	
+}
+
+.memPointTit {
+	display: block;
+	font-size: 24px;
+    margin-top: 15px;
+    margin-bottom: -15px;
+}
+
+.editContainer {
 	width: 100%;
-    margin-right: auto;
-    margin-left: auto;	
+}
+
+.editBox {
+	position: relative;
+	float: left;
+	width: 750px;
+	margin-left: 60px;
+}
+
+.editSubMsgBox {
+    float: right;
+    margin-top: 2.3rem !important;
+}
+
+.myPageNav {
+	padding: 0 40px 20px;
+	border: 0px 1px 1px 1px solid #e5e5e5;
+}
+
+.lst {
+	margin-top: 0;	
+}
+
+.myPageNav .lst dt:first-child {
+    border-top: 0;
+    margin-top: 25px;
+}
+
+.myPageNav .lst dt {
+    font-size: 18px;
+    color: #222;
+    margin-top: 23px;
+    padding: 21px 0 0 6px;
+    border-top: 1px solid #eaebec;
+}
+
+.myPageNav .lst dd li {
+    padding: 11px 0 0 6px;
+}
+
+dl {
+	display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+dt {
+    display: block;
+}
+
+ul, ol {
+    list-style: none;
+    padding-inline-start: 0px !important;
 }

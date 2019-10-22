@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div id="aside" class="myPageSide" th:fragment="side">
+		<div class="memInfo">
+			<span class="memName" th:text="${session.mem.memName}+'님'"></span>
+			<em class="memPointTit">적립금</em>
+			<strong class="memPoint" th:text="${}"></strong>
+			<em class="won">원</em>						
+		</div>
+		<div id="snb" class="myPageNav">
+		    <dl class="lst">
+		        <dt>
+		            <a th:href="@{myPage.do}" style="font-size:26px;">MY PAGE</a>
+		        </dt>
+		        <dt>
+		            <a href="/my/writable-reviews">관심 상품</a>
+		        </dt>
+		        <dd>
+		            <ul>
+		            	<li>
+		                    <a href="/my/keep-products">장바구니</a>
+		                </li>
+		                <li>
+		                    <a href="/my/keep-products">찜한 상품</a>
+		                </li>
+		                <li>
+		                    <a href="/my/recently-viewed-products">최근 본 상품</a>
+		                </li>
+		            </ul>
+		        </dd>					        
+		        <dt>
+		            <a href="/my/writable-reviews">상품 리뷰</a>
+		        </dt>
+		        <dd>
+		            <ul>
+		                <li>
+		                    <a href="/my/writable-reviews">작성 가능한 리뷰</a>
+		                </li>
+		                <li>
+		                    <a href="/my/written-reviews">내가 작성한 리뷰</a>
+		                </li>
+		            </ul>
+		        </dd>
+		        <dt class="on">
+		            <a href="/my/p/qna/index.nhn">상품 Q&amp;A</a>
+		        </dt>
+		        <dt class="on">
+		            <a th:href="@{editMember.do}">회원정보수정</a>
+		        </dt>
+		    </dl>
+		</div>
+	</div>	
+</body>
+</html>

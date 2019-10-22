@@ -10,7 +10,8 @@ CREATE TABLE user(
 	memAddr1 varchar(200) default null,
 	memAddr2 varchar(200) default null,
     memStat varchar(10) default 'no',
-    memAuth varchar(10) default 'no'
+    memAuth varchar(10) default 'no',
+    memPoint int default 0
 );
 
 CREATE TABLE product(

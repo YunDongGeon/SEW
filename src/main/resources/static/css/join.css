@@ -85,11 +85,11 @@ th{
     border-right-width: 0;
     text-align: left;
     font-weight: normal;
-    font-size: 13px;
+    font-size: 18px;
 }
 
 td{	
-	padding: 15px 0 14px 18px;   
+	padding: 25px 0 24px 18px;   
 }
 
 .inputChkBox {
@@ -97,19 +97,20 @@ td{
 }
 
 .subMsg {
-	font-size: 12px;
+	font-size: 14px;
 }
 
 .joinContainer {
 	width: 100%;
-    padding-right: 20%;
-    padding-left: 20%;
+    padding-right: 10%;
+    padding-left: 10%;
     margin-right: auto;
     margin-left: auto;	
 }
 
 input[type=text], input[type=password]{
-	height: 24px;
+	width: 250px;
+	height: 32px;
     line-height: 20px;
     padding: 2px 4px;
     border: 1px solid #08080830;
@@ -240,7 +241,7 @@ input[class="smallBox"]:checked + label:before {
 }
 
 input[name="next"] {
-	width: 30%;
+	width: 25%;
     background-color: #525252;
     border: none;
     color:#fff;
@@ -253,7 +254,7 @@ input[name="next"] {
 }
 
 input[name="cancel"] {
-	width: 30%;
+	width: 25%;
     background-color: #fff;
     border: 0.5px solid black;
     color:#000;
@@ -267,7 +268,7 @@ input[name="cancel"] {
 }
 
 #memInputSubmit {
-	width: 30%;
+	width: 25%;
     background-color: #525252;
     border: none;
     color:#fff;
@@ -302,7 +303,7 @@ input[name="id"] {
 }
 
 .addrInput {
-	width: 250px;
+	width: 360px !important;
 }
 
 #postcode{
@@ -313,7 +314,7 @@ input[name="id"] {
 	margin-left: 10px;
 	float: left;
 	width: 100px;
-	height: 24px;
+	height: 32px;
 	font-size: 13px;
 	background-color: #fff;
     border: 0.5px solid black;
@@ -321,8 +322,8 @@ input[name="id"] {
 }
 
 .subMsgBox {
-	float: right;
-	margin-top: 1.5rem !important;
+    float: right;
+    margin-top: 2.3rem !important;
 }
 
 .inputTit {
