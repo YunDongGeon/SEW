@@ -58,27 +58,27 @@ em {
 	font-style: normal !important;
 }
 
-table {
+.joinBox table, .editBox table {
 	width: 100%;
 	height: auto;
 	margin-top: 20px;
 }
 
-tr:nth-child(1) {
+.joinBox tr:nth-child(1), .editBox tr:nth-child(1) {
 	border-top: 1px solid #08080870;	
 }
 
-tr:nth-child(8) {
+.joinBox tr:nth-child(8), .editBox tr:nth-child(8) {
 	border-bottom: 1px solid #08080870;	
 }
 
-tr {
+.joinBox tr, .editBox tr {
 	margin-top: 10px;
 	border-top: 1px solid #08080830;
 	/*border-bottom: 1px solid #08080830;*/
 }
 
-th{
+.joinBox th, .editBox th{
 	width: 25%;
 	color: #080808; 
     border-bottom-width: 0;
@@ -88,7 +88,7 @@ th{
     font-size: 18px;
 }
 
-td{	
+.joinBox td, .editBox th{	
 	padding: 25px 0 24px 18px;   
 }
 

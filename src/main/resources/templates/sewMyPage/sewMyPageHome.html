@@ -5,9 +5,15 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Teko:300&display=swap&subset=devanagari,latin-ext" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Teko:300&display=swap&subset=devanagari,latin-ext"
+	rel="stylesheet">
 <link rel="icon" th:href="@{img/logo/favicon.png}">
+<link th:href="@{vendor/fontawesome-free/css/all.min.css}"
+	rel="stylesheet" type="text/css">
 <link rel="stylesheet" th:href="@{css/open-iconic-bootstrap.min.css}">
 <link rel="stylesheet" th:href="@{css/animate.css}">
 <link rel="stylesheet" th:href="@{css/owl.carousel.min.css}">
@@ -39,41 +45,534 @@
 		<div class="container">
 			<div class="myPageContainer">
 				<div id="aside" class="myPageSide" th:replace="sewMyPage/sewMyPageSideNav::side"></div>
-				<div class="editBox">
+				<div class="mainBox">
 					<div class="spot">
 						<ul>
 							<li class="ship1 ">
 								<div class="inner">
-									<span class="ico"></span>
+									<span class="ico"><i class="fas fa-truck fa-2x"></i></span>
 									<dl>
-									<dt>배송중/완료</dt>
-									<dd class="com_num _beforeDelivery"><em class="num0">0</em></dd>
+										<dt>배송중</dt>
+										<dd class="com_num beforeDelivery">
+											<em class="num">0</em>
+										</dd>
 									</dl>
-								</div>
-								<a href="#" class="com_link _beforeDeliveryBtn _mouseover(nmp.front.order.timeline.home.summary.showLayer(BEFORE_DELIVERY)) _click(nmp.front.order.timeline.home.summary.showSummaryList(BEFORE_DELIVERY)) _stopDefault" style="display: none;">현황보기</a><!--N=a:top:pay-->
+								</div> <!--N=a:top:pay-->
 							</li>
 							<li class="ship2 ">
 								<div class="inner">
-									<span class="ico"></span>
+									<span class="ico"><i class="fas fa-box fa-2x"></i></span>
 									<dl>
-									<dt>배송중/완료</dt>
-									<dd class="com_num _afterDelivery"><em class="num0">0</em></dd>
+										<dt>배송완료</dt>
+										<dd class="com_num _afterDelivery">
+											<em class="num">0</em>
+										</dd>
 									</dl>
-								</div>
-								<a href="#" class="com_link _afterDeliveryBtn _mouseover(nmp.front.order.timeline.home.summary.showLayer(AFTER_DELIVERY)) _click(nmp.front.order.timeline.home.summary.showSummaryList(AFTER_DELIVERY)) _stopDefault" style="display: none;">현황보기</a><!--N=a:top:delivery-->
+								</div> <!--N=a:top:delivery-->
 							</li>
 							<li class="ship3 ">
 								<div class="inner">
-									<span class="ico"></span>
+									<span class="ico"><i class="fas fa-undo fa-2x"></i></span>
 									<dl>
-									<dt>취소/반품/교환</dt>
-									<dd class="com_num _inClaim"><em class="num0">0</em></dd>
+										<dt>취소/반품/교환</dt>
+										<dd class="com_num inClaim">
+											<em class="num">0</em>
+										</dd>
 									</dl>
-								</div>
-								<a href="#" class="com_link _inClaimBtn _mouseover(nmp.front.order.timeline.home.summary.showLayer(IN_CLAIM)) _click(nmp.front.order.timeline.home.summary.showSummaryList(IN_CLAIM)) _stopDefault" style="display: none;">현황보기</a><!--N=a:top:claim-->
+								</div> <!--N=a:top:claim-->
 							</li>
 						</ul>
-				</div>					
+					</div>
+					<div class="listRoot">
+						<div class="ask_sc">
+							<table cellpadding="0" cellspacing="0" border="0" class="terms">
+								<colgroup>
+									<col>
+									<col width="243">
+									<col width="100">
+									<col width="62">
+								</colgroup>
+								<tbody>
+									<tr>
+										<td>
+											<div class="month_area">
+												<ul class="month_list">
+													<li class="_rangeQuickSelectorLi"
+														id="_rangeQuickSelectorLi0"><a
+														id="_rangeQuickSelectorA0" href="#"
+														class="_click(nmp.front.order.timeline.home.list.date.clickRangeQuickSelector(0)) _stopDefault">5월</a>
+														<!--N=a:top.6m--></li>
+													<li class="_rangeQuickSelectorLi"
+														id="_rangeQuickSelectorLi1"><a
+														id="_rangeQuickSelectorA1" href="#"
+														class="_click(nmp.front.order.timeline.home.list.date.clickRangeQuickSelector(1)) _stopDefault">6월</a>
+														<!--N=a:top.5m--></li>
+													<li class="_rangeQuickSelectorLi"
+														id="_rangeQuickSelectorLi2"><a
+														id="_rangeQuickSelectorA2" href="#"
+														class="_click(nmp.front.order.timeline.home.list.date.clickRangeQuickSelector(2)) _stopDefault">7월</a>
+														<!--N=a:top.4m--></li>
+													<li class="_rangeQuickSelectorLi"
+														id="_rangeQuickSelectorLi3"><a
+														id="_rangeQuickSelectorA3" href="#"
+														class="_click(nmp.front.order.timeline.home.list.date.clickRangeQuickSelector(3)) _stopDefault">8월</a>
+														<!--N=a:top.3m--></li>
+													<li class="_rangeQuickSelectorLi"
+														id="_rangeQuickSelectorLi4"><a
+														id="_rangeQuickSelectorA4" href="#"
+														class="_click(nmp.front.order.timeline.home.list.date.clickRangeQuickSelector(4)) _stopDefault">9월</a>
+														<!--N=a:top.2m--></li>
+													<li class="_rangeQuickSelectorLi"
+														id="_rangeQuickSelectorLi5"><a
+														id="_rangeQuickSelectorA5" href="#"
+														class="_click(nmp.front.order.timeline.home.list.date.clickRangeQuickSelector(5)) _stopDefault">10월</a>
+														<!--N=a:top.1m--></li>
+												</ul>
+											</div>
+										</td>
+										<td>
+											<div id="_rangeDateArea" class="date">
+												<a href="#" id="_rangeFromDateA" class="d_bx"><span
+													id="_rangeFromDateSpan">2019.07.01</span><span class="ico"></span><input
+													type="hidden" id="_rangeFromDateInput"
+													name="range.fromDate" value="2019.07.01" readonly=""></a>
+												<!--N=a:top.sdate-->
+												<span class="dash">~</span> <a href="#" id="_rangeToDateA"
+													class="d_bx"><span id="_rangeToDateSpan">2019.07.01</span><span
+													class="ico"></span><input type="hidden"
+													id="_rangeToDateInput" name="range.toDate"
+													value="2019.07.01" readonly=""></a>
+												<!--N=a:top.edate-->
+												<div id="chku_calendar1" class="chku_calendar"
+													style="right: 0px; top: 29px; display: none; z-index: 1;">
+													<div class="chku_mth">
+														<a href="#" class="calendar-btn-prev-mon">이전</a> <span
+															class="calendar-title-year"><span class="y2"><span
+																class="hidden">2</span></span><span class="y0"><span
+																class="hidden">0</span></span><span class="y1"><span
+																class="hidden">1</span></span><span class="y9"><span
+																class="hidden">9</span></span></span> <strong
+															class="calendar-title-month m05"></strong> <a href="#"
+															class="calendar-btn-next-mon">다음</a>
+													</div>
+													<div class="chku_day">
+														<table cellpadding="0" cellspacing="0" border="0">
+															<thead>
+																<tr>
+																	<th scope="col"><span>일</span></th>
+																	<th scope="col"><span>월</span></th>
+																	<th scope="col"><span>화</span></th>
+																	<th scope="col"><span>수</span></th>
+																	<th scope="col"><span>목</span></th>
+																	<th scope="col"><span>금</span></th>
+																	<th scope="col"><span>토</span></th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr class="calendar-week">
+																	<td class="calendar-prev-mon calendar-sun"><a
+																		class="calendar-date" href="#">28</a></td>
+																	<td class="calendar-prev-mon"><a
+																		class="calendar-date" href="#">29</a></td>
+																	<td class="calendar-prev-mon"><a
+																		class="calendar-date" href="#">30</a></td>
+																	<td><a class="calendar-date" href="#">1</a></td>
+																	<td><a class="calendar-date" href="#">2</a></td>
+																	<td><a class="calendar-date" href="#">3</a></td>
+																	<td class="calendar-sat"><a class="calendar-date"
+																		href="#">4</a></td>
+																</tr>
+																<tr class="calendar-week">
+																	<td class="calendar-sun"><a class="calendar-date"
+																		href="#">5</a></td>
+																	<td><a class="calendar-date" href="#">6</a></td>
+																	<td><a class="calendar-date" href="#">7</a></td>
+																	<td><a class="calendar-date" href="#">8</a></td>
+																	<td><a class="calendar-date" href="#">9</a></td>
+																	<td class=""><a class="calendar-date" href="#">10</a></td>
+																	<td class="calendar-sat calendar-over"><a
+																		class="calendar-date" href="#">11</a></td>
+																</tr>
+																<tr class="calendar-week">
+																	<td class="calendar-sun"><a class="calendar-date"
+																		href="#">12</a></td>
+																	<td><a class="calendar-date" href="#">13</a></td>
+																	<td><a class="calendar-date" href="#">14</a></td>
+																	<td><a class="calendar-date" href="#">15</a></td>
+																	<td><a class="calendar-date" href="#">16</a></td>
+																	<td><a class="calendar-date" href="#">17</a></td>
+																	<td class="calendar-sat"><a class="calendar-date"
+																		href="#">18</a></td>
+																</tr>
+																<tr class="calendar-week">
+																	<td class="calendar-sun"><a class="calendar-date"
+																		href="#">19</a></td>
+																	<td><a class="calendar-date" href="#">20</a></td>
+																	<td><a class="calendar-date" href="#">21</a></td>
+																	<td><a class="calendar-date" href="#">22</a></td>
+																	<td><a class="calendar-date" href="#">23</a></td>
+																	<td><a class="calendar-date" href="#">24</a></td>
+																	<td class="calendar-sat"><a class="calendar-date"
+																		href="#">25</a></td>
+																</tr>
+																<tr class="calendar-week">
+																	<td class="calendar-sun"><a class="calendar-date"
+																		href="#">26</a></td>
+																	<td><a class="calendar-date" href="#">27</a></td>
+																	<td><a class="calendar-date" href="#">28</a></td>
+																	<td><a class="calendar-date" href="#">29</a></td>
+																	<td><a class="calendar-date" href="#">30</a></td>
+																	<td><a class="calendar-date" href="#">31</a></td>
+																	<td class="calendar-next-mon calendar-sat"><a
+																		class="calendar-date" href="#">1</a></td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+										</td>
+										<td>											
+											<div class="select">
+												<div id="s2" class="">
+													<select class="selectbox-source"><option
+															value="ALL" class="selectbox-default">전체상태</option>
+														<option value="ALL"
+															class="selectbox-option-group-SHOPPING">전체상태</option>
+														<option value="SHOPPING__PAY_WAITING"
+															class="selectbox-option-group-SHOPPING">입금확인중</option>
+														<option value="SHOPPING__PAYED"
+															class="selectbox-option-group-SHOPPING">결제완료</option>
+														<option value="SHOPPING__DELIVERY"
+															class="selectbox-option-group-SHOPPING">배송확인</option>
+														<option value="SHOPPING__PURCHASE_DECIDED"
+															class="selectbox-option-group-SHOPPING">구매완료</option>
+														<option value="SHOPPING__CANCEL"
+															class="selectbox-option-group-SHOPPING">취소</option>
+														<option value="SHOPPING__RETURN"
+															class="selectbox-option-group-SHOPPING">반품</option>
+														<option value="SHOPPING__EXCHANGE"
+															class="selectbox-option-group-SHOPPING">교환</option></select> <select
+														name="statusGroup" class="selectbox-source-option-group"
+														style="position: absolute; left: -9999px;">
+													</select>
+													<div class="selectbox-box">
+														<div class="selectbox-label" unselectable="on">배송확인</div>
+													</div>											
+												</div>												
+												<span class="ico"></span>
+											</div>
+										</td>
+										<td class="btn">
+											<button class="btn_srch">조회</button>											
+											<!--N=a:top.done-->
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="sub_sc" style="min-height: 895px;">
+							<div id="_listContentArea">
+								<div class="tit_month">
+									<h4>2019.08</h4>
+								</div>
+								<div class="goods_pay_section ">
+									<div class="goods_group">
+										<ul class="goods_group_list">
+											<li id="_rowLi20190821101051CHK2019082111674400"
+												class="goods_pay_item ">
+												<div class="goods_item">
+													<a href="/orderStatus/2019082176941180" class="goods_thumb">
+														<img
+														src="https://ssl.pstatic.net/checkout.phinf/20190801_164/1564629379062RypUM_JPEG/2001438301000002709.jpg?type=m90_90"
+														alt="C 언어로 배우는 8051 마이크로프로세서" width="90" height="90">
+													</a>
+													<!--N=a:lst.detail-->
+													<div class="goods_info">
+														<!-- NV_MID:14636621349 -->
+														<a href="/orderStatus/2019082176941180" class="goods">
+															<p class="name">C 언어로 배우는 8051 마이크로프로세서</p>
+															<ul class="info">
+																<li><span class="blind">상품금액</span>22,500원</li>
+																<li class="date"><span class="blind">상품구매날짜</span>
+																	2019.08.21</li>
+															</ul>
+														</a>
+														<!--N=a:lst.detail-->
+
+														<span class="state _statusName   ">구매확정</span>
+														<p class="guide">
+															<!--<p class="guide notify"><b>결제 및 상세 내역 확인 및 취소요청은 <a href="#" class="point_color_green link">교보문고</a>에서 확인하실 수 있습니다.</b><br>(거래완료는 포인트 적립 완료로 확인 가능합니다.)</p>-->
+															구매가 완료되었습니다. 이용해주셔서 감사합니다.<br>구매확정 이후 <strong>상품의
+																이용방법, 반품 등에 대한 문의는 판매자에게 문의해주세요.</strong>
+														</p>
+													</div>
+												</div>
+												<div class="seller_item">
+													<div class="inner">
+														<span class="seller">북게이트 BookGate</span> <span
+															class="tel">031-955-9877</span> <a href="#"
+															class="state_button qna _click(nmp.front.order.timeline.home.list.shoppingInquiry(/merchant/shoppingInquiry/2019082111674400)) _stopDefault">문의하기</a>
+														<!--N=a:lst.qnas-->
+													</div>
+												</div>
+												<div class="button_item">
+
+													<a href="#"
+														class="state_button function _click(nmp.front.order.timeline.home.list.userActionPopup(https://shopping.naver.com/reviews/monthly-form?orderNo=2019082176941180&amp;productOrderNos=2019082111674400&amp;returnUrl=https://order.pay.naver.com/review/formCallback)) _stopDefault">한달사용리뷰쓰기</a>
+													<!--N=a:lst.onemonthreview-->
+												</div>
+											</li>
+										</ul>
+									</div>
+									<div class="goods_group">
+										<ul class="goods_group_list">
+											<li id="_rowLi20190815015307CHK2019081589205411"
+												class="goods_pay_item ">
+												<div class="goods_item">
+													<a href="/orderStatus/2019081513425081" class="goods_thumb">
+														<img
+														src="https://order.pay.naver.com/proxy/phinf/shop1/20190613_141/synif7_1560413190325wuvU8_JPEG/101465_1.jpg?type=m90_90"
+														alt="시니프 에어웰 메쉬의자 B250 컴퓨터 학생 책상의자" width="90" height="90">
+													</a>
+													<!--N=a:lst.detail-->
+													<div class="goods_info">
+														<!-- NV_MID:82095627314 -->
+														<a href="/orderStatus/2019081513425081" class="goods">
+															<p class="name">
+																<span class="ico_pointplus"><span class="blind">포인트플러스</span></span>
+																시니프 에어웰 메쉬의자 B250 컴퓨터 학생 책상의자
+															</p>
+															<ul class="info">
+																<li><span class="blind">상품금액</span>88,000원</li>
+																<li class="date"><span class="blind">상품구매날짜</span>
+																	2019.08.15</li>
+															</ul>
+														</a>
+														<!--N=a:lst.detail-->
+
+														<span class="state _statusName   ">구매확정</span>
+														<p class="guide">
+															<!--<p class="guide notify"><b>결제 및 상세 내역 확인 및 취소요청은 <a href="#" class="point_color_green link">교보문고</a>에서 확인하실 수 있습니다.</b><br>(거래완료는 포인트 적립 완료로 확인 가능합니다.)</p>-->
+															구매가 완료되었습니다. 이용해주셔서 감사합니다.<br>구매확정 이후 <strong>상품의
+																이용방법, 반품 등에 대한 문의는 판매자에게 문의해주세요.</strong>
+														</p>
+													</div>
+												</div>
+												<div class="seller_item">
+													<div class="inner">
+														<span class="seller">시니프</span> <span class="tel">031-388-1376</span>
+														<a href="#"
+															class="state_button qna _click(nmp.front.order.timeline.home.list.shoppingInquiry(/merchant/shoppingInquiry/2019081589205411)) _stopDefault">문의하기</a>
+														<!--N=a:lst.qnas-->
+													</div>
+												</div>
+												<div class="button_item">
+
+													<a href="#"
+														class="state_button function _click(nmp.front.order.timeline.home.list.userActionPopup(https://shopping.naver.com/reviews/monthly-form?orderNo=2019081513425081&amp;productOrderNos=2019081589205411&amp;returnUrl=https://order.pay.naver.com/review/formCallback)) _stopDefault">한달사용리뷰쓰기</a>
+													<!--N=a:lst.onemonthreview-->
+												</div>
+											</li>
+										</ul>
+									</div>
+									<div class="goods_group">
+										<ul class="goods_group_list">
+											<li id="_rowLi20190808210957CHK2019080872266901"
+												class="goods_pay_item ">
+												<div class="goods_item">
+													<a href="/orderStatus/2019080836891611" class="goods_thumb">
+														<img
+														src="https://order.pay.naver.com/proxy/phinf/shop1/20190716_186/wgpc7849_1563270131916ak7qD_PNG/629966489015123_775481861.png?type=m90_90"
+														alt="ORBIS GM70 그래픽카드 지지대 (블랙) + 사은품 장패드 증정" width="90"
+														height="90">
+													</a>
+													<!--N=a:lst.detail-->
+													<div class="goods_info">
+														<!-- NV_MID:82065245928 -->
+														<a href="/orderStatus/2019080836891611" class="goods">
+															<p class="name">
+																<span class="ico_pointplus"><span class="blind">포인트플러스</span></span>
+																ORBIS GM70 그래픽카드 지지대 (블랙) + 사은품 장패드 증정
+															</p>
+															<ul class="info">
+																<li><span class="blind">상품금액</span>12,260원</li>
+																<li class="date"><span class="blind">상품구매날짜</span>
+																	2019.08.08</li>
+															</ul>
+														</a>
+														<!--N=a:lst.detail-->
+
+														<span class="state _statusName   ">구매확정</span>
+														<p class="guide">
+															<!--<p class="guide notify"><b>결제 및 상세 내역 확인 및 취소요청은 <a href="#" class="point_color_green link">교보문고</a>에서 확인하실 수 있습니다.</b><br>(거래완료는 포인트 적립 완료로 확인 가능합니다.)</p>-->
+															구매가 완료되었습니다. 이용해주셔서 감사합니다.<br>구매확정 이후 <strong>상품의
+																이용방법, 반품 등에 대한 문의는 판매자에게 문의해주세요.</strong>
+														</p>
+													</div>
+												</div>
+												<div class="seller_item">
+													<div class="inner">
+														<span class="seller">왕가피씨</span> <span class="tel">1566-2728</span>
+														<a href="#"
+															class="state_button qna _click(nmp.front.order.timeline.home.list.shoppingInquiry(/merchant/shoppingInquiry/2019080872266901)) _stopDefault">문의하기</a>
+														<!--N=a:lst.qnas-->
+													</div>
+												</div>
+												<div class="button_item">
+
+													<a href="#"
+														class="state_button function _click(nmp.front.order.timeline.home.list.userActionPopup(https://shopping.naver.com/reviews/monthly-form?orderNo=2019080836891611&amp;productOrderNos=2019080872266901&amp;returnUrl=https://order.pay.naver.com/review/formCallback)) _stopDefault">한달사용리뷰쓰기</a>
+													<!--N=a:lst.onemonthreview-->
+												</div>
+											</li>
+										</ul>
+									</div>
+									<div class="goods_group">
+										<ul class="goods_group_list">
+											<li id="_rowLi20190805223253CHK2019080513787161"
+												class="goods_pay_item ">
+												<div class="goods_item">
+													<a href="/orderStatus/2019080590785491" class="goods_thumb">
+														<img
+														src="https://order.pay.naver.com/proxy/phinf/shop1/20161104_2/tscpdj_1478242723014Odful_JPEG/ts422.jpg?type=m90_90"
+														alt="TS-04 LPM 책상/사무용가구/데스크/사무실/테이블/DIY/오피스" width="90"
+														height="90">
+													</a>
+													<!--N=a:lst.detail-->
+													<div class="goods_info">
+														<!-- NV_MID:8777344871 -->
+														<a href="/orderStatus/2019080590785491" class="goods">
+															<p class="name">
+																<span class="ico_pointplus"><span class="blind">포인트플러스</span></span>
+																TS-04 LPM 책상/사무용가구/데스크/사무실/테이블/DIY/오피스
+															</p>
+															<ul class="info">
+																<li><span class="blind">상품금액</span>74,900원</li>
+																<li class="date"><span class="blind">상품구매날짜</span>
+																	2019.08.05</li>
+															</ul>
+														</a>
+														<!--N=a:lst.detail-->
+
+														<span class="state _statusName   ">구매확정</span>
+														<p class="guide">
+															<!--<p class="guide notify"><b>결제 및 상세 내역 확인 및 취소요청은 <a href="#" class="point_color_green link">교보문고</a>에서 확인하실 수 있습니다.</b><br>(거래완료는 포인트 적립 완료로 확인 가능합니다.)</p>-->
+															구매가 완료되었습니다. 이용해주셔서 감사합니다.<br>구매확정 이후 <strong>상품의
+																이용방법, 반품 등에 대한 문의는 판매자에게 문의해주세요.</strong>
+														</p>
+													</div>
+												</div>
+												<div class="seller_item">
+													<div class="inner">
+														<span class="seller">TS퍼니처</span> <span class="tel">1644-9870</span>
+														<a href="#"
+															class="state_button qna _click(nmp.front.order.timeline.home.list.shoppingInquiry(/merchant/shoppingInquiry/2019080513787161)) _stopDefault">문의하기</a>
+														<!--N=a:lst.qnas-->
+													</div>
+												</div>
+												<div class="button_item">
+
+													<a href="#"
+														class="state_button function _click(nmp.front.order.timeline.home.list.userActionPopup(https://shopping.naver.com/reviews/monthly-form?orderNo=2019080590785491&amp;productOrderNos=2019080513787161&amp;returnUrl=https://order.pay.naver.com/review/formCallback)) _stopDefault">한달사용리뷰쓰기</a>
+													<!--N=a:lst.onemonthreview-->
+												</div>
+											</li>
+										</ul>
+									</div>
+									<div class="goods_group">
+										<ul class="goods_group_list">
+											<li id="_rowLi20190805143418CHK2019080594827500"
+												class="goods_pay_item ">
+												<div class="goods_item">
+													<a href="/orderStatus/2019080585156690" class="goods_thumb">
+														<img
+														src="https://ssl.pstatic.net/checkout.phinf/20190607_14/1559876915687c2n1i_JPEG/2000102556538926.jpg?type=m90_90"
+														alt="마이크론 Crucial P1 M.2 2280 대원CTS (1TB)" width="90"
+														height="90">
+													</a>
+													<!--N=a:lst.detail-->
+													<div class="goods_info">
+														<!-- NV_MID:20409601124 -->
+														<a href="/orderStatus/2019080585156690" class="goods">
+															<p class="name">마이크론 Crucial P1 M.2 2280 대원CTS (1TB)
+															</p>
+															<ul class="info">
+																<li><span class="blind">상품금액</span>152,880원</li>
+																<li class="date"><span class="blind">상품구매날짜</span>
+																	2019.08.05</li>
+															</ul>
+														</a>
+														<!--N=a:lst.detail-->
+
+														<span class="state _statusName   ">구매확정</span>
+														<p class="guide">
+															<!--<p class="guide notify"><b>결제 및 상세 내역 확인 및 취소요청은 <a href="#" class="point_color_green link">교보문고</a>에서 확인하실 수 있습니다.</b><br>(거래완료는 포인트 적립 완료로 확인 가능합니다.)</p>-->
+															구매가 완료되었습니다. 이용해주셔서 감사합니다.<br>구매확정 이후 <strong>상품의
+																이용방법, 반품 등에 대한 문의는 판매자에게 문의해주세요.</strong>
+														</p>
+													</div>
+												</div>
+												<div class="seller_item">
+													<div class="inner">
+														<span class="seller">아이티엔조이</span> <span class="tel">02-1599-1239</span>
+														<a href="#"
+															class="state_button qna _click(nmp.front.order.timeline.home.list.shoppingInquiry(/merchant/shoppingInquiry/2019080594827500)) _stopDefault">문의하기</a>
+														<!--N=a:lst.qnas-->
+													</div>
+												</div>
+												<div class="button_item">
+
+													<a href="#"
+														class="state_button function _click(nmp.front.order.timeline.home.list.userActionPopup(https://shopping.naver.com/reviews/monthly-form?orderNo=2019080585156690&amp;productOrderNos=2019080594827500&amp;returnUrl=https://order.pay.naver.com/review/formCallback)) _stopDefault">한달사용리뷰쓰기</a>
+													<!--N=a:lst.onemonthreview-->
+												</div>
+											</li>
+										</ul>
+									</div>
+									<input type="hidden" id="_lastId0"
+										value="20190805143418CHK2019080594827500"> <input
+										type="hidden" id="_hasMore0" value="false"> <input
+										type="hidden" id="_interlockNosForDeliveryTracking0" value="">
+								</div>
+							</div>
+
+							<div class="viewmore_btn_section" id="_moreButton"
+								style="display: none;">
+								<button type="button"
+									class="button_viewmore _click(nmp.front.order.timeline.home.list.more()) _stopDefault">
+									<span>더보기</span>
+								</button>
+								<!--N=a:not.more-->
+							</div>
+
+							<div class="pay_area">
+								<h3>공지사항</h3>
+								<ul class="lst_info">
+									<li><a
+										href="http://pay.naver.com/notice/view?id=200010723">[일반]
+											네이버페이 충전포인트 결제수단 변경 안내(11/21일 변경)</a>
+									<!--N=a:not.list--> <em>2019.10.23</em></li>
+									<li><a
+										href="http://pay.naver.com/notice/view?id=200010727">[일반]
+											네이버페이 충전포인트 즉시적립 혜택 변경 안내(11/21일 변경)</a>
+									<!--N=a:not.list--> <em>2019.10.23</em></li>
+									<li><a
+										href="http://pay.naver.com/notice/view?id=200010725">[일반]
+											네이버페이 포인트 최소충전금액 변경 안내(11/21일 변경)</a>
+									<!--N=a:not.list--> <em>2019.10.23</em></li>
+									<li><a
+										href="http://pay.naver.com/notice/view?id=200010683">[시스템]
+											금융결제원 시스템 작업에 따른 네이버페이 계좌 관련 서비스 일시중지 안내</a>
+									<!--N=a:not.list--> <em>2019.10.18</em></li>
+								</ul>
+								<a href="http://pay.naver.com/notice" class="btn_view"><span
+									class="blind">결제관련안내</span>더보기</a>
+								<!--N=a:not.listmore-->
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</section>
@@ -103,7 +602,8 @@
 	<script th:src="@{js/jquery.animateNumber.min.js}"></script>
 	<script th:src="@{js/bootstrap-datepicker.js}"></script>
 	<script th:src="@{js/scrollax.min.js}"></script>
-	<script th:src="@{https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false}"></script>
+	<script
+		th:src="@{https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false}"></script>
 	<script th:src="@{js/google-map.js}"></script>
 	<script th:src="@{js/main.js}"></script>
 	<script th:src="@{slick/slick.js}"></script>
@@ -111,7 +611,8 @@
 	<script th:src="@{js/slider.js}"></script>
 	<script th:src="@{js/sewJoin.js}"></script>
 	<script th:src="@{js/sewMyPage.js}"></script>
-	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	
+	<script
+		src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 </body>
 </html>

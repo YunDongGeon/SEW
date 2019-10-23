@@ -46,6 +46,7 @@
 }
 
 .won {
+	font-size: 24px;
 	margin-left: 2px;	
 }
 
@@ -60,10 +61,10 @@
 	width: 100%;
 }
 
-.editBox {
+.editBox, .mainBox {
 	position: relative;
 	float: left;
-	width: 750px;
+	width: 800px;
 	margin-left: 60px;
 }
 
@@ -125,18 +126,219 @@ ul, ol {
 	width: 100%;
 	position: relative;
     float: left;
-	background-color: #525252;
+	border: 1px solid #dadddf;
+    background-color: #edeff2;
 	color: white;	
 }
 
 .spot ul {
+	padding-top: 10px;
 	text-align: center;
 }
 
 .spot li {
-    display: inline-block;
-    float: left;
+    display: inline-block;    
     position: relative;
     width: 150px;
     zoom: 1;
+}
+
+.spot li .inner {
+    position: relative;
+    height: 115px;
+    padding-left: 72px;
+}
+
+.com_num .num {
+	font-size: 42px;
+	color: black;
+}
+
+.spot li .inner .ico {
+    background: #9099a9;
+    display: inline-block;
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+
+}
+
+.spot li.ship1 .inner dt {
+	color: #828282;
+	margin-left: -45px;
+    width: 48px;
+    background-position: 0 -70px;
+}
+
+.spot li.ship2 .inner dt {
+	color: #828282;
+	margin-left: -50px;
+    width: 56px;
+    background-position: -80px -70px;
+}
+
+.spot li.ship3 .inner dt {
+	color: #828282;
+	margin-left: -45px;
+    width: 95px;
+    background-position: -150px -70px;
+}
+
+.spot li .inner dd {
+    margin-top: 5px;
+    /*padding: 15px 0 14px;*/
+}
+
+.com_num em.num {
+    width: 19px;
+    background-position: 0 -90px;
+}
+
+.ico i {
+	margin: 15px 0;
+	color: #eeeeee;
+}
+
+.listRoot {
+	width: 100%;
+	position: relative;
+	float: left;
+}
+
+.ask_sc {	
+	width: 100%;
+    position: relative;
+    float: left;
+    z-index: 20;
+    margin: -1px 0 46px;
+    padding: 19px 27px;
+    border: 1px solid #dadddf;
+    background-color: #edeff2;
+}
+
+.month_area {
+	height: 32px;
+    border: 1px solid #d5d8dc;
+}
+
+.month_list {
+    display: table;
+    *overflow: hidden;
+    width: 100%;
+    table-layout: fixed;
+    zoom: 1;
+}
+
+.month_list li:first-child {
+    border-left: none;
+}
+
+.month_list li {
+    display: table-cell;
+    *float: left;
+    border-left: 1px solid #f0f5f8;
+    background-color: #fff;
+    line-height: 30px;
+    text-align: center;
+    zoom: 1;
+}
+
+.month_list li a {
+    display: block;
+    *padding: 0 8px;
+    font-size: 11px;
+    color: #808080;
+}
+
+.terms {
+	height: 32px;
+}
+
+.terms tr, .terms td {
+	margin: 0;
+	padding: 0;
+}
+
+.mainBox .date {
+    position: relative;
+    margin: 0 10px;
+    color: #808080;
+}
+
+.mainBox .date .d_bx {
+    display: inline-block;
+    float: left;
+    position: relative;
+    width: 102px;
+    height: 30px;
+    border: 1px solid #d5d8dc;
+    background-color: #fff;
+    line-height: 30px;
+    font-family: Tahoma,Geneva,sans-serif;
+    font-size: 12px;
+    color: #808080;
+    text-decoration: none;
+    text-indent: 10px;
+}
+
+.mainBox .date .dash {
+    float: left;
+    width: 10px;
+    line-height: 30px;
+    text-align: center;
+}
+
+.terms .select {
+    width: 122px;
+    margin-right: 0;
+}
+
+.select {
+    position: relative;
+    margin: 1px 3px -1px 0;
+}
+
+.selectbox-source {
+    position: absolute;
+    left: -9999px;
+}
+
+.selectbox-box {
+    width: 100px;
+    margin-top: -1px;
+    border: 1px solid #d5d8dc;
+    background-color: #fff;
+    cursor: default;
+}
+
+.selectbox-label {
+    position: relative;
+    height: 28px;
+    line-height: 30px;
+    color: #828282;
+    text-indent: 10px;
+    font-size: 11px;
+}
+
+.terms .btn {
+    text-align: right;
+}
+
+.btn_srch {
+	background: #525f78;
+	border: none;
+    color: #fff;
+    padding: 5px 0;
+    text-align: center;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 62px;
+    height: 30px;
+    background-position: -20px 0;
+    vertical-align: middle;
 }
