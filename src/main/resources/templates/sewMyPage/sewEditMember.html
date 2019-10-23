@@ -52,7 +52,7 @@
 				<form name="joinInputForm" id="joinInputForm" method="post" th:action="@{sewJoinFinPage.do}" th:object="${member}" onsubmit="return joinInputChk()">
 					<div class="editContainer">
 						<div class="editBox">
-							<h3 class="inputTit">회원정보 수정</h3>
+							<h3 class="inputTit" style="font-weight: bold;">회원정보 수정</h3>
 							<div class="editSubMsgBox">
 								<img class="icon" th:src="@{/img/icon/icoRequired.png}" alt="필수">
 								<span class="subMsg">필수 입력사항</span>
@@ -216,6 +216,7 @@
 	<script th:src="@{slick/slick.min.js}"></script>
 	<script th:src="@{js/slider.js}"></script>
 	<script th:src="@{js/sewJoin.js}"></script>
+	<script th:src="@{js/sewMyPage.js}"></script>
 	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </body>
 </html>

@@ -47,4 +47,8 @@ public class SewLinkController {
 	public String editMember() {
 		return "sewMyPage/sewEditMember";		
 	}
+	@GetMapping("/withDrawal.do")
+	public String withDrawal() {
+		return "sewMyPage/sewWithDrawal";		
+	}
 }

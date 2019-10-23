@@ -1,4 +1,4 @@
-package itc.hoseo.sew.myPage;
+package itc.hoseo.sew.mypage;
 
 import lombok.Data;
 

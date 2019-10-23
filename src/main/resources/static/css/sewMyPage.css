@@ -114,3 +114,29 @@ ul, ol {
     list-style: none;
     padding-inline-start: 0px !important;
 }
+
+#withdrawalPw {
+	width: 100%;
+    padding-left: 10px;
+    height: 40px;
+}
+
+.spot {	
+	width: 100%;
+	position: relative;
+    float: left;
+	background-color: #525252;
+	color: white;	
+}
+
+.spot ul {
+	text-align: center;
+}
+
+.spot li {
+    display: inline-block;
+    float: left;
+    position: relative;
+    width: 150px;
+    zoom: 1;
+}

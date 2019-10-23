@@ -9,7 +9,7 @@
 		<div class="memInfo">
 			<span class="memName" th:text="${session.mem.memName}+'님'"></span>
 			<em class="memPointTit">적립금</em>
-			<strong class="memPoint" th:text="${}"></strong>
+			<strong class="memPoint"></strong>
 			<em class="won">원</em>						
 		</div>
 		<div id="snb" class="myPageNav">
@@ -18,7 +18,7 @@
 		            <a th:href="@{myPage.do}" style="font-size:26px;">MY PAGE</a>
 		        </dt>
 		        <dt>
-		            <a href="/my/writable-reviews">관심 상품</a>
+	            	관심 상품
 		        </dt>
 		        <dd>
 		            <ul>
@@ -34,7 +34,7 @@
 		            </ul>
 		        </dd>					        
 		        <dt>
-		            <a href="/my/writable-reviews">상품 리뷰</a>
+	            	상품 리뷰
 		        </dt>
 		        <dd>
 		            <ul>
@@ -50,10 +50,20 @@
 		            <a href="/my/p/qna/index.nhn">상품 Q&amp;A</a>
 		        </dt>
 		        <dt class="on">
-		            <a th:href="@{editMember.do}">회원정보수정</a>
+	            	회원정보
 		        </dt>
+		        <dd>
+		            <ul>
+		                <li>
+		                    <a th:href="@{editMember.do}">회원정보수정</a>
+		                </li>
+		                <li>
+		                    <a th:href="@{withDrawal.do}">회원탈퇴</a>
+		                </li>
+		            </ul>
+		        </dd>
 		    </dl>
 		</div>
-	</div>	
+	</div>
 </body>
 </html>

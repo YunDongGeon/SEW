@@ -50,10 +50,10 @@
 				</div>				
 			</div>
 			<div class="loginContainer">
-			<h3 style="font-weight: bold;">비밀번호 찾기</h3>
-			<div id="idChkBox1">
-				<span>회원가입시 등록된 이메일로 임시 비밀번호가 발송됩니다.</span>
-			</div>
+				<h3 style="font-weight: bold;">비밀번호 찾기</h3>
+				<div id="idChkBox1">
+					<span>회원가입시 등록된 이메일로 임시 비밀번호가 발송됩니다.</span>
+				</div>
 				<div class="findIdBox">
 					<h5 class="mb-4">회원 비밀번호 찾기</h5>					
 					<div>
@@ -116,10 +116,9 @@
 	<script th:src="@{js/slider.js}"></script>	
 	<script type="text/javascript">
 		$("form").submit(function(e){
-			var findId = document.findPwForm.memId.value;
 			e.preventDefault();
-			
-			if (findId==""){						
+			var findId = document.findPwForm.memId.value;			
+			if (findId==""){
 				$("#idChkBox1").show()
 				$("#findPwEmailSended").hide()
 				$("#idChkBox3").hide()

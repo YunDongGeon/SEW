@@ -5,7 +5,17 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700"
+	rel="stylesheet">
+<link href="http://allfont.net/allfont.css?fonts=agency-fb"
+	rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300&display=swap" rel="stylesheet">
+<link href="http://allfont.net/allfont.css?fonts=agency-fb" rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Teko:300&display=swap&subset=devanagari,latin-ext" rel="stylesheet">
 <link rel="icon" th:href="@{img/logo/favicon.png}">
 <link rel="stylesheet" th:href="@{css/open-iconic-bootstrap.min.css}">
@@ -26,7 +36,7 @@
 <link rel="stylesheet" th:href="@{css/nav.css}">
 <link rel="stylesheet" th:href="@{css/join.css}">
 <link rel="stylesheet" th:href="@{css/sewMyPage.css}">
-
+<link rel="stylesheet" th:href="@{css/login.css}">
 </head>
 <body>
 	<nav
@@ -38,42 +48,31 @@
 	<section class="ftco-section ftco-product">
 		<div class="container">
 			<div class="myPageContainer">
-				<div id="aside" class="myPageSide" th:replace="sewMyPage/sewMyPageSideNav::side"></div>
+				<div id="aside" class="myPageSide" th:replace="sewMyPage/sewMyPageSideNav::side"></div>								
 				<div class="editBox">
-					<div class="spot">
-						<ul>
-							<li class="ship1 ">
-								<div class="inner">
-									<span class="ico"></span>
-									<dl>
-									<dt>배송중/완료</dt>
-									<dd class="com_num _beforeDelivery"><em class="num0">0</em></dd>
-									</dl>
+					<h3 style="font-weight: bold;">회원탈퇴</h3>					
+					<div class="findIdBox">
+						<h5 class="mb-4">비밀번호 입력</h5>	
+						<div>
+							<form id="findPwForm" name="findPwForm" method="post">
+								<div class="loginInputSec">
+									<input type="password" id="withdrawalPw" name="memId" placeholder="비밀번호" >
 								</div>
-								<a href="#" class="com_link _beforeDeliveryBtn _mouseover(nmp.front.order.timeline.home.summary.showLayer(BEFORE_DELIVERY)) _click(nmp.front.order.timeline.home.summary.showSummaryList(BEFORE_DELIVERY)) _stopDefault" style="display: none;">현황보기</a><!--N=a:top:pay-->
-							</li>
-							<li class="ship2 ">
-								<div class="inner">
-									<span class="ico"></span>
-									<dl>
-									<dt>배송중/완료</dt>
-									<dd class="com_num _afterDelivery"><em class="num0">0</em></dd>
-									</dl>
-								</div>
-								<a href="#" class="com_link _afterDeliveryBtn _mouseover(nmp.front.order.timeline.home.summary.showLayer(AFTER_DELIVERY)) _click(nmp.front.order.timeline.home.summary.showSummaryList(AFTER_DELIVERY)) _stopDefault" style="display: none;">현황보기</a><!--N=a:top:delivery-->
-							</li>
-							<li class="ship3 ">
-								<div class="inner">
-									<span class="ico"></span>
-									<dl>
-									<dt>취소/반품/교환</dt>
-									<dd class="com_num _inClaim"><em class="num0">0</em></dd>
-									</dl>
-								</div>
-								<a href="#" class="com_link _inClaimBtn _mouseover(nmp.front.order.timeline.home.summary.showLayer(IN_CLAIM)) _click(nmp.front.order.timeline.home.summary.showSummaryList(IN_CLAIM)) _stopDefault" style="display: none;">현황보기</a><!--N=a:top:claim-->
-							</li>
-						</ul>
-				</div>					
+								<input type="submit" id="loginBtn" name="loginBtn" value="회원탈퇴"> 
+							</form>
+						</div>
+						<div class="inputChkBox" id="idChkBox1">
+							<span>비밀번호를 입력해주세요.</span>
+						</div>						
+						<div class="inputChkBox" id="idChkBox3">
+							<span>비밀번호를 확인해주세요.</span>
+						</div>
+						<hr>	
+						<div id="idChkBox1">
+							<span>회원가입시 등록된 모든 정보가 삭제되고 복구가 불가능합니다.</span>
+						</div>				
+					</div>
+				</div>
 			</div>
 		</div>
 	</section>
@@ -89,7 +88,7 @@
 			<circle class="path" cx="24" cy="24" r="22" fill="none"
 				stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg>
 	</div>
-
+	
 	<script th:src="@{js/jquery.min.js}"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script th:src="@{js/popper.min.js}"></script>
@@ -112,6 +111,37 @@
 	<script th:src="@{js/sewJoin.js}"></script>
 	<script th:src="@{js/sewMyPage.js}"></script>
 	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	
+	<script type="text/javascript">
+		$("form").submit(function(e){
+			var findId = document.findPwForm.memId.value;
+			e.preventDefault();
+			
+			if (findId==""){						
+				$("#idChkBox1").show()
+				$("#idChkBox3").hide()
+			} else if (findId!=""){
+				$.ajax({
+					async: true,
+				    type : 'POST',
+				    data : JSON.stringify({"memPw": findId}),
+				    url : "",
+				    dataType : "json",
+				    contentType: "application/json; charset=UTF-8",
+				    success : function(data) {
+				        if (data.sendEmail) {
+				        	$("#idChkBox1").hide()							
+							$("#idChkBox3").hide()
+				        } else {
+				        	$("#idChkBox1").hide()							
+							$("#idChkBox3").show()
+				        }
+				    },
+				    error : function(error) {
+				        alert("error : " + error);
+				    }
+				});								
+			}	   			
+		});
+	</script>
 </body>
 </html>
