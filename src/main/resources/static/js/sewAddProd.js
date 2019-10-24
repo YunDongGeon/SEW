@@ -64,7 +64,6 @@ $("#addColor").on("click", function(){
 				M 사이즈 <input class="form-control" type="text" name="prodMsize" numberOnly>
 				L 사이즈 <input class="form-control" type="text" name="prodLsize" numberOnly>
 				XL 사이즈 <input class="form-control" type="text" name="prodXLsize" numberOnly>
-				
 			</li>`);
 });
 function deleteBox(self){

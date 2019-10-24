@@ -342,3 +342,181 @@ ul, ol {
     background-position: -20px 0;
     vertical-align: middle;
 }
+
+.sub_sc {    
+	width: 100%;
+    position: relative;
+    float: left;
+    z-index: 10;
+    padding: 0;
+    background-color: #fff;
+}
+
+.tit_month {
+    width: 100%;
+    height: 48px;
+    margin: -9px 0;
+    text-align: center;
+}
+
+.tit_month hr {
+	width: 100%;
+	margin: 25px 0;
+	z-index: 1;
+	position: absolute;
+	border: 0.5px solid #bbbbbb;
+}
+
+.tit_month span {
+	background: #fff;
+	height: 48px;
+	z-index: 2;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	padding: 0 50px;
+	font-size: 28px;
+	color: #000;
+	border: 0.5px solid #bbbbbb;
+	border-radius: 30px;
+}
+
+.goods_pay_item .goods_item .goods_thumb img {
+	float: left;
+    vertical-align: top;
+}
+
+img {
+    vertical-align: middle;
+    border-style: none;
+}
+
+.goods_pay_item {
+    display: table;
+    width: 100%;
+    height: auto;
+    padding: 40px 0 20px;
+    table-layout: fixed;
+}
+
+.goods_pay_item .goods_item {
+	width: 100%;
+    position: relative;
+    float: left;
+    padding-left: 30px;
+}
+
+.goods_pay_item .goods_item .goods_info .goods .name {
+    max-width: 100%;
+    overflow: hidden;
+    color: #000;
+    font-size: 16px;
+    white-space: nowrap;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    text-decoration: none;
+}
+
+.goods_pay_item .goods_item .goods_info {
+	width: 85%;
+	padding-left: 30px;
+	float: left;
+    font-size: 13px;
+}
+
+.goods_pay_item .goods_item .goods_info .goods .info {
+    margin: 8px 0px 12px;
+}
+
+.goods_pay_item .goods_item .goods_info .goods .info li span{
+    font-size: 24px;
+}
+
+.goods_pay_item .goods_item .goods_info .goods .info li span .won{
+    font-size: 20px;
+}
+
+.goods_pay_item .goods_item .goods_info .goods .info li {
+    display: inline-block;
+    color: #000;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.goods_pay_item .goods_item .goods_info .goods .info li.date {
+    color: #a5a5a5 !important;
+}
+
+.goods_pay_item .goods_item .goods_info .goods .info li + li {
+    margin: 0 0 0 8px !important;
+    padding-left: 11px;
+}
+
+.goods_pay_item .goods_item .goods_info .goods .info li + li:before {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 1px;
+    height: 17px;
+    margin-top: -9px;
+    background-color: #bbbbbb;
+    content: '';
+}
+
+.goods_pay_item .goods_item .goods_info .goods {
+    display: block;
+    text-decoration: none;
+}
+
+.goods_pay_item .goods_item .goods_info .guide {
+    margin-top: 10px;
+    padding-top: 10px;
+    color: #646465;
+    line-height: 18px;
+    border-top: 1px solid #e2e2e2;
+}
+
+strong {
+    font-weight: bold;
+}
+
+.goods_pay_item .button_item {
+	text-align: center;
+    width: 110px;
+}
+
+.writeReviewBtn {	
+	background-color: #fff;
+    border: 0.5px solid black;
+    color: #000;
+    padding: 5px 15px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.goods_pay_item > div {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.goods_pay_section + .goods_pay_section, .goods_group + .goods_group {
+    border-top: 1px solid #dadddf;
+    margin-top: -15px;
+}
+
+.goods_pay_section + .goods_pay_section, .goods_group ul{
+    margin-bottom: 10px;
+}
+
+.goods_pay_section + .goods_pay_section, .goods_group + .goods_group ul{
+    margin-bottom: 10px;
+}
+
+.viewmore_btn_section {
+	text-align: center;
+    display: block;
+    width: 100%;
+}

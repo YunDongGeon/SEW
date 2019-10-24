@@ -12,5 +12,6 @@ public interface ManagementRepository {
 	public int addProdInven(Management m);
 	public List<Management> getNewProd();
 	public Management getProd(Management m);
-	public Management getProdInven(Management m);	
+	public List<Management> getProdColor(Management m);
+	public Management getProdInven(Management m);
 }

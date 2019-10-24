@@ -44,6 +44,10 @@ public class ManagementService {
 		return managementRepository.getProd(m);
 	}
 	
+	public List<Management> getProdColor(Management m) {
+		return managementRepository.getProdColor(m);
+	}
+	
 	public Management getProdInven(Management m) {
 		return managementRepository.getProdInven(m);
 	}

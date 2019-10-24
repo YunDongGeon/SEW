@@ -3,10 +3,12 @@ package itc.hoseo.sew.management;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -49,16 +51,22 @@ public class ManagementController {
 		m.put("newProdList", service.getNewProd());
 		return "/index";
 	}
-	@GetMapping("/sewDetail")
-	public String goDetailPage(
-			@RequestParam(value="prodNo") int prodNo,
-			ModelMap m) {
+	@GetMapping("/sewDetail.do")
+	public String goDetailPage(@RequestParam(value="prodNo") int prodNo, ModelMap m) {
 		Management manage = new Management();
 		manage.setProdNo(prodNo);
 		manage = service.getProd(manage);
-		m.put("prodDetail", manage);		
-		//m.put("prodInven", service.getProdInven(manage));
+		m.put("prodDetail", manage);
+		m.put("prodColor", service.getProdColor(manage));
 		return "sewProduct/sewProductDetail";
+	}
+	
+	@PostMapping("/getSize.do")
+	@ResponseBody
+	public Map<Object, Object> getSize(@RequestBody Management mg, HttpSession session) {
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		map.put("prodInven", service.getProdInven(mg));
+		return map;
 	}
 	
 	// 상품 추가

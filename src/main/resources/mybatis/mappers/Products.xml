@@ -23,8 +23,11 @@
 		on prod.prodNo = img.prodNo
 		WHERE prod.prodNo = #{prodNo}
     </select>
-    <select id="getProdInven" resultType="Management" parameterType="Management">
+    <select id="getProdColor" resultType="Management" parameterType="Management">
 		SELECT * FROM prodInven WHERE prodNo = #{prodNo}    	
+    </select>
+    <select id="getProdInven" resultType="Management" parameterType="Management">
+		SELECT * FROM prodInven WHERE prodNo = #{prodNo} and prodColor = #{prodColor}    	
     </select>
     <select id="getNewProd" resultType="Management">
     	SELECT prod.*, img.* 

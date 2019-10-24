@@ -9,7 +9,8 @@ h3 {
 .prodContainer{
 	margin-top: 50px;
 	width: 100%;
-	height: 650px;
+	height: auto;
+	overflow: hidden;
 }
 .productImgBox{
 	width: 50%;
@@ -37,15 +38,15 @@ tr:nth-child(1) {
 	border-top: 1px solid #ddd;
 }
 
-tr:nth-child(6) {
-	border-bottom: 1px solid #ddd;	
+tr:nth-child(7) td{
+	padding: 0px;	
 }
 
-tr:nth-child(6) {
+tr:nth-child(8) {
 	border-bottom: 4px solid #000;	
 }
 
-th{		
+th{			
 	padding-left: 20px;
 	width: 25%;
 	color: #080808; 
@@ -54,6 +55,11 @@ th{
     text-align: left;
     font-weight: normal;
     font-size: 14px;
+}
+
+tr:nth-child(6) th {
+	padding-top: 20px;
+	vertical-align: text-top;
 }
 
 td{	
@@ -85,11 +91,161 @@ input[name="buyBtn"] {
     font-weight: bold;
     margin-right: 5%;
     cursor: pointer;
-}	
+}
+	
 select {
 	font-size: 16px;
 }
+
 .buttonsBox{
 	margin-top: 10px;
 	text-align: center;
+}
+
+#sizeOption {
+	display: none;
+}
+
+.total {
+	float: right;
+}
+
+.totalMsg {	
+	font-style: normal;
+	font-size: 14px;
+    position: relative;
+    display: inline-block;
+    padding-right: 18px;
+    color: #999;
+    vertical-align: middle;
+}
+
+.totalMsg:after {
+	margin-top: 6px;
+	position: absolute;
+    right: 8px;
+    width: 1px;
+    height: 18px;
+    background-color: #9c9c9c;
+    content: '';
+}	
+
+.total .format-money {
+	font-size: 28px;
+	color: #000;
+	font-weight: bold;
+}
+
+.won {
+	font-size: 24px;
+	color: #000;
+}
+
+.totalCount {
+	font-size: 20px;
+	color: #000;
+}
+
+#selectedList {
+	padding: 0;
+}
+
+#selectedList .listItem:nth-child(1) {
+	border-top: 1px solid #ddd;
+}
+
+#selectedList .listItem {
+	display: table;
+    position: relative;
+    width: 100%;
+    padding: 15px 14px 15px 0;    
+    border-bottom: 1px solid #ddd;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+#selectedList .itemBox {
+	padding-left: 10px;
+	display: table-cell;
+    vertical-align: top;
+}
+
+#selectedList .itemName {
+	margin: 20px 119px 12px 0;
+    color: #333;
+    line-height: 20px;
+    font-size: 16px;
+    word-break: break-all;
+}
+
+#selectedList .itemRow .itemCounter {
+	float: left;
+}
+
+.itemRow {
+	margin-bottom: 65px;
+}
+
+.itemCounter {
+	display: inline-block;
+    position: relative;
+    height: 34px;
+    border: solid 1px #dde0e3;
+}
+
+.itemCounter .itemAmount {
+    width: 50px;
+    height: 100%;
+    margin: 0 -5px;
+    border: 1px solid #eff1f5;
+    border-width: 0 1px;
+    vertical-align: top;
+    color: #333;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 34px;
+    text-align: center;
+}
+
+.itemCounter .pmBtn {
+	border: none;
+    background-color: transparent;
+    cursor: pointer;
+    position: relative;
+    width: 34px;
+    height: 100%;
+    background-color: #f1f2f4;
+}
+
+#selectedList .itemRow .itemPriceBox {
+	float: right;
+    margin: 8px 10px 0 0;
+    font-size: 13px;
+}
+
+#selectedList .itemRow .itemPriceBox .itemPrice {
+	display: inline-block;
+    margin-top: -3px;
+    font-family: Tahoma;
+    font-weight: bold;
+    color: #222;
+    vertical-align: middle;
+    font-size: 15px;
+}
+
+#selectedList .delBtn {
+	color: #000;
+	margin-left: 10px;
+	border: none;
+    background-color: transparent;
+    cursor: pointer;
+    width: 27px;
+    height: 27px;
+}
+
+#selectChk {
+	display: none;
+	margin-left: 10px;
+	font-size: 12px;
+	color: red;
 }
