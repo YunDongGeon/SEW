@@ -71,16 +71,24 @@ $('#colorOption').change(function() {
 	});
 });
 
+Array.prototype.contains = function(obj) {
+    var i = this.length;
+    while (i--) {
+        if (this[i].innerHTML == obj) {
+            return true;
+        }
+    }
+    return false;
+}
+
 $('#sizeOption').change(function() {
 	sizeSelect = $(this).val();
-	var itemName = colorSelect + " / " + sizeSelect;
-	alert(itemName);
-	alert($(".itemName").length);
-	if ($(".itemName").length!=0){
-		for (var i in $(".itemName")){
-			alert($(".itemName")[i].text());
-		}
-		if($(".itemName").text()==itemName){
+	var itemName = colorSelect + " / " + sizeSelect;	
+	var itemArr = $(".itemName").get();
+	var prodPrice = $("#prodPrice").val();
+	if(itemArr.length>0){
+		var itemStat = itemArr.contains(itemName);
+		if (itemStat){
 			$("#selectChk").show();
 		}else{
 			$("#selectChk").hide();
@@ -92,19 +100,19 @@ $('#sizeOption').change(function() {
 							<div class="itemRow">
 								<div class="itemCounter">
 									<button type="button" class="pmBtn minus">-</button>
-									<input type="text" class="itemAmount" value="1">
+									<input type="number" class="itemAmount" value="1">
 									<button type="button" class="pmBtn plus">+</button>
 								</div>
 								<span class="itemPriceBox">
-									<span class="itemPrice">15,900</span>원
+									<span class="itemPrice">${prodPrice}</span>원
 									<i class="far fa-trash-alt delBtn" onclick="deleteBox(this)"></i>
 								</span>
 							</div>
 						</div>												
 					</li>
 				`		
-		    );
-		}
+		    );			
+		}	
 	}else{
 		$("#selectChk").hide();
 		$("#selectedList").append(
@@ -115,19 +123,25 @@ $('#sizeOption').change(function() {
 						<div class="itemRow">
 							<div class="itemCounter">
 								<button type="button" class="pmBtn minus">-</button>
-								<input type="text" class="itemAmount" value="1">
+								<input type="number" class="itemAmount" value="1">
 								<button type="button" class="pmBtn plus">+</button>
 							</div>
 							<span class="itemPriceBox">
-								<span class="itemPrice">15,900</span>원
+								<span class="itemPrice">${prodPrice}</span>원
 								<i class="far fa-trash-alt delBtn" onclick="deleteBox(this)"></i>
 							</span>
 						</div>
 					</div>												
 				</li>
 			`		
+	    );		
+	}
+	jQuery('.itemPrice').text(function() {
+	    jQuery(this).text(
+	        jQuery(this).text().format()
 	    );
-	}	
+	});
+	$(".itemPrice").attr('class','format-money');	
 });
 
 function getParameterByName(name) {
@@ -136,3 +150,35 @@ function getParameterByName(name) {
         results = regex.exec(location.search);
     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
+
+function deleteBox(self){
+	$($(self).parent("span").parent("div").parent("div").parent("li")).remove();	
+}
+
+$(".itemAmount").on("change keyup paste", function() {
+	alert($(".itemAmount").val());
+});
+
+Number.prototype.format = function(){
+    if(this==0) return 0;
+
+    var reg = /(^[+-]?\d+)(\d{3})/;
+    var n = (this + '');
+
+    while (reg.test(n)) n = n.replace(reg, '$1' + ',' + '$2');
+
+    return n;
+};
+
+String.prototype.format = function(){
+    var num = parseFloat(this);
+    if( isNaN(num) ) return "0";
+
+    return num.format();
+};
+
+jQuery('.format-money').text(function() {
+    jQuery(this).text(
+        jQuery(this).text().format()
+    );
+});

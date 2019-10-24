@@ -73,6 +73,7 @@
 									<td>
 										<h4>
 											<span class="format-money" th:text="${prodDetail.prodPrice}"></span><span>원</span>
+											<input type="number" hidden="hidden" id="prodPrice" name="prodPrice" th:value="${prodDetail.prodPrice}">
 										</h4>
 									</td>
 								</tr>
@@ -169,31 +170,7 @@
 	<script th:src="@{js/slider.js}"></script>
 	<script th:src="@{js/sewDetail.js}"></script>
 
-	<script type="text/javascript">
-		function deleteBox(self){
-			$($(self).parent("span").parent("div").parent("div").parent("li")).remove();	
-		}
-		Number.prototype.format = function(){
-		    if(this==0) return 0;
-	
-		    var reg = /(^[+-]?\d+)(\d{3})/;
-		    var n = (this + '');
-	
-		    while (reg.test(n)) n = n.replace(reg, '$1' + ',' + '$2');
-	
-		    return n;
-		};
-		String.prototype.format = function(){
-		    var num = parseFloat(this);
-		    if( isNaN(num) ) return "0";
-
-		    return num.format();
-		};
-		jQuery('.format-money').text(function() {
-		    jQuery(this).text(
-		        jQuery(this).text().format()
-		    );
-		});
+	<script type="text/javascript">		
 	</script>	
 </body>
 </html>
