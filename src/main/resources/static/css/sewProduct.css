@@ -130,7 +130,7 @@ select {
     content: '';
 }	
 
-.total .format-money {
+.totalPriceTxt {
 	font-size: 28px;
 	color: #000;
 	font-weight: bold;
@@ -223,7 +223,7 @@ select {
     font-size: 20px;
 }
 
-#selectedList .itemRow .itemPriceBox .format-money {
+#selectedList .itemRow .itemPriceBox .itemPrice {
 	display: inline-block;
     margin-top: -3px;
     font-weight: bold;    

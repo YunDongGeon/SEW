@@ -1,5 +1,8 @@
 var colorSelect = null;
 var sizeSelect = null;
+var optionCount = 0;
+var totalAmount = 0;
+var totalPrice = 0;
 
 $('#colorOption').change(function() {
 	$("#sizeOption *").remove();
@@ -82,10 +85,14 @@ Array.prototype.contains = function(obj) {
 }
 
 $('#sizeOption').change(function() {
-	sizeSelect = $(this).val();
+	sizeSelect = $(this).val();;
+	var sum = 0;
+	var curAmount = Number($(".totalCount").text());
+	var curTotal = $("#totalPrice").val();
 	var itemName = colorSelect + " / " + sizeSelect;	
 	var itemArr = $(".itemName").get();
 	var prodPrice = $("#prodPrice").val();
+	var prodPriceTxt = numberFormat(prodPrice);
 	if(itemArr.length>0){
 		var itemStat = itemArr.contains(itemName);
 		if (itemStat){
@@ -100,18 +107,24 @@ $('#sizeOption').change(function() {
 							<div class="itemRow">
 								<div class="itemCounter">
 									<button type="button" class="pmBtn minus">-</button>
-									<input type="number" class="itemAmount" value="1">
+									<input type="number" class="itemAmount" value="1" onkeyup="cal(this, this.form.prodPrice)">
 									<button type="button" class="pmBtn plus">+</button>
 								</div>
 								<span class="itemPriceBox">
-									<span class="itemPrice">${prodPrice}</span>원
+									<span class="itemPrice">${prodPriceTxt}</span>원
+									<input type="hidden" class="sumPrice" value="${prodPrice}" readonly>
 									<i class="far fa-trash-alt delBtn" onclick="deleteBox(this)"></i>
 								</span>
 							</div>
 						</div>												
 					</li>
 				`		
-		    );			
+		    );
+			optionCount += 1;
+			$(".totalAmount").text(curAmount+=1);			
+			sum = Number(curTotal)+Number(prodPrice);				
+			$(".totalPriceTxt").text(numberFormat(sum));
+			$("#totalPrice").val(Number(sum));
 		}	
 	}else{
 		$("#selectChk").hide();
@@ -123,41 +136,74 @@ $('#sizeOption').change(function() {
 						<div class="itemRow">
 							<div class="itemCounter">
 								<button type="button" class="pmBtn minus">-</button>
-								<input type="number" class="itemAmount" value="1">
+								<input type="number" class="itemAmount" value="1" onkeyup="cal(this, this.form.prodPrice)">
 								<button type="button" class="pmBtn plus">+</button>
 							</div>
 							<span class="itemPriceBox">
-								<span class="itemPrice">${prodPrice}</span>원
+								<span class="itemPrice">${prodPriceTxt}</span>원
+								<input type="hidden" class="sumPrice" value="${prodPrice}" readonly>
 								<i class="far fa-trash-alt delBtn" onclick="deleteBox(this)"></i>
 							</span>
 						</div>
 					</div>												
 				</li>
 			`		
-	    );		
-	}
-	jQuery('.itemPrice').text(function() {
-	    jQuery(this).text(
-	        jQuery(this).text().format()
 	    );
-	});
-	$(".itemPrice").attr('class','format-money');	
+		optionCount += 1;
+		$(".totalAmount").text(curAmount+=1);
+		sum = Number(curTotal)+Number(prodPrice);		
+		$(".totalPriceTxt").text(numberFormat(sum));
+		$("#totalPrice").val(sum);
+	}		
 });
 
-function getParameterByName(name) {
-    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-        results = regex.exec(location.search);
-    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+
+function cal(amount, price) {
+	totalAmount = 0;
+	totalPrice = 0;
+	if($(amount).val()==0){
+		$($(amount).parent("div").parent("div").parent("div").parent("li")).remove();		
+		optionCount-=1;
+		for(var n=0;n<optionCount;n++){		
+			totalAmount += Number(document.getElementsByClassName('itemAmount')[n].value);
+			totalPrice += Number(document.getElementsByClassName('sumPrice')[n].value);
+		}
+		$(".totalAmount").text(totalAmount);
+		$(".totalPriceTxt").text(numberFormat(totalPrice));
+	}else{
+		var total = Number($(amount).val()*$(price).val());
+		$(amount).parent("div").parent("div").children(".itemPriceBox").children(".itemPrice").text(numberFormat(total));
+		$(amount).parent("div").parent("div").children(".itemPriceBox").children(".sumPrice").val(total);
+		for(var n=0;n<optionCount;n++){		
+			totalAmount += Number(document.getElementsByClassName('itemAmount')[n].value);
+			totalPrice += Number(document.getElementsByClassName('sumPrice')[n].value);
+		}
+		$(".totalAmount").text(totalAmount);
+		$(".totalPriceTxt").text(numberFormat(totalPrice));
+	}	
 }
 
-function deleteBox(self){
+function deleteBox(self) {
+	var prevAmount = $(self).parent("span").parent("div").children(".itemCounter").children(".itemAmount").val();
+	var prevPrice = $(self).parent("span").children(".sumPrice").val();
 	$($(self).parent("span").parent("div").parent("div").parent("li")).remove();	
+	optionCount-=1;
+	alert(optionCount);
+	if(optionCount==0){
+		$(".totalAmount").text(0);
+		$(".totalPriceTxt").text(0);
+	}else{
+		$(".totalAmount").text(totalAmount-prevAmount);
+		$(".totalPriceTxt").text(numberFormat(totalPrice-prevPrice));
+	}
 }
 
-$(".itemAmount").on("change keyup paste", function() {
-	alert($(".itemAmount").val());
-});
+function numberFormat(inputNumber) {
+   return inputNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+function removeComma(str) {
+	return parseInt(str.replace(/,/g,""));
+}
 
 Number.prototype.format = function(){
     if(this==0) return 0;
@@ -182,3 +228,10 @@ jQuery('.format-money').text(function() {
         jQuery(this).text().format()
     );
 });
+
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}

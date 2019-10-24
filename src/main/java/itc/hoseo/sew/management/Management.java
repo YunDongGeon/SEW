@@ -25,4 +25,7 @@ public class Management {
 	private String prodThumbUrl;
 	private String prodContName;
 	private String prodContUrl;
+	private int totalPrice;
+	private int prodAmount;
+	private int totalAmount;
 }
