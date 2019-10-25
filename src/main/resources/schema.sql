@@ -53,3 +53,20 @@ CREATE TABLE buyList(
 	buyStat varchar(10) not null,
 	buyDate Timestamp not null
 );
+
+CREATE TABLE cartList(
+	cartNo int primary key auto_increment,
+	prodNo int not null,
+	memId varchar(20) not null,
+	foreign key(prodNo) references product(prodNo),
+	foreign key(memId) references user(memId)
+);
+
+CREATE TABLE cartOptionList(
+	optionNo int primary key auto_increment,
+	cartNo int not null,	
+	prodColor varchar(40) not null,
+	prodSize int not null,
+	prodAmount int not null,
+	foreign key(cartNo) references cartList(cartNo)	
+);
