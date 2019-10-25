@@ -84,19 +84,49 @@ Array.prototype.contains = function(obj) {
     return false;
 }
 
-$('#sizeOption').change(function() {
-	sizeSelect = $(this).val();;
-	var sum = 0;
-	var curAmount = Number($(".totalCount").text());
-	var curTotal = $("#totalPrice").val();
-	var itemName = colorSelect + " / " + sizeSelect;	
-	var itemArr = $(".itemName").get();
-	var prodPrice = $("#prodPrice").val();
-	var prodPriceTxt = numberFormat(prodPrice);
-	if(itemArr.length>0){
-		var itemStat = itemArr.contains(itemName);
-		if (itemStat){
-			$("#selectChk").show();
+$('#sizeOption').click(function() {
+	sizeSelect = $(this).val();
+	if(sizeSelect != null){
+		var sum = 0;
+		var curAmount = Number($(".totalCount").text());
+		var curTotal = $("#totalPrice").val();
+		var itemName = colorSelect + " / " + sizeSelect;	
+		var itemArr = $(".itemName").get();
+		var prodPrice = $("#prodPrice").val();
+		var prodPriceTxt = numberFormat(prodPrice);	
+		if(itemArr.length>0){
+			var itemStat = itemArr.contains(itemName);
+			if (itemStat){
+				$("#selectChk").show();
+			}else{
+				$("#selectChk").hide();
+				$("#selectedList").append(
+			    	`
+						<li class="listItem">
+							<div class="itemBox">
+								<p class="itemName">${itemName}</p>
+								<div class="itemRow">
+									<div class="itemCounter">
+										<button type="button" class="pmBtn minus" onclick="minusAmount(this)">-</button>
+										<input type="number" class="itemAmount" value="1" onkeyup="cal(this, this.form.prodPrice)">
+										<button type="button" class="pmBtn plus" onclick="plusAmount(this)">+</button>
+									</div>
+									<span class="itemPriceBox">
+										<span class="itemPrice">${prodPriceTxt}</span>원
+										<input type="hidden" class="sumPrice" value="${prodPrice}" readonly>
+										<i class="far fa-trash-alt delBtn" onclick="deleteBox(this)"></i>
+									</span>
+								</div>
+							</div>												
+						</li>
+					`		
+			    );
+				optionCount += 1;
+				$(".totalAmount").text(curAmount+=1);			
+				sum = Number(curTotal)+Number(prodPrice);				
+				$(".totalPriceTxt").text(numberFormat(sum));
+				$("#totalPrice").val(Number(sum));
+			}	
 		}else{
 			$("#selectChk").hide();
 			$("#selectedList").append(
@@ -121,40 +151,12 @@ $('#sizeOption').change(function() {
 				`		
 		    );
 			optionCount += 1;
-			$(".totalAmount").text(curAmount+=1);			
-			sum = Number(curTotal)+Number(prodPrice);				
+			$(".totalAmount").text(curAmount+=1);
+			sum = Number(curTotal)+Number(prodPrice);		
 			$(".totalPriceTxt").text(numberFormat(sum));
-			$("#totalPrice").val(Number(sum));
+			$("#totalPrice").val(sum);
 		}	
-	}else{
-		$("#selectChk").hide();
-		$("#selectedList").append(
-	    	`
-				<li class="listItem">
-					<div class="itemBox">
-						<p class="itemName">${itemName}</p>
-						<div class="itemRow">
-							<div class="itemCounter">
-								<button type="button" class="pmBtn minus" onclick="minusAmount(this)">-</button>
-								<input type="number" class="itemAmount" value="1" onkeyup="cal(this, this.form.prodPrice)">
-								<button type="button" class="pmBtn plus" onclick="plusAmount(this)">+</button>
-							</div>
-							<span class="itemPriceBox">
-								<span class="itemPrice">${prodPriceTxt}</span>원
-								<input type="hidden" class="sumPrice" value="${prodPrice}" readonly>
-								<i class="far fa-trash-alt delBtn" onclick="deleteBox(this)"></i>
-							</span>
-						</div>
-					</div>												
-				</li>
-			`		
-	    );
-		optionCount += 1;
-		$(".totalAmount").text(curAmount+=1);
-		sum = Number(curTotal)+Number(prodPrice);		
-		$(".totalPriceTxt").text(numberFormat(sum));
-		$("#totalPrice").val(sum);
-	}		
+	}
 });
 
 function cal(amount, price) {

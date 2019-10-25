@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Sew</title>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link
+	href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Teko:300&display=swap&subset=devanagari,latin-ext"
+	rel="stylesheet">
+<link rel="icon" th:href="@{img/logo/favicon.png}">
+<link th:href="@{vendor/fontawesome-free/css/all.min.css}"
+	rel="stylesheet" type="text/css">
+<link rel="stylesheet" th:href="@{css/open-iconic-bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{css/animate.css}">
+<link rel="stylesheet" th:href="@{css/owl.carousel.min.css}">
+<link rel="stylesheet" th:href="@{css/owl.theme.default.min.css}">
+<link rel="stylesheet" th:href="@{css/magnific-popup.css}">
+<link rel="stylesheet" th:href="@{css/aos.css}">
+<link rel="stylesheet" th:href="@{css/ionicons.min.css}">
+<link rel="stylesheet" th:href="@{css/bootstrap-datepicker.css}">
+<link rel="stylesheet" th:href="@{css/jquery.timepicker.css}">
+<link rel="stylesheet" th:href="@{css/flaticon.css}">
+<link rel="stylesheet" th:href="@{css/icomoon.css}">
+<link rel="stylesheet" th:href="@{css/style.css}">
+<link rel="stylesheet" th:href="@{slick/slick.css}">
+<link rel="stylesheet" th:href="@{slick/slick-theme.css}">
+<link rel="stylesheet" th:href="@{css/slider.css}">
+<link rel="stylesheet" th:href="@{css/nav.css}">
+<link rel="stylesheet" th:href="@{css/join.css}">
+<link rel="stylesheet" th:href="@{css/sewMyPage.css}">
+
+</head>
+<body>
+	<nav
+		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
+		id="ftco-navbar" th:replace="sewNav::nav"></nav>
+	<!-- END nav -->
+
+	<!-- Join Form -->
+	<section class="ftco-section ftco-product">
+		<div class="container">
+			<div class="myPageContainer">
+				<div id="aside" class="myPageSide" th:replace="sewMyPage/sewMyPageSideNav::side"></div>
+				<div class="cartBox">
+					<div class="cartTit">
+						<h2>장바구니</h2>
+						<ol>
+							<li class="onPage"><span>01</span> 장바구니 <span class="arrows">></span>
+							</li>
+							<li><span>02</span> 주문/결제 <span class="arrows">></span></li>
+							<li><span>03</span> 주문완료</li>
+						</ol>
+					</div>
+					<div class="listRoot">
+						<div class="sub_sc" style="min-height: 895px;">
+							<div id="_listContentArea">
+								<div class="goods_pay_section ">
+									<table cellspacing="0" border="1" class="tb_list tb_order_check _order_area">
+										<colgroup>
+											<col width="36">
+											<col>
+											<col width="55">
+											<col width="80">
+											<col width="80">
+											<col width="132">
+										</colgroup>
+										<thead>
+											<tr>
+												<th scope="col"><input type="checkbox" id="lb_chk"
+													class="_checkbox_all _click(nmp.front.order.cart.toggleAll())"
+													checked="checked">
+												<th scope="col" class="product"><strong>상품정보</strong></th>
+												<th scope="col">수량</th>
+												<th scope="col">상품금액</th>
+												<th scope="col" class="bg_point">배송비</th>
+												<th scope="col" class="bg_point">주문금액</th>
+											</tr>
+										</thead>										
+										<tbody>
+											<tr>
+												<td class="check">
+													<input type="checkbox" id="lb_chk2"	name="cartProductIds" class="_cart_order_checkbox  _click(nmp.front.order.cart.toggleOne()) "
+														value="2019102519730093" checked="checked">
+												</td>
+												<td class="product">
+													<div>
+														<div class="thmb">
+															<div class="img_center">
+																<a href="#" target="_blank"> 
+																	<img src="https://order.pay.naver.com/proxy/phinf/shop1/20191023_251/1571809684768hNwhk_JPEG/9173073297191983_1226245663.jpg?type=m80"
+																		class="prodImg"alt="면 레이온 베이직 무지 셔츠 (화이트, 그레이카키)">
+																</a>
+																<!--N=a:car.product-->
+															</div>
+														</div>
+														<dl class="naver_plus">
+															<dt class="zzim_add">
+																<strong class="name_seller">[스마트스토어] 엘레아노샵</strong> 
+																<a href="#"	target="_blank"> 면 레이온 베이직 무지 셔츠 (화이트, 그레이카키) </a>
+																<a href="#"	class="zzim _click(nmp.front.order.cart.keepOne(2019102519730093))">찜하기</a>
+																<!--N=a:car.zzim-->
+															</dt>
+															<dd class="modify_sec btn_oneline">
+																<a href="#" target="_blank" title="주문조건 추가/변경" class="btn_od_modify _click(nmp.front.order.cart.modifyCartProduct(2019102519730093,false)) _stopDefault">
+																	<span class="blind">주문 조건 추가/변경</span>
+																</a>
+																<!--N=a:car.modifyoption-->
+															</dd>
+															<dd>
+																<ul class="option">
+																	<li>색상: 카키그레이 / 사이즈: Free / 1개</li>
+																</ul>
+															</dd>
+														</dl>
+													</div>
+												</td>
+												<td>
+													<em class="_product_quantity mount thm"> 
+														<strong	class="_product_quantity mount thm">1</strong>														
+													</em>
+													<a href="#" target="_blank" class="btn_pd_edit">
+														<span>수량</span>
+													</a>
+												</td>
+												<td>
+													<span class="num">
+														<em	class="thm _sumOrderAmount"> 34,500</em>원
+													</span>
+												</td>
+												<td rowspan="1" class="seller bg_point">
+													<div class="send zi10">
+														<div class="sum">
+															<em class="thm _deliveryFeeAmount">2,500</em>원 
+														</div>
+													</div>
+												</td>
+												<!--N=a:car.seller--></td>
+												<td class="bg_point order_money"><strong
+													class="pointcol"> <em class="thm">26,500</em>원
+												</strong>
+													<p class="btn_group">
+														<a href="#" class="btn_order">
+															<span>주문</span>
+														</a>
+														<a href="#" class="btn_ordel">
+															<span class="blind">삭제</span>
+														</a>
+													</p>
+												</td>
+											</tr>											
+											<tr>
+												<td class="check">
+													<input type="checkbox" id="lb_chk2" name="cartProductIds" value="2019102519728932" checked="checked">
+												</td>
+												<td class="product">
+													<div>
+														<div class="thmb">
+															<div class="img_center">
+																<a href="#" target="_blank"> 
+																	<img src="https://order.pay.naver.com/proxy/phinf/shop1/20190926_30/1569426109254oUyYo_JPEG/6787651849963807_8226748.jpg?type=m80" alt="베이직 브이넥 니트 가디건">
+																</a>
+															</div>
+														</div>
+														<dl class="naver_plus">
+															<dt class="zzim_add">
+																<strong class="name_seller">[스마트스토어] 드밍</strong> 
+																<a href="#" target="_blank"> 베이직 브이넥 니트 가디건 </a>
+																<!--N=a:car.zzim-->
+															</dt>
+															<dd class="modify_sec btn_oneline">
+																<a href="#" target="_blank" title="주문조건 추가/변경"
+																	class="btn_od_modify _click(nmp.front.order.cart.modifyCartProduct(2019102519728932,false)) _stopDefault"><span
+																	class="blind">주문 조건 추가/변경</span></a>
+																<!--N=a:car.modifyoption-->
+															</dd>
+
+															<dd>
+																<ul class="option">
+																	<li>색상: 화이트 / 3개</li>
+																</ul>
+
+																<ul class="add">
+																</ul>
+															</dd>
+														</dl>
+													</div>
+												</td>
+												<td>
+													<em class="_product_quantity mount thm"> 
+														<strong	class="_product_quantity mount thm">12</strong>
+													</em>
+													<a href="#" target="_blank" class="btn_pd_edit">
+														<span>수량</span>
+													</a>
+												</td>
+												<td>
+													<span class="num">
+														<em class="thm _sumOrderAmount"> 360,000</em>원
+													</span>
+												</td>
+												<td rowspan="1" class="seller bg_point">
+													<div class="send zi10">
+														<div class="sum">
+															무료
+														</div>
+													</div>
+												</td>
+												<td class="bg_point order_money"><strong
+													class="pointcol"> <em class="thm">190,800</em>원
+												</strong>
+													<p class="btn_group">
+														<a href="#" class="btn_order">
+															<span>주문</span></a>
+														<!--N=a:car.order-->
+														<a href="#" class="btn_ordel">
+															<span class="blind">삭제</span>
+														</a>
+													</p>
+												</td>
+											</tr>
+										</tbody>
+										<tfoot>
+											<tr>
+												<td colspan="4">&nbsp;</td>
+												<td colspan="3" class="amount bg_point2">
+													<dl>
+														<dd>
+															<ul>
+																<li>
+																	<strong>총 상품금액</strong>
+																	<p>
+																		<em class="thm _totalOrderAmount">406,500</em> 원
+																	</p>
+																</li>
+																<li>
+																	<strong>배송비</strong>
+																	<p>
+																		<em class="thm _totalDeliveryFeeAmount">5,500</em>원
+																	</p>
+																</li>
+															</ul>
+														</dd>
+													</dl>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="4" class="tb_btnone">&nbsp;</td>
+												<td colspan="3" class="amount bg_point2 tot">
+													<dl>
+														<dd>
+															<ul>
+																<li>
+																	<strong>결제금액</strong>
+																	<p>
+																		<em class="thm _subTotal">231,100</em> 원
+																	</p>
+																</li>
+															</ul>
+														</dd>
+													</dl>
+												</td>
+											</tr>
+										</tfoot>
+									</table>									
+								</div>								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- END Join Form -->
+
+	<footer th:replace="sewFooter::footer"
+		class="ftco-footer bg-light ftco-section"></footer>
+	<!-- loader -->
+	<div id="ftco-loader" class="show fullscreen">
+		<svg class="circular" width="48px" height="48px">
+			<circle class="path-bg" cx="24" cy="24" r="22" fill="none"
+				stroke-width="4" stroke="#eeeeee" />
+			<circle class="path" cx="24" cy="24" r="22" fill="none"
+				stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg>
+	</div>
+
+	<script th:src="@{js/jquery.min.js}"></script>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script th:src="@{js/popper.min.js}"></script>
+	<script th:src="@{js/bootstrap.min.js}"></script>
+	<script th:src="@{js/jquery.easing.1.3.js}"></script>
+	<script th:src="@{js/jquery.waypoints.min.js}"></script>
+	<script th:src="@{js/jquery.stellar.min.js}"></script>
+	<script th:src="@{js/owl.carousel.min.js}"></script>
+	<script th:src="@{js/jquery.magnific-popup.min.js}"></script>
+	<script th:src="@{js/aos.js}"></script>
+	<script th:src="@{js/jquery.animateNumber.min.js}"></script>
+	<script th:src="@{js/bootstrap-datepicker.js}"></script>
+	<script th:src="@{js/scrollax.min.js}"></script>
+	<script
+		th:src="@{https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false}"></script>
+	<script th:src="@{js/google-map.js}"></script>
+	<script th:src="@{js/main.js}"></script>
+	<script th:src="@{slick/slick.js}"></script>
+	<script th:src="@{slick/slick.min.js}"></script>
+	<script th:src="@{js/slider.js}"></script>
+	<script th:src="@{js/sewJoin.js}"></script>
+	<script th:src="@{js/sewMyPage.js}"></script>
+	<script
+		src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+</body>
+</html>

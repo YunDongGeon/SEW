@@ -212,7 +212,7 @@ ul, ol {
 	width: 100%;
     position: relative;
     float: left;
-    z-index: 20;
+    /*z-index: 20;*/
     margin: -1px 0 46px;
     padding: 19px 27px;
     border: 1px solid #dadddf;
@@ -519,4 +519,376 @@ strong {
 	text-align: center;
     display: block;
     width: 100%;
+}
+/* Cart Page  */
+.cartBox {
+	position: relative;
+	float: left;
+	width: 825px;
+	margin-left: 60px;
+}
+
+.cartTit {
+    overflow: hidden;
+}
+
+.cartTit h2 {
+	font-family: 'Teko', sans-serif;
+	float: left;
+	margin-top: 1.5rem !important;
+	font-weight: bold;	
+}
+
+.cartTit ol {
+	float: right;
+	list-style: none;
+	margin-top: 40px;
+	margin-bottom: 0 !important;	
+}
+
+.cartTit ol li{
+	color: #d1d1d1;
+	font-size: 15px;
+	float: left;		
+}
+
+.cartTit ol span{
+	font-size: 18px;
+	font-weight: bold;	
+}
+
+.cartTit ol .onPage{
+	font-size: 15px;
+	float: left;	
+	color: #000;		
+}
+
+.cartTit ol .onPage span{
+	font-size: 18px;
+	font-weight: bold;	
+	color: #000;
+}
+
+.tb_list {
+    width: 100%;
+    border: none;
+    border-top: 1px solid #383d4a;
+    border-bottom: 1px solid #dddde1;
+    table-layout: fixed;
+}
+
+.tb_list th {
+    padding: 13px 0 12px;
+    border-top: 1px solid #383d4a;
+    color: #20232c;
+    font-weight: normal;
+}
+
+.tb_list th, .tb_list td {
+    border: none;
+    text-align: center;
+}
+
+.tb_list th.product {
+	display: table-cell;
+    padding-left: 10px;
+    text-align: left;
+    margin-bottom: 0;
+}
+
+.tb_list th strong {
+    letter-spacing: -1px;
+}
+
+.tb_list th input {
+    width: 13px;
+    height: 13px;
+    margin: -1px 5px 1px 0;
+    vertical-align: middle;
+}
+
+.tb_list th.product {
+    padding-left: 10px;
+    text-align: left;
+}
+
+.tb_list td {
+    padding: 15px 0;
+    border-top: 1px solid #edeeef;
+    color: #20232c;
+    vertical-align: middle;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.tb_list td.product {
+    padding: 17px 10px;
+    text-align: left;
+    margin: 0;
+}
+
+.tb_list td.product div {
+    overflow: hidden;
+    position: relative;
+    zoom: 1;
+}
+
+.tb_list td.product .thmb {
+    float: left;
+    margin-right: 17px;
+}
+
+.tb_list td.product .thmb .img_center {
+    width: 60px;
+    height: 60px;
+    text-align: left;
+    padding-right: 5px;
+}
+
+.img_center a {
+    display: inline-block;
+}
+
+img, fieldset {
+    border: 0;
+}
+
+.tb_list .btn_oneline {
+    display: inline-block;
+}
+
+.tb_list td.product dl {
+    display: block !important;
+    overflow: hidden;
+    *float: left;
+}
+
+.tb_list td.product dt {
+    margin-bottom: 3px;
+    line-height: 18px;
+}
+
+.tb_list td.product dt.zzim_add {
+    position: relative;
+}
+
+.tb_list td.product dd {
+    margin-top: 2px;
+    color: #b6b7bc;
+    font-size: 11px;
+    letter-spacing: 0;
+    line-height: 16px;
+    margin: 0;
+}
+
+.tb_list dl.naver_plus .modify_sec {
+    padding: 3px 0;
+}
+
+.tb_list td.product dd.shp_toggle {
+    margin: 11px 0 0 0;
+}
+
+.tb_list dl.naver_plus dd.shp_toggle {
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin-top: 0;
+}
+
+.tb_list .bg_point {
+    border-left: 1px solid #edeeef;
+    background-color: #f7f7f7;
+}
+
+.tb_list td.order_money {
+    width: 138px;
+    padding-right: 15px;
+    text-align: right;
+}
+
+.tb_list td.product dd .add {
+    margin-left: 6px;
+}
+
+.tb_list td.product dd .option li {
+    padding-left: 6px;
+
+}
+
+.tb_list td.product dd .add li.plus_item {
+    background: none;
+}
+
+.tb_list td.product dl {
+	margin: 0;
+    display: block !important;
+    overflow: hidden;
+    vertical-align: middle;
+    *zoom: 1;
+}
+.tb_list dl.naver_plus {
+    position: relative;
+    padding-top: 17px;
+}
+
+.tb_list dl.naver_plus .modify_sec.btn_oneline a {
+    display: inline-block;
+}
+
+.tb_list td.product .thmb {
+    float: left;
+    margin-right: 17px;
+}
+
+.tb_list td.product .thmb .img_center {
+    width: 60px;
+    height: 60px;
+    text-align: left;
+    padding-top: 15px;
+    padding-right: 5px;
+}
+
+.img_center {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.tb_list tfoot td {
+    padding: 8px 0 6px;
+    font-size: 11px;
+    line-height: 15px;
+    color: #565960;
+    letter-spacing: -1px;
+}
+
+.tb_list tfoot td.amount {
+    padding: 18px 14px 9px;
+    border-top: none;
+    color: #000;
+    font-size: 12px;
+}
+
+.tb_list tfoot td.amount dl {
+	margin: 0;
+}
+
+.tb_list tfoot td.amount dl dd{
+    margin: 0;
+}
+
+.tb_list tfoot td.amount dl dd ul{
+    margin-top: 10px;
+}
+
+.tb_list tfoot td.amount dl dd{
+    border-top: none;
+    color: #fff;
+    font-size: 12px;
+}
+
+.tb_list tfoot td.amount li {
+	height: 30px;
+    overflow: hidden;
+    zoom: 1;
+}
+
+.tb_list tfoot td.amount li strong {
+	font-size: 17px;
+    float: left;
+    margin-top: 10px;
+    font-weight: normal;
+}
+
+.tb_list tfoot td.amount li p {
+	padding-top: 10px;
+    float: right;
+    color: #fff;
+    font-weight: bold;
+}
+
+.tb_list tfoot td.amount li p em {
+    color: #fff;
+    font-weight: bold;
+    letter-spacing: 0;
+}
+
+.tb_list tfoot td {
+    padding: 8px 0 6px;
+    font-size: 11px;
+    line-height: 15px;
+    color: #565960;
+    letter-spacing: -1px;
+}
+
+.tb_list tfoot td.tot {
+    vertical-align: bottom;
+}
+
+.tb_list tfoot td.tot li {
+    line-height: 24px;
+}
+
+.tb_list tfoot td.tot li strong {
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.tb_list tfoot td.tot li p {
+    font-weight: bold;
+    line-height: 24px;
+}
+
+.tb_list tfoot td.tot li em {
+    display: inline-block;
+    margin: -2px 0 2px;
+    font-size: 20px;
+    vertical-align: middle;
+}
+
+.thm {
+	font-size: 24px;
+}
+
+.tb_list .btn_pd_edit {
+    display: block;
+    width: 32px;
+    height: 20px;
+    margin: 6px auto 0;
+    background: url(../../../../img/service/front/order/spr_btn.gif?20190214) no-repeat -500px -650px;
+    vertical-align: top;
+}
+
+.sub_benefit {
+    position: absolute;
+    left: 0;
+    bottom: 95px;
+    width: 790px;
+}
+
+.prime_benefit {
+    line-height: 14px;
+    zoom: 1;
+}
+
+.prime_benefit dd ul {
+    float: left;
+}
+
+.prime_benefit dd li.first {
+    margin-left: 0;
+    padding-left: 0;
+    background: none;
+}
+
+.prime_benefit dd li strong, .prime_benefit dd li em, .prime_benefit dd li span {
+    display: inline-block;
+    margin: 0 2px 0 5px;
+    letter-spacing: 0;
+    vertical-align: middle;
+}
+
+.tb_list .bg_point2 {
+    background-color: #7b7b7b;
 }
