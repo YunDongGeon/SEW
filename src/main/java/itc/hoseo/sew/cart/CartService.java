@@ -26,4 +26,7 @@ public class CartService {
 		return repo.getOption(memId);
 	}
 	
+	public int delCartItem(Cart c) {
+		return repo.delCartItem(c);
+	}	
 }

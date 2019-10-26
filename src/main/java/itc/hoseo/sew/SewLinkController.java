@@ -50,5 +50,5 @@ public class SewLinkController {
 	@GetMapping("/withDrawal.do")
 	public String withDrawal() {
 		return "sewMyPage/sewWithDrawal";		
-	}	
+	}
 }

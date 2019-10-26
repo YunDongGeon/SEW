@@ -254,3 +254,85 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
     -webkit-appearance: none;
     margin: 0;
 }
+
+.layerpop_wrap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10000;
+    min-width: 320px;
+}
+
+.layerpop_wrap.error .layer_inner {
+    padding: 58px 20px;
+}
+
+.layerpop_wrap.error .title {
+    font-size: 14px;
+    line-height: 1.57em;
+    font-weight: 400;
+}
+
+.layerpop_wrap .layer_inner {
+    position: relative;
+    padding: 30px 20px;
+    border: 1px solid #d7d7d7;
+    background: #fff;
+    text-align: center;
+}
+
+.layerpop_wrap .title {
+	display: inline-block;
+    font-size: 18px;
+    line-height: 1.44em;
+    position: relative;
+    margin: 0;
+    letter-spacing: 0;
+    color: #000;    
+}
+
+.layerpop_wrap .button_wrap {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.layerpop_wrap .button_wrap .btn.bg_white {
+    border-color: #e2e5e9;
+    background-color: #fff;
+    color: #444;
+}
+
+.layerpop_wrap .button_wrap .btn + .btn {
+    margin-left: 4px;
+}
+
+.layerpop_wrap .button_wrap .btn.bg_white {
+    border-color: #e2e5e9;
+    background-color: #fff;
+    color: #444;
+}
+
+.layerpop_wrap .button_close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-image: url(https://img-shop.pstatic.net/smartstore/pc/dist/legacy/img/auto-gen/20191024/103426/sp_icon_common.png);
+    background-image: url(https://img-shop.pstatic.net/smartstore/pc/dist/legacy/img/auto-gen/20191024/103426/sp_icon_common.svg), none;
+    -webkit-background-size: 701px 675px;
+    background-size: 701px 675px;
+    background-position: -473px -535px;
+    width: 15px;
+    height: 15px;
+    background-color: initial;
+    border: 0;
+}
+
+.title span {
+    letter-spacing: 0;
+    line-height: 14px;
+    font-family: tahoma;
+}
+
+.fc_point {
+    color: #5679d1 !important;
+}

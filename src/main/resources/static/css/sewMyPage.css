@@ -625,10 +625,6 @@ strong {
    font-size: 18px;
 }
 
-.tb_list td .sum span{
-   font-size: 22px;
-}
-
 .tb_list td.product {
     padding: 17px 10px;
     text-align: left;
@@ -775,7 +771,7 @@ strong {
 }
 
 .tb_list tfoot td.amount {
-    padding: 18px 14px 9px;
+    padding: 0px 14px 0px 14px;
     border-top: none;
     color: #000;
     font-size: 12px;
@@ -902,4 +898,166 @@ strong {
 
 .tb_list .bg_point2 {
     background-color: #7b7b7b;
+}
+
+
+.layerpop_wrap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10000;
+    min-width: 320px;
+}
+
+.layerpop_wrap.error .layer_inner {
+    padding: 58px 20px;
+}
+
+.layerpop_wrap.error .title {
+    font-size: 14px;
+    line-height: 1.57em;
+    font-weight: 400;
+}
+
+.layerpop_wrap .layer_inner {
+    position: relative;
+    padding: 30px 20px;
+    border: 1px solid #d7d7d7;
+    background: #fff;
+    text-align: center;
+}
+
+.layerpop_wrap .title {
+	display: inline-block;
+    font-size: 18px;
+    line-height: 1.44em;
+    position: relative;
+    margin: 0;
+    letter-spacing: 0;
+    color: #000;    
+}
+
+.layerpop_wrap .button_wrap {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.layerpop_wrap .button_wrap .btn.bg_white {
+    border-color: #e2e5e9;
+    background-color: #fff;
+    color: #444;
+}
+
+.layerpop_wrap .button_wrap .btn + .btn {
+    margin-left: 4px;
+}
+
+.layerpop_wrap .button_wrap .btn.bg_white {
+    border-color: #e2e5e9;
+    background-color: #fff;
+    color: #444;
+}
+
+.layerpop_wrap .button_close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-image: url(https://img-shop.pstatic.net/smartstore/pc/dist/legacy/img/auto-gen/20191024/103426/sp_icon_common.png);
+    background-image: url(https://img-shop.pstatic.net/smartstore/pc/dist/legacy/img/auto-gen/20191024/103426/sp_icon_common.svg), none;
+    -webkit-background-size: 701px 675px;
+    background-size: 701px 675px;
+    background-position: -473px -535px;
+    width: 15px;
+    height: 15px;
+    background-color: initial;
+    border: 0;
+}
+
+.title span {
+    letter-spacing: 0;
+    line-height: 14px;
+    font-family: tahoma;
+}
+
+.fc_point {
+    color: #5679d1 !important;
+}
+
+.btn_ordel {
+	border: 1px solid #e2e5e9;
+    background-color: #fff;
+    color: #444;
+    cursor: pointer;
+}
+
+.cart-total-price .price-area {
+    padding: 20px 15px 18px;
+    font-size: 14px;
+    line-height: 17px;
+    color: #555;
+    text-align: center;
+}
+
+.cart-total-price em {
+    padding: 0 4px 0 5px;
+    font-weight: 700;
+    color: #111;
+}
+
+.symbol-plus1 {
+    margin: 0 11px 0 10px;
+    vertical-align: -4px;
+    background: url(//img1a.coupangcdn.com/image/www/newBuy/img_plus_2.gif) no-repeat;
+}
+
+.symbol-equal1 {
+    background: url(//img1a.coupangcdn.com/image/www/newBuy/img_equals_2.gif) no-repeat;
+}
+
+.symbol-equal, .symbol-plus1 {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+}
+
+.symbol-equal1, .symbol-minus1 {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin: 0 11px 0 10px;
+    vertical-align: -4px;
+}
+
+.cart-total-price .final-order-price {
+    color: #ea0000;
+    font-size: 20px;
+}
+
+tfoot {
+	clear: both;
+    position: relative;
+    padding: 20px 0 35px;
+}
+
+.all-select-product {
+    float: left;
+    margin-left: 15px;
+    font-size: 12px;
+}
+
+#delSelected {
+	border: 0px;
+	font-family: 'Teko', 'Noto Sans KR', sans-serif;
+	background: transparent;
+    cursor: pointer;
+	
+}
+
+.prePoint {
+	padding-left: 6px;
+	padding-right: 10px;
+}
+
+.totalPoint {
+	font-size: 20px;
 }

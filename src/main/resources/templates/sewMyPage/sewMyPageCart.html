@@ -32,7 +32,6 @@
 <link rel="stylesheet" th:href="@{css/nav.css}">
 <link rel="stylesheet" th:href="@{css/join.css}">
 <link rel="stylesheet" th:href="@{css/sewMyPage.css}">
-
 </head>
 <body>
 	<nav
@@ -102,9 +101,9 @@
 										</colgroup>
 										<thead>
 											<tr>
-												<th scope="col"><input type="checkbox" id="lb_chk"
-													class="_checkbox_all _click(nmp.front.order.cart.toggleAll())"
-													checked="checked">
+												<th scope="col">
+													<input type="checkbox" id="lb_chk" class="checkbox_all" checked="checked" onclick="checkAll()">
+												</th>
 												<th scope="col" class="product"><strong>상품정보</strong></th>
 												<th scope="col">수량</th>
 												<th scope="col" class="bg_point">배송비</th>
@@ -114,7 +113,7 @@
 										<tbody>
 											<tr th:each="cartItem : ${cartList}">
 												<td class="check">
-													<input type="checkbox" id="lb_chk2" name="cartProductIds" value="2019102519728932" checked="checked">
+													<input type="checkbox" name="cartProductIds" checked="checked">													
 												</td>
 												<td class="product">
 													<div>
@@ -171,64 +170,59 @@
 														<em class="thm prodPrice format-money" th:text="${cartItem.totalPrice}"></em>원
 													</strong>
 													<p class="btn_group">
-														<a href="#" class="btn_order">
-															<span>주문</span></a>
-														<!--N=a:car.order-->
-														<a href="#" class="btn_ordel">
-															<span class="blind">삭제</span>
-														</a>
+														<input type="hidden" class="cartNo" name="cartNo" th:value="${cartItem.cartNo}">
+														<button class="btn_ordel">삭제</button>
 													</p>
 												</td>
 											</tr>
 										</tbody>
-										<tfoot>
+										<tfoot>	
 											<tr>
-												<td colspan="3">&nbsp;</td>
-												<td colspan="3" class="amount bg_point2">
-													<dl>
-														<dd>
-															<ul>
-																<li>
-																	<strong>총 상품금액</strong>
-																	<p>
-																		<em class="thm totalPrice"></em>원
-																	</p>
-																</li>
-																<li>
-																	<strong>배송비</strong>
-																	<p>
-																		<em class="thm totalDeli">0</em>원
-																	</p>
-																</li>
-															</ul>
-														</dd>
-													</dl>
+												<td colspan="6">
+													<span class="all-select-product">
+														<span class="prePoint">
+															예상 적립금
+														</span>
+														<em class="thm totalPoint">0</em>원
+													</span>	
 												</td>
-											</tr>
+											</tr>	
 											<tr>
-												<td colspan="3" class="tb_btnone">&nbsp;</td>
-												<td colspan="3" class="amount bg_point2 tot">
-													<dl>
-														<dd>
-															<ul>
-																<li>
-																	<strong>결제금액</strong>
-																	<p>
-																		<em class="thm sumTotal">0</em> 원
-																	</p>
-																</li>
-															</ul>
-														</dd>
-													</dl>
+												<td colspan="6">
+													<span class="all-select-product">
+														<button id="delSelected" onclick="delSelected()">선택삭제</button>
+													</span>	
 												</td>
-											</tr>
+											</tr>											
 										</tfoot>
-									</table>									
+									</table>
+									<div class="cart-total-price" data-total-price="15000" data-discount-price="0">
+						                <div class="price-area">
+						                   	총 상품가격 
+						                   	<em class="thm totalPrice">0</em>원
+						                    <span class="symbol-plus1"></span>
+				                    		총 배송비 
+				                    		<em class="thm totalDeli">0</em>원
+						                    <span class="symbol-equal1"></span>
+						                   	 총 주문금액 
+						                   	<em class="thm sumTotal">0</em> 원
+						                </div>
+						            </div>									
 								</div>								
 							</div>
 						</div>
 					</div>
 				</div>
+			</div>
+			<div class="_layer_cart_add layerpop_wrap delCartPop" style="display: none; z-index: 10000; left: 791.5px; top: 400px;" tabindex="-1">
+			    <div class="layer_inner">
+			        <strong class="title">삭제하시겠습니까?</strong>
+			        <div class="button_wrap">
+			            <a href="#" class="btn bg_white delCartItem" role="button">삭제</a>
+		        	    <button type="button" class="btn bg_white closePop">닫기</button>
+			        </div>
+			        <button type="button" class="button_close closePop"></button>
+			    </div>
 			</div>
 		</div>
 	</section>
@@ -267,6 +261,7 @@
 	<script th:src="@{js/slider.js}"></script>
 	<script th:src="@{js/sewJoin.js}"></script>
 	<script th:src="@{js/sewMyPage.js}"></script>
+	<script th:src="@{js/sewCart.js}"></script>
 	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>	
 </body>
 </html>

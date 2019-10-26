@@ -70,5 +70,6 @@ CREATE TABLE cartOptionList(
 	prodColor varchar(40) not null,
 	prodSize varchar(20) not null,
 	prodAmount int not null,
-	foreign key(cartNo) references cartList(cartNo)	
+	constraint optionfk foreign key(cartNo) references cartList(cartNo)	
+	on delete cascade
 );

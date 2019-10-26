@@ -40,5 +40,9 @@
 		SELECT cartNo, prodColor, prodSize, prodAmount
 		FROM cartOptionList
 		WHERE cartNo = #{cartNo}
-	</select>		
+	</select>
+	<delete id="delCartItem" parameterType="Cart">
+		DELETE FROM cartList
+		WHERE cartNo = #{cartNo}
+	</delete>	
 </mapper>

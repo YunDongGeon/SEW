@@ -134,13 +134,43 @@
 							<input type="submit" name="buyBtn" value="결제하기">
 						</div>
 					</div>					
-				</form>				
+				</form>
+				<iframe src="#" name="iframe" style="width:0px; height:0px; border:0; visibility:hidden;"></iframe>		
 			</div>
 			<div class="prodDetailHeader">
 				<h3>상품제품정보</h3>				
 			</div>
 			<div class="prodDetailCont">
 				<img th:src="@{'/prodcont/'+${prodDetail.prodContName}}">
+			</div>
+			<div class="_layer_cart_add layerpop_wrap goCartPop" style="display: none; z-index: 10000; left: 791.5px; top: 400px;" tabindex="-1">
+			    <div class="layer_inner">
+			        <strong class="title">장바구니에<br>상품을 담았습니다.</strong>
+			        <div class="button_wrap">
+			            <a href="#" class="btn bg_white goMyCart" role="button">장바구니 보기</a>
+			            <a href="#" class="btn bg_white closeCartPop" role="button">닫기</a>
+			        </div>
+			        <button type="button" class="button_close closeCartPop"></button>
+			    </div>
+			</div>
+			<div class="_layer_order_check layerpop_wrap error" style="display: none; z-index: 10000; left: 791.5px; top: 400px;" tabindex="-1">
+			    <div class="layer_inner">
+			        <strong class="title _order_check_comment">
+			        	<span class="fc_point">옵션</span>을 선택하지 않으셨습니다.<br>
+			        	옵션을 <span class="fc_point">선택해 주세요.</span>
+		        	</strong>
+			        <button type="button" class="button_close" onclick="closePop(this)"></button>
+			    </div>
+			</div>
+			<div class="_layer_cart_add layerpop_wrap goLoginPop" style="display: none; z-index: 10000; left: 791.5px; top: 400px;" tabindex="-1">
+			    <div class="layer_inner">
+			        <strong class="title">로그인이 필요합니다.</strong>
+			        <div class="button_wrap">
+			            <a href="#" class="btn bg_white goLogin" role="button">로그인</a>
+			            <a href="#" class="btn bg_white" role="button" onclick="closePop(this)">닫기</a>
+			        </div>
+			        <button type="button" class="button_close" onclick="closePop(this)"></button>
+			    </div>
 			</div>
 		</div>
 	</section>

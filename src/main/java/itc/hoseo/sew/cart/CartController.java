@@ -2,6 +2,7 @@ package itc.hoseo.sew.cart;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import itc.hoseo.sew.management.Management;
 import itc.hoseo.sew.member.Member;
 
 @Controller
@@ -42,7 +44,7 @@ public class CartController {
 		}
 		return "redirect:/myCart.do";
 	}
-		
+	
 	@GetMapping("/myCart.do")
 	public String getCart(HttpSession session, ModelMap m, Cart c) {
 		Member mem = (Member)session.getAttribute("mem");
@@ -53,5 +55,15 @@ public class CartController {
 			m.put("cartList", service.getCart(memId));
 		}
 		return "sewMyPage/sewMyPageCart";
-	}	
+	}
+	
+	@GetMapping("/delCart.do")
+	@ResponseBody
+	public Map<Object, Object> delCartItem(@RequestParam(value="cartNo") int cartNo, Cart c) {
+		c.setCartNo(cartNo);
+		service.delCartItem(c);
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		map.put("data", "success");
+		return map;
+	}
 }
