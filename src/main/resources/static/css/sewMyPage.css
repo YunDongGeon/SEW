@@ -1,4 +1,4 @@
-.myPageTit {	
+	.myPageTit {	
 	overflow: hidden;
 }
 
@@ -621,6 +621,14 @@ strong {
     word-break: break-all;
 }
 
+.tb_list td .sum{
+   font-size: 18px;
+}
+
+.tb_list td .sum span{
+   font-size: 22px;
+}
+
 .tb_list td.product {
     padding: 17px 10px;
     text-align: left;
@@ -649,7 +657,9 @@ strong {
     display: inline-block;
 }
 
-img, fieldset {
+.prodThumb {
+	width: 80px;
+	height: 80px;
     border: 0;
 }
 
@@ -672,12 +682,13 @@ img, fieldset {
     position: relative;
 }
 
-.tb_list td.product dd {
+.tb_list td.product dd{
     margin-top: 2px;
     color: #b6b7bc;
     font-size: 11px;
     letter-spacing: 0;
     line-height: 16px;
+    font-family: '³ª´®°íµñ',NanumGothic,'¸¼Àº°íµñ',MalgunGothic,'µ¸¿ò',Dotum,Helvetica,sans-serif;
     margin: 0;
 }
 

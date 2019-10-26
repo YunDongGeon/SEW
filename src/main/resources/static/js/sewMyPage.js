@@ -1,4 +1,4 @@
-$(document).ready(function(){		
+$(document).ready(function(){
 	$.ajax({
 		async: true,
 	    type : 'POST',			    
@@ -36,4 +36,36 @@ $(document).ready(function(){
 	        alert("error : " + error);
 	    }
 	});
+	$(".totalPrice").text(function(){
+		$(this).text(
+			for(var n=0;n<$('.'))
+		);
+	});
 });		
+
+Number.prototype.format = function(){
+    if(this==0) return 0;
+
+    var reg = /(^[+-]?\d+)(\d{3})/;
+    var n = (this + '');
+
+    while (reg.test(n)) n = n.replace(reg, '$1' + ',' + '$2');
+
+    return n;
+};
+String.prototype.format = function(){
+    var num = parseFloat(this);
+    if( isNaN(num) ) return "0";
+
+    return num.format();
+};
+
+jQuery('.format-money').text(function() {
+    jQuery(this).text(
+        jQuery(this).text().format()
+    );
+});
+
+function removeComma(str) {
+	return parseInt(str.replace(/,/g,""));
+}

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="itc.hoseo.sew.cart.CartRepository">
+	<insert id="addCart" parameterType="MyPage">
+		insert into cartList(prodNo, memId, totalAmount, totalPrice) values(#{prodNo}, #{memId}, #{totalAmount}, #{totalPrice})
+		<selectKey	keyProperty="cartNo" resultType="int" order="AFTER">
+			select last_insert_id()		
+		</selectKey>
+	</insert>
+	<insert id="addOption" parameterType="MyPage">
+		insert into cartOptionList(cartNo, prodColor, prodSize, prodAmount) values(#{cartNo}, #{prodColor}, #{prodSize}, #{prodAmount})
+	</insert>
+	<select id="checkCart" resultType="int">
+		select count(*) from cartList
+	</select>
+	<resultMap type="Cart" id="CartMap">
+		<result column="cartNO" property="cartNo"/>
+		<result column="prodNo" property="prodNo"/>
+		<result column="memId" property="memId"/>
+		<result column="totalAmount" property="totalAmount"/>
+		<result column="totalPrice" property="totalPrice"/>
+	    <result column="prodName" property="prodName"/>
+	    <result column="prodDeli" property="prodDeli"/>
+	    <result column="prodThumbName" property="prodThumbName"/>
+	    <collection property="optionList" column="cartNo" javaType="java.util.ArrayList" ofType="CartOption" select="getOption"/>
+	</resultMap>
+	<select id="getCart" parameterType="String" resultMap="CartMap">
+		SELECT cart.*, prod.prodName, prod.prodDeli, img.prodThumbName
+		from cartList cart
+		join product prod
+		on cart.prodno = prod.prodno
+		join prodImage img
+		on prod.prodno = img.prodno
+		where cart.memid = #{memId}
+		order by cart.cartno desc
+	</select>	
+	<select id="getOption" parameterType="String" resultType="CartOption">
+		SELECT cartNo, prodColor, prodSize, prodAmount
+		FROM cartOptionList
+		WHERE cartNo = #{cartNo}
+	</select>		
+</mapper>

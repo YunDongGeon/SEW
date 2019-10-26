@@ -49,7 +49,8 @@
 	<section class="ftco-section ftco-product">
 		<div class="container">
 			<div class="prodContainer">
-				<form method="post" action="#">				
+				<form method="post" action="#">
+					<input type="hidden" name="prodNo" id="prodNo" th:value="${prodDetail.prodNo}" readOnly>		
 					<div class="productImgBox">
 						<img th:src="@{'/prodthumb/'+${prodDetail.prodThumbName}}">
 					</div>
@@ -119,13 +120,17 @@
 											<em class="totalMsg">총 수량 <span class="totalAmount">0</span>개</em>											
 											<span class="totalPriceTxt">0</span><span class="won">원</span>
 											<input type="number" hidden="hidden" id="totalPrice" name="totalPrice" readonly>											
+											<input type="number" hidden="hidden" id="totalAmount" name="totalAmount" readonly>
 										</div>
 									</td>
 								</tr>							
 							</table>
 						</div>		
 						<div class="buttonsBox">
-							<button class="addCart"><span class="icon-shopping_cart"></span>장바구니</button>							
+							<button id="addCart" th:if="${session.mem!=null}" class="addCart">
+								<span class="icon-shopping_cart"></span>장바구니
+							</button>
+							<button th:unless="${session.mem!=null}" id="cantAddCart" class="addCart"><span class="icon-shopping_cart"></span>장바구니</button>							
 							<input type="submit" name="buyBtn" value="결제하기">
 						</div>
 					</div>					
@@ -171,8 +176,5 @@
 	<script th:src="@{slick/slick.min.js}"></script>
 	<script th:src="@{js/slider.js}"></script>
 	<script th:src="@{js/sewDetail.js}"></script>
-
-	<script type="text/javascript">		
-	</script>	
 </body>
 </html>

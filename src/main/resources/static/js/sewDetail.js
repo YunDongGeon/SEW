@@ -1,16 +1,21 @@
+var prodNo = null;
 var colorSelect = null;
 var sizeSelect = null;
 var optionCount = 0;
 var totalAmount = 0;
 var totalPrice = 0;
 
-$('#colorOption').click(function() {
-	$("#sizeOption *").remove();
+$(document).ready(function(){
+	prodNo = $("#prodNo").val();	
+});
+
+$('#colorOption').change(function() {
+	$("#sizeOption *").remove();	
 	colorSelect = $(this).val();			
 	$.ajax({
 		async: true,
 	    type : 'POST',
-	    data : JSON.stringify({"prodNo": getParameterByName("prodNo"), "prodColor": colorSelect}),
+	    data : JSON.stringify({"prodNo": prodNo, "prodColor": colorSelect}),
 	    url : "getSize.do",
 	    dataType : "json",
 	    contentType: "application/json; charset=UTF-8",
@@ -18,53 +23,44 @@ $('#colorOption').click(function() {
 	        if (data.prodInven==null) {			        	
 	        	$("#sizeOption").hide();			        	
 	        } else {
+	        	
 	            //아이디가 존재할 경우				            
-	            $("#sizeOption").show();	            
-	            var small = data.prodInven.prodSsize;
-	            var medium = data.prodInven.prodMsize;
-	            var large = data.prodInven.prodLsize;
-	            var xlarge = data.prodInven.prodXLsize;
-	            
-	            if(small=="0"){
-	            	samll = "품절";
+	            $("#sizeOption").show();	 
+	            var arr = [];
+	            arr.push(data.prodInven.prodSsize);
+	            arr.push(data.prodInven.prodMsize);
+	            arr.push(data.prodInven.prodLsize);
+	            arr.push(data.prodInven.prodXLsize);
+	            for (var i=0; i<4; i++){
+	            	if(arr[i]==0){
+	            		arr[i]="품절";	            		
+	            	}
 	            }
-	            if(medium=="0"){
-	            	medium = "품절";
-	            }
-	            if(large=="0"){
-	            	large = "품절";
-	            }
-	            if(xlarge=="0"){
-	            	xlarge = "품절";
-	            }
+
 	            $("#sizeOption").append(
 	            	`
 	            	<option value="" selected disabled> = 사이즈 = </option>
-            		<option value="S 사이즈" id="sSize">재고 : ${small} (S 사이즈)</option>
-            		<option value="M 사이즈" id="mSize">재고 : ${medium} (M 사이즈)</option>
-            		<option value="L 사이즈" id="lSize">재고 : ${large} (L 사이즈)</option>
-            		<option value="XL 사이즈" id="xlSize">재고 : ${xlarge} (XL 사이즈)</option>
+            		<option value="S 사이즈" id="sSize">재고 : ${arr[0]} (S 사이즈)</option>
+            		<option value="M 사이즈" id="mSize">재고 : ${arr[1]} (M 사이즈)</option>
+            		<option value="L 사이즈" id="lSize">재고 : ${arr[2]} (L 사이즈)</option>
+            		<option value="XL 사이즈" id="xlSize">재고 : ${arr[3]} (XL 사이즈)</option>
             		`		
 	            );
-	            if(small=="품절"){
-	            	var x = document.getElementById("sSize");
-	                x.style.color = "red";
-	                x.disabled = true;
+	            if(arr[0]=="품절"){
+	            	$("#sSize").css("color", "red");	                
+	                $("#sSize").attr("disabled",true);
 	            }
-	            if(medium=="품절"){
-	            	var x = document.getElementById("mSize");
-	                x.style.color = "red";
-	                x.disabled = true;
+	            if(arr[1]=="품절"){
+	            	$("#mSize").css("color", "red");	                
+	                $("#mSize").attr("disabled",true);
 	            }
-	            if(large=="품절"){
-	            	var x = document.getElementById("lSize");
-	                x.style.color = "red"; 
-	                x.disabled = true;
+	            if(arr[2]=="품절"){
+	            	$("#lSize").css("color", "red");	                
+	                $("#lSize").attr("disabled",true);
 	            }
-	            if(xlarge=="품절"){
-	            	var x = document.getElementById("xlSize");
-	                x.style.color = "red";
-	                x.disabled = true;
+	            if(arr[3]=="품절"){
+	            	$("#xlSize").css("color", "red");	                
+	                $("#xlSize").attr("disabled",true);
 	            }
 	        }
 	    },
@@ -84,7 +80,7 @@ Array.prototype.contains = function(obj) {
     return false;
 }
 
-$('#sizeOption').click(function() {
+$('#sizeOption').change(function() {
 	sizeSelect = $(this).val();
 	if(sizeSelect != null){
 		var sum = 0;
@@ -103,12 +99,14 @@ $('#sizeOption').click(function() {
 				$("#selectedList").append(
 			    	`
 						<li class="listItem">
+							<input type="hidden" name="prodColor" value="${colorSelect}" readOnly>
+							<input type="hidden" name="prodSize" value="${sizeSelect}" readOnly>
 							<div class="itemBox">
 								<p class="itemName">${itemName}</p>
 								<div class="itemRow">
 									<div class="itemCounter">
 										<button type="button" class="pmBtn minus" onclick="minusAmount(this)">-</button>
-										<input type="number" class="itemAmount" value="1" onkeyup="cal(this, this.form.prodPrice)">
+										<input type="number" name="prodAmount" class="itemAmount" value="1" onkeyup="cal(this, this.form.prodPrice)">
 										<button type="button" class="pmBtn plus" onclick="plusAmount(this)">+</button>
 									</div>
 									<span class="itemPriceBox">
@@ -125,19 +123,22 @@ $('#sizeOption').click(function() {
 				$(".totalAmount").text(curAmount+=1);			
 				sum = Number(curTotal)+Number(prodPrice);				
 				$(".totalPriceTxt").text(numberFormat(sum));
-				$("#totalPrice").val(Number(sum));
+				$("#totalAmount").val(curAmount);
+				$("#totalPrice").val(sum);
 			}	
 		}else{
 			$("#selectChk").hide();
 			$("#selectedList").append(
 		    	`
 					<li class="listItem">
+						<input type="hidden" name="prodColor" value="${colorSelect}" readOnly>
+						<input type="hidden" name="prodSize" value="${sizeSelect}" readOnly>
 						<div class="itemBox">
 							<p class="itemName">${itemName}</p>
 							<div class="itemRow">
 								<div class="itemCounter">
 									<button type="button" class="pmBtn minus" onclick="minusAmount(this)">-</button>
-									<input type="number" class="itemAmount" value="1" onkeyup="cal(this, this.form.prodPrice)">
+									<input type="number" name="prodAmount" class="itemAmount" value="1" onkeyup="cal(this, this.form.prodPrice)">
 									<button type="button" class="pmBtn plus" onclick="plusAmount(this)">+</button>
 								</div>
 								<span class="itemPriceBox">
@@ -154,9 +155,31 @@ $('#sizeOption').click(function() {
 			$(".totalAmount").text(curAmount+=1);
 			sum = Number(curTotal)+Number(prodPrice);		
 			$(".totalPriceTxt").text(numberFormat(sum));
+			$("#totalAmount").val(curAmount);
 			$("#totalPrice").val(sum);
 		}	
 	}
+});
+
+$('#cantAddCart').click(function(e){
+	e.preventDefault();
+	alert("로그인이 필요한 기능입니다.");
+	$(location).attr("href", "login.do");
+});
+
+$('#addCart').click(function(e){
+	e.preventDefault();
+	if($("#colorOption").val()==null){
+		alert("색상을 선택하세요.")
+	}else{		
+		if($("#sizeOption").val()==null){
+			alert("사이즈를 선택해주세요.");
+		}else{
+			$('form').attr("action", "addCart.do")
+			$("form").unbind("submit").submit();
+			alert("장바구니에 등록되었습니다.");	
+		}
+	}	
 });
 
 function cal(amount, price) {
@@ -171,6 +194,7 @@ function cal(amount, price) {
 		}
 		$(".totalAmount").text(totalAmount);
 		$(".totalPriceTxt").text(numberFormat(totalPrice));
+//		$("#totalAmount").val(curAmount);/
 	}else{
 		var total = Number($(amount).val()*$(price).val());
 		$(amount).parent("div").parent("div").children(".itemPriceBox").children(".itemPrice").text(numberFormat(total));
@@ -181,6 +205,8 @@ function cal(amount, price) {
 		}
 		$(".totalAmount").text(totalAmount);
 		$(".totalPriceTxt").text(numberFormat(totalPrice));
+		$("#totalAmount").val(curAmount);
+		$("#totalPrice").val(Number(sum));
 	}	
 }
 
@@ -189,13 +215,16 @@ function deleteBox(self) {
 	var prevPrice = $(self).parent("span").children(".sumPrice").val();
 	$($(self).parent("span").parent("div").parent("div").parent("li")).remove();	
 	optionCount-=1;
-	alert(optionCount);
 	if(optionCount==0){
 		$(".totalAmount").text(0);
 		$(".totalPriceTxt").text(0);
+		$("#totalAmount").val(0);
+		$("#totalPrice").val(0);
 	}else{
 		$(".totalAmount").text(totalAmount-prevAmount);
 		$(".totalPriceTxt").text(numberFormat(totalPrice-prevPrice));
+		$("#totalAmount").val(totalAmount-prevAmount);
+		$("#totalPrice").val(totalPrice-prevPrice);
 	}
 }
 
@@ -226,6 +255,8 @@ function plusAmount(self) {
 	}
 	$(".totalAmount").text(totalAmount);
 	$(".totalPriceTxt").text(numberFormat(totalPrice));
+	$("#totalAmount").val(totalAmount);
+	$("#totalPrice").val(totalPrice);
 }
 
 function minusAmount(self) {
@@ -244,6 +275,8 @@ function minusAmount(self) {
 		}
 		$(".totalAmount").text(totalAmount);
 		$(".totalPriceTxt").text(numberFormat(totalPrice));
+		$("#totalAmount").val(totalAmount);
+		$("#totalPrice").val(totalPrice);
 	} else {
 		var oriPrice = Number($(self).parent("div").next("span").children(".sumPrice").val()/prev);
 		var total = Number(cur * oriPrice);
@@ -256,6 +289,8 @@ function minusAmount(self) {
 		}
 		$(".totalAmount").text(totalAmount);
 		$(".totalPriceTxt").text(numberFormat(totalPrice));
+		$("#totalAmount").val(totalAmount);
+		$("#totalPrice").val(totalPrice);
 	}
 }
 

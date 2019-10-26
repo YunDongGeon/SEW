@@ -55,7 +55,7 @@
 							<li><span>03</span> 주문완료</li>
 						</ol>
 					</div>
-					<div class="listRoot">
+					<div class="listRoot" th:unless="${cartList!=0}">
 						<div class="sub_sc" style="min-height: 895px;">
 							<div id="_listContentArea">
 								<div class="goods_pay_section ">
@@ -64,7 +64,6 @@
 											<col width="36">
 											<col>
 											<col width="55">
-											<col width="80">
 											<col width="80">
 											<col width="132">
 										</colgroup>
@@ -75,84 +74,45 @@
 													checked="checked">
 												<th scope="col" class="product"><strong>상품정보</strong></th>
 												<th scope="col">수량</th>
-												<th scope="col">상품금액</th>
 												<th scope="col" class="bg_point">배송비</th>
 												<th scope="col" class="bg_point">주문금액</th>
 											</tr>
 										</thead>										
 										<tbody>
 											<tr>
-												<td class="check">
-													<input type="checkbox" id="lb_chk2"	name="cartProductIds" class="_cart_order_checkbox  _click(nmp.front.order.cart.toggleOne()) "
-														value="2019102519730093" checked="checked">
-												</td>
-												<td class="product">
-													<div>
-														<div class="thmb">
-															<div class="img_center">
-																<a href="#" target="_blank"> 
-																	<img src="https://order.pay.naver.com/proxy/phinf/shop1/20191023_251/1571809684768hNwhk_JPEG/9173073297191983_1226245663.jpg?type=m80"
-																		class="prodImg"alt="면 레이온 베이직 무지 셔츠 (화이트, 그레이카키)">
-																</a>
-																<!--N=a:car.product-->
-															</div>
-														</div>
-														<dl class="naver_plus">
-															<dt class="zzim_add">
-																<strong class="name_seller">[스마트스토어] 엘레아노샵</strong> 
-																<a href="#"	target="_blank"> 면 레이온 베이직 무지 셔츠 (화이트, 그레이카키) </a>
-																<a href="#"	class="zzim _click(nmp.front.order.cart.keepOne(2019102519730093))">찜하기</a>
-																<!--N=a:car.zzim-->
-															</dt>
-															<dd class="modify_sec btn_oneline">
-																<a href="#" target="_blank" title="주문조건 추가/변경" class="btn_od_modify _click(nmp.front.order.cart.modifyCartProduct(2019102519730093,false)) _stopDefault">
-																	<span class="blind">주문 조건 추가/변경</span>
-																</a>
-																<!--N=a:car.modifyoption-->
-															</dd>
-															<dd>
-																<ul class="option">
-																	<li>색상: 카키그레이 / 사이즈: Free / 1개</li>
-																</ul>
-															</dd>
-														</dl>
-													</div>
-												</td>
-												<td>
-													<em class="_product_quantity mount thm"> 
-														<strong	class="_product_quantity mount thm">1</strong>														
-													</em>
-													<a href="#" target="_blank" class="btn_pd_edit">
-														<span>수량</span>
-													</a>
-												</td>
-												<td>
-													<span class="num">
-														<em	class="thm _sumOrderAmount"> 34,500</em>원
-													</span>
-												</td>
-												<td rowspan="1" class="seller bg_point">
-													<div class="send zi10">
-														<div class="sum">
-															<em class="thm _deliveryFeeAmount">2,500</em>원 
-														</div>
-													</div>
-												</td>
-												<!--N=a:car.seller--></td>
-												<td class="bg_point order_money"><strong
-													class="pointcol"> <em class="thm">26,500</em>원
-												</strong>
-													<p class="btn_group">
-														<a href="#" class="btn_order">
-															<span>주문</span>
-														</a>
-														<a href="#" class="btn_ordel">
-															<span class="blind">삭제</span>
-														</a>
-													</p>
-												</td>
-											</tr>											
+												<td colspan="6">등록된 상품이 없습니다.</td>
+											</tr>
+										</tbody>										
+									</table>									
+								</div>								
+							</div>
+						</div>
+					</div>
+					<div class="listRoot" th:if="${cartList!=0}">
+						<div class="sub_sc" style="min-height: 895px;">
+							<div id="_listContentArea">
+								<div class="goods_pay_section ">
+									<table cellspacing="0" border="1" class="tb_list tb_order_check _order_area">
+										<colgroup>
+											<col width="36">
+											<col>
+											<col width="55">
+											<col width="80">
+											<col width="132">
+										</colgroup>
+										<thead>
 											<tr>
+												<th scope="col"><input type="checkbox" id="lb_chk"
+													class="_checkbox_all _click(nmp.front.order.cart.toggleAll())"
+													checked="checked">
+												<th scope="col" class="product"><strong>상품정보</strong></th>
+												<th scope="col">수량</th>
+												<th scope="col" class="bg_point">배송비</th>
+												<th scope="col" class="bg_point">주문금액</th>
+											</tr>
+										</thead>										
+										<tbody>
+											<tr th:each="cartItem : ${cartList}">
 												<td class="check">
 													<input type="checkbox" id="lb_chk2" name="cartProductIds" value="2019102519728932" checked="checked">
 												</td>
@@ -161,15 +121,13 @@
 														<div class="thmb">
 															<div class="img_center">
 																<a href="#" target="_blank"> 
-																	<img src="https://order.pay.naver.com/proxy/phinf/shop1/20190926_30/1569426109254oUyYo_JPEG/6787651849963807_8226748.jpg?type=m80" alt="베이직 브이넥 니트 가디건">
+																	<img class="prodThumb" th:src="@{'/prodThumb/'+${cartItem.prodThumbName}}" alt="thumb">
 																</a>
 															</div>
 														</div>
 														<dl class="naver_plus">
 															<dt class="zzim_add">
-																<strong class="name_seller">[스마트스토어] 드밍</strong> 
-																<a href="#" target="_blank"> 베이직 브이넥 니트 가디건 </a>
-																<!--N=a:car.zzim-->
+																<a href="#" target="_blank" th:text="${cartItem.prodName}"></a>
 															</dt>
 															<dd class="modify_sec btn_oneline">
 																<a href="#" target="_blank" title="주문조건 추가/변경"
@@ -179,11 +137,12 @@
 															</dd>
 
 															<dd>
-																<ul class="option">
-																	<li>색상: 화이트 / 3개</li>
-																</ul>
-
-																<ul class="add">
+																<ul class="option" >
+																	<li th:each="optionList : ${cartItem.optionList}"
+																		 th:text="'색상 : ' + ${optionList.prodColor} + 
+																		 		' / 사이즈  : ' + ${optionList.prodSize} + 
+																		 		' / 수량  : ' + ${optionList.prodAmount}"/>
+																	 </li>
 																</ul>
 															</dd>
 														</dl>
@@ -191,27 +150,26 @@
 												</td>
 												<td>
 													<em class="_product_quantity mount thm"> 
-														<strong	class="_product_quantity mount thm">12</strong>
+														<strong	class="_product_quantity mount thm" th:text="${cartItem.totalAmount}"></strong>
 													</em>
-													<a href="#" target="_blank" class="btn_pd_edit">
-														<span>수량</span>
-													</a>
-												</td>
-												<td>
-													<span class="num">
-														<em class="thm _sumOrderAmount"> 360,000</em>원
-													</span>
 												</td>
 												<td rowspan="1" class="seller bg_point">
 													<div class="send zi10">
-														<div class="sum">
-															무료
+														<div th:if="${cartItem.prodDeli==0}" class="sum">
+															<span class="deliPrice">
+																무료
+															</span>
+														</div>
+														<div th:unless="${cartItem.prodDeli==0}" class="sum">
+															<span class="deliPrice format-money" th:text="${cartItem.prodDeli}"></span>
+															원
 														</div>
 													</div>
 												</td>
-												<td class="bg_point order_money"><strong
-													class="pointcol"> <em class="thm">190,800</em>원
-												</strong>
+												<td class="bg_point order_money">
+													<strong class="pointcol"> 
+														<em class="thm prodPrice format-money" th:text="${cartItem.totalPrice}"></em>원
+													</strong>
 													<p class="btn_group">
 														<a href="#" class="btn_order">
 															<span>주문</span></a>
@@ -225,7 +183,7 @@
 										</tbody>
 										<tfoot>
 											<tr>
-												<td colspan="4">&nbsp;</td>
+												<td colspan="3">&nbsp;</td>
 												<td colspan="3" class="amount bg_point2">
 													<dl>
 														<dd>
@@ -233,13 +191,13 @@
 																<li>
 																	<strong>총 상품금액</strong>
 																	<p>
-																		<em class="thm _totalOrderAmount">406,500</em> 원
+																		<em class="thm totalPrice"></em>원
 																	</p>
 																</li>
 																<li>
 																	<strong>배송비</strong>
 																	<p>
-																		<em class="thm _totalDeliveryFeeAmount">5,500</em>원
+																		<em class="thm totalDeli">0</em>원
 																	</p>
 																</li>
 															</ul>
@@ -248,7 +206,7 @@
 												</td>
 											</tr>
 											<tr>
-												<td colspan="4" class="tb_btnone">&nbsp;</td>
+												<td colspan="3" class="tb_btnone">&nbsp;</td>
 												<td colspan="3" class="amount bg_point2 tot">
 													<dl>
 														<dd>
@@ -256,7 +214,7 @@
 																<li>
 																	<strong>결제금액</strong>
 																	<p>
-																		<em class="thm _subTotal">231,100</em> 원
+																		<em class="thm sumTotal">0</em> 원
 																	</p>
 																</li>
 															</ul>
@@ -309,8 +267,6 @@
 	<script th:src="@{js/slider.js}"></script>
 	<script th:src="@{js/sewJoin.js}"></script>
 	<script th:src="@{js/sewMyPage.js}"></script>
-	<script
-		src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
+	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>	
 </body>
 </html>
