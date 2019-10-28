@@ -689,3 +689,37 @@ strong {
 em, address {
     font-style: normal;
 }
+
+.order_sc .payment_agree_wrap {
+    position: relative;
+    text-align: center;
+    padding: 26px 0 35px;
+    border: 1px solid #fff;
+    border-top: 0;
+    font-size: 0;
+}
+
+.order_sc .payment_agree_wrap .btn_payment {
+    width: 198px;
+    height: 56px;
+}
+
+.order_sc .payment_agree_wrap button {
+    margin: 0 6px;
+    border: 1px solid #07ba5b;
+    width: 175px;
+    height: 50px;
+    background-color: #1ec800;
+    cursor: pointer;
+}
+
+.order_sc .payment_agree_wrap .txt_payment {
+    width: 120px;
+    height: 50px;
+    background-position: -200px 0;
+    display: inline-block;
+    overflow: hidden;
+    font-size: 18px;
+    line-height: 50px;
+	color: white;    
+}
