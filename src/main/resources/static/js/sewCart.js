@@ -8,21 +8,23 @@ function checkAll(){
 	}
 }
 
-function delSelected(){
-//	var chk_obj = document.getElementsByName("cartProductIds");
-	var chk_obj = $("input[name=cartProductIds]");
-	var chk_leng = chk_obj.length;
-	var checked = 0;
-	
-	alert(chk_leng);
-	for(i=0;i<chk_leng;i++){
-		if(chk_obj[i].checked==true){		
-			checked +=1;
-			var cartNo = chk_obj[i].parent('td');
-//			var cartNo = chk_obj[i].parent('td').next().next().next().next().children('p').children('.cartNo');
-			alert(cartNo);
-		}
+$("input[name=cartProductIds]").click(function(){
+	if($("input[name=cartProductIds]:checked").length == $("input[name=cartProductIds]").length){
+		$("input[id='lb_chk']").prop("checked", true);
+	}else{
+		$("input[id='lb_chk']").prop("checked", false);
 	}
+});
+
+function delSelected(){
+	$('.delCartPop').css("display", "block");	
+	var chk_obj = $("input[name=cartProductIds]:checked");
+	$('.delCartItem').click(function() {
+		$(chk_obj).each(function() {		
+			var checkboxValue = $(this).parent('td').next().next().next().next().children('p').children('.cartNo').val();
+			delCartItem(checkboxValue);
+		});
+	});
 }
 
 function cal(){
@@ -74,7 +76,7 @@ function delCartItem(self) {
 	    	$(location).attr("href", "myCart.do");
 	    },
 	    error : function(error) {
-	        alert("error : " + error);
+//	        alert("error : " + error);
 	    }
 	});
 }

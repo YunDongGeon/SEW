@@ -170,7 +170,16 @@ $('.goLogin').click(function(){
 	$(location).attr("href", "login.do");
 });
 
-$('#addCart').click(function(e){
+$('.goMyCart').click(function(e){
+	stat = 1;				
+});
+
+$('.closeCartPop').click(function(e){				
+	stat = 0;
+});
+var stat = 0;
+
+$('#addCart').click(function(e){	
 	e.preventDefault();
 	if($("#colorOption").val()==null){
 		$('.error').css("display", "block");
@@ -181,7 +190,7 @@ $('#addCart').click(function(e){
 			$('.goCartPop').css("display", "block");
 			$('.goMyCart').click(function(e){
 				$('form').attr("action", "addCart.do");
-				$("form").unbind("submit").submit();
+				$("form").unbind("submit").submit();		
 			});
 			$('.closeCartPop').click(function(e){				
 				$('form').attr("target", "iframe");
@@ -189,7 +198,6 @@ $('#addCart').click(function(e){
 				$("form").unbind("submit").submit();
 				$('.goCartPop').css("display", "none");
 			});
-			
 		}
 	}
 });

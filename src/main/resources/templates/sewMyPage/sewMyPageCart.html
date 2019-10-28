@@ -126,7 +126,7 @@
 														</div>
 														<dl class="naver_plus">
 															<dt class="zzim_add">
-																<a href="#" target="_blank" th:text="${cartItem.prodName}"></a>
+																<a href="#" target="_blank" th:href="@{'sewDetail.do?prodNo='+${cartItem.prodNo}}" th:text="${cartItem.prodName}"></a>
 															</dt>
 															<dd class="modify_sec btn_oneline">
 																<a href="#" target="_blank" title="주문조건 추가/변경"
@@ -207,7 +207,11 @@
 						                   	 총 주문금액 
 						                   	<em class="thm sumTotal">0</em> 원
 						                </div>
-						            </div>									
+						            </div>	
+						            <div class="buttonsBox" style="margin-top: 1.5rem !important;">
+										<input type="button" name="cancel" value="홈으로 가기" onclick="location.href='/'">
+										<input type="submit" id="memInputSubmit" value="결제하기">
+									</div>									
 								</div>								
 							</div>
 						</div>

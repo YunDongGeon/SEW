@@ -51,4 +51,8 @@ public class SewLinkController {
 	public String withDrawal() {
 		return "sewMyPage/sewWithDrawal";		
 	}
+	@GetMapping("/sewPayment.do")
+	public String sewPayment() {
+		return "sewProduct/sewPaymentPage";		
+	}
 }

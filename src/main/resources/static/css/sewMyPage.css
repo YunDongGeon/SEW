@@ -1045,12 +1045,11 @@ tfoot {
     font-size: 12px;
 }
 
-#delSelected {
-	border: 0px;
+#delAllBtn, #delSelected {
+	border: 1px solid #e2e5e9;
 	font-family: 'Teko', 'Noto Sans KR', sans-serif;
 	background: transparent;
     cursor: pointer;
-	
 }
 
 .prePoint {
