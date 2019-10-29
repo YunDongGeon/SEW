@@ -111,11 +111,11 @@
 									</td>
 									<td rowspan="1">
 										<span th:if="${buyList.prodDeli==0}" class="deli_fee">
-											<span class="deliPrice">
-												무료
-											</span>
+											<span class="deliPrice">무료</span>
+										 	<input type="hidden" class="prodDeli" th:value="${buyList.prodDeli}">
 										</span>
 										<span th:unless="${buyList.prodDeli==0}" class="deli_fee">
+											<input type="hidden" class="prodDeli" th:value="${buyList.prodDeli}">
 											<span class="deliPrice format-money" th:text="${buyList.prodDeli}"></span>원
 										</span>
 									</td>
@@ -125,9 +125,11 @@
 									<td class="col_price">
 										<span style="float: right;">
 											<em class="format-money orgn_price" th:text="${buyList.totalListPrice}"></em>원
+											<input type="hidden" class="totalProdListPrice" th:value="${buyList.totalListPrice}">
 										</span>
 										<strong>
 											<em class="format-money" th:text="${buyList.totalPrice}"></em>원
+											<input type="hidden" class="totalProdPrice" th:value="${buyList.totalPrice}">
 										</strong>
 									</td>
 								</tr>
@@ -142,11 +144,11 @@
 									<strong class="req short" title="필수입력">수령인</strong>
 									<div class="deliver_option">
 										<input type="text" title="수령인" placeholder="50자 이내로 입력하세요"
-											maxlength="50" class="inp_txt2 name _deliveryForm"
-											name="deliveryAddress.receiverName" value="윤동건"> <input
-											type="hidden"
-											name="deliveryAddress.purchaseMemberDeliveryPlaceSeq"
-											value="">
+											maxlength="50" class="inp_txt2 name receiverName"
+											name="receiverName" value="윤동건">
+										<div class="inputChkBox" id="addrChkBox" style="padding-left: 5px;">
+											<span>배송지 주소를 확인해주세요.</span>
+										</div>
 									</div>
 								</div>
 								<div class="deliver_option_wrap">
@@ -215,16 +217,19 @@
 									<strong class="req" title="필수입력">배송지 주소</strong>
 									<div class="deliver_option">
 										<span class="zipcode_group"> 
-											<input type="text" title="우편번호" class="inp_txt2 zipcode" 
-												name="deliveryAddress.zipCode" id="postcode"
+											<input type="text" title="우편번호" class="inp_txt2 zipcode deliZipCode" 
+												name="deliZipCode" id="postcode"
 												readonly="readonly" maxlength="7" style="float: none;">
 										</span>
 										<button class="btn" onClick="findPostCode()">우편번호</button>
 										<div class="addr_detail">
-											<input type="text" title="주소" class="inp_txt2 addr_input1 _deliveryForm"
+											<input type="text" title="주소" class="inp_txt2 addr_input1 deliAddr1"
 												id="addr1" name="deliveryAddress.baseAddress" value="" readonly="readonly"><br> 
-											<input type="text" title="상세주소" class="inp_txt2 addr_input2 " 
+											<input type="text" title="상세주소" class="inp_txt2 addr_input2 deliAddr2" 
 												id="addr2" name="deliveryAddress.detailAddress" maxlength="50">
+											<div class="inputChkBox" id="addrChkBox" style="padding-left: 5px;">
+												<span>배송지 주소를 확인해주세요.</span>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -242,7 +247,10 @@
 												id="addr1" name="deliveryAddress.baseAddress" value="" readonly="readonly"><br> 
 											<input type="text" title="상세주소" class="inp_txt2 addr_input2 "  th:value="${member.memAddr2}"
 												id="addr2" name="deliveryAddress.detailAddress" maxlength="50">
-										</div>
+											<div class="inputChkBox"  id="addrChkBox" style="padding-left: 5px;">
+												<span>배송지 주소를 확인해주세요.</span>
+											</div>
+										</div>										
 									</div>
 								</div>
 							</div>
@@ -253,12 +261,10 @@
 								<li th:text="${member.memName}"></li>
 								<li class="_telNoHighlight">
 									<span class="memPhone" th:text="${member.memPhone}"></span>
-									<button class="btn _click(nmp.front.order.order_sheet.changeMemberCellphone()) _stopDefault">수정</button>
 									<!--N=a:ord.modifyphone-->
 								</li>
 								<li>
 									<span class="memEmail" th:text="${member.memEmail}"></span>
-									<button class="btn _click(nmp.front.order.order_sheet.changeMemberEmail()) _stopDefault">수정</button>
 									<!--N=a:ord.modifyemail-->
 								</li>
 							</ul>
@@ -309,8 +315,9 @@
 										<th>보유 적립금</th>
 										<td>
 											<div class="input_area no_underline">
-												<span class="value _pointBalance">697</span> <span
-													class="measure">원</span>
+												<span class="value myPoint format-money" th:text="${member.memPoint}"></span>
+												<input type="hidden" class="memPoint" th:value="${member.memPoint}">
+												<span class="measure">원</span>
 											</div>
 										</td>
 									</tr>
@@ -318,11 +325,10 @@
 										<th>사용 포인트</th>
 										<td>
 											<div class="input_area">
-												<input type="text" id="mileage" title="네이버페이 포인트"
-													name="payAmounts.NAVER_CASH" value="0"
-													class="_onlyPriceTarget _calculationDiscountTarget _mileageUseAmount _subPayMeans _keyup(nmp.front.order.order_sheet.calculateTotalPriceOnKeyUp()) _blur(nmp.front.order.order_sheet.showClearPointButton()) _stopDefault _payForm">
+												<input type="text" name="payAmounts.NAVER_CASH" placeholder="0"
+													class="useMemPoint" onkeyup="inputNumberFormat(this)">
 												<span class="measure">원</span>
-												<button class="btn _pointAllUseButton _click(nmp.front.order.order_sheet.useAllSubSettle()) _stopDefault ">전액사용</button>
+												<button class="btn pointAllUseButton">전액사용</button>
 											</div>											
 											<!--N=a:ord.pntall-->
 										</td>
@@ -332,34 +338,39 @@
 						</div>
 						<div class="price_sum">
 							<h4>결제금액</h4>
-							<input type="hidden" class="_totalPayAmount" value="197500">
 							<div class="sum _lastTotalAccountPrice">
-								<em class="totalPrice">197,500</em> 
+								<em class="totalPrice"></em>
+								<input type="hidden" class="totalValue">
+								<input type="hidden" class="oriTotalValue">							
 								<span class="txt">원</span>
 							</div>
 							<ul class="calc_list">
 								<li>
 									<strong>총 상품금액</strong>
 									<p>
-										<em class="_totalOrderPrice">267,500</em>원
+										<em class="totalOrderListPrice"></em>원
+										<input type="hidden" class="totalListValue">
 									</p>
 								</li>
 								<li>
 									<strong>배송비</strong>
 									<p>
-										(+) <em class="_totalDeliveryFee">5,500</em>원
+										(+) <em class="totalDeliveryFee"></em>원
+										<input type="hidden" class="totalDeliValue">
 									</p>
 								</li>
 								<li>
 									<strong>할인금액</strong>
 									<p>
-										(-) <em class="_totalDiscountPrice">75,500</em>원
+										(-) <em class="totalDiscountPrice"></em>원
+										
 									</p>
 								</li>
 								<li>
 									<strong>적립금 사용금액</strong>
 									<p>
-										(-) <em class="_useNaverMileagePrice">0</em>원
+										(-) <em class="usingMemPoint">0</em>원
+										<input type="hidden" name="usedMemPoint" class="usedMemPoint">
 									</p>
 								</li>
 							</ul>
@@ -396,17 +407,20 @@
 												<strong class="req short">카드구분</strong>
 												<div class="payment_option">
 													<ul class="radio_inline_list">
-														<li><span class="_cardTypeRadio radio-applied"><span
-																class="radio-mark _click(nmp.front.order.order_sheet.integration_cart.changeCardType()) radio-checked"></span><input
-																type="radio" id="card" name="cardType" value="PRIVATE"
-																class="_cardtype _payForm _click(nmp.front.order.order_sheet.integration_cart.changeCardType())"
-																checked=""></span> <label for="card">개인카드</label></li>
-														<li><span class="_cardTypeRadio radio-applied"><span
-																class="radio-mark _click(nmp.front.order.order_sheet.integration_cart.changeCardType())"></span><input
-																type="radio" id="card2" name="cardType"
-																value="CORPORATION"
-																class="_cardtype _payForm _click(nmp.front.order.order_sheet.integration_cart.changeCardType())"></span>
-															<label for="card2">법인카드</label></li>
+														<li>
+															<span class="_cardTypeRadio radio-applied">
+																<span class="radio-mark radio-checked"></span>
+																<input type="radio" id="card" name="cardType" value="PRIVATE" checked>
+															</span> 
+															<label for="card">개인카드</label>
+														</li>
+														<li>
+															<span class="_cardTypeRadio radio-applied">
+																<span class="radio-mark"></span>
+																<input type="radio" id="card2" name="cardType" value="CORPORATION">
+															</span>
+															<label for="card2">법인카드</label>
+														</li>
 													</ul>
 												</div>
 											</div>
@@ -514,16 +528,6 @@
 													</div>
 												</div>
 											</div>
-											<div
-												class="banner_point type_space _eventBannerAreaCvsCharge"
-												style="display: none;">
-												<a href="https://campaign.naver.com/event/pointadd2_01"
-													target="_blank"> <img
-													src="https://phinf.pstatic.net/checkout/20190930_145/15698199838924zKnJ_JPEG/684x50.jpg"
-													width="684" height="50" alt="무통장보다 쉽고 편한 방법, 네이버페이 편의점 충전!">
-												</a>
-												<!--N=a:ode.chcbanner-->
-											</div>
 										</div>
 									</div>
 								</div>
@@ -536,7 +540,7 @@
 									<strong class="req short">예상 적립금</strong>
 									<div class="payment_option">
 										<div class="input_area no_underline">
-											<span class="value _pointBalance">697</span> <span
+											<span class="value prePoint"></span> <span
 												class="measure">원</span>
 										</div>
 									</div>
@@ -653,7 +657,6 @@
 	<script th:src="@{js/slider.js}"></script>
 	<script th:src="@{js/sewDetail.js}"></script>
 	<script th:src="@{js/sewPayment.js}"></script>
-	<script th:src="@{js/sewJoin.js}"></script>
 	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </body>
 </html>

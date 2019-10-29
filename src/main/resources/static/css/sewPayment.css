@@ -537,8 +537,9 @@ caption {
     line-height: 25px;
     color: #000;
     font-family: tahoma,geneva,sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     text-align: right;
+    padding: 0px 4px;
 }
 
 .order_sc .tb_discount .btn {
@@ -767,3 +768,5 @@ em, address {
 .memEmail {
 	font-size: 20px;
 }
+
+
