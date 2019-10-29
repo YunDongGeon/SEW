@@ -40,6 +40,7 @@ var pwChk = 0;
 var rePwChk = 0;
 var nameChk = 0;
 var birthChk = 0;
+var phoneChk = 0;
 var emailChk = 0;
 
 // onsubmit
@@ -96,7 +97,7 @@ function joinInputChk(){
 		$("#emailChkBox").show();
 		return false;
 	}
-	if(idChk && pwChk && rePwChk && nameChk && birthChk && emailChk){
+	if(idChk && pwChk && rePwChk && nameChk && birthChk && emailChk && phoneChk){
 		return true;
 	}
 	return false;
@@ -126,7 +127,7 @@ $("#memId").on("change keyup paste", function() {
 	        async: true,
 	        type : 'POST',
 	        data : memId,
-	        url : "memInputIdChk",
+	        url : "memInputIdChk.do",
 	        dataType : "json",
 	        contentType: "application/json; charset=UTF-8",
 	        success : function(data) {
@@ -206,7 +207,7 @@ $("#memName").on("change keyup paste", function() {
     } else {
     	$("#nameChkBox").hide();
     	nameChk=1;
-    }   
+    }
 });
 
 // 생년월일 유효성검사
@@ -274,6 +275,19 @@ $("#memEmail").on("change keyup paste", function() {
     	$("#emailChkBox").hide();
     	emailChk=1;
     }
+});
+
+//휴대폰 유효성 검사
+$("#cellPhone").on("change keyup paste", function() {
+	var regExp = /(01[0|1|6|9|7])(\d{3}|\d{4})(\d{4}$)/g; 
+	var result = regExp.exec($(this).val()); 
+	if(result){
+		$("#phoneChkBox").hide();
+		phoneChk=1;
+	} else {
+		$("#phoneChkBox").show();
+		phoneChk=0; 
+	}
 });
 
 //Daum postCode api

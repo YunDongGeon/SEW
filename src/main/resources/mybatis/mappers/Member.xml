@@ -16,6 +16,9 @@
 	<select id="getMember" parameterType="Member" resultType="Member">
 		select memId, memName, memStat, memAuth from user where memId = #{memId} and memPw = #{memPw} 
 	</select>
+	<select id="getMemInfo" parameterType="Member" resultType="Member">
+		select memName, memEmail, memPhone, memZipcode, memAddr1, memAddr2, memPoint from user where memId = #{memId} 
+	</select>
     <select id="findMemId" parameterType="Member" resultType="Member">
     	select memId, memName from user where memName = #{memName} and memEmail = #{memEmail}
     </select>

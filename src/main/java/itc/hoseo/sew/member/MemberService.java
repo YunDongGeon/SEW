@@ -52,6 +52,9 @@ public class MemberService {
 	public Member getMember(Member member) {					
 		return memberRepositoty.getMember(member);
 	}
+	public Member getMemInfo(Member member) {					
+		return memberRepositoty.getMemInfo(member);
+	}
 	public Member findMemId(Member member) {
 		return memberRepositoty.findMemId(member);
 	}

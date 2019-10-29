@@ -65,7 +65,8 @@
 									<th>정가</th>
 									<td>
 										<del>
-											 <span class="format-money" th:text="${prodDetail.prodListP}"></span><span>원</span>
+									 	<span class="format-money" th:text="${prodDetail.prodListP}"></span><span>원</span>
+									 	<input type="number" hidden="hidden" id="prodListP" name="prodListP" th:value="${prodDetail.prodListP}">	
 										</del>
 									</td>
 								</tr>
@@ -119,8 +120,9 @@
 										<div class="total">
 											<em class="totalMsg">총 수량 <span class="totalAmount">0</span>개</em>											
 											<span class="totalPriceTxt">0</span><span class="won">원</span>
-											<input type="number" hidden="hidden" id="totalPrice" name="totalPrice" readonly>											
-											<input type="number" hidden="hidden" id="totalAmount" name="totalAmount" readonly>
+											<input type="number" hidden="hidden" id="totalPrice" name="totalPrice" value="" readonly>
+											<input type="number" hidden="hidden" id="totalListPrice" name="totalListPrice" value="" readonly>											
+											<input type="number" hidden="hidden" id="totalAmount" name="totalAmount" value="" readonly>
 										</div>
 									</td>
 								</tr>							
@@ -135,7 +137,7 @@
 						</div>
 					</div>					
 				</form>
-				<iframe src="#" name="iframe" style="width:0px; height:0px; border:0; visibility:hidden;"></iframe>		
+				<iframe src="" name="iframe" style="width:0px; height:0px; border:0; visibility:hidden;"></iframe>		
 			</div>
 			<div class="prodDetailHeader">
 				<h3>상품제품정보</h3>				

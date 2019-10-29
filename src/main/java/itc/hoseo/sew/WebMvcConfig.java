@@ -20,8 +20,8 @@ public class WebMvcConfig implements WebMvcConfigurer{
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(httpInterceptor)
-			.addPathPatterns("/**/*.do", "/")		// 인터셉터 걸리는 패턴
-			.excludePathPatterns("/sewChangePw.do", "/logOut.do");		// 인터셉터 안걸리는 패턴	
+			.addPathPatterns("/**/*.do", "/index.do")		// 인터셉터 걸리는 패턴
+			.excludePathPatterns("/sewChangePw.do", "/logOut.do", "/login.do", "/");		// 인터셉터 안걸리는 패턴	
 	}
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {

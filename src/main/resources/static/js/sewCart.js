@@ -3,29 +3,26 @@ cal();
 function checkAll(){
 	if($("#lb_chk").is(':checked')){
 		$("input[name=cartProductIds]").prop("checked", true);
+		$("input[name=cartNo]").prop("disabled", false);
 	}else{
 		$("input[name=cartProductIds]").prop("checked", false);
+		$("input[name=cartNo]").prop("disabled", true);
 	}
 }
 
 $("input[name=cartProductIds]").click(function(){
+	var cartNo = $(this).parent('td').next().next().next().next().children('p').children('.cartNo');
 	if($("input[name=cartProductIds]:checked").length == $("input[name=cartProductIds]").length){
-		$("input[id='lb_chk']").prop("checked", true);
+		$("input[id='lb_chk']").prop("checked", true);		
 	}else{
 		$("input[id='lb_chk']").prop("checked", false);
 	}
+	if($(this).is(":checked")){		
+		cartNo.prop("disabled", false);
+	}else{
+		cartNo.prop("disabled", true);
+	}
 });
-
-function delSelected(){
-	$('.delCartPop').css("display", "block");	
-	var chk_obj = $("input[name=cartProductIds]:checked");
-	$('.delCartItem').click(function() {
-		$(chk_obj).each(function() {		
-			var checkboxValue = $(this).parent('td').next().next().next().next().children('p').children('.cartNo').val();
-			delCartItem(checkboxValue);
-		});
-	});
-}
 
 function cal(){
 	var totalPrice = 0;
@@ -51,35 +48,28 @@ function cal(){
 
 var cartNo = null;
 
-$('.btn_ordel').click(function(){
+$('#delSelected').click(function(e){
+	e.preventDefault();
+	$('.delCartPop').css("display", "block");
+	$('.delCartItem').click(function() {
+		$("form").attr("action", "/delSelected.do");
+		$("form").unbind("submit").submit();
+	});
+});
+
+$('.btn_ordel').click(function(e){
+	e.preventDefault();
 	cartNo = $(this).prev('.cartNo').val();
 	$('.delCartPop').css("display", "block");
+	$('.delCartItem').click(function() {
+		$("form").attr("action", "/delCart.do");
+		$("form").unbind("submit").submit();
+	});
 });
 
 $('.closePop').click(function() {
 	$('.delCartPop').css("display", "none");
 });
-
-$('.delCartItem').click(function() {
-	delCartItem(cartNo);
-});
-
-function delCartItem(self) {	
-	$.ajax({
-		async: true,
-	    type : 'GET',
-	    data : {"cartNo": self},
-	    url : "delCart.do",
-	    dataType : "json",
-	    contentType: "application/json; charset=UTF-8",
-	    success : function(data) {
-	    	$(location).attr("href", "myCart.do");
-	    },
-	    error : function(error) {
-//	        alert("error : " + error);
-	    }
-	});
-}
 
 Number.prototype.format = function(){
     if(this==0) return 0;
@@ -95,7 +85,6 @@ Number.prototype.format = function(){
 String.prototype.format = function(){
     var num = parseFloat(this);
     if( isNaN(num) ) return "0";
-
     return num.format();
 };
 

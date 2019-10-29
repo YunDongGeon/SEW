@@ -161,12 +161,16 @@
 								</tr>								
 								<tr>
 									<th scope="row">
-										휴대폰번호										
+										휴대폰 번호
+										<img class="icon" th:src="@{/img/icon/icoRequired.png}" alt="필수">										
 									</th>
 									<td>
 										<div>
 											<input th:field="*{memPhone}" type="text" id="cellPhone" name="memPhone" maxlength="11" placeholder="- 없이 입력하세요." numberOnly>
-										</div>										
+										</div>	
+										<div class="inputChkBox" id="phoneChkBox">
+											<span>휴대폰 번호를 확인해주세요.</span>
+										</div>									
 									</td>
 								</tr>								
 								<tr>

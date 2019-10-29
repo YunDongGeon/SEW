@@ -14,8 +14,12 @@ public class CartService {
 		return repo.addCart(c);
 	}
 	
-	public boolean addOption(Cart c) {
-		return repo.addOption(c)!=0;
+	public boolean addOption(CartOption cp) {
+		return repo.addOption(cp)!=0;
+	}
+	
+	public Cart getSelectCart(Cart c) {
+		return repo.getSelectCart(c);
 	}
 	
 	public List<Cart> getCart(String memId) {

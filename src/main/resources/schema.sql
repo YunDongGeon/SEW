@@ -5,7 +5,7 @@ CREATE TABLE user(
 	memName varchar(20) not null,
 	memBirth varchar(8) not null,
 	memEmail varchar(50) not null,
-	memPhone varchar(11) default null,
+	memPhone varchar(11) not null,
 	memZipCode varchar(5) default null,
 	memAddr1 varchar(200) default null,
 	memAddr2 varchar(200) default null,
@@ -60,6 +60,7 @@ CREATE TABLE cartList(
 	memId varchar(20) not null,
 	totalAmount int not null,
 	totalPrice int not null,
+	totalListPrice int not null,
 	foreign key(prodNo) references product(prodNo),
 	foreign key(memId) references user(memId)
 );

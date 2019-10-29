@@ -9,6 +9,7 @@ public interface MemberRepository {
 	public int memIdChk(String memId);
 	public Member loginChk(Member member);
 	public Member getMember(Member member);
+	public Member getMemInfo(Member member);
 	public Member findMemId(Member member);
 	public Member findMemPw(Member member);
 	public int updateTempPw(Member member);

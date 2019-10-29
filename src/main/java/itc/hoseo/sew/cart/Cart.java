@@ -12,9 +12,8 @@ public class Cart {
 	private String prodName;
 	private int prodDeli;
 	private String prodThumbName;
-	private String prodColor;
-	private String prodSize;
 	private int prodAmount;
+	private int totalListPrice;
 	private int totalPrice;
 	private int totalAmount;
 	private List<CartOption> optionList;

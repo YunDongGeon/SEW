@@ -7451,6 +7451,7 @@ h1, h2, h3, h4, h5,
       .ftco-navbar-light.scrolled .nav-link.active {
         color: #f1b8c4 !important; }
     .ftco-navbar-light.scrolled.awake {
+      z-index: 99;	
       margin-top: 0px;
       -webkit-transition: .3s all ease-out;
       -o-transition: .3s all ease-out;

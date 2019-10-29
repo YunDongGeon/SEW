@@ -3,13 +3,13 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="itc.hoseo.sew.cart.CartRepository">
-	<insert id="addCart" parameterType="MyPage">
-		insert into cartList(prodNo, memId, totalAmount, totalPrice) values(#{prodNo}, #{memId}, #{totalAmount}, #{totalPrice})
+	<insert id="addCart" parameterType="Cart">
+		insert into cartList(prodNo, memId, totalAmount, totalPrice, totalListPrice) values(#{prodNo}, #{memId}, #{totalAmount}, #{totalPrice}, #{totalListPrice})
 		<selectKey	keyProperty="cartNo" resultType="int" order="AFTER">
 			select last_insert_id()		
 		</selectKey>
 	</insert>
-	<insert id="addOption" parameterType="MyPage">
+	<insert id="addOption" parameterType="CartOption">
 		insert into cartOptionList(cartNo, prodColor, prodSize, prodAmount) values(#{cartNo}, #{prodColor}, #{prodSize}, #{prodAmount})
 	</insert>
 	<select id="checkCart" resultType="int">
@@ -34,6 +34,16 @@
 		join prodImage img
 		on prod.prodno = img.prodno
 		where cart.memid = #{memId}
+		order by cart.cartno desc
+	</select>
+	<select id="getSelectCart" parameterType="Cart" resultMap="CartMap">
+		SELECT cart.*, prod.prodName, prod.prodDeli, img.prodThumbName
+		from cartList cart
+		join product prod
+		on cart.prodno = prod.prodno
+		join prodImage img
+		on prod.prodno = img.prodno
+		where cart.memid = #{memId} and cart.cartNo = #{cartNo}
 		order by cart.cartno desc
 	</select>	
 	<select id="getOption" parameterType="String" resultType="CartOption">

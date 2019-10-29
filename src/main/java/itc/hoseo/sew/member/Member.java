@@ -13,6 +13,9 @@ public class Member {
 	private String memZipCode;
 	private String memAddr1;
 	private String memAddr2;
+	private String firstNum;
+	private String middleNum;
+	private String endNum;
 	private String memStat;
 	private String memAuth;
 	private String memPoint;

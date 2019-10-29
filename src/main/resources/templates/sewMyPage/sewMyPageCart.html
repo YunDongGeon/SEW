@@ -68,10 +68,12 @@
 										</colgroup>
 										<thead>
 											<tr>
-												<th scope="col"><input type="checkbox" id="lb_chk"
-													class="_checkbox_all _click(nmp.front.order.cart.toggleAll())"
-													checked="checked">
-												<th scope="col" class="product"><strong>상품정보</strong></th>
+												<th scope="col">
+													<input type="checkbox" id="lb_chk" class="_checkbox_all" checked="checked">
+												</th>
+												<th scope="col" class="product">
+													<strong>상품정보</strong>
+												</th>
 												<th scope="col">수량</th>
 												<th scope="col" class="bg_point">배송비</th>
 												<th scope="col" class="bg_point">주문금액</th>
@@ -87,135 +89,137 @@
 							</div>
 						</div>
 					</div>
-					<div class="listRoot" th:if="${cartList!=0}">
-						<div class="sub_sc" style="min-height: 895px;">
-							<div id="_listContentArea">
-								<div class="goods_pay_section ">
-									<table cellspacing="0" border="1" class="tb_list tb_order_check _order_area">
-										<colgroup>
-											<col width="36">
-											<col>
-											<col width="55">
-											<col width="80">
-											<col width="132">
-										</colgroup>
-										<thead>
-											<tr>
-												<th scope="col">
-													<input type="checkbox" id="lb_chk" class="checkbox_all" checked="checked" onclick="checkAll()">
-												</th>
-												<th scope="col" class="product"><strong>상품정보</strong></th>
-												<th scope="col">수량</th>
-												<th scope="col" class="bg_point">배송비</th>
-												<th scope="col" class="bg_point">주문금액</th>
-											</tr>
-										</thead>										
-										<tbody>
-											<tr th:each="cartItem : ${cartList}">
-												<td class="check">
-													<input type="checkbox" name="cartProductIds" checked="checked">													
-												</td>
-												<td class="product">
-													<div>
-														<div class="thmb">
-															<div class="img_center">
-																<a href="#" target="_blank"> 
-																	<img class="prodThumb" th:src="@{'/prodThumb/'+${cartItem.prodThumbName}}" alt="thumb">
-																</a>
+					<form action="sewCartPayment.do" method="post">
+						<div class="listRoot" th:if="${cartList!=0}">
+							<div class="sub_sc" style="min-height: 895px;">
+								<div id="_listContentArea">
+									<div class="goods_pay_section ">
+										<table cellspacing="0" border="1" class="tb_list tb_order_check _order_area">
+											<colgroup>
+												<col width="36">
+												<col>
+												<col width="55">
+												<col width="80">
+												<col width="132">
+											</colgroup>
+											<thead>
+												<tr>
+													<th scope="col">
+														<input type="checkbox" id="lb_chk" class="checkbox_all" checked="checked" onclick="checkAll()">
+													</th>
+													<th scope="col" class="product"><strong>상품정보</strong></th>
+													<th scope="col">수량</th>
+													<th scope="col" class="bg_point">배송비</th>
+													<th scope="col" class="bg_point">주문금액</th>
+												</tr>
+											</thead>										
+											<tbody>
+												<tr th:each="cartItem : ${cartList}">
+													<td class="check">
+														<input type="checkbox" name="cartProductIds" checked="checked">													
+													</td>
+													<td class="product">
+														<div>
+															<div class="thmb">
+																<div class="img_center">
+																	<a href="#" target="_blank"> 
+																		<img class="prodThumb" th:src="@{'/prodThumb/'+${cartItem.prodThumbName}}" alt="thumb">
+																	</a>
+																</div>
+															</div>
+															<dl class="naver_plus">
+																<dt class="zzim_add">
+																	<a href="#" target="_blank" th:href="@{'sewDetail.do?prodNo='+${cartItem.prodNo}}" th:text="${cartItem.prodName}"></a>
+																</dt>
+																<dd class="modify_sec btn_oneline">
+																	<a href="#" target="_blank" title="주문조건 추가/변경"
+																		class="btn_od_modify _click(nmp.front.order.cart.modifyCartProduct(2019102519728932,false)) _stopDefault"><span
+																		class="blind">주문 조건 추가/변경</span></a>
+																	<!--N=a:car.modifyoption-->
+																</dd>
+	
+																<dd>
+																	<ul class="option" >
+																		<li th:each="optionList : ${cartItem.optionList}"
+																			 th:text="'색상 : ' + ${optionList.prodColor} + 
+																			 		' / 사이즈  : ' + ${optionList.prodSize} + 
+																			 		' / 수량  : ' + ${optionList.prodAmount}"/>
+																		 </li>
+																	</ul>
+																</dd>
+															</dl>
+														</div>
+													</td>
+													<td>
+														<em class="_product_quantity mount thm"> 
+															<strong	class="_product_quantity mount thm" th:text="${cartItem.totalAmount}"></strong>
+														</em>
+													</td>
+													<td rowspan="1" class="seller bg_point">
+														<div class="send zi10">
+															<div th:if="${cartItem.prodDeli==0}" class="sum">
+																<span class="deliPrice">
+																	무료
+																</span>
+															</div>
+															<div th:unless="${cartItem.prodDeli==0}" class="sum">
+																<span class="deliPrice format-money" th:text="${cartItem.prodDeli}"></span>
+																원
 															</div>
 														</div>
-														<dl class="naver_plus">
-															<dt class="zzim_add">
-																<a href="#" target="_blank" th:href="@{'sewDetail.do?prodNo='+${cartItem.prodNo}}" th:text="${cartItem.prodName}"></a>
-															</dt>
-															<dd class="modify_sec btn_oneline">
-																<a href="#" target="_blank" title="주문조건 추가/변경"
-																	class="btn_od_modify _click(nmp.front.order.cart.modifyCartProduct(2019102519728932,false)) _stopDefault"><span
-																	class="blind">주문 조건 추가/변경</span></a>
-																<!--N=a:car.modifyoption-->
-															</dd>
-
-															<dd>
-																<ul class="option" >
-																	<li th:each="optionList : ${cartItem.optionList}"
-																		 th:text="'색상 : ' + ${optionList.prodColor} + 
-																		 		' / 사이즈  : ' + ${optionList.prodSize} + 
-																		 		' / 수량  : ' + ${optionList.prodAmount}"/>
-																	 </li>
-																</ul>
-															</dd>
-														</dl>
-													</div>
-												</td>
-												<td>
-													<em class="_product_quantity mount thm"> 
-														<strong	class="_product_quantity mount thm" th:text="${cartItem.totalAmount}"></strong>
-													</em>
-												</td>
-												<td rowspan="1" class="seller bg_point">
-													<div class="send zi10">
-														<div th:if="${cartItem.prodDeli==0}" class="sum">
-															<span class="deliPrice">
-																무료
+													</td>
+													<td class="bg_point order_money">
+														<strong class="pointcol"> 
+															<em class="thm prodPrice format-money" th:text="${cartItem.totalPrice}"></em>원
+														</strong>
+														<p class="btn_group">
+															<input type="hidden" class="cartNo" name="cartNo" th:value="${cartItem.cartNo}">
+															<button class="btn_ordel">삭제</button>
+														</p>
+													</td>
+												</tr>
+											</tbody>
+											<tfoot>	
+												<tr>
+													<td colspan="6">
+														<span class="all-select-product">
+															<span class="prePoint">
+																예상 적립금
 															</span>
-														</div>
-														<div th:unless="${cartItem.prodDeli==0}" class="sum">
-															<span class="deliPrice format-money" th:text="${cartItem.prodDeli}"></span>
-															원
-														</div>
-													</div>
-												</td>
-												<td class="bg_point order_money">
-													<strong class="pointcol"> 
-														<em class="thm prodPrice format-money" th:text="${cartItem.totalPrice}"></em>원
-													</strong>
-													<p class="btn_group">
-														<input type="hidden" class="cartNo" name="cartNo" th:value="${cartItem.cartNo}">
-														<button class="btn_ordel">삭제</button>
-													</p>
-												</td>
-											</tr>
-										</tbody>
-										<tfoot>	
-											<tr>
-												<td colspan="6">
-													<span class="all-select-product">
-														<span class="prePoint">
-															예상 적립금
-														</span>
-														<em class="thm totalPoint">0</em>원
-													</span>	
-												</td>
-											</tr>	
-											<tr>
-												<td colspan="6">
-													<span class="all-select-product">
-														<button id="delSelected" onclick="delSelected()">선택삭제</button>
-													</span>	
-												</td>
-											</tr>											
-										</tfoot>
-									</table>
-									<div class="cart-total-price" data-total-price="15000" data-discount-price="0">
-						                <div class="price-area">
-						                   	총 상품가격 
-						                   	<em class="thm totalPrice">0</em>원
-						                    <span class="symbol-plus1"></span>
-				                    		총 배송비 
-				                    		<em class="thm totalDeli">0</em>원
-						                    <span class="symbol-equal1"></span>
-						                   	 총 주문금액 
-						                   	<em class="thm sumTotal">0</em> 원
-						                </div>
-						            </div>	
-						            <div class="buttonsBox" style="margin-top: 1.5rem !important;">
-										<input type="button" name="cancel" value="홈으로 가기" onclick="location.href='/'">
-										<input type="submit" id="memInputSubmit" value="결제하기">
-									</div>									
-								</div>								
+															<em class="thm totalPoint">0</em>원
+														</span>	
+													</td>
+												</tr>	
+												<tr>
+													<td colspan="6">
+														<span class="all-select-product">
+															<button id="delSelected">선택삭제</button>
+														</span>	
+													</td>
+												</tr>											
+											</tfoot>
+										</table>
+										<div class="cart-total-price" data-total-price="15000" data-discount-price="0">
+							                <div class="price-area">
+							                   	총 상품가격 
+							                   	<em class="thm totalPrice">0</em>원
+							                    <span class="symbol-plus1"></span>
+					                    		총 배송비 
+					                    		<em class="thm totalDeli">0</em>원
+							                    <span class="symbol-equal1"></span>
+							                   	 총 주문금액 
+							                   	<em class="thm sumTotal">0</em> 원
+							                </div>
+							            </div>	
+							            <div class="buttonsBox" style="margin-top: 1.5rem !important;">
+											<input type="button" name="cancel" value="홈으로 가기" onclick="location.href='/'">
+											<input type="submit" id="memInputSubmit" value="결제하기">
+										</div>									
+									</div>								
+								</div>
 							</div>
 						</div>
-					</div>
+					</form>
 				</div>
 			</div>
 			<div class="_layer_cart_add layerpop_wrap delCartPop" style="display: none; z-index: 10000; left: 791.5px; top: 400px;" tabindex="-1">

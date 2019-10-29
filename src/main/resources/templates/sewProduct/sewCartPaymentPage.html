@@ -86,52 +86,48 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
+								<tr th:each="buyList : ${selectList}">
 									<td>
 										<div class="product_info">
 											<a href="https://smartstore.naver.com/main/products/4428552261" class="product_thmb" target="_blank"> 
-												<img src="https://order.pay.naver.com/proxy/phinf/shop1/20191004_63/1570179655674Ro9fv_JPEG/7540394303575034_1400203660.jpg?type=m120"
-												alt="빅사이즈 남성 긴팔 남방 체크셔츠 솔리드 헨리넥 무지 스트라이프 가을 겨울 기모 5XL" width="92" height="92">
+												<img th:src="@{'/prodThumb/'+${buyList.prodThumbName}}" width="92" height="92">
 											</a>
 											<!--N=a:ord.product-->
 											<div class="product_dsc">
-												<a href="https://smartstore.naver.com/main/products/4428552261" target="_blank" class="product_name"> <strong>
-													빅사이즈 남성 긴팔 남방 체크셔츠 솔리드 헨리넥 무지 스트라이프 가을 겨울 기모 5XL </strong>
+												<a href="https://smartstore.naver.com/main/products/4428552261" target="_blank" class="product_name"> 
+													<strong th:text="${buyList.prodName}"></strong>
 												</a>
 												<div class="option">
 													<ul class="option_list">
-														<li>상품번호: 02번-DN옥스퍼드긴팔셔츠B / 상품명/사이즈: DN_93퍼플/100/1개
-															(+5,000원)</li>
-														<li>상품번호: 02번-DN옥스퍼드긴팔셔츠B / 상품명/사이즈: DN_93퍼플/95/1개
-															(+5,000원)</li>
-														<li>상품번호: 02번-DN옥스퍼드긴팔셔츠B / 상품명/사이즈: DN_98그레이/95/1개
-															(+5,000원)</li>
-														<li>상품번호: 02번-DN옥스퍼드긴팔셔츠B / 상품명/사이즈: DN_98그레이/105/1개
-															(+5,000원)</li>
-														<li>상품번호: 02번-DN옥스퍼드긴팔셔츠B / 상품명/사이즈: DN_98그레이/120/1개
-															(+7,000원)</li>
-														<li>상품번호: 02번-DN옥스퍼드긴팔셔츠B / 상품명/사이즈: DN_103오렌지/105/1개
-															(+5,000원)</li>
-														<li>상품번호: 02번-DN옥스퍼드긴팔셔츠B / 상품명/사이즈: DN_104브라운/100/1개
-															(+5,000원)</li>
+														<li th:each="optionList : ${buyList.optionList}"
+															th:text="'색상 : ' + ${optionList.prodColor} + 
+																' / 사이즈  : ' + ${optionList.prodSize} + 
+																' / 수량  : ' + ${optionList.prodAmount}">
+														</li>
 													</ul>
 												</div>
 											</div>
 										</div>
 									</td>
 									<td rowspan="1">
-										<span class="deli_fee">
-											<span class="sp_order ico_deli"></span>
-											<span class="_deliveryPriceText2019102730742605">무료</span>
+										<span th:if="${buyList.prodDeli==0}" class="deli_fee">
+											<span class="deliPrice">
+												무료
+											</span>
+										</span>
+										<span th:unless="${buyList.prodDeli==0}" class="deli_fee">
+											<span class="deliPrice format-money" th:text="${buyList.prodDeli}"></span>원
 										</span>
 									</td>
-									<td>7개</td>
+									<td>
+										<span th:text="${buyList.totalAmount}"></span>개
+									</td>
 									<td class="col_price">
-										<span class="orgn_price _productOrderTotalAmt2019102733153380">
-											<em>203,600</em>원
+										<span style="float: right;">
+											<em class="format-money orgn_price" th:text="${buyList.totalListPrice}"></em>원
 										</span>
 										<strong>
-											<em class="_productOrderPayAmt2019102733153380">140,600</em>원
+											<em class="format-money" th:text="${buyList.totalPrice}"></em>원
 										</strong>
 									</td>
 								</tr>
@@ -157,17 +153,19 @@
 									<strong class="req short" title="필수입력">연락처</strong>
 									<div class="deliver_option">
 										<div class="cellphone_group">
-											<!-- select box -->
+											<!-- select box -->											
 											<select 
+												
 												id="deliveryAddress.telNo1_1"
 												name="deliveryAddress.telNo1___1"
 												class="selectbox-label _deliveryForm _group_tel1_1 _firstNumber">
-												<option value="010">010</option>
-												<option value="011">011</option>
-												<option value="016">016</option>
-												<option value="017">017</option>
-												<option value="018">018</option>
-												<option value="019">019</option>
+												<option value="" disabled selected>선택</option>
+												<option value="010" th:selected="${member.firstNum=='010'}">010</option>
+												<option value="011" th:selected="${member.firstNum=='011'}">011</option>
+												<option value="016" th:selected="${member.firstNum=='016'}">016</option>
+												<option value="017" th:selected="${member.firstNum=='017'}">017</option>
+												<option value="018" th:selected="${member.firstNum=='018'}">018</option>
+												<option value="019" th:selected="${member.firstNum=='019'}">019</option>
 												<option value="02">02</option>
 												<option value="031">031</option>
 												<option value="032">032</option>
@@ -202,31 +200,48 @@
 											<div class="cellPhone">
 												 - 
 												<input type="text" title="핸드폰번호 중간" id="deliveryAddress.telNo1_2" 
-													name="deliveryAddress.telNo1___2" value="9177"
+													name="deliveryAddress.telNo1___2" th:value="${member.middleNum}"
 													class="inp_txt2 _deliveryForm _group_tel1_2 _onlyNumberTarget" maxlength="4">
 												 - 
 											 	<input type="text" title="핸드폰번호 뒷자리" id="deliveryAddress.telNo1_3"
-													name="deliveryAddress.telNo1___3" value="8955"
+													name="deliveryAddress.telNo1___3" th:value="${member.endNum}"
 													class="inp_txt2 _deliveryForm _group_tel1_3 _onlyNumberTarget" maxlength="4">
 											</div>
 										</div>
 									</div>
 									<input type="hidden" id="reliefPhoneNumberHidden" class="_deliveryForm _reliefPhoneNumberUseYn" name="deliveryAddress.reliefPhoneNumberUseYn">
 								</div>
-								<div class="deliver_option_wrap deli_address">
+								<div th:if=${member.memZipCode==null} class="deliver_option_wrap deli_address">
 									<strong class="req" title="필수입력">배송지 주소</strong>
 									<div class="deliver_option">
-										<span class="zipcode_group"> <input type="text"
-											title="우편번호"
-											class="inp_txt2 zipcode _deliveryForm _click(nmp.front.order.popup.openAddressPopup(deliveryAddress,,true,false)) _stopDefault"
-											name="deliveryAddress.zipCode" value="04948"
-											readonly="readonly" maxlength="7">
+										<span class="zipcode_group"> 
+											<input type="text" title="우편번호" class="inp_txt2 zipcode" 
+												name="deliveryAddress.zipCode" id="postcode"
+												readonly="readonly" maxlength="7" style="float: none;">
 										</span>
-										<button class="btn _click(nmp.front.order.popup.openAddressPopup(deliveryAddress,,true,false)) _stopDefault">우편번호</button>
+										<button class="btn" onClick="findPostCode()">우편번호</button>
 										<div class="addr_detail">
 											<input type="text" title="주소" class="inp_txt2 addr_input1 _deliveryForm"
-												name="deliveryAddress.baseAddress" value="서울특별시 광진구 영화사로 87-12 (구의동, 세인트힐 빌리지)" readonly="readonly"><br> 
-											<input type="text" title="상세주소" class="inp_txt2 addr_input2 _deliveryForm" name="deliveryAddress.detailAddress" value="102동 501호" maxlength="50">
+												id="addr1" name="deliveryAddress.baseAddress" value="" readonly="readonly"><br> 
+											<input type="text" title="상세주소" class="inp_txt2 addr_input2 " 
+												id="addr2" name="deliveryAddress.detailAddress" maxlength="50">
+										</div>
+									</div>
+								</div>
+								<div th:unless=${member.memZipCode==null} class="deliver_option_wrap deli_address">
+									<strong class="req" title="필수입력">배송지 주소</strong>
+									<div class="deliver_option">
+										<span class="zipcode_group"> 
+											<input type="text" title="우편번호" class="inp_txt2 zipcode" 
+												name="deliveryAddress.zipCode" id="postcode" th:value="${member.memZipCode}"
+												readonly="readonly" maxlength="7" style="float: none;">
+										</span>
+										<button class="btn" onClick="findPostCode()">우편번호</button>
+										<div class="addr_detail">
+											<input type="text" title="주소" class="inp_txt2 addr_input1 _deliveryForm" th:value="${member.memAddr1}"
+												id="addr1" name="deliveryAddress.baseAddress" value="" readonly="readonly"><br> 
+											<input type="text" title="상세주소" class="inp_txt2 addr_input2 "  th:value="${member.memAddr2}"
+												id="addr2" name="deliveryAddress.detailAddress" maxlength="50">
 										</div>
 									</div>
 								</div>
@@ -235,13 +250,17 @@
 						<div class="userinfo_wrap _purchaserInfo">
 							<h4>주문자 정보</h4>
 							<ul class="user_info">
-								<li>윤동건</li>
-								<li class="_telNoHighlight "><span class="_memberTelNumber">010-9**7-8**5</span>
-								<button class="btn _click(nmp.front.order.order_sheet.changeMemberCellphone()) _stopDefault">수정</button>
-									<!--N=a:ord.modifyphone--></li>
-								<li><span class="_memberEmailAddress">db******@na**com</span>
-								<button class="btn _click(nmp.front.order.order_sheet.changeMemberEmail()) _stopDefault">수정</button>
-									<!--N=a:ord.modifyemail--></li>
+								<li th:text="${member.memName}"></li>
+								<li class="_telNoHighlight">
+									<span class="memPhone" th:text="${member.memPhone}"></span>
+									<button class="btn _click(nmp.front.order.order_sheet.changeMemberCellphone()) _stopDefault">수정</button>
+									<!--N=a:ord.modifyphone-->
+								</li>
+								<li>
+									<span class="memEmail" th:text="${member.memEmail}"></span>
+									<button class="btn _click(nmp.front.order.order_sheet.changeMemberEmail()) _stopDefault">수정</button>
+									<!--N=a:ord.modifyemail-->
+								</li>
 							</ul>
 							<ul class="info_dsc">
 								<li class="info_confirm">
@@ -261,10 +280,9 @@
 									</span>
 								</li>
 							</ul>
-							<input type="hidden" name="order.memberName" value="윤동건">
-							<input type="hidden" name="order.memberCellPhoneNo"
-								value="010-9**7-8**5"> <input type="hidden"
-								name="memberEmail" value="dbswlgh20@naer.com">
+							<input type="hidden" name="order.memberName" th:value="${member.memName}">
+							<input type="hidden" name="order.memberCellPhoneNo" value="010-9**7-8**5"> 
+							<input type="hidden" name="memberEmail" value="dbswlgh20@naver.com">
 						</div>
 						<span class="shdw_left"></span> <span class="shdw_right"></span>
 					</div>
@@ -316,27 +334,34 @@
 							<h4>결제금액</h4>
 							<input type="hidden" class="_totalPayAmount" value="197500">
 							<div class="sum _lastTotalAccountPrice">
-								<em class="n1">1</em> <em class="n9">9</em> <em class="n7">7</em>
-								<em class="comma">,</em> <em class="n5">5</em> <em class="n0">0</em>
-								<em class="n0">0</em> <span class="txt">원</span>
+								<em class="totalPrice">197,500</em> 
+								<span class="txt">원</span>
 							</div>
 							<ul class="calc_list">
-								<li><strong>총 상품금액</strong>
-								<p>
+								<li>
+									<strong>총 상품금액</strong>
+									<p>
 										<em class="_totalOrderPrice">267,500</em>원
-									</p></li>
-								<li><strong>배송비</strong>
-								<p>
+									</p>
+								</li>
+								<li>
+									<strong>배송비</strong>
+									<p>
 										(+) <em class="_totalDeliveryFee">5,500</em>원
-									</p></li>
-								<li><strong>할인금액</strong>
-								<p>
+									</p>
+								</li>
+								<li>
+									<strong>할인금액</strong>
+									<p>
 										(-) <em class="_totalDiscountPrice">75,500</em>원
-									</p></li>
-								<li><strong>포인트 사용금액</strong>
-								<p>
+									</p>
+								</li>
+								<li>
+									<strong>적립금 사용금액</strong>
+									<p>
 										(-) <em class="_useNaverMileagePrice">0</em>원
-									</p></li>
+									</p>
+								</li>
 							</ul>
 						</div>
 						<span class="shdw_left"></span> <span class="shdw_right"></span>
@@ -360,16 +385,9 @@
 											<li class="payment_item">
 												<span class="_payMeansClassRadio radio-applied">
 													<span class="radio-mark"></span>
-													<input type="radio" id="pay2" name="payMeansClass" value="VIRTUAL_ACCOUNT" class="opt _payMeansClass">
+													<input type="radio" id="pay1" name="payMeansClass" value="VIRTUAL_ACCOUNT" class="opt _payMeansClass">
 												</span>
-												<label for="pay2">무통장입금</label>
-											</li>
-											<li class="payment_item">
-												<span class="_payMeansClassRadio radio-applied">
-													<span class="radio-mark"></span>
-													<input type="radio" id="pay3" name="payMeansClass" value="MOBILE" class="opt _payMeansClass">
-												</span>
-												<label for="pay3">휴대폰</label>
+												<label for="pay1">무통장입금</label>
 											</li>
 										</ul>
 										<!-- 결제수단 문구 -->
@@ -467,7 +485,6 @@
 												</div>
 											</div>
 										</div>
-										<div class="bank _tr_paymeans _accountInfo" style="display: none"></div>
 										<div class="virtualAccount _tr_paymeans _accountInfo" style="display: none">
 											<div class="payment_option_wrap">
 												<strong class="req short">입금은행</strong>
@@ -477,10 +494,9 @@
 														<div id="bankCodeList" class="">
 															<select
 																name="nonBankBookSettleInfo.nonBankBookPayBankCode"
-																class="selectbox-source _nonBankBookPayBankCode _payForm"
-																style="display: none;">
-																<option class="selectbox-default _selectBoxDefault"
-																	value="">선택해 주세요</option>
+																class="selectbox-label _nonBankBookPayBankCode _payForm"
+																style="width: 120px;">
+																<option class="selectbox-default _selectBoxDefault" selected disabled>선택해 주세요</option>
 																<option value="011">농협</option>
 																<option value="004">국민은행</option>
 																<option value="088">신한은행</option>
@@ -494,61 +510,7 @@
 																<option value="034">광주은행</option>
 																<option value="039">경남은행</option>
 															</select>
-															<div class="selectbox-box">
-																<div class="selectbox-label" unselectable="on">
-																	선택해주세요
-																</div>
-															</div>
 														</div>
-													</div>
-													<p class="dsc">
-														<span class="highlight">
-															농협, 국민, &#8203;&#8203;부산, SC, 우체국
-														</span>은 ATM 현금 입금 불가 (은행 창구, 인터넷 뱅킹 이용 가능)
-													</p>
-												</div>
-											</div>
-											<div class="payment_option_wrap">
-												<strong class="req short">환불방법<a href="#" title="?"
-													class="sp_order ico_que _click(nmp.front.order.order_sheet.showLayerCommon(refuneMethodLayer,false,false,left)) _stopDefault"></a></strong>
-												<div class="payment_option">
-													<ul class="radio_inline_list inline">
-														<li><span
-															class="radio-applied _refundMethodTypeRadio _click(nmp.front.order.order_sheet.changeRefundMethod())"><span
-																class="radio-mark"></span><input type="radio"
-																id="refund0" checked="checked"
-																class="opt _refundMethod _payForm"
-																name="refundAccountInfo.refundMethodType"
-																value="CHARGE_AMOUNT"></span> <label for="refund0">환불정산액
-																적립</label></li>
-														<li><span
-															class="radio-applied _refundMethodTypeRadio _click(nmp.front.order.order_sheet.changeRefundMethod())"><span
-																class="radio-mark radio-checked"></span><input
-																type="radio" id="refund1" checked="checked"
-																class="opt _refundMethod _payForm"
-																name="refundAccountInfo.refundMethodType"
-																value="BANK_ACCOUNT"></span> <label for="refund1">본인계좌환불</label></li>
-													</ul>
-													<a href="#"
-														class="btn2 _click(nmp.front.order.popup.openRefundmentAccountBookForOrder(nmp.front.order.order_sheet.applyRefuncAccountInfo)) _stopDefault"><span
-														class="type1">내 계좌목록</span></a>
-													<div class="account_group">
-														<input type="hidden" class="_refundBankId _payForm"
-															name="refundAccountInfo.refundBankId" value=""> <input
-															type="hidden" class="_refundBankCode _payForm"
-															name="refundAccountInfo.refundBankCode" value="">
-														<input type="text" title="은행선택" value=""
-															class="inp_txt2 bank _refundInfo _payForm _refundBankCodeName _click(nmp.front.order.popup.openRefundmentAccountBookForOrder(nmp.front.order.order_sheet.applyRefuncAccountInfo)) _stopDefault"
-															style="" name="refundAccountInfo.refundBankCodeName"
-															readonly="readonly"> <input type="text"
-															title="예금주" value=""
-															class="inp_txt2 user_name _refundInfo _payForm _refundAccountHolderName _click(nmp.front.order.popup.openRefundmentAccountBookForOrder(nmp.front.order.order_sheet.applyRefuncAccountInfo)) _stopDefault"
-															style="" name="refundAccountInfo.refundAccountHolderName"
-															readonly="readonly"> <input type="text"
-															title="계좌번호" value=""
-															class="inp_txt2 acc_num _refundInfo _refundAccountNo _payForm _click(nmp.front.order.popup.openRefundmentAccountBookForOrder(nmp.front.order.order_sheet.applyRefuncAccountInfo)) _stopDefault"
-															style="" name="refundAccountInfo.refundAccountNo"
-															readonly="readonly">
 													</div>
 												</div>
 											</div>
@@ -563,255 +525,7 @@
 												<!--N=a:ode.chcbanner-->
 											</div>
 										</div>
-										<div class="mobile _tr_paymeans _accountInfo"
-											style="display: none;">
-											<div class="payment_option_wrap">
-												<strong class="req short">결제구분</strong>
-												<div class="payment_option">
-													<ul class="radio_inline_list">
-														<li><span class="ajax_radio radio-applied"> <span
-																class="radio-mark _click(nmp.front.order.order_sheet.changeMobilePayMethod(mobilePinPay))"></span>
-																<input type="radio" name="mobileSettleInfo.isPinPay"
-																value="true" id="mobilePinPay"
-																class="_payForm _click(nmp.front.order.order_sheet.changeMobilePayMethod(mobilePinPay))">
-														</span> <label for="mobilePinPay">간편결제</label></li>
-														<li><span class="ajax_radio radio-applied"> <span
-																class="radio-mark _click(nmp.front.order.order_sheet.changeMobilePayMethod(mobilePay)) radio-checked"></span>
-																<input type="radio" name="mobileSettleInfo.isPinPay"
-																value="false"
-																class="_payForm _click(nmp.front.order.order_sheet.changeMobilePayMethod(mobilePay))"
-																id="mobilePay" checked="checked">
-														</span> <label for="mobilePay">일반결제</label></li>
-													</ul>
-												</div>
-											</div>
-											<div class="payment_option_wrap">
-												<strong class="req short" title="필수입력">휴대폰번호</strong>
-												<div class="deliver_option">
-													<div class="cellphone_group _isPinMember"
-														style="display: none;">
-														<input type="text" title="핸드폰번호 첫째자리" maxlength="3"
-															name="mobileSettleInfo.cellPhoneNo___1" value=""
-															class="inp_txt2  _group_tel3_1 cphNo _onlyNumberTarget"
-															disabled=""> - <input type="text"
-															title="핸드폰번호 중간" maxlength="4"
-															name="mobileSettleInfo.cellPhoneNo___2" value=""
-															class="inp_txt2  _group_tel3_2 cphNo _onlyNumberTarget"
-															disabled=""> - <input type="text"
-															title="핸드폰번호 뒷자리" maxlength="4" name="" value="****"
-															class="inp_txt2" disabled=""> <input
-															type="hidden" title="핸드폰번호 뒷자리" maxlength="4"
-															name="mobileSettleInfo.cellPhoneNo___3" value=""
-															class="inp_txt2  _group_tel3_3 cphNo">
-													</div>
-
-													<div class="cellphone_group _isNotPinMember">
-														<!-- select box -->
-														<div class="select_section">
-															<div id="cellPhone3" class="">
-																<select id="mobileSettleInfo.cellPhoneNo_1"
-																	name="mobileSettleInfo.cellPhoneNo___1"
-																	class="_payForm selectbox-source _group_tel3_1 cphNo _change(nmp.front.order.order_sheet.checkFirstNumber(default)) _firstNumber"
-																	style="display: none;">
-																	<option value="010">010</option>
-																	<option value="011">011</option>
-																	<option value="016">016</option>
-																	<option value="017">017</option>
-																	<option value="018">018</option>
-																	<option value="019">019</option>
-																</select>
-																<div class="selectbox-box">
-																	<div class="selectbox-label" unselectable="on">
-																		010</div>
-																</div>
-
-																<span class="drop"></span>
-															</div>
-														</div>
-														- <input type="text" title="핸드폰번호 중간" maxlength="4"
-															name="mobileSettleInfo.cellPhoneNo___2" value=""
-															class="inp_txt2 _payForm _group_tel3_2 cphNo _onlyNumberTarget">
-														- <input type="text" title="핸드폰번호 뒷자리" maxlength="4"
-															name="mobileSettleInfo.cellPhoneNo___3" value=""
-															class="inp_txt2 _payForm _group_tel3_3 cphNo _onlyNumberTarget">
-													</div>
-												</div>
-											</div>
-											<div class="payment_option_wrap _isPinMember"
-												style="display: none;">
-												<strong class="req" title="필수입력">비밀번호</strong>
-												<div class="payment_option">
-													<input type="password" title="비밀번호" placeholder="4자리"
-														maxlength="4" name="mobilePassword"
-														class="inp_txt2 addopt_msg placeholder _onlyNumberTarget password">
-												</div>
-												<ul class="link_list">
-													<li><a href="#"
-														class="txt_link _stopDefault _click(nmp.front.order.order_sheet.integration_cart.openPasswordManagePopup(PASS_LOST))">비밀번호
-															분실</a></li>
-													<li><a href="#"
-														class="txt_link _stopDefault _click(nmp.front.order.order_sheet.integration_cart.openPasswordManagePopup(PASS_CHANGE))">비밀번호
-															변경</a></li>
-													<li><a href="#"
-														class="txt_link _stopDefault _click(nmp.front.order.order_sheet.integration_cart.openPasswordManagePopup(PIN_CLOSE))">간편결제
-															해지</a></li>
-												</ul>
-											</div>
-										</div>
 									</div>
-								</div>
-								<p class="registration _cashReceiptInfoSaved _cashReceiptHeader"
-									style="display: none;">
-									<strong>현금영수증</strong><span class="ico_bar"></span>개인소득공제용
-									(휴대폰번호 : 010-2768-8954) <a href="#" class="btn2"><span
-										class="type1 _click(nmp.front.order.order_sheet.changeCashReceiptInfo()) _stopDefault">현금영수증정보
-											변경</span></a>
-								</p>
-								<div
-									class="payment_option_wrap _cashReceiptTemplate _cashReceiptHeader"
-									style="display: none;">
-									<strong class="req short_v2">현금영수증<a href="#"
-										class="sp_order ico_que _click(nmp.front.order.order_sheet.showLayerCommon(cashReceiptInfoLayer,false,false,left)) _stopDefault"
-										title="?"><span class="blind">현금영수증 발급안내 도움말</span></a></strong>
-									<div class="payment_option">
-										<ul class="radio_inline_list">
-											<li><span
-												class="ajax_radio radio-applied _click(nmp.front.order.order_sheet.isCashReceipt())"><span
-													class="radio-mark radio-checked"></span><input type="radio"
-													id="receiptApplyed_true" class="_payForm"
-													name="receiptInfo.receiptApplyed" value="true"
-													checked="checked"></span> <label for="receiptApplyed_true">신청하기</label></li>
-											<li><span
-												class="ajax_radio radio-applied _click(nmp.front.order.order_sheet.isCashReceipt())"><span
-													class="radio-mark"></span><input type="radio"
-													id="receiptApplyed_false" class="_payForm"
-													name="receiptInfo.receiptApplyed" value="false"></span> <label
-												for="receiptApplyed_false">신청안함</label></li>
-										</ul>
-										<ul class="radio_inline_list cashReceiptInfo">
-											<li><span
-												class="ajax_radio radio-applied _click(nmp.front.order.order_sheet.changeReceiptType())"><span
-													class="radio-mark radio-checked"></span><input type="radio"
-													id="receiptIssueUsageCode_1"
-													class="_receiptIssueUsageCode _payForm"
-													name="receiptInfo.receiptIssueUsageCode"
-													value="PERSONAL_INCOME_TAX" checked="checked"></span> <label
-												for="receiptIssueUsageCode_1">개인소득공제용</label></li>
-											<li><span
-												class="ajax_radio radio-applied _click(nmp.front.order.order_sheet.changeReceiptType())"><span
-													class="radio-mark"></span><input type="radio"
-													id="receiptIssueUsageCode_2"
-													class="_receiptIssueUsageCode _payForm"
-													name="receiptInfo.receiptIssueUsageCode"
-													value="BIZ_EXPENSE_PROOF"></span> <label
-												for="receiptIssueUsageCode_2">사업자증빙용(세금계산서용)</label></li>
-										</ul>
-										<div class="cash_receipt cashReceiptInfo _cashReceiptInputArea privateDeductMethod" style="display: block;">
-											<!-- select box -->
-											<div class="select_section">
-												<div id="privateCashReceiptIssueType" class="">
-													<select name="receiptInfo.receiptIssueClassCode"
-														class="selectbox-source privateCashReceiptIssueClassCode _change(nmp.front.order.order_sheet.changeCashReceiptIssueClass()) _payForm"
-														style="display: none;">
-														<option value="PR_CELL_PHONE_NUMBER" selected="">휴대폰번호</option>
-														<option value="PR_SOCIAL_NUMBER">주민등록번호</option>
-														<option value="PR_CASH_RECEIPT_CARD_NUMBER">현금영수증카드번호</option>
-													</select>
-													<div class="selectbox-box">
-														<div class="selectbox-label" unselectable="on">휴대폰번호</div>
-													</div>
-
-													<span class="drop"></span>
-												</div>
-											</div>
-											<span style="display: none;" class="resident_group socialNumber">
-												<input type="text" id="id_num" name="receiptInfo.socialNumberFirst" maxlength="6" 
-													class="inp_txt2 _onlyNumberTarget _payForm" value="">
-												<label for="id_num" class="blind">주민등록번호 앞자리 입력</label> - 
-												<input type="password" id="id_num2" name="receiptInfo.socialNumberSecond" maxlength="7"
-													class="inp_txt2 _onlyNumberTarget _payForm _socialNumberSecond" value="">
-												<label for="id_num2" class="blind">뒷자리 입력</label>
-											</span> 
-											<span style="display: inline;" class="cellphone_group cellPhone">
-												<div class="select_section">
-													<div id="cashReceiptCellPhone" class="">
-														<select id="phon_num" name="receiptInfo.cellPhoneFirst"
-															class="selectbox-source _payForm" style="display: none;">
-															<option value="010" selected="">010</option>
-															<option value="011">011</option>
-															<option value="016">016</option>
-															<option value="017">017</option>
-															<option value="018">018</option>
-															<option value="019">019</option>
-														</select>
-														<div class="selectbox-box">
-															<div class="selectbox-label" unselectable="on">010</div>
-														</div>
-														<span class="drop"></span>
-													</div>
-												</div> - 
-												<input type="text" id="phon_num2" name="receiptInfo.cellPhoneSecond" maxlength="4" 
-													class="inp_txt2 _onlyNumberTarget _payForm" value="2768">
-												<label for="phon_num2" class="blind">중간번호</label> - 
-												<input type="text" id="phon_num3" name="receiptInfo.cellPhoneThird" maxlength="4" 
-													class="inp_txt2 _onlyNumberTarget _payForm" value="8954">
-												<label for="phon_num3" class="blind">뒷번호</label>
-											</span> 
-											<span style="display: none;" class="cardnum_group cashCard">
-												<input type="text" id="receipt" name="receiptInfo.receiptCardFirst" maxlength="4"
-													class="inp_txt2 _onlyNumberTarget _payForm" value="">
-												<label for="receipt" class="blind">현금영수증카드번호 앞번호</label> - 
-												<input type="text" id="receipt2" name="receiptInfo.receiptCardSend" maxlength="4" 
-													class="inp_txt2 _onlyNumberTarget _payForm" value="">
-												<label for="receipt2" class="blind">두번째 번호</label> - 
-												<input type="text" id="receipt3" name="receiptInfo.receiptCardThird" maxlength="4"
-													class="inp_txt2 _onlyNumberTarget _payForm" value="">
-												<label for="receipt3" class="blind">세번째 번호</label> - 
-												<input type="text" id="receipt4" name="receiptInfo.receiptCardFourth" maxlength="7"
-													class="inp_txt2 input_receipt _onlyNumberTarget _payForm" value="">
-												<label for="receipt4" class="blind">네번째 번호</label>
-											</span>
-										</div>
-										<div class="businessDeductMethod cashReceiptInfo cash_receipt"
-											style="display: none;">
-											<input type="hidden" name="receiptInfo.receiptIssueClassCode"
-												class="businessCashReceiptIssueClassCode _payForm"
-												value="BUSINESS_REGISTRATION_NUMBER" disabled=""> <span
-												class="corp_reg">사업자 등록번호</span> <input type="text"
-												title="사업자 등록번호 앞자리" id="order_num"
-												name="receiptInfo.receiptBizNoFirst" maxlength="3" value=""
-												class="inp_txt2 corp_reg_m _onlyNumberTarget _payForm">
-											- <input type="text" title="사업자 등록번호 가운데자리"
-												name="receiptInfo.receiptBizNoSecond" maxlength="2" value=""
-												class="inp_txt2 corp_reg_m _onlyNumberTarget _payForm">
-											- <input type="password" title="사업자 등록번호 뒷자리"
-												name="receiptInfo.receiptBizNoThird" maxlength="5" value=""
-												class="inp_txt2 corp_reg_l _onlyNumberTarget _payForm">
-										</div>
-										<div class="chk_txt cashReceiptInfo">
-											<div class="s_checkbox">
-												<span class="checkbox checkbox-applied"
-													id="updateReceiptInfoCheckbox"> <span
-													class="checkbox-mark"></span> <input type="checkbox"
-													id="chk_m" class="opt _payForm"
-													name="receiptInfo.updateReceiptInfo">
-												</span> <label for="chk_m">현재 현금영수증 신청정보를 저장합니다.</label>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="notice_box _cashReceiptNotice" style="display: none;">
-									<ul>
-										<li class="cashReceiptIssueInfomationsDON" style="display: none">
-											네이버페이 포인트로 결제시 현금영수증 신청을 한 경우라도 충전
-											수단에 따라서 현금영수증 신청이 제외 될 수 있습니다.<br>네이버페이는 
-											<span class="pointcol">신용카드/무통장입금/계좌이체/상품권</span>
-											으로 충전한 네이버페이 포인트 결제 금액에 대해서만 현금영수증을 발급합니다.<br>
-											네이버페이 포인트를 충전한 내역에 대해서는
-											<span class="pointcol">[포인트 &gt; 충전]</span>
-											에서 영수증을 확인할 수 있습니다.
-										</li>
-									</ul>
 								</div>
 							</div>
 							<div class="payment">
@@ -938,5 +652,8 @@
 	<script th:src="@{slick/slick.min.js}"></script>
 	<script th:src="@{js/slider.js}"></script>
 	<script th:src="@{js/sewDetail.js}"></script>
+	<script th:src="@{js/sewPayment.js}"></script>
+	<script th:src="@{js/sewJoin.js}"></script>
+	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </body>
 </html>

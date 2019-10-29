@@ -4,6 +4,7 @@ var sizeSelect = null;
 var optionCount = 0;
 var totalAmount = 0;
 var totalPrice = 0;
+var totalListPrice = 0;
 
 $(document).ready(function(){
 	prodNo = $("#prodNo").val();	
@@ -84,11 +85,14 @@ $('#sizeOption').change(function() {
 	sizeSelect = $(this).val();
 	if(sizeSelect != null){
 		var sum = 0;
-		var curAmount = Number($(".totalCount").text());
+		var listPSum = 0;
+		var curAmount = Number($(".totalAmount").text());
 		var curTotal = $("#totalPrice").val();
+		var curTotalListP = $("#totalListPrice").val();
 		var itemName = colorSelect + " / " + sizeSelect;	
 		var itemArr = $(".itemName").get();
 		var prodPrice = $("#prodPrice").val();
+		var prodListP = $("#prodListP").val();
 		var prodPriceTxt = numberFormat(prodPrice);	
 		if(itemArr.length>0){
 			var itemStat = itemArr.contains(itemName);
@@ -106,12 +110,13 @@ $('#sizeOption').change(function() {
 								<div class="itemRow">
 									<div class="itemCounter">
 										<button type="button" class="pmBtn minus" onclick="minusAmount(this)">-</button>
-										<input type="number" name="prodAmount" class="itemAmount" value="1" onkeyup="cal(this, this.form.prodPrice)">
+										<input type="number" name="prodAmount" class="itemAmount" value="1" onkeyup="cal(this, this.form.prodPrice, this.form.prodListP)">
 										<button type="button" class="pmBtn plus" onclick="plusAmount(this)">+</button>
 									</div>
 									<span class="itemPriceBox">
 										<span class="itemPrice">${prodPriceTxt}</span>원
 										<input type="hidden" class="sumPrice" value="${prodPrice}" readonly>
+										<input type="hidden" class="sumListPrice" value="${prodListP}" readonly>
 										<i class="far fa-trash-alt delBtn" onclick="deleteBox(this)"></i>
 									</span>
 								</div>
@@ -119,11 +124,13 @@ $('#sizeOption').change(function() {
 						</li>
 					`		
 			    );
-				optionCount += 1;
-				$(".totalAmount").text(curAmount+=1);			
-				sum = Number(curTotal)+Number(prodPrice);				
+				optionCount += 1;				
+				$(".totalAmount").text(curAmount+=1);				
+				sum = Number(curTotal)+Number(prodPrice);	
+				listPSum = Number(curTotalListP)+Number(prodListP);
 				$(".totalPriceTxt").text(numberFormat(sum));
 				$("#totalAmount").val(curAmount);
+				$("#totalListPrice").val(listPSum)
 				$("#totalPrice").val(sum);
 			}	
 		}else{
@@ -138,12 +145,13 @@ $('#sizeOption').change(function() {
 							<div class="itemRow">
 								<div class="itemCounter">
 									<button type="button" class="pmBtn minus" onclick="minusAmount(this)">-</button>
-									<input type="number" name="prodAmount" class="itemAmount" value="1" onkeyup="cal(this, this.form.prodPrice)">
+									<input type="number" name="prodAmount" class="itemAmount" value="1" onkeyup="cal(this, this.form.prodPrice, this.form.prodListP)">
 									<button type="button" class="pmBtn plus" onclick="plusAmount(this)">+</button>
 								</div>
 								<span class="itemPriceBox">
 									<span class="itemPrice">${prodPriceTxt}</span>원
 									<input type="hidden" class="sumPrice" value="${prodPrice}" readonly>
+									<input type="hidden" class="sumListPrice" value="${prodListP}" readonly>
 									<i class="far fa-trash-alt delBtn" onclick="deleteBox(this)"></i>
 								</span>
 							</div>
@@ -153,9 +161,11 @@ $('#sizeOption').change(function() {
 		    );
 			optionCount += 1;
 			$(".totalAmount").text(curAmount+=1);
-			sum = Number(curTotal)+Number(prodPrice);		
+			sum = Number(curTotal)+Number(prodPrice);
+			listPSum = Number(curTotalListP)+Number(prodListP);
 			$(".totalPriceTxt").text(numberFormat(sum));
 			$("#totalAmount").val(curAmount);
+			$("#totalListPrice").val(listPSum)
 			$("#totalPrice").val(sum);
 		}	
 	}
@@ -187,17 +197,21 @@ $('#addCart').click(function(e){
 		if($("#sizeOption").val()==null){
 			$('.error').css("display", "block");
 		}else if ($("#sizeOption").val()!=null){
-			$('.goCartPop').css("display", "block");
-			$('.goMyCart').click(function(e){
-				$('form').attr("action", "addCart.do");
-				$("form").unbind("submit").submit();		
-			});
-			$('.closeCartPop').click(function(e){				
-				$('form').attr("target", "iframe");
-				$('form').attr("action", "addCart.do");
-				$("form").unbind("submit").submit();
-				$('.goCartPop').css("display", "none");
-			});
+			if(optionCount!=0){
+				$('.goCartPop').css("display", "block");
+				$('.goMyCart').click(function(e){
+					$('form').attr("action", "addCart.do");
+					$("form").unbind("submit").submit();		
+				});
+				$('.closeCartPop').click(function(e){				
+					$('form').attr("target", "iframe");
+					$('form').attr("action", "addCart.do");
+					$("form").unbind("submit").submit();
+					$('.goCartPop').css("display", "none");
+				});
+			}else{
+				$('.error').css("display", "block");
+			}			
 		}
 	}
 });
@@ -206,37 +220,46 @@ function closePop(self){
 	$(self).parent('div').parent('div').css("display", "none");
 }
 
-function cal(amount, price) {
+function cal(amount, price, listPrice) {
 	totalAmount = 0;
 	totalPrice = 0;
+	totalListPrice = 0;	
 	if($(amount).val()==0){
 		$($(amount).parent("div").parent("div").parent("div").parent("li")).remove();		
-		optionCount-=1;
+		optionCount-=1;		
 		for(var n=0;n<optionCount;n++){		
 			totalAmount += Number(document.getElementsByClassName('itemAmount')[n].value);
 			totalPrice += Number(document.getElementsByClassName('sumPrice')[n].value);
-		}
-		$(".totalAmount").text(totalAmount);
-		$(".totalPriceTxt").text(numberFormat(totalPrice));
-//		$("#totalAmount").val(curAmount);/
-	}else{
-		var total = Number($(amount).val()*$(price).val());
-		$(amount).parent("div").parent("div").children(".itemPriceBox").children(".itemPrice").text(numberFormat(total));
-		$(amount).parent("div").parent("div").children(".itemPriceBox").children(".sumPrice").val(total);
-		for(var n=0;n<optionCount;n++){		
-			totalAmount += Number(document.getElementsByClassName('itemAmount')[n].value);
-			totalPrice += Number(document.getElementsByClassName('sumPrice')[n].value);
+			totalListPrice += Number(document.getElementsByClassName('sumListPrice')[n].value);
 		}
 		$(".totalAmount").text(totalAmount);
 		$(".totalPriceTxt").text(numberFormat(totalPrice));
 		$("#totalAmount").val(curAmount);
-		$("#totalPrice").val(Number(sum));
+		$("#totalPrice").val(Number(totalPrice));
+		$("#totalListPrice").val(Number(totalListPrice));
+	}else{
+		var total = Number($(amount).val()*$(price).val());
+		var totalList = Number($(amount).val()*$(listPrice).val());
+		$(amount).parent("div").parent("div").children(".itemPriceBox").children(".itemPrice").text(numberFormat(total));
+		$(amount).parent("div").parent("div").children(".itemPriceBox").children(".sumPrice").val(total);
+		$(amount).parent("div").parent("div").children(".itemPriceBox").children(".sumListPrice").val(totalList);
+		for(var n=0;n<optionCount;n++){		
+			totalAmount += Number(document.getElementsByClassName('itemAmount')[n].value);
+			totalPrice += Number(document.getElementsByClassName('sumPrice')[n].value);
+			totalListPrice += Number(document.getElementsByClassName('sumListPrice')[n].value);
+		}
+		$(".totalAmount").text(totalAmount);
+		$(".totalPriceTxt").text(numberFormat(totalPrice));
+		$("#totalAmount").val(curAmount);
+		$("#totalPrice").val(Number(totalPrice));
+		$("#totalListPrice").val(Number(totalListPrice));
 	}	
 }
 
 function deleteBox(self) {
 	var prevAmount = $(self).parent("span").parent("div").children(".itemCounter").children(".itemAmount").val();
 	var prevPrice = $(self).parent("span").children(".sumPrice").val();
+	var prevListPrice = $(self).parent("span").children(".sumListPrice").val();
 	$($(self).parent("span").parent("div").parent("div").parent("li")).remove();	
 	optionCount-=1;
 	if(optionCount==0){
@@ -244,11 +267,13 @@ function deleteBox(self) {
 		$(".totalPriceTxt").text(0);
 		$("#totalAmount").val(0);
 		$("#totalPrice").val(0);
+		$("#totalListPrice").val(0);
 	}else{
 		$(".totalAmount").text(totalAmount-prevAmount);
 		$(".totalPriceTxt").text(numberFormat(totalPrice-prevPrice));
 		$("#totalAmount").val(totalAmount-prevAmount);
 		$("#totalPrice").val(totalPrice-prevPrice);
+		$("#totalListPrice").val(totalListPrice-prevListPrice);
 	}
 }
 
@@ -263,29 +288,36 @@ function removeComma(str) {
 function plusAmount(self) {
 	totalAmount = 0;
 	totalPrice = 0;
-	var cur = Number($(self).prev().val());
+	totalListPrice = 0;
+	var cur = Number($(self).prev().val());	
 	var prev = cur;
 	$(self).prev().val(cur+=1);
 	
 	var oriPrice = Number($(self).parent("div").next("span").children(".sumPrice").val()/prev);
+	var oriListPrice = Number($(self).parent("div").next("span").children(".sumListPrice").val()/prev);
 	
 	var total = Number(cur * oriPrice);
+	var totalListPrice = Number(cur * oriListPrice);
 	$(self).parent("div").next("span").children(".itemPrice").text(numberFormat(total));
 	$(self).parent("div").next("span").children(".sumPrice").val(total);
+	$(self).parent("div").next("span").children(".sumListPrice").val(totalListPrice);
 	
 	for(var n=0;n<optionCount;n++){		
 		totalAmount += Number(document.getElementsByClassName('itemAmount')[n].value);
 		totalPrice += Number(document.getElementsByClassName('sumPrice')[n].value);
+		totalListPrice += Number(document.getElementsByClassName('sumListPrice')[n].value);
 	}
 	$(".totalAmount").text(totalAmount);
 	$(".totalPriceTxt").text(numberFormat(totalPrice));
 	$("#totalAmount").val(totalAmount);
 	$("#totalPrice").val(totalPrice);
+	$("#totalListPrice").val(totalListPrice);
 }
 
 function minusAmount(self) {
 	totalAmount = 0;
 	totalPrice = 0;
+	totalListPrice = 0;
 	var cur = Number($(self).next().val());
 	var prev = cur;
 	$(self).next().val(cur-=1);
@@ -296,25 +328,34 @@ function minusAmount(self) {
 		for(var n=0;n<optionCount;n++){		
 			totalAmount += Number(document.getElementsByClassName('itemAmount')[n].value);
 			totalPrice += Number(document.getElementsByClassName('sumPrice')[n].value);
+			totalListPrice += Number(document.getElementsByClassName('sumListPrice')[n].value);
 		}
 		$(".totalAmount").text(totalAmount);
 		$(".totalPriceTxt").text(numberFormat(totalPrice));
 		$("#totalAmount").val(totalAmount);
 		$("#totalPrice").val(totalPrice);
+		$("#totalListPrice").val(totalListPrice);
 	} else {
 		var oriPrice = Number($(self).parent("div").next("span").children(".sumPrice").val()/prev);
+		var oriListPrice = Number($(self).parent("div").next("span").children(".sumListPrice").val()/prev);
+		
 		var total = Number(cur * oriPrice);
+		var totalList = Number(cur * oriListPrice);		
+		
 		$(self).parent("div").next("span").children(".itemPrice").text(numberFormat(total));
 		$(self).parent("div").next("span").children(".sumPrice").val(total);
+		$(self).parent("div").next("span").children(".sumListPrice").val(totalList);
 		
-		for(var n=0;n<optionCount;n++){		
+		for(var n=0;n<optionCount;n++){
 			totalAmount += Number(document.getElementsByClassName('itemAmount')[n].value);
 			totalPrice += Number(document.getElementsByClassName('sumPrice')[n].value);
-		}
+			totalListPrice += Number(document.getElementsByClassName('sumListPrice')[n].value);
+		}		
 		$(".totalAmount").text(totalAmount);
 		$(".totalPriceTxt").text(numberFormat(totalPrice));
 		$("#totalAmount").val(totalAmount);
 		$("#totalPrice").val(totalPrice);
+		$("#totalListPrice").val(totalListPrice);		
 	}
 }
 

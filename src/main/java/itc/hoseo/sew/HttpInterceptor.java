@@ -25,7 +25,11 @@ public class HttpInterceptor extends HandlerInterceptorAdapter {
 				response.sendRedirect("/sewChangePw.do");
 				return false;
 			}
-		}
+		} 
+//		else {
+//			response.sendRedirect("/login.do");
+//			return false;
+//		}
 		
 		return true;				
 	}
