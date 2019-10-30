@@ -174,32 +174,33 @@ $('#sizeOption').change(function() {
 $('#cantAddCart').click(function(e){
 	e.preventDefault();
 	$('.goLoginPop').css("display", "block");	
+	$('html').animate({ scrollTop : 0}, 600);
 });
 
 $('.goLogin').click(function(){
 	$(location).attr("href", "login.do");
 });
 
-$('.goMyCart').click(function(e){
-	stat = 1;				
-});
-
-$('.closeCartPop').click(function(e){				
-	stat = 0;
-});
-var stat = 0;
+function closeLoginPop(self){
+	$(self).parent('div').parent('div').parent('div').css("display", "none");
+}
 
 $('#addCart').click(function(e){	
 	e.preventDefault();
 	if($("#colorOption").val()==null){
 		$('.error').css("display", "block");
+		$('html').animate({ scrollTop : 0}, 600);
 	}else{		
 		if($("#sizeOption").val()==null){
 			$('.error').css("display", "block");
+			$("#colorOption").val("");
+			$('html').animate({ scrollTop : 0}, 600);
 		}else if ($("#sizeOption").val()!=null){
 			if(optionCount!=0){
 				$('.goCartPop').css("display", "block");
+				$('html').animate({ scrollTop : 0}, 600);
 				$('.goMyCart').click(function(e){
+					$('form').attr("target", "");
 					$('form').attr("action", "addCart.do");
 					$("form").unbind("submit").submit();		
 				});
@@ -211,6 +212,30 @@ $('#addCart').click(function(e){
 				});
 			}else{
 				$('.error').css("display", "block");
+				$('html').animate({ scrollTop : 0}, 600);
+			}			
+		}
+	}
+});
+
+$('#buyBtn').click(function(e){	
+	e.preventDefault();
+	if($("#colorOption").val()==null){
+		$('.error').css("display", "block");
+		$('html').animate({ scrollTop : 0}, 600);
+	}else{		
+		if($("#sizeOption").val()==null){
+			$('.error').css("display", "block");
+			$("#colorOption").val("");
+			$('html').animate({ scrollTop : 0}, 600);
+		}else if ($("#sizeOption").val()!=null){
+			if(optionCount!=0){
+				$('html').animate({ scrollTop : 0}, 600);
+				$('form').attr("action", "sewDirectPayment.do");
+				$("form").unbind("submit").submit();		
+			}else{
+				$('.error').css("display", "block");
+				$('html').animate({ scrollTop : 0}, 600);
 			}			
 		}
 	}

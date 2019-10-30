@@ -147,7 +147,6 @@ input[id="allAgree"]+ label:before {
 
     content: "";  
     display: inline-block;  
-  
     width: 20px;  
     height: 20px;  
   
@@ -161,7 +160,6 @@ input[id="allAgree"]+ label:before {
 }
 
 input[id="allAgree"]:checked + label:before { 
-
     content: "\2713";  /* 체크모양 */
     text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);  
     font-size: 18px; 

@@ -108,4 +108,24 @@ public class CartController {
 		return "sewProduct/sewCartPaymentPage";
 	}
 	
+	@PostMapping("/sewDirectPayment.do")	
+	public String goDIrectPay(ModelMap m, Cart c, CartOption cp, HttpServletRequest r, HttpSession session) {
+		List<CartOption> optionList = new ArrayList<CartOption>();
+		String [] prodColor = r.getParameterValues("prodColor");
+		String [] prodSize = r.getParameterValues("prodSize");
+		String [] prodAmount = r.getParameterValues("prodAmount");		
+		Member mem = (Member)session.getAttribute("mem");
+		String memId = mem.getMemId();		
+		c.setMemId(memId);		
+		for(int i = 0; i < prodColor.length; i++) {		
+			cp.setProdColor(prodColor[i]);
+			cp.setProdSize(prodSize[i]);
+			cp.setProdAmount(Integer.parseInt(prodAmount[i]));
+			optionList.add(i, cp);			
+		}
+		c.setOptionList(optionList);
+		m.put("selectList", c);
+		return "sewProduct/sewDirectPaymentPage";
+	}
+	
 }

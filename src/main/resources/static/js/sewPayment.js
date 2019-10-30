@@ -1,5 +1,25 @@
 cal();
 
+$("#all_agree").click(function(){
+	if($(this).is(':checked')){
+		$("#buy_agree2").prop("checked", true);
+		chkStat = 1;
+	}else{
+		$("#buy_agree2").prop("checked", false);
+		chkStat = 0;
+	}
+});
+
+$("#buy_agree2").click(function(){
+	if($(this).is(":checked")){
+		$("#all_agree").prop("checked", true);	
+		chkStat = 1;
+	}else{
+		$("#all_agree").prop("checked", false);
+		chkStat = 0;
+	}
+});
+
 $("input[id=pay0]").click(function () {	
 	$(".creditCard").css("display", "block");
 	$(".virtualAccount").css("display", "none");
@@ -41,8 +61,7 @@ function cal(){
 	var totalPoint = 0;
 	var totalDiscount = 0;
 	$('input[type="hidden"].totalProdPrice').each(function () {
-	    totalPrice += Number($(this).val());
-	    totalPoint += Math.floor(Number($(this).val()*0.005));
+	    totalPrice += Number($(this).val());	    
 	});
 	
 	$('input[type="hidden"].totalProdListPrice').each(function () {
@@ -53,17 +72,16 @@ function cal(){
 		totalDeli += Number($(this).val());
 	});
 	
+	totalPoint = Math.floor(Number(totalPrice*0.01));
+	
 	totalDiscount = totalProdListPrice-totalPrice;
 	
 	$(".totalDiscountPrice").text(numberFormat(totalDiscount));
 	$(".prePoint").text(numberFormat(totalPoint));
+	$(".accPoint").val(totalPoint);
 	$(".totalPrice").text(numberFormat(totalPrice));
 	
-	if(totalDeli==0){
-		$(".totalDeliveryFee").text("무료");
-	} else {
-		$(".totalDeliveryFee").text(numberFormat(totalDeli));
-	}
+	$(".totalDeliveryFee").text(numberFormat(totalDeli));
 	$(".totalOrderListPrice").text(numberFormat(totalProdListPrice));
 	$(".totalValue").val(totalPrice);
 	$(".oriTotalValue").val(totalPrice);
@@ -71,16 +89,19 @@ function cal(){
 	$(".totalDeliValue").val(totalDeli);
 }
 
-$(".pointAllUseButton").click(function () {	
+$(".pointAllUseButton").click(function (e) {	
+	e.preventDefault();
 	var oriTotalPrice = $(".oriTotalValue").val();	
-	if( Number($('.memPoint').val()) > Number($(".totalValue").val()*0.5) ){
-		$('.usedMemPoint').val(Number($(".totalValue").val()*0.5));
-		$('.useMemPoint').val(numberFormat(Number($(".totalValue").val()*0.5)));
-		$('.usingMemPoint').text(numberFormat(Number($(".totalValue").val()*0.5)));
+	if( Number($('.memPoint').val()) > Number($(".totalValue").val()*0.2) ){
+		$('.usedMemPoint').val(Number($(".totalValue").val()*0.2));
+		$('.useMemPoint').val(numberFormat(Number($(".totalValue").val()*0.2)));
+		$('.usingMemPoint').text(numberFormat(Number($(".totalValue").val()*0.2)));
+		$(".remainMemPoint").val(Number($(".memPoint").val())-Number($(".usedMemPoint").val()));
 	}else{
 		$('.usedMemPoint').val($('.memPoint').val());
 		$('.useMemPoint').val(numberFormat($('.memPoint').val()));
 		$('.usingMemPoint').text(numberFormat($('.memPoint').val()));
+		$(".remainMemPoint").val(Number($(".memPoint").val())-Number($(".usedMemPoint").val()));
 	}
 	$(".totalValue").val(Number(oriTotalPrice)-Number($('.usedMemPoint').val()));
 	$(".totalPrice").text(numberFormat($(".totalValue").val()));
@@ -92,17 +113,19 @@ function inputNumberFormat(obj) {
 	if(obj.value==0){
 		obj.value='';
 		$('.usedMemPoint').val(0);
-		$('.usingMemPoint').text(0);
+		$('.usingMemPoint').text(0);		
 		$(".totalValue").val(Number(oriTotalPrice)-0);
 		$(".totalPrice").text(numberFormat($(".totalValue").val()));
+		$(".remainMemPoint").val(Number($(".memPoint").val())-Number($(".usedMemPoint").val()));
 	}else{
-		if(Number($('.memPoint').val()) > Number($(".totalValue").val()*0.5)){
-			usedMemPoint = Number($(".totalValue").val()*0.5);
+		if(Number($('.memPoint').val()) > Number($(".totalValue").val()*0.2)){
+			usedMemPoint = Number($(".totalValue").val()*0.2);
 			$('.usedMemPoint').val(usedMemPoint);
 			$('.useMemPoint').val(numberFormat(usedMemPoint));
 			$('.usingMemPoint').text(numberFormat(usedMemPoint));
 			$(".totalValue").val(Number(oriTotalPrice)-usedMemPoint);
 			$(".totalPrice").text(numberFormat($(".totalValue").val()));
+			$(".remainMemPoint").val(Number($(".memPoint").val())-Number(usedMemPoint));
 		}else{
 			if(Number(uncomma(obj.value))>Number($('.memPoint').val())){
 				usedMemPoint = $('.memPoint').val();
@@ -111,6 +134,7 @@ function inputNumberFormat(obj) {
 				$('.usingMemPoint').text(numberFormat(usedMemPoint));
 				$(".totalValue").val(Number(oriTotalPrice)-usedMemPoint);
 				$(".totalPrice").text(numberFormat($(".totalValue").val()));
+				$(".remainMemPoint").val(Number($(".memPoint").val())-Number(usedMemPoint));
 			}else{
 				usedMemPoint = uncomma(obj.value);
 				$('.usedMemPoint').val(uncomma(obj.value));
@@ -118,6 +142,7 @@ function inputNumberFormat(obj) {
 				$('.usingMemPoint').text(obj.value);
 				$(".totalValue").val(Number(oriTotalPrice)-Number(usedMemPoint));
 				$(".totalPrice").text(numberFormat($(".totalValue").val()));
+				$(".remainMemPoint").val(Number($(".memPoint").val())-Number(usedMemPoint));
 			}
 		}
 	}
@@ -133,17 +158,81 @@ function uncomma(str) {
     return str.replace(/[^\d]+/g, '');
 }
 
+var recvStat = 0;
+var phStat = 0;
+var addrStat = 0;
+var cardStat = 0;
+var chkStat = 0;
+
+
 $(".btn_payment").click(function(e){
 	e.preventDefault();	
-	if($(".deliZipCode").val()==""||$(".deliAddr1").val()==""||$(".deliAddr2").val()==""){
-		$("#addrChkBox").show();		
-	}else{
-		$("#addrChkBox").hide();
+	if(recvStat==0||phStat==0||addrStat==0||cartStat==0||chkStat==0){
+		$(".error").show();		
+		$('html').animate({ scrollTop : 0}, 600);
 	}
-	if($(".receiverName").val()==null){
-		
+	if($(".cardCompanyTypeCode").val()==null){
+		$("#cardChkBox").show();
+		cardStat = 0;
+	} else {
+		$("#cardChkBox").hide();
+		cardStat = 1;
 	}
 });
+
+$(".receiverName").on("change keyup paste", function(){
+	if($(".receiverName").val()==""){
+		$("#receiverChkBox").show();
+		recvStat = 0;
+	}else{
+		$("#receiverChkBox").hide();
+		recvStat = 1;
+	}
+});
+
+$(".middleNum").on("change keyup paste", function(){
+	if( $(".middleNum").val()=="" || $(".endNum").val()=="" ){
+		$("#phoneChkBox").show();
+		phStat = 0;
+	}else{
+		$("#phoneChkBox").hide();
+		phStat = 1;
+	}
+});
+
+$(".endNum").on("change keyup paste", function(){
+	if($(".middleNum").val()==""||$(".endNum").val()==""){
+		$("#phoneChkBox").show();
+		phStat = 0;
+	}else{
+		$("#phoneChkBox").hide();
+		phStat = 1;
+	}
+});
+
+$(".addr_input2").on("change keyup paste", function(){
+	if($(".zipcode").val()==""||$(".addr_input1").val()==""||$(".addr_input2").val()==""){
+		$("#addrChkBox").show();
+		addrStat = 0;
+	}else{
+		$("#addrChkBox").hide();
+		addrStat = 1;
+	}
+});
+
+$(".cardCompanyTypeCode").on("change", function(){
+	if($(".cardCompanyTypeCode").val()==null){
+		$("#cardChkBox").show();
+		cardStat = 0;
+	} else {
+		$("#cardChkBox").hide();
+		cardStat = 1;
+	}
+});
+
+function closePop(self){
+	$(self).parent('div').parent('div').css("display", "none");
+}
 
 //Daum postCode api
 function findPostCode() {

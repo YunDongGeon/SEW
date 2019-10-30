@@ -12,7 +12,6 @@ public class Cart {
 	private String prodName;
 	private int prodDeli;
 	private String prodThumbName;
-	private int prodAmount;
 	private int totalListPrice;
 	private int totalPrice;
 	private int totalAmount;

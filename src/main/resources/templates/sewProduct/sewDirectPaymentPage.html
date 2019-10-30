@@ -53,16 +53,12 @@
 				<div class="payTit">
 					<h2>장바구니</h2>
 					<ol>
-						<li>
-							<span>01</span> 장바구니 
-							<span class="arrows">></span>
-						</li>
 						<li class="onPage">
-							<span>02</span> 주문/결제 
+							<span>01</span> 주문/결제 
 							<span class="arrows">></span>
 						</li>
 						<li>
-							<span>03</span>
+							<span>02</span>
 							주문완료
 						</li>
 					</ol>
@@ -99,7 +95,6 @@
 														<strong th:text="${buyList.prodName}"></strong>
 													</a>
 													<input type="hidden" name="prodNo" th:value="${buyList.prodNo}">
-													<input type="hidden" name="cartNo" th:value="${buyList.cartNo}">
 													<div class="option">
 														<ul class="option_list">
 															<li th:each="optionList : ${buyList.optionList}"

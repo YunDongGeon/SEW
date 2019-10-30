@@ -53,11 +53,13 @@
 					<input type="hidden" name="prodNo" id="prodNo" th:value="${prodDetail.prodNo}" readOnly>		
 					<div class="productImgBox">
 						<img th:src="@{'/prodthumb/'+${prodDetail.prodThumbName}}">
+						<input type="hidden" name="prodThumbName" th:value="${prodDetail.prodThumbName}">
 					</div>
 					<div class="productBox">
 						<hr>
 						<div class="prodHeader">
 							<h3 th:text="${prodDetail.prodName}"></h3>
+							<input type="hidden" name="prodName" th:value="${prodDetail.prodName}">
 						</div>
 						<div class="prodDetailList">
 							<table>
@@ -83,6 +85,7 @@
 									<th>배송비</th>
 									<td>
 										<span class="format-money" th:text="${prodDetail.prodDeli}"></span> <span>원 / 주문시결제(선결제)</span>
+										<input type="hidden" name="prodDeli" th:value="${prodDetail.prodDeli}">
 									</td>
 								</tr>
 								<tr>
@@ -133,7 +136,7 @@
 								<span class="icon-shopping_cart"></span>장바구니
 							</button>
 							<button th:unless="${session.mem!=null}" id="cantAddCart" class="addCart"><span class="icon-shopping_cart"></span>장바구니</button>							
-							<input type="submit" name="buyBtn" value="결제하기">
+							<input type="submit" name="buyBtn" value="결제하기" id="buyBtn">
 						</div>
 					</div>					
 				</form>
@@ -169,7 +172,7 @@
 			        <strong class="title">로그인이 필요합니다.</strong>
 			        <div class="button_wrap">
 			            <a href="#" class="btn bg_white goLogin" role="button">로그인</a>
-			            <a href="#" class="btn bg_white" role="button" onclick="closePop(this)">닫기</a>
+			            <a href="#" class="btn bg_white" role="button" onclick="closeLoginPop(this)">닫기</a>
 			        </div>
 			        <button type="button" class="button_close" onclick="closePop(this)"></button>
 			    </div>

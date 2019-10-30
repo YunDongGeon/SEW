@@ -31,7 +31,7 @@ function cal(){
 	
 	for(var i=0;i<$('.prodPrice').get().length;i++){
 		totalPrice += Number(removeComma($('.prodPrice')[i].innerHTML));
-		totalPoint += Math.floor(Number(removeComma($('.prodPrice')[i].innerHTML))*0.005);
+		totalPoint += Math.floor(Number(removeComma($('.prodPrice')[i].innerHTML))*0.01);
 	}
 	$(".totalPoint").text(numberFormat(totalPoint));
 	$(".totalPrice").text(numberFormat(totalPrice));
