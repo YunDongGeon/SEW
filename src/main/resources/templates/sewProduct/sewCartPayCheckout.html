@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Sew</title>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link
+	href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700"
+	rel="stylesheet">
+<link href="http://allfont.net/allfont.css?fonts=agency-fb"
+	rel="stylesheet" type="text/css" />
+<link th:href="@{vendor/fontawesome-free/css/all.min.css}"
+	rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300&display=swap" rel="stylesheet">
+<link href="http://allfont.net/allfont.css?fonts=agency-fb" rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Teko:300&display=swap&subset=devanagari,latin-ext" rel="stylesheet">
+<link rel="icon" th:href="@{img/logo/favicon.png}">
+<link rel="stylesheet" th:href="@{css/open-iconic-bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{css/animate.css}">
+<link rel="stylesheet" th:href="@{css/owl.carousel.min.css}">
+<link rel="stylesheet" th:href="@{css/owl.theme.default.min.css}">
+<link rel="stylesheet" th:href="@{css/magnific-popup.css}">
+<link rel="stylesheet" th:href="@{css/aos.css}">
+<link rel="stylesheet" th:href="@{css/ionicons.min.css}">
+<link rel="stylesheet" th:href="@{css/bootstrap-datepicker.css}">
+<link rel="stylesheet" th:href="@{css/jquery.timepicker.css}">
+<link rel="stylesheet" th:href="@{css/flaticon.css}">
+<link rel="stylesheet" th:href="@{css/icomoon.css}">
+<link rel="stylesheet" th:href="@{css/style.css}">
+<link rel="stylesheet" th:href="@{slick/slick.css}">
+<link rel="stylesheet" th:href="@{slick/slick-theme.css}">
+<link rel="stylesheet" th:href="@{css/slider.css}">
+<link rel="stylesheet" th:href="@{css/nav.css}">
+<link rel="stylesheet" th:href="@{css/join.css}">
+<link rel="stylesheet" th:href="@{css/sewMyPage.css}">
+<link rel="stylesheet" th:href="@{css/sewPayment.css}">
+<link rel="stylesheet" th:href="@{css/sewPayCheckout.css}">
+
+</head>
+<body>
+	<nav
+		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
+		id="ftco-navbar" th:replace="sewNav::nav"></nav>
+	<!-- END nav -->
+
+	<!-- Join Form -->
+	<section class="ftco-section ftco-product">
+		<div class="container">
+			<div class="order_sc">
+				<div class="payTit">
+					<h2>주문/결제</h2>
+					<ol>
+						<li>
+							<span>01</span> 장바구니 
+							<span class="arrows">></span>
+						</li>
+						<li>
+							<span>02</span> 주문/결제 
+							<span class="arrows">></span>
+						</li>
+						<li class="onPage">
+							<span>03</span>
+							주문완료
+						</li>
+					</ol>
+				</div>		
+				<div class="order_content">		
+					<div class="orderendtxt_wrap">
+						<div class="orderendtxt_content">
+							<p class="txt_oe">
+								<span>
+									주문이 정상적으로 완료되었습니다.
+								</span>
+							</p>
+						</div>
+					</div>
+					<div class="orderend_info">
+						<div class="info_wrap">
+							<h4>주문번호</h4>
+							<a href="#" class="order_number">
+								<strong>2019103137182610</strong>
+							</a><!--N=a:ctm.ordnumber-->
+				        </div>			
+						<div class="info_wrap">
+							<h4>배송지정보</h4>
+							<div class="info_dsc">
+								<ul>
+									<li>윤동건</li>
+									<li>
+				                   		010-9177-8955
+									</li>
+									<li>
+										(04948) 서울특별시 광진구 영화사로 87-12 (구의동, 세인트힐 빌리지)    102동 501호
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="info_wrap">
+							<h4>결제정보</h4>
+							<div class="info_dsc">
+									<ul>
+										<li>결제수단</li>
+										<li>카드사</li>
+										<li>일시불</li>
+									</ul>
+							</div>
+						</div>
+						<div class="info_wrap">
+							<h4>적립된 적립금</h4>
+							<div class="info_dsc">
+								<a href="#" class="order_number">
+									<strong>0</strong>원
+								</a>
+							</div>
+				        </div>				        
+					</div>
+					<div class="order_bill">
+						<div class="bill_content">
+							<span class="sp_order logo">
+								<img th:src="@{img/logo/logo.png}">
+							</span>
+							<div class="scroll">
+								<ul class="product_list">
+									<li class="product_item">
+										<a href="#">
+											<img src="https://ssl.pstatic.net/checkout.phinf/20190816_291/1565951802313KeyNf_GIF/2000474258420.gif?type=m80" alt="[1+1+1]티셔츠 3종 세트" width="74" height="74">
+											<span class="mask"></span>
+										</a>
+										<div class="product_dsc">
+											<a href="#">
+												<p>
+													[1+1+1]티셔츠 3종 세트
+												</p>
+											</a><!--N=a:ctm.product-->
+											<ul class="option_list">
+												<li>
+													[세트]클렌즈 트임 오버핏 긴팔티, 색상=[NCBTS025]코코아, 사이즈=M_1(95~100)(1개) | [오늘발송]구김없는 베이직 오버핏 긴팔티, 색상=[ZYTS118]그린-오늘발송, 사이즈=FREE(95~105)(1개) | [오늘발송]10컬러 리버풀 오버핏 긴팔티, 색상=[ZYTS121]화이트, 사이즈=L_2(95~100)(1개)/1개
+												</li>
+											</ul>
+											<strong class="price">
+												<em>19,800</em>원
+											</strong>
+										</div>
+									</li>
+								</ul>
+							</div>
+							<ul class="calc_list">
+								<li>
+									<strong>총 상품금액</strong>
+									<p>
+										<em>19,800</em>원
+									</p>
+								</li>
+								<li>
+									<strong>배송비</strong>
+									<p>
+										<span>(+) </span> 
+										<em>3,000</em>원
+									</p>
+								</li>
+								<li>
+									<strong>할인금액</strong>
+									<p>
+										<span>(-) </span> 
+										<em>0</em>원
+									</p>
+								</li>
+								<li>
+									<strong>포인트</strong>
+									<p>
+										<span>(-) </span> 
+										<em>0</em>원
+									</p>
+								</li>
+							</ul>
+							<div class="total_price">
+								<strong>결제금액</strong>
+								<div class="sum">
+									<em class="format-money">99999</em>
+									<span class="txt">원</span>
+								</div>
+							</div>
+						</div>
+					</div>					
+				</div>
+				<div class="payment_agree_wrap">
+					<button class="btn_payment">
+						<span class="txt_payment">구매내역 보기</span>
+					</button>
+					<button class="btn_payment">
+						<span class="txt_payment">쇼핑 홈 가기</span>
+					</button>
+					<div class="shdw_bottom"></div>
+				</div>
+				<div class="_layer_order_check layerpop_wrap error" style="display: none; z-index: 10000; left: 791.5px; top: 400px;" tabindex="-1">
+				    <div class="layer_inner">
+				        <strong class="title _order_check_comment">
+				        	누락된 <span class="fc_point">정보</span>또는  <span class="fc_point">약관 동의</span>가 있습니다.<br>
+				        	 <span class="fc_point">정보</span>와 
+				        	 <span class="fc_point">약관 동의</span>를 
+				        	 <span class="fc_point">확인</span>해 주세요.
+			        	</strong>
+				        <button type="button" class="button_close" onclick="closePop(this)"></button>
+				    </div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- END Join Form -->
+
+	<footer th:replace="sewFooter::footer"
+		class="ftco-footer bg-light ftco-section"></footer>
+	<!-- loader -->
+	<div id="ftco-loader" class="show fullscreen">
+		<svg class="circular" width="48px" height="48px">
+			<circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+			<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
+		</svg>
+	</div>
+	<script th:src="@{js/jquery.min.js}"></script>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script th:src="@{js/popper.min.js}"></script>
+	<script th:src="@{js/bootstrap.min.js}"></script>
+	<script th:src="@{js/jquery.easing.1.3.js}"></script>
+	<script th:src="@{js/jquery.waypoints.min.js}"></script>
+	<script th:src="@{js/jquery.stellar.min.js}"></script>
+	<script th:src="@{js/owl.carousel.min.js}"></script>
+	<script th:src="@{js/jquery.magnific-popup.min.js}"></script>
+	<script th:src="@{js/aos.js}"></script>
+	<script th:src="@{js/jquery.animateNumber.min.js}"></script>
+	<script th:src="@{js/bootstrap-datepicker.js}"></script>
+	<script th:src="@{js/scrollax.min.js}"></script>
+	<script th:src="@{https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false}"></script>
+	<script th:src="@{js/google-map.js}"></script>
+	<script th:src="@{js/main.js}"></script>
+	<script th:src="@{slick/slick.js}"></script>
+	<script th:src="@{slick/slick.min.js}"></script>
+	<script th:src="@{js/slider.js}"></script>
+	<script th:src="@{js/sewDetail.js}"></script>
+	<script th:src="@{js/sewPayment.js}"></script>
+	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+</body>
+</html>

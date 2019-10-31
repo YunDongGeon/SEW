@@ -1,0 +1,243 @@
+.order_sc .order_content {
+    position: relative;
+    border: 1px solid #e3e4e5;
+}
+
+.order_sc .order_content .orderendtxt_wrap {
+    position: relative;
+    padding-bottom: 44px;
+    border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
+    background-color: #fafafa;
+}
+
+.orderendtxt_wrap .orderendtxt_content .txt_oe {
+    margin: 40px 0 11px;
+    width: 520px;
+    height: 37px;
+}
+
+.orderendtxt_wrap .orderendtxt_content .txt_oe span{	
+	font-size: 34px;
+	font-weight: bold;
+}
+
+.order_sc .orderendtxt_content {
+    padding: 1px 0 0 50px;
+}
+
+.order_sc .order_content .orderend_info {
+    position: relative;
+    padding: 29px 423px 29px 50px;
+    border-top: 1px solid #f0f0f0;
+    border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
+    min-height: 400px;
+    background: #fafafa;
+}
+
+.order_sc .orderend_info .info_wrap {
+    font-size: 13px;
+    line-height: 24px;
+    zoom: 1;
+}
+
+.order_sc .orderend_info .info_wrap~.info_wrap {
+	float: left;
+    margin-top: 18px;
+}
+
+.order_sc .info_wrap h4 {
+    float: left;
+    width: 139px;
+    margin-top: 2px;
+   	font-size: 16px;
+    color: #4b4b4b;
+    line-height: 19px;
+}
+
+.order_sc .info_wrap .order_number {
+    float: left;
+    font-size: 16px;
+    font-family: tahoma,geneva,sans-serif;
+    color: #5f5f5f;
+}
+
+strong {
+    font-weight: bold;
+}
+
+.order_sc .info_wrap .info_dsc {
+    float: left;
+    width: 380px;
+    font-size: 16px;
+    color: #000;
+    word-break: break-all;
+}
+
+.order_sc .order_content .order_bill {
+	background: #fff;
+    position: absolute;
+    top: -1px;
+    right: 50px;
+    border: 1px solid #f2f2f2;
+    border-top-color: #e4e4e4;
+    border-bottom: 2px dashed #e4e4e4;
+    width: 341px;
+}
+
+.order_sc .order_bill .bill_content {
+    min-height: 387px;
+    padding: 37px 29px 22px;
+    background-color: #fff;
+}
+
+.order_sc .order_bill .logo {
+    display: block;
+    margin: 0 auto;
+    width: 218px;
+    height: 98px;
+}
+
+.order_sc .order_bill .logo img {
+	vertical-align: top;
+	width: 218px;
+    height: 98px;    
+}
+
+.order_sc .order_bill .scroll {
+    margin-top: 22px;
+    border-top: 1px solid #cecece;
+    border-bottom: 1px solid #ebebeb;
+}
+
+.order_sc .order_bill .product_list {
+    overflow: auto;
+    overflow-x: hidden;
+    max-height: 351px;
+}
+
+.order_sc .product_item {
+    padding: 12px 0 15px;
+}
+
+.order_sc .product_item a {
+    display: inline-block;
+    padding-right: 15px;
+    vertical-align: middle;
+}
+
+.order_sc .product_item .product_dsc {
+    display: inline-block;
+    margin-left: -5px;
+    width: 177px;
+    font-size: 11px;
+    line-height: 18px;
+    vertical-align: middle;
+    *zoom: 1;
+    *display: inline;
+}
+
+.order_sc .product_item .product_dsc a {
+    padding: 0;
+    display: block;
+    color: #000;
+}
+
+.order_sc .product_item .product_dsc a p {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-bottom: 5px;
+    font-size: 18px;
+}
+
+.order_sc .product_item .product_dsc .option_list li {
+    display: block;
+    margin-left: 2px;
+    padding-left: 9px;
+    overflow: hidden;
+    background-position: -320px -250px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #979797;
+    font-size: 13px;
+}
+
+.order_sc .product_item .product_dsc .price {
+    display: block;
+    margin-top: 20px;
+    line-height: 12px;
+    font-weight: normal;
+    color: #000;
+}
+
+em, address {
+	font-size: 28px;
+    font-style: normal;
+}
+
+.order_sc .order_bill .calc_list li {
+	height: 28px;
+    line-height: 22px;
+    zoom: 1;
+}
+
+.order_sc .order_bill .calc_list li strong {
+    float: left;
+    width: 100px;
+    font-weight: normal;
+}
+
+.order_sc .order_bill .calc_list li p {
+    float: right;
+   	margin: 0;
+}
+
+.order_sc .order_bill .calc_list li p span{
+	font-size: 18px;
+	vertical-align: top;
+}
+
+.order_sc .order_bill .calc_list {
+    margin: 15px 0 5px 0;
+}
+
+.order_sc .order_bill .total_price {
+    border-top: 1px solid #d1d1d1;
+    color: #000;
+    zoom: 1;
+}
+
+.order_sc .order_bill .total_price strong {
+    float: left;
+    margin-top: 44px;
+}
+
+.order_sc .order_bill .total_price .sum {
+    float: right;
+    margin-top: 23px;
+}
+
+.order_sc .sum .txt {
+    display: inline-block;
+    margin: -1px 0 14px;
+    font-size: 16px;
+    color: #000;
+    font-weight: bold;
+    vertical-align: bottom;
+}
+
+.sum em {
+	font-size: 36px;
+}
+
+.order_sc .payment_agree_wrap .txt_purchase {
+    width: 96px;
+    background-position: -200px -20px;
+}
+
+.order_sc .payment_agree_wrap .txt_shophome {
+    width: 85px;
+    background-position: -200px -80px;
+}

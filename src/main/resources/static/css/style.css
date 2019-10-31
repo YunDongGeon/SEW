@@ -4,6 +4,9 @@
  * Copyright 2011-2018 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+.format-money {
+	font-size: 34px;
+}
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
@@ -7087,6 +7090,7 @@ button.bg-dark:focus {
   text-align: left !important; }
 
 .text-right {
+  margin-top: 24px;
   text-align: right !important; }
 
 .text-center {
@@ -7872,6 +7876,7 @@ h1, h2, h3, h4, h5,
       .product .text h3 a {
         color: #000000; }
     .product .text p.price {
+      font-size: 22px;
       margin-bottom: 0;
       color: #000000;
       font-weight: 400; }

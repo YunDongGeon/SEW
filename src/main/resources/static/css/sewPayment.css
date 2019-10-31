@@ -730,7 +730,8 @@ em, address {
     overflow: hidden;
     font-size: 18px;
     line-height: 50px;
-	color: white;    
+	color: white;   
+	font-weight: 600; 
 }
 
 .totalPrice {
