@@ -72,9 +72,9 @@ function cal(){
 		totalDeli += Number($(this).val());
 	});
 	
-	totalPoint = Math.floor(Number(totalPrice*0.01));
-	
+	totalPoint = Math.floor(Number(totalPrice*0.01));	
 	totalDiscount = totalProdListPrice-totalPrice;
+	totalPrice += totalDeli;
 	
 	$(".totalDiscountPrice").text(numberFormat(totalDiscount));
 	$(".prePoint").text(numberFormat(totalPoint));
@@ -91,11 +91,11 @@ function cal(){
 
 $(".pointAllUseButton").click(function (e) {	
 	e.preventDefault();
-	var oriTotalPrice = $(".oriTotalValue").val();	
-	if( Number($('.memPoint').val()) > Number($(".totalValue").val()*0.2) ){
-		$('.usedMemPoint').val(Number($(".totalValue").val()*0.2));
-		$('.useMemPoint').val(numberFormat(Number($(".totalValue").val()*0.2)));
-		$('.usingMemPoint').text(numberFormat(Number($(".totalValue").val()*0.2)));
+	var oriTotalPrice = $(".oriTotalValue").val();
+	if( Number($('.memPoint').val()) > Number(oriTotalPrice*0.2) ){
+		$('.usedMemPoint').val(Number(oriTotalPrice*0.2));
+		$('.useMemPoint').val(numberFormat(Number(oriTotalPrice*0.2)));
+		$('.usingMemPoint').text(numberFormat(Number(oriTotalPrice*0.2)));
 		$(".remainMemPoint").val(Number($(".memPoint").val())-Number($(".usedMemPoint").val()));
 	}else{
 		$('.usedMemPoint').val($('.memPoint').val());
@@ -127,24 +127,15 @@ function inputNumberFormat(obj) {
 			$(".totalPrice").text(numberFormat($(".totalValue").val()));
 			$(".remainMemPoint").val(Number($(".memPoint").val())-Number(usedMemPoint));
 		}else{
-			if(Number(uncomma(obj.value))>Number($('.memPoint').val())){
-				usedMemPoint = $('.memPoint').val();
-				$('.usedMemPoint').val(usedMemPoint);
-				$('.useMemPoint').val(numberFormat(usedMemPoint));
-				$('.usingMemPoint').text(numberFormat(usedMemPoint));
-				$(".totalValue").val(Number(oriTotalPrice)-usedMemPoint);
-				$(".totalPrice").text(numberFormat($(".totalValue").val()));
-				$(".remainMemPoint").val(Number($(".memPoint").val())-Number(usedMemPoint));
-			}else{
-				usedMemPoint = uncomma(obj.value);
-				$('.usedMemPoint').val(uncomma(obj.value));
-				obj.value = comma(usedMemPoint);
-				$('.usingMemPoint').text(obj.value);
-				$(".totalValue").val(Number(oriTotalPrice)-Number(usedMemPoint));
-				$(".totalPrice").text(numberFormat($(".totalValue").val()));
-				$(".remainMemPoint").val(Number($(".memPoint").val())-Number(usedMemPoint));
-			}
+			usedMemPoint = uncomma(obj.value);
+			$('.usedMemPoint').val(uncomma(obj.value));
+			obj.value = comma(usedMemPoint);
+			$('.usingMemPoint').text(obj.value);
+			$(".totalValue").val(Number(oriTotalPrice)-Number(usedMemPoint));
+			$(".totalPrice").text(numberFormat($(".totalValue").val()));
+			$(".remainMemPoint").val(Number($(".memPoint").val())-Number(usedMemPoint));
 		}
+		
 	}
 }
 
@@ -167,17 +158,56 @@ var chkStat = 0;
 
 $(".btn_payment").click(function(e){
 	e.preventDefault();	
-	if(recvStat==0||phStat==0||addrStat==0||cartStat==0||chkStat==0){
+	// 수령인 이름
+	if($(".receiverName").val()==""){
 		$(".error").show();		
 		$('html').animate({ scrollTop : 0}, 600);
+		$("#receiverChkBox").show();
+		recvStat = 0;
+	}else{
+		$("#receiverChkBox").hide();
+		recvStat = 1;
 	}
+	// 수령인 연락처
+	if( $(".middleNum").val()=="" || $(".endNum").val()=="" ){
+		$(".error").show();		
+		$('html').animate({ scrollTop : 0}, 600);
+		$("#phoneChkBox").show();
+		phStat = 0;
+	}else{
+		$("#phoneChkBox").hide();
+		phStat = 1;
+	}
+	// 배송지 주소
+	if($(".zipcode").val()==""||$(".addr_input1").val()==""||$(".addr_input2").val()==""){
+		$(".error").show();		
+		$('html').animate({ scrollTop : 0}, 600);
+		$("#addrChkBox").show();
+		addrStat = 0;
+	}else{
+		$("#addrChkBox").hide();
+		addrStat = 1;
+	}
+	// 결제수단 
 	if($(".cardCompanyTypeCode").val()==null){
+		$(".error").show();		
+		$('html').animate({ scrollTop : 0}, 600);
 		$("#cardChkBox").show();
 		cardStat = 0;
 	} else {
 		$("#cardChkBox").hide();
 		cardStat = 1;
 	}
+	
+	if($("#all_agree").is(":checked")){
+		chkStat=1;
+	}else{
+		$(".error").show();		
+		$('html').animate({ scrollTop : 0}, 600);
+		chkStat=0;
+	}
+	
+	alert(recvStat==0||phStat==0||addrStat==0||cartStat==0||chkStat==0);
 });
 
 $(".receiverName").on("change keyup paste", function(){

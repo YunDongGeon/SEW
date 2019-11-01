@@ -14,32 +14,48 @@ import org.springframework.web.bind.annotation.PostMapping;
 import itc.hoseo.sew.cart.Cart;
 import itc.hoseo.sew.cart.CartOption;
 import itc.hoseo.sew.member.Member;
+import itc.hoseo.sew.member.MemberService;
 
 @Controller
 public class PaymentController {
 	@Autowired
 	PaymentService service;
+	@Autowired
+	MemberService mService;
 	
 	@PostMapping("/sewDirectPayment.do")	
-	public String goDIrectPay(ModelMap m, Payment p, HttpServletRequest r, HttpSession session) {
-		List<BuyOption> optionList = new ArrayList<BuyOption>();
+	public String goDIrectPay(ModelMap m, Cart c, HttpServletRequest r, HttpSession session) {
+		List<CartOption> optionList = new ArrayList<CartOption>();
 		String [] prodColor = r.getParameterValues("prodColor");
 		String [] prodSize = r.getParameterValues("prodSize");
 		String [] prodAmount = r.getParameterValues("prodAmount");
-		BuyOption bo = new BuyOption();
+		CartOption co = new CartOption();
 		Member mem = (Member)session.getAttribute("mem");
 		String memId = mem.getMemId();		
-		p.setMemId(memId);			
-		bo.setProdNo(p.getProdNo());				
+		c.setMemId(memId);			
+		c.setProdNo(c.getProdNo());				
 		for(int i = 0; i < prodColor.length; i++) {
-			bo = new BuyOption();
-			bo.setProdColor(prodColor[i]);
-			bo.setProdSize(prodSize[i]);
-			bo.setProdAmount(Integer.parseInt(prodAmount[i]));
-			optionList.add(bo);			
+			co = new CartOption();
+			co.setProdColor(prodColor[i]);
+			co.setProdSize(prodSize[i]);
+			co.setProdAmount(Integer.parseInt(prodAmount[i]));
+			optionList.add(co);			
 		}	
-		p.setOptionList(optionList);
-		m.put("selectList", p);
+		c.setOptionList(optionList);
+		m.put("selectList", c);
+		
+		mem = mService.getMemInfo(mem);
+		if(mem.getMemPhone().length()==11) {
+			mem.setFirstNum(mem.getMemPhone().substring(0, 3));
+			mem.setMiddleNum(mem.getMemPhone().substring(3, 7));
+			mem.setEndNum(mem.getMemPhone().substring(7, 11));
+		}else {
+			mem.setFirstNum(mem.getMemPhone().substring(0, 3));
+			mem.setMiddleNum(mem.getMemPhone().substring(3, 6));
+			mem.setEndNum(mem.getMemPhone().substring(6, 10));
+		}
+		m.put("member", mem);
+		
 		return "sewProduct/sewDirectPaymentPage";
 	}
 }
