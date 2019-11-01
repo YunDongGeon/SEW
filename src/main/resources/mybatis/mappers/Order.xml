@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="itc.hoseo.sew.order.OrderRepository">
+	<insert id="addOrder" parameterType="Order">
+		<selectKey order="BEFORE" keyProperty="orderProdNo" resultType="Order">
+			SELECT 
+	           'P' || cast(to_char(sysdate,'YYYYMMDD') || nvl(to_char(max(substr(orderProdNo, 9))), '0000') as number) +1
+	           as orderProdNo
+	        FROM
+	            orderProd
+		</selectKey>
+		INSERT INTO orderProd
+		VALUES (#{orderProdNo}, #{prodNo}, #{prodAmount}, #{prodCost})	
+	</insert>
+	<insert id="addOrderOption" parameterType="OrderOption">
+		INSERT INTO orderOption(orderProdNo, orderColor, orderSize, orderAmount)
+		VALUES(#{orderProdNo}, #{orderColor}, #{orderSize}, #{orderAmount})
+	</insert>
+	<insert id="addOrderList" parameterType="OrderList">
+		<selectKey order="BEFORE" keyProperty="orderNo" resultType="OrderList">
+			SELECT 
+	           'O' || cast(to_char(sysdate,'YYYYMMDD') || nvl(to_char(max(substr(orderNo, 9))), '0000') as number) +1
+	           as orderNo
+	        FROM
+	            orderList
+		</selectKey>
+		INSERT INTO 
+		orderList(orderNo, orderProdNo, totalListCost, totalDeli, totalDiscount, totalUsedPoint, totalCost, 
+			memId, receiverName, receiverContact, deliZipcode, deliAddr1, deliAddr2,
+			payType, payCompany, orderDate)
+		VALUES (#{orderNo}, #{orderProdNo}, #{totalListCost}, #{totalDiscount}, #{totalDeli}, 
+			#{totalUsedPoint}, #{totalCost}, #{memId}, #{receiverName}, #{receiverContact}, 
+			#{deliZipcode}, #{deliAddr1}, #{deliAddr2}, #{payType}, #{payCompany}, #{orderDate})	
+	</insert>	
+</mapper>

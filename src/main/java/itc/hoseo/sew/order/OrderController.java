@@ -1,4 +1,4 @@
-package itc.hoseo.sew.payment;
+package itc.hoseo.sew.order;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,9 +17,9 @@ import itc.hoseo.sew.member.Member;
 import itc.hoseo.sew.member.MemberService;
 
 @Controller
-public class PaymentController {
+public class OrderController {
 	@Autowired
-	PaymentService service;
+	OrderService service;
 	@Autowired
 	MemberService mService;
 	
