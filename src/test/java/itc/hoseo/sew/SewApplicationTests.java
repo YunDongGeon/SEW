@@ -1,5 +1,8 @@
 package itc.hoseo.sew;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,27 +14,24 @@ import itc.hoseo.sew.management.Management;
 import itc.hoseo.sew.management.ManagementService;
 import itc.hoseo.sew.member.Member;
 import itc.hoseo.sew.member.MemberService;
+import itc.hoseo.sew.payment.Payment;
+import itc.hoseo.sew.payment.PaymentService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class SewApplicationTests {
 	@Autowired
-	ManagementService service;
+	PaymentService service;
 	@Test
-	public void addMenProd() {
-		Management manage = new Management();
-		manage.setProdType("top");
-		manage.setProdCat("맨투맨/후드");
-		manage.setProdName("남성 분또 가로블럭 맨투맨");
-		manage.setProdListP(59900);
-		manage.setProdPrice(24900);
-		manage.setProdDeli(2500);
-		manage.setProdCode("KA9S1-MKL010");
-		manage.setProdOrigin("기타국가");
-		manage.setProdContName("내용");
-		
-		service.addProd(manage);
-		
+	public void addOrder() {
+		Timestamp ts = new Timestamp(System.currentTimeMillis());
+		Payment p = new Payment();
+		p.setProdNo(1);
+		p.setTotalAmount(2);
+		p.setTotalPrice(29900);
+		p.setTotalDeli(2500);
+		p.setOrderDate(ts);
+		service.addOrder(p);
 		
 	}
 	

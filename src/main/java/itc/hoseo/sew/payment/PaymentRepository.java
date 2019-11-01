@@ -1,8 +1,8 @@
 package itc.hoseo.sew.payment;
 
-import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.Mapper;
 
-@Repository
+@Mapper
 public interface PaymentRepository {
-
+	public int addOrder(Payment p);
 }

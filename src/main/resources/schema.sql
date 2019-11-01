@@ -6,7 +6,7 @@ CREATE TABLE user(
 	memBirth varchar(8) not null,
 	memEmail varchar(50) not null,
 	memPhone varchar(11) not null,
-	memZipCode varchar(5) default null,
+	memZipCode varchar(6) default null,
 	memAddr1 varchar(200) default null,
 	memAddr2 varchar(200) default null,
     memStat varchar(10) default 'no',
@@ -73,4 +73,45 @@ CREATE TABLE cartOptionList(
 	prodAmount int not null,
 	constraint optionfk foreign key(cartNo) references cartList(cartNo)	
 	on delete cascade
+);
+
+CREATE TABLE orderList(
+	orderNo varchar(20) primary key,
+	prodNo int not null,	
+	totalAmount int not null,		
+	totalCost int not null,
+	totalDeli int not null,	
+	orderDate Timestamp not null,
+	foreign key(prodNo) references product(prodNo)
+);
+
+CREATE TABLE orderOption(
+	optionNo int primary key auto_increment,
+	orderNo varchar(20) not null,
+	orderColor varchar(40) not null,
+	orderSize varchar(20) not null,
+	orderAmount int not null,
+	foreign key(orderNo) references orderList(orderNo)
+);
+
+CREATE TABLE salesList(
+	salesNo varchar(20) primary key,	
+	orderNo varchar(20) not null,
+	totalListCost int not null,
+	totalDiscount int not null,
+	totalUsedPoint int not null,
+	totalCost int not null,
+	memId varchar(20) not null,
+	receiverName varchar(20) not null,
+	receiverContact varchar(12) not null,
+	deliZipcode varchar(6) not null,
+	deliAddr1 varchar(200) not null,
+	deliAddr2 varchar(200) not null,
+	payType varchar(10) not null,
+	payCompany varchar(10) not null,	
+	salesDate Timestamp not null,
+	salesStat varchar(10) not null,
+	foreign key(orderNo) references orderList(orderNo),
+	foreign key(memId) references user(memId),
+	foreign key(salesDate) references orderList(orderDate)
 );

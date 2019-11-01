@@ -415,6 +415,7 @@
 												<div class="payment_option_wrap">
 													<strong class="req short">카드구분</strong>
 													<div class="payment_option">
+														<input type="hidden" name="cardType">
 														<ul class="radio_inline_list">
 															<li>
 																<span class="_cardTypeRadio radio-applied">
@@ -438,7 +439,7 @@
 													<div class="payment_option credit_option">
 														<div class="select_section" style="float: left;">
 															<div id="cardCodeList" class="">
-																<select title="카드종류" id="card_li" name="cardSettleInfo.cardCompanyTypeCode" 
+																<select title="카드종류" id="card_li" name="cardCompanyType" 
 																	class="selectbox-label cardCompanyTypeCode _payForm _tr_paymeans"
 																	style="width: 120px;">
 																	<option class="selectbox-default _selectBoxDefault" disabled selected>선택해주세요.</option>
@@ -473,9 +474,9 @@
 														<!-- select box -->
 														<div class="select_section">
 															<div id="installmentCodeList" class="">
-																<select id="monthGeneralPay" name="freeInterestInstallmentInfo.installmentMonth"
+																<select id="monthGeneralPay" name="installmentMonth"
 																	class="selectbox-label cardInstallmentPeriodClassCode _payForm"
-																	style="width: 120px;">
+																	style="width: 120px;" disabled="disabled">
 																	<option value="01" selected>일시불</option>
 																	<option value="02">2개월</option>
 																	<option value="03">3개월</option>
@@ -490,23 +491,7 @@
 																	<option value="12">12개월</option>
 																</select>
 															</div>
-														</div>
-														<p class="dsc _noInstallmentStr"></p>
-														<p class="dsc dsc_block" style="display: none;">
-															<em class="highlight _noInstallmentMonthStr"></em>
-														</p>
-														<p class="dsc dsc_block" style="display: none;">
-															<em class="highlight _eventInfoStr"></em>
-														</p>
-														<p class="dsc dsc_block _companycard_notice"
-															style="display: none;">
-															<em class="highlight">법인(개인사업자 법인 포함)카드는 할부/무이자혜택 적용
-																불가</em>
-														</p>
-														<p class="dsc dsc_block _bccard_notice"
-															style="display: none;">
-															<em class="highlight">카드에 BC마크가 없는 경우 무이자 할부 적용 불가</em>
-														</p>
+														</div>														
 													</div>
 												</div>
 											</div>

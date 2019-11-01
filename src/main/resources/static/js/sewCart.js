@@ -51,9 +51,10 @@ var cartNo = null;
 $('#delSelected').click(function(e){
 	e.preventDefault();
 	$('.delCartPop').css("display", "block");
+	$('html').animate({ scrollTop : 0}, 600);
 	$('.delCartItem').click(function() {
 		$("form").attr("action", "/delSelected.do");
-		$("form").unbind("submit").submit();
+		$("form").unbind("submit").submit();		
 	});
 });
 
@@ -61,6 +62,7 @@ $('.btn_ordel').click(function(e){
 	e.preventDefault();
 	cartNo = $(this).prev('.cartNo').val();
 	$('.delCartPop').css("display", "block");
+	$('html').animate({ scrollTop : 0}, 600);
 	$('.delCartItem').click(function() {
 		$("form").attr("action", "/delCart.do");
 		$("form").unbind("submit").submit();

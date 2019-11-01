@@ -189,24 +189,16 @@
 					</div>					
 				</div>
 				<div class="payment_agree_wrap">
-					<button class="btn_payment">
-						<span class="txt_payment">구매내역 보기</span>
-					</button>
-					<button class="btn_payment">
-						<span class="txt_payment">쇼핑 홈 가기</span>
-					</button>
-					<div class="shdw_bottom"></div>
-				</div>
-				<div class="_layer_order_check layerpop_wrap error" style="display: none; z-index: 10000; left: 791.5px; top: 400px;" tabindex="-1">
-				    <div class="layer_inner">
-				        <strong class="title _order_check_comment">
-				        	누락된 <span class="fc_point">정보</span>또는  <span class="fc_point">약관 동의</span>가 있습니다.<br>
-				        	 <span class="fc_point">정보</span>와 
-				        	 <span class="fc_point">약관 동의</span>를 
-				        	 <span class="fc_point">확인</span>해 주세요.
-			        	</strong>
-				        <button type="button" class="button_close" onclick="closePop(this)"></button>
-				    </div>
+					<a href="myPage.do">
+						<button class="btn_payment">
+							<span class="txt_payment">구매내역 보기</span>
+						</button>
+					</a>
+					<a href="index.do">
+						<button class="btn_payment">
+							<span class="txt_payment">쇼핑 홈 가기</span>
+						</button>
+					</a>
 				</div>
 			</div>
 		</div>
@@ -242,7 +234,6 @@
 	<script th:src="@{slick/slick.min.js}"></script>
 	<script th:src="@{js/slider.js}"></script>
 	<script th:src="@{js/sewDetail.js}"></script>
-	<script th:src="@{js/sewPayment.js}"></script>
 	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </body>
 </html>

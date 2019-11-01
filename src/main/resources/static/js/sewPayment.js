@@ -230,6 +230,10 @@ $(".cardCompanyTypeCode").on("change", function(){
 	}
 });
 
+if(Number($(".totalValue").val())>100000){
+	$("#monthGeneralPay").attr("disabled", false);
+}
+
 function closePop(self){
 	$(self).parent('div').parent('div').css("display", "none");
 }

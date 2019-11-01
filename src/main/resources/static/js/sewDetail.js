@@ -197,17 +197,15 @@ $('#addCart').click(function(e){
 			$('html').animate({ scrollTop : 0}, 600);
 		}else if ($("#sizeOption").val()!=null){
 			if(optionCount!=0){
+				$('form').attr("target", "iframe");
+				$('form').attr("action", "addCart.do");
+				$("form").unbind("submit").submit();				
 				$('.goCartPop').css("display", "block");
 				$('html').animate({ scrollTop : 0}, 600);
-				$('.goMyCart').click(function(e){
-					$('form').attr("target", "");
-					$('form').attr("action", "addCart.do");
-					$("form").unbind("submit").submit();		
+				$('.goMyCart').click(function(e){					
+					$(location).attr("href", "myCart.do");	
 				});
 				$('.closeCartPop').click(function(e){				
-					$('form').attr("target", "iframe");
-					$('form').attr("action", "addCart.do");
-					$("form").unbind("submit").submit();
 					$('.goCartPop').css("display", "none");
 				});
 			}else{
