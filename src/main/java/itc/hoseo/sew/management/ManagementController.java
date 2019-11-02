@@ -45,13 +45,8 @@ public class ManagementController {
 	public String goAddProd() {
 		return "sewManagement/sewAddProd";
 	}
-	// 메인 화면 새로운 제품
-	@GetMapping("/")
-	public String getNewProd(ModelMap m) {
-		m.put("newProdList", service.getNewProd());
-		return "/index";
-	}
-	@GetMapping("/sewDetail.do")
+
+	@GetMapping("/sewDetail")
 	public String goDetailPage(@RequestParam(value="prodNo") int prodNo, ModelMap m) {
 		Management manage = new Management();
 		manage.setProdNo(prodNo);
@@ -61,7 +56,7 @@ public class ManagementController {
 		return "sewProduct/sewProductDetail";
 	}
 	
-	@PostMapping("/getSize.do")
+	@PostMapping("/getSize")
 	@ResponseBody
 	public Map<Object, Object> getSize(@RequestBody Management mg, HttpSession session) {
 		Map<Object, Object> map = new HashMap<Object, Object>();

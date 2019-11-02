@@ -22,12 +22,12 @@ public class HttpInterceptor extends HandlerInterceptorAdapter {
 			Member member = (Member)session.getAttribute("mem");
 			
 			if(member.getMemStat().equals("yes")) {
-				response.sendRedirect("/sewChangePw.do");
+				response.sendRedirect("/sewChangePw");
 				return false;
 			}
 		} 
 //		else {
-//			response.sendRedirect("/login.do");
+//			response.sendRedirect("/login");
 //			return false;
 //		}
 		

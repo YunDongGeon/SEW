@@ -1,5 +1,6 @@
 package itc.hoseo.sew.order;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import itc.hoseo.sew.cart.Cart;
 import itc.hoseo.sew.cart.CartOption;
+import itc.hoseo.sew.cart.CartService;
 import itc.hoseo.sew.member.Member;
 import itc.hoseo.sew.member.MemberService;
 
@@ -22,9 +24,11 @@ public class OrderController {
 	OrderService service;
 	@Autowired
 	MemberService mService;
+	@Autowired
+	CartService cService;
 	
-	@PostMapping("/sewDirectPayment.do")	
-	public String goDIrectPay(ModelMap m, Cart c, HttpServletRequest r, HttpSession session) {
+	@PostMapping("/sewDirectOrder.do")	
+	public String goDirectOrder(ModelMap m, Cart c, HttpServletRequest r, HttpSession session) {
 		List<CartOption> optionList = new ArrayList<CartOption>();
 		String [] prodColor = r.getParameterValues("prodColor");
 		String [] prodSize = r.getParameterValues("prodSize");
@@ -56,6 +60,42 @@ public class OrderController {
 		}
 		m.put("member", mem);
 		
-		return "sewProduct/sewDirectPaymentPage";
+		return "sewProduct/sewDirectOrderPage";
+	}
+	
+	@PostMapping("/sewOrder.do")	
+	public String order(Cart c, Order o, OrderOption op, OrderList ol, HttpServletRequest r, HttpSession session) {
+		List<Cart> buyList = new ArrayList<Cart>();
+		Member mem = (Member)session.getAttribute("mem");
+		String memId = mem.getMemId();	
+		c.setMemId(memId);
+		String [] cartNo = r.getParameterValues("cartNo");
+		
+		for(int i = 0; i < cartNo.length; i++) {
+			c.setCartNo(Integer.parseInt(cartNo[i]));
+			buyList.add(cService.getSelectCart(c));
+		}					
+		Timestamp ts = new Timestamp(System.currentTimeMillis());		
+		ol.setMemId(memId);
+		ol.setReceiverContact(ol.getDeliTelNo1()+ol.getDeliTelNo2()+ol.getDeliTelNo3());		
+		ol.setOrderDate(ts);
+		service.addOrderList(ol);
+		o.setOrderNo(ol.getOrderNo());		
+		for(int i = 0; i < buyList.size(); i++) {			
+			o.setProdNo(buyList.get(i).getProdNo());
+			o.setProdCost(buyList.get(i).getTotalPrice());
+			o.setProdAmount(buyList.get(i).getTotalAmount());
+			List<CartOption> optionList = buyList.get(i).getOptionList();
+			service.addOrder(o);						
+			for(int j = 0; j < optionList.size(); j++) {
+				op = new OrderOption();
+				op.setOrderProdNo(o.getOrderProdNo());
+				op.setOrderColor(optionList.get(j).getProdColor());
+				op.setOrderSize(optionList.get(j).getProdSize());
+				op.setOrderAmount(optionList.get(j).getProdAmount());
+				service.addOrderOption(op);				
+			}
+		}
+		return "sewProduct/sewCartOrderCheckout";
 	}
 }

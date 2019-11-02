@@ -67,7 +67,7 @@
 						</li>
 					</ol>
 				</div>
-				<form method="post" action="/sewPay.do">
+				<form method="post" action="sewOrder.do">
 					<div class="order_content">
 						<div class="product_area">
 							<table cellspacing="0" class="tb_products">
@@ -107,9 +107,12 @@
 																	' / 사이즈  : ' + ${optionList.prodSize} + 
 																	' / 수량  : ' + ${optionList.prodAmount}">															
 															</li>
-															<input th:each="optionList : ${buyList.optionList}" type="hidden" name="prodColor" th:value="${optionList.prodColor}">
-															<input th:each="optionList : ${buyList.optionList}" type="hidden" name="prodSize" th:value="${optionList.prodSize}">
-															<input th:each="optionList : ${buyList.optionList}" type="hidden" name="prodAmount" th:value="${optionList.prodAmount}">
+															<input th:each="optionList : ${buyList.optionList}" type="hidden" 
+																name="orderColor" th:value="${optionList.prodColor}">
+															<input th:each="optionList : ${buyList.optionList}" type="hidden" 
+																name="orderSize" th:value="${optionList.prodSize}">
+															<input th:each="optionList : ${buyList.optionList}" type="hidden" 
+																name="orderAmount" th:value="${optionList.prodAmount}">
 														</ul>
 													</div>
 												</div>
@@ -127,6 +130,7 @@
 										</td>
 										<td>
 											<span th:text="${buyList.totalAmount}"></span>개
+											<input type="hidden" name="prodAmount" th:value="${buyList.totalAmount}">
 										</td>
 										<td class="col_price">
 											<span style="float: right;">
@@ -135,7 +139,7 @@
 											</span>
 											<strong>
 												<em class="format-money" th:text="${buyList.totalPrice}"></em>원
-												<input type="hidden" class="totalProdPrice" th:value="${buyList.totalPrice}">
+												<input type="hidden" name="prodCost" class="totalProdPrice" th:value="${buyList.totalPrice}">
 											</strong>
 										</td>
 									</tr>
@@ -226,10 +230,10 @@
 										<div class="deliver_option">
 											<span class="zipcode_group"> 
 												<input type="text" title="우편번호" class="inp_txt2 zipcode deliZipCode" 
-													name="deliZipCode" id="postcode"
+													name="deliZipcode" id="postcode"
 													readonly="readonly" maxlength="7" style="float: none;">
 											</span>
-											<button class="btn" onClick="findPostCode()">우편번호</button>
+											<button type="button" class="btn" onClick="findPostCode()">우편번호</button>
 											<div class="addr_detail">
 												<input type="text" title="주소" class="inp_txt2 addr_input1 deliAddr1"
 													id="addr1" name="deliAddr1" value="" readonly="readonly"><br> 
@@ -246,15 +250,15 @@
 										<div class="deliver_option">
 											<span class="zipcode_group"> 
 												<input type="text" title="우편번호" class="inp_txt2 zipcode" 
-													name="deliveryAddress.zipCode" id="postcode" th:value="${member.memZipCode}"
+													name="deliZipcode" id="postcode" th:value="${member.memZipCode}"
 													readonly="readonly" maxlength="7" style="float: none;">
 											</span>
-											<button class="btn" onClick="findPostCode()">우편번호</button>
+											<button type="button" class="btn" onClick="findPostCode()">우편번호</button>
 											<div class="addr_detail">
 												<input type="text" title="주소" class="inp_txt2 addr_input1 _deliveryForm" th:value="${member.memAddr1}"
-													id="addr1" name="deliveryAddress.baseAddress" value="" readonly="readonly"><br> 
+													id="addr1" name="deliAddr1" value="" readonly="readonly"><br> 
 												<input type="text" title="상세주소" class="inp_txt2 addr_input2 "  th:value="${member.memAddr2}"
-													id="addr2" name="deliveryAddress.detailAddress" maxlength="50">
+													id="addr2" name="deliAddr2" maxlength="50">
 												<div class="inputChkBox"  id="addrChkBox" style="padding-left: 5px;">
 													<span>배송지 주소를 확인해주세요.</span>
 												</div>
@@ -274,24 +278,6 @@
 									<li>
 										<span class="memEmail" th:text="${member.memEmail}"></span>
 										<!--N=a:ord.modifyemail-->
-									</li>
-								</ul>
-								<ul class="info_dsc">
-									<li class="info_confirm">
-										<span class="_telNoNoti _telNoDuplicated" style="display: none">
-											<strong>휴대폰 번호를 확인해주세요!</strong><br>
-											현재 등록되어 있는 휴대폰 번호가<br>다른사용자에게도 동일하게 등록되어<br>있습니다.<br>
-											휴대폰 번호가 잘못 등록되어 있을 경우<br>정확한 주문/결제 알림을 받지 못할 수<br> 있습니다.
-										</span> 
-										<span class="_telNoNoti _telNoNeedRegistration" style="display: none">
-											<strong>휴대폰 번호를 등록해주세요.</strong><br>
-											휴대폰 번호가 등록되지 않으면 정확한<br>주문/결제 알림을 받지
-											못할 수 있습니다.
-										</span>
-<!-- 										<span class="_telNoNoti _telNoInfo" style="display: block"> -->
-<!-- 											주문자 정보로 결제관련 정보가 제공됩니다.<br> -->
-<!-- 											정확한 정보로 등록되어있는지 확인해주세요. -->
-<!-- 										</span> -->
 									</li>
 								</ul>
 								<input type="hidden" name="order.memberName" th:value="${member.memName}">
@@ -349,7 +335,7 @@
 								<h4>결제금액</h4>
 								<div class="sum _lastTotalAccountPrice">
 									<em class="totalPrice"></em>
-									<input type="hidden" name="totalPrice" class="totalValue">
+									<input type="hidden" name="totalCost" class="totalValue">
 									<input type="hidden" class="oriTotalValue">							
 									<span class="txt">원</span>
 								</div>
@@ -358,20 +344,21 @@
 										<strong>총 상품금액</strong>
 										<p>
 											<em class="totalOrderListPrice"></em>원
-											<input type="hidden" class="totalListValue">
+											<input type="hidden" name="totalListCost" class="totalListValue">
 										</p>
 									</li>
 									<li>
 										<strong>배송비</strong>
 										<p>
 											(+) <em class="totalDeliveryFee"></em>원
-											<input type="hidden" class="totalDeliValue">
+											<input type="hidden" name="totalDeli" class="totalDeliValue">
 										</p>
 									</li>
 									<li>
 										<strong>할인금액</strong>
 										<p>
 											(-) <em class="totalDiscountPrice"></em>원
+											<input type="hidden" name="totalDiscount" class="totalDiscount">
 											
 										</p>
 									</li>
@@ -379,7 +366,7 @@
 										<strong>적립금 사용금액</strong>
 										<p>
 											(-) <em class="usingMemPoint">0</em>원
-											<input type="hidden" class="usedMemPoint">
+											<input type="hidden" name="totalUsedPoint" class="usedMemPoint" value="0">
 										</p>
 									</li>
 								</ul>
@@ -398,14 +385,14 @@
 												<li class="payment_item">
 													<span class="_payMeansClassRadio radio-applied">
 														<span class="radio-mark radio-checked"></span>
-														<input type="radio" id="pay0" name="payMeansClass" value="신용카드" class="opt" checked="checked">
+														<input type="radio" id="pay0" name="payType" value="신용카드" class="opt" checked="checked">
 													</span> 
 													<label for="pay0">신용카드</label>
 												</li>
 												<li class="payment_item">
 													<span class="_payMeansClassRadio radio-applied">
 														<span class="radio-mark"></span>
-														<input type="radio" id="pay1" name="payMeansClass" value="무통장입금" class="opt _payMeansClass">
+														<input type="radio" id="pay1" name="payType" value="무통장입금" class="opt _payMeansClass" disabled="disabled">
 													</span>
 													<label for="pay1">무통장입금</label>
 												</li>

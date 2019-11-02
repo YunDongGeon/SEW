@@ -77,6 +77,7 @@ function cal(){
 	totalPrice += totalDeli;
 	
 	$(".totalDiscountPrice").text(numberFormat(totalDiscount));
+	$(".totalDiscount").val(totalDiscount);
 	$(".prePoint").text(numberFormat(totalPoint));
 	$(".accPoint").val(totalPoint);
 	$(".totalPrice").text(numberFormat(totalPrice));
@@ -207,7 +208,9 @@ $(".btn_payment").click(function(e){
 		chkStat=0;
 	}
 	
-	alert(recvStat==0||phStat==0||addrStat==0||cartStat==0||chkStat==0);
+	if(recvStat==1 && phStat==1 && addrStat==1 && cardStat==1 && chkStat==1){
+		$("form").unbind("submit").submit();
+	}
 });
 
 $(".receiverName").on("change keyup paste", function(){
@@ -269,7 +272,7 @@ function closePop(self){
 }
 
 //Daum postCode api
-function findPostCode() {
+function findPostCode() {	
     new daum.Postcode({
         oncomplete: function(data) {
             // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.

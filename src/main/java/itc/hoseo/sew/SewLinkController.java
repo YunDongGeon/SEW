@@ -17,25 +17,30 @@ public class SewLinkController {
 	@Autowired
 	ManagementService service;
 	
-	@GetMapping("/index.do")
+	@GetMapping("/")
+	public String main(ModelMap m) {
+		return "redirect:index";
+	}
+	
+	@GetMapping("/index")
 	public String index(ModelMap m) {
 		m.put("newProdList", service.getNewProd());
 		return "index";
 	}
-	@GetMapping("/login.do")
+	@GetMapping("/login")
 	public String getGoLogin() {
 		return "sewLogin/sewLogin";
 	}
-	@PostMapping("/login.do")
+	@PostMapping("/login")
 	public String postGoLogin() {
 		return "sewLogin/sewLogin";
 	}
-	@GetMapping("/logOut.do")
+	@GetMapping("/logOut")
 	public String logOut(HttpSession session) {
 		session.invalidate();
-		return "redirect:/index.do";
+		return "redirect:/index";
 	}
-	@GetMapping("/joinTerms.do")
+	@GetMapping("/joinTerms")
 	public String joinTerms() {
 		return "sewJoin/sewJoinTerms";
 	}
@@ -53,6 +58,6 @@ public class SewLinkController {
 	}
 	@GetMapping("/sewPayCheckout.do")
 	public String sewCheckout() {
-		return "sewProduct/sewCartPayCheckout";		
+		return "sewProduct/sewCartOrderCheckout";		
 	}
 }

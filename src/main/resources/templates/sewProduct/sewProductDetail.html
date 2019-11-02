@@ -83,8 +83,12 @@
 								</tr>
 								<tr>
 									<th>배송비</th>
-									<td>
+									<td th:if="${prodDetail.prodDeli!=0}">
 										<span class="format-money" th:text="${prodDetail.prodDeli}"></span> <span>원 / 주문시결제(선결제)</span>
+										<input type="hidden" name="prodDeli" th:value="${prodDetail.prodDeli}">
+									</td>
+									<td th:if="${prodDetail.prodDeli==0}">
+										<span>무료</span>
 										<input type="hidden" name="prodDeli" th:value="${prodDetail.prodDeli}">
 									</td>
 								</tr>

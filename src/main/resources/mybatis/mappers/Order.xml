@@ -6,13 +6,13 @@
 	<insert id="addOrder" parameterType="Order">
 		<selectKey order="BEFORE" keyProperty="orderProdNo" resultType="Order">
 			SELECT 
-	           'P' || cast(to_char(sysdate,'YYYYMMDD') || nvl(to_char(max(substr(orderProdNo, 9))), '0000') as number) +1
+	           'P' || cast(to_char(sysdate,'YYYYMMDD') || nvl(to_char(max(substr(orderProdNo, 10))), '0000') as number) +1
 	           as orderProdNo
 	        FROM
 	            orderProd
 		</selectKey>
 		INSERT INTO orderProd
-		VALUES (#{orderProdNo}, #{prodNo}, #{prodAmount}, #{prodCost})	
+		VALUES (#{orderProdNo}, #{orderNo}, #{prodNo}, #{prodAmount}, #{prodCost})	
 	</insert>
 	<insert id="addOrderOption" parameterType="OrderOption">
 		INSERT INTO orderOption(orderProdNo, orderColor, orderSize, orderAmount)
@@ -21,17 +21,17 @@
 	<insert id="addOrderList" parameterType="OrderList">
 		<selectKey order="BEFORE" keyProperty="orderNo" resultType="OrderList">
 			SELECT 
-	           'O' || cast(to_char(sysdate,'YYYYMMDD') || nvl(to_char(max(substr(orderNo, 9))), '0000') as number) +1
+	           'O' || cast(to_char(sysdate,'YYYYMMDD') || nvl(to_char(max(substr(orderNo, 10))), '0000') as number) +1
 	           as orderNo
 	        FROM
 	            orderList
 		</selectKey>
 		INSERT INTO 
-		orderList(orderNo, orderProdNo, totalListCost, totalDeli, totalDiscount, totalUsedPoint, totalCost, 
+		orderList(orderNo, totalListCost, totalDeli, totalDiscount, totalUsedPoint, totalCost, 
 			memId, receiverName, receiverContact, deliZipcode, deliAddr1, deliAddr2,
-			payType, payCompany, orderDate)
-		VALUES (#{orderNo}, #{orderProdNo}, #{totalListCost}, #{totalDiscount}, #{totalDeli}, 
+			payType, orderDate)
+		VALUES (#{orderNo}, #{totalListCost}, #{totalDiscount}, #{totalDeli}, 
 			#{totalUsedPoint}, #{totalCost}, #{memId}, #{receiverName}, #{receiverContact}, 
-			#{deliZipcode}, #{deliAddr1}, #{deliAddr2}, #{payType}, #{payCompany}, #{orderDate})	
+			#{deliZipcode}, #{deliAddr1}, #{deliAddr2}, #{payType}, #{orderDate})	
 	</insert>	
 </mapper>

@@ -32,18 +32,18 @@ public class MemberController {
 	@Autowired
 	FindService findService;	
 	
-	@PostMapping("/sewJoinInput.do")
+	@PostMapping("/sewJoinInput")
 	public String termsAgree(@ModelAttribute("member") Member member) {
 		return "sewJoin/sewJoinInput";
 	}
 	
-	@GetMapping("/sewJoinFinPage.do")
+	@GetMapping("/sewJoinFinPage")
 	public String joinFin(Model model) {
 		model.addAttribute("member", new Member());		
 		return "sewJoin/sewJoinFinPage";
 	}
 	
-	@PostMapping("/sewJoinFinPage.do")
+	@PostMapping("/sewJoinFinPage")
 	public String joinFin(@ModelAttribute("member") Member member) {		
 		if (service.addMember(member)) {
 			return "/sewJoin/sewJoinFin";
@@ -51,7 +51,7 @@ public class MemberController {
 		return "sewJoin/sewJoinInput";		
 	}	
 	
-	@PostMapping("/memInputIdChk.do")
+	@PostMapping("/memInputIdChk")
 	@ResponseBody
     public Map<Object, Object> memIdChk(@RequestBody String memId) {        
         int count = 0;
@@ -61,7 +61,7 @@ public class MemberController {
         return map;
     }	
 	
-	@PostMapping("/validIdPw.do")
+	@PostMapping("/validIdPw")
 	@ResponseBody
     public Map<Object, Object> vaildIdPw(@RequestBody Member member) {
 		boolean isValid = false;
@@ -76,28 +76,28 @@ public class MemberController {
         return map;
     }
 	
-	@PostMapping("/sewLogin.do")
+	@PostMapping("/sewLogin")
 	public String loginChk(Member mem, HttpSession session) {
 		mem = service.encryp(mem);
 		if(service.getMember(mem)!=null) {
 			mem = service.getMember(mem);
 			session.setAttribute("mem", mem);
-			return "redirect:/index.do";
+			return "redirect:/index";
 		}
-		return "/index.do";
+		return "/index";
 	}
 
-	@GetMapping("/findId.do")
+	@GetMapping("/findId")
 	public String goFindId() {
 		return "sewLogin/sewFindId";
 	}
 	
-	@GetMapping("/findPw.do")
+	@GetMapping("/findPw")
 	public String goFindPw() {
 		return "sewLogin/sewFindPw";
 	}
 	
-	@PostMapping("/findMemberId.do")
+	@PostMapping("/findMemberId")
 	@ResponseBody
     public Map<Object, Object> findId(@RequestBody Member member) {
         Map<Object, Object> map = new HashMap<Object, Object>();
@@ -112,7 +112,7 @@ public class MemberController {
         return map;
     }
 	
-	@PostMapping("/findMemberPw.do")
+	@PostMapping("/findMemberPw")
 	@ResponseBody
     public Map<Object, Object> findPw(@RequestBody Member member) {
         Map<Object, Object> map = new HashMap<Object, Object>();
@@ -133,12 +133,12 @@ public class MemberController {
         return map;
     }
 	
-	@GetMapping("/sewChangePw.do")
+	@GetMapping("/sewChangePw")
 	public String goChangePw() {
 		return "sewLogin/sewChangePw";
 	}
 	
-	@PostMapping("/sewChangePw.do")
+	@PostMapping("/sewChangePw")
 	public String changePw(Member member, HttpSession session) {
 		if(session.getAttribute("mem")==null) {
 			return "sewLogin/sewLogin";
@@ -151,7 +151,7 @@ public class MemberController {
 		
 		session.invalidate();			
 		
-		return "redirect:/index.do";
+		return "redirect:/index";
 	}
 
 }

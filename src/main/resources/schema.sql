@@ -75,26 +75,8 @@ CREATE TABLE cartOptionList(
 	on delete cascade
 );
 
-CREATE TABLE orderProd(
-	orderProdNo varchar(20) primary key,
-	prodNo int not null,	
-	prodAmount int not null,		
-	prodCost int not null,
-	foreign key(prodNo) references product(prodNo)
-);
-
-CREATE TABLE orderOption(
-	optionNo int primary key auto_increment,
-	orderProdNo varchar(20) not null,
-	orderColor varchar(40) not null,
-	orderSize varchar(20) not null,
-	orderAmount int not null,
-	foreign key(orderProdNo) references orderProd(orderProdNo)
-);
-
 CREATE TABLE orderList(
 	orderNo varchar(20) primary key,	
-	orderProdNo varchar(20) not null,
 	totalListCost int not null,
 	totalDiscount int not null,
 	totalDeli int not null,
@@ -107,9 +89,26 @@ CREATE TABLE orderList(
 	deliAddr1 varchar(200) not null,
 	deliAddr2 varchar(200) not null,
 	payType varchar(10) not null,
-	payCompany varchar(10) not null,	
 	orderDate Timestamp not null,
 	orderStat varchar(10) default '상품 준비중',
-	foreign key(orderProdNo) references orderProd(orderProdNo),
-	foreign key(memId) references user(memId),
+	foreign key(memId) references user(memId)
+);
+
+CREATE TABLE orderProd(	
+	orderProdNo varchar(20) primary key,
+	orderNo varchar(20) not null,
+	prodNo int not null,	
+	prodAmount int not null,		
+	prodCost int not null,
+	foreign key(prodNo) references product(prodNo),
+	foreign key(orderNo) references orderList(orderNo)
+);
+
+CREATE TABLE orderOption(
+	optionNo int primary key auto_increment,
+	orderProdNo varchar(20) not null,
+	orderColor varchar(40) not null,
+	orderSize varchar(20) not null,
+	orderAmount int not null,
+	foreign key(orderProdNo) references orderProd(orderProdNo)
 );

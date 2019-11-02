@@ -39,7 +39,6 @@ public class SewApplicationTests {
 		op.setOrderSize("M 사이즈");
 		op.setOrderAmount(1);
 		service.addOrderOption(op);
-		ol.setOrderProdNo(o.getOrderProdNo());
 		ol.setTotalListCost(69900);
 		ol.setTotalDiscount(40000);
 		ol.setTotalDeli(2500);
@@ -52,7 +51,6 @@ public class SewApplicationTests {
 		ol.setDeliAddr1("서울특별시 강서구 강서로 420");
 		ol.setDeliAddr2("서울호서전문학교 1호관 705호");
 		ol.setPayType("신용카드");
-		ol.setPayCompany("비씨");
 		ol.setOrderDate(ts);
 		service.addOrderList(ol);
 	}

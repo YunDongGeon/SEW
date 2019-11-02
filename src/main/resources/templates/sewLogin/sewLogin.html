@@ -56,7 +56,7 @@
 				<div class="loginBox">
 					<h5 class="mb-4">회원 로그인</h5>
 					<div>
-						<form name="loginForm" method="post" action="sewLogin.do">
+						<form name="loginForm" method="post" action="sewLogin">
 							<div class="loginInputSec">
 								<input type="text" id="loginId" name="memId" placeholder="아이디" >
 								<input type="password" id="loginPw" name="memPw" placeholder="비밀번호">
@@ -126,7 +126,7 @@
 					async: true,
 				    type : 'POST',
 				    data : JSON.stringify({"memId": loginId, "memPw": loginPw}),
-				    url : "validIdPw.do",
+				    url : "validIdPw",
 				    dataType : "json",
 				    contentType: "application/json; charset=UTF-8",
 				    success : function(data) {

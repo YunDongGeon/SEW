@@ -17,7 +17,7 @@ $('#colorOption').click(function() {
 		async: true,
 	    type : 'POST',
 	    data : JSON.stringify({"prodNo": prodNo, "prodColor": colorSelect}),
-	    url : "getSize.do",
+	    url : "getSize",
 	    dataType : "json",
 	    contentType: "application/json; charset=UTF-8",
 	    success : function(data) {
@@ -178,7 +178,7 @@ $('#cantAddCart').click(function(e){
 });
 
 $('.goLogin').click(function(){
-	$(location).attr("href", "login.do");
+	$(location).attr("href", "login");
 });
 
 function closeLoginPop(self){

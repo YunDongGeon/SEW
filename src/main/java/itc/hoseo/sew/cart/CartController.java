@@ -78,7 +78,7 @@ public class CartController {
 		return "redirect:/myCart.do";
 	}
 	
-	@PostMapping("/sewCartPayment.do")
+	@PostMapping("/sewCartOrder.do")
 	public String goCartPayment(HttpServletRequest r, HttpSession session, ModelMap m, Cart c) {
 		List<Cart> buyList = new ArrayList<Cart>();
 		Member mem = (Member)session.getAttribute("mem");
@@ -105,7 +105,7 @@ public class CartController {
 		m.put("member", mem);
 		m.put("selectList", buyList);
 		
-		return "sewProduct/sewCartPaymentPage";
+		return "sewProduct/sewCartOrderPage";
 	}
 	
 }
