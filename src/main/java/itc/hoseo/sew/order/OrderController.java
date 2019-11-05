@@ -70,6 +70,43 @@ public class OrderController {
 		return "sewProduct/sewDirectOrderPage";
 	}
 	
+	@PostMapping("/sewCartOrder.do")	
+	public String cartOrder(Cart c, Order o, OrderOption op, OrderList ol, HttpServletRequest r, HttpSession session, ModelMap m) {
+		List<Cart> buyList = new ArrayList<Cart>();
+		Member mem = (Member)session.getAttribute("mem");
+		String memId = mem.getMemId();	
+		c.setMemId(memId);
+		String [] cartNo = r.getParameterValues("cartNo");
+		
+		for(int i = 0; i < cartNo.length; i++) {
+			c.setCartNo(Integer.parseInt(cartNo[i]));
+			buyList.add(cService.getSelectCart(c));
+		}					
+		Timestamp ts = new Timestamp(System.currentTimeMillis());		
+		ol.setMemId(memId);
+		ol.setReceiverContact(ol.getDeliTelNo1()+ol.getDeliTelNo2()+ol.getDeliTelNo3());		
+		ol.setOrderDate(ts);
+		service.addOrderList(ol);
+		o.setOrderNo(ol.getOrderNo());		
+		for(int i = 0; i < buyList.size(); i++) {			
+			o.setProdNo(buyList.get(i).getProdNo());
+			o.setProdCost(buyList.get(i).getTotalPrice());
+			o.setProdAmount(buyList.get(i).getTotalAmount());
+			List<CartOption> optionList = buyList.get(i).getOptionList();
+			service.addOrder(o);						
+			for(int j = 0; j < optionList.size(); j++) {
+				op = new OrderOption();
+				op.setOrderProdNo(o.getOrderProdNo());
+				op.setOrderColor(optionList.get(j).getProdColor());
+				op.setOrderSize(optionList.get(j).getProdSize());
+				op.setOrderAmount(optionList.get(j).getProdAmount());
+				service.addOrderOption(op);				
+			}
+		}
+		m.put("orderList", ol);
+//		m.put("orderProdList", service.getOrderProd(ol.getOrderNo()));
+		return "sewProduct/sewCartOrderCheckout";
+	}
 	@PostMapping("/sewOrder.do")	
 	public String order(Cart c, Order o, OrderOption op, OrderList ol, HttpServletRequest r, HttpSession session, ModelMap m) {
 		List<Cart> buyList = new ArrayList<Cart>();

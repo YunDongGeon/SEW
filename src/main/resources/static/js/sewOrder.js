@@ -119,10 +119,19 @@ function inputNumberFormat(obj) {
 		$(".totalPrice").text(numberFormat($(".totalValue").val()));
 		$(".remainMemPoint").val(Number($(".memPoint").val())-Number($(".usedMemPoint").val()));
 	}else{
-		if(Number($('.memPoint').val()) > Number($(".totalValue").val()*0.2)){
-			usedMemPoint = Number($(".totalValue").val()*0.2);
+		if(uncomma(obj.value) > $('.memPoint').val()){
+			usedMemPoint = Number($('.memPoint').val());
 			$('.usedMemPoint').val(usedMemPoint);
-			$('.useMemPoint').val(numberFormat(usedMemPoint));
+			obj.value = comma(usedMemPoint);
+			$('.usingMemPoint').text(numberFormat(usedMemPoint));
+			$(".totalValue").val(Number(oriTotalPrice)-usedMemPoint);
+			$(".totalPrice").text(numberFormat($(".totalValue").val()));
+			$(".remainMemPoint").val(Number($(".memPoint").val())-Number(usedMemPoint));
+		}
+		if(uncomma(obj.value) > Number(oriTotalPrice*0.2)){
+			usedMemPoint = Number(oriTotalPrice*0.2);
+			$('.usedMemPoint').val(usedMemPoint);
+			obj.value = comma(usedMemPoint);
 			$('.usingMemPoint').text(numberFormat(usedMemPoint));
 			$(".totalValue").val(Number(oriTotalPrice)-usedMemPoint);
 			$(".totalPrice").text(numberFormat($(".totalValue").val()));

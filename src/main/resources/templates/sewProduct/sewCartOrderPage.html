@@ -67,7 +67,7 @@
 						</li>
 					</ol>
 				</div>
-				<form method="post" action="sewOrder.do">
+				<form method="post" action="sewCartOrder.do">
 					<div class="order_content">
 						<div class="product_area">
 							<table cellspacing="0" class="tb_products">
@@ -223,7 +223,6 @@
 												</div>
 											</div>										
 										</div>
-										<input type="hidden" id="reliefPhoneNumberHidden" class="_deliveryForm _reliefPhoneNumberUseYn" name="deliveryAddress.reliefPhoneNumberUseYn">
 									</div>
 									<div th:if=${member.memZipCode==null} class="deliver_option_wrap deli_address">
 										<strong class="req" title="필수입력">배송지 주소</strong>
@@ -320,7 +319,7 @@
 											<td>
 												<div class="input_area">
 													<input type="text" name="payAmounts.NAVER_CASH" placeholder="0"
-														class="useMemPoint" onchange="inputNumberFormat(this)">
+														class="useMemPoint" onkeyup="inputNumberFormat(this)">
 													<span class="measure">원</span>
 													<button class="btn pointAllUseButton">전액사용</button>
 													<input type="hidden" name="memPoint" class="remainMemPoint">
@@ -463,7 +462,7 @@
 															<div id="installmentCodeList" class="">
 																<select id="monthGeneralPay" name="installmentMonth"
 																	class="selectbox-label cardInstallmentPeriodClassCode _payForm"
-																	style="width: 120px;" disabled="disabled">
+																	style="width: 120px;">
 																	<option value="01" selected>일시불</option>
 																	<option value="02">2개월</option>
 																	<option value="03">3개월</option>

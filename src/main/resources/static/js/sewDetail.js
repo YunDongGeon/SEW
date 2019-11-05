@@ -229,7 +229,7 @@ $('#buyBtn').click(function(e){
 		}else if ($("#sizeOption").val()!=null){
 			if(optionCount!=0){
 				$('html').animate({ scrollTop : 0}, 600);
-				$('form').attr("action", "sewDirectPayment.do");
+				$('form').attr("action", "sewDirectOrder.do");
 				$("form").unbind("submit").submit();		
 			}else{
 				$('.error').css("display", "block");
