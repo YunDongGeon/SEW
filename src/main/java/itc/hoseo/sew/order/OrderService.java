@@ -1,5 +1,7 @@
 package itc.hoseo.sew.order;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,5 +20,13 @@ public class OrderService {
 	
 	public boolean addOrderList(OrderList ol) {
 		return repo.addOrderList(ol)!=0;
+	}
+	
+	public List<Order> getOrderProd(String orderNo) {
+		return repo.getOrderProd(orderNo);
+	}
+	
+	public List<OrderOption> getOrderOption(String orderProdNo) {
+		return repo.getOrderOption(orderProdNo);
 	}
 }

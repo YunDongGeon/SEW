@@ -26,10 +26,10 @@ public class HttpInterceptor extends HandlerInterceptorAdapter {
 				return false;
 			}
 		} 
-//		else {
-//			response.sendRedirect("/login");
-//			return false;
-//		}
+		else {
+			response.sendRedirect("/login");
+			return false;
+		}
 		
 		return true;				
 	}

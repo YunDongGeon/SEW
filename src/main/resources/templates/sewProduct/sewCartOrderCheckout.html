@@ -83,19 +83,19 @@
 						<div class="info_wrap">
 							<h4>주문번호</h4>
 							<a href="#" class="order_number">
-								<strong>2019103137182610</strong>
+								<strong class="orderNo" th:text="${orderList.orderNo}"></strong>
 							</a><!--N=a:ctm.ordnumber-->
 				        </div>			
 						<div class="info_wrap">
 							<h4>배송지정보</h4>
 							<div class="info_dsc">
 								<ul>
-									<li>윤동건</li>
+									<li th:text="${orderList.receiverName}"></li>
+									<li th:text="${orderList.receiverContact}"></li>
 									<li>
-				                   		010-9177-8955
-									</li>
-									<li>
-										(04948) 서울특별시 광진구 영화사로 87-12 (구의동, 세인트힐 빌리지)    102동 501호
+										(<div th:text="${orderList.deliZipcode}" style="display: inline;"></div>)
+										<div th:text="${orderList.deliAddr1}" style="display: inline;"></div>
+									 	<div th:text="${orderList.deliAddr2}" style="display: inline;"></div>
 									</li>
 								</ul>
 							</div>
@@ -103,18 +103,16 @@
 						<div class="info_wrap">
 							<h4>결제정보</h4>
 							<div class="info_dsc">
-									<ul>
-										<li>결제수단</li>
-										<li>카드사</li>
-										<li>일시불</li>
-									</ul>
+								<ul>
+									<li th:text="${orderList.payType}"></li>
+								</ul>
 							</div>
 						</div>
 						<div class="info_wrap">
 							<h4>적립된 적립금</h4>
 							<div class="info_dsc">
 								<a href="#" class="order_number">
-									<strong>0</strong>원
+									<strong class="format-money" style="font-size: 16px;" th:text="${orderList.memAccPoint}"></strong>원
 								</a>
 							</div>
 				        </div>				        
@@ -124,64 +122,40 @@
 							<span class="sp_order logo">
 								<img th:src="@{img/logo/logo.png}">
 							</span>
-							<div class="scroll">
-								<ul class="product_list">
-									<li class="product_item">
-										<a href="#">
-											<img src="https://ssl.pstatic.net/checkout.phinf/20190816_291/1565951802313KeyNf_GIF/2000474258420.gif?type=m80" alt="[1+1+1]티셔츠 3종 세트" width="74" height="74">
-											<span class="mask"></span>
-										</a>
-										<div class="product_dsc">
-											<a href="#">
-												<p>
-													[1+1+1]티셔츠 3종 세트
-												</p>
-											</a><!--N=a:ctm.product-->
-											<ul class="option_list">
-												<li>
-													[세트]클렌즈 트임 오버핏 긴팔티, 색상=[NCBTS025]코코아, 사이즈=M_1(95~100)(1개) | [오늘발송]구김없는 베이직 오버핏 긴팔티, 색상=[ZYTS118]그린-오늘발송, 사이즈=FREE(95~105)(1개) | [오늘발송]10컬러 리버풀 오버핏 긴팔티, 색상=[ZYTS121]화이트, 사이즈=L_2(95~100)(1개)/1개
-												</li>
-											</ul>
-											<strong class="price">
-												<em>19,800</em>원
-											</strong>
-										</div>
-									</li>
-								</ul>
-							</div>
+							<div class="scroll"></div>
 							<ul class="calc_list">
 								<li>
 									<strong>총 상품금액</strong>
 									<p>
-										<em>19,800</em>원
+										<em class="format-money" th:text="${orderList.totalListCost}"></em>원
 									</p>
 								</li>
 								<li>
 									<strong>배송비</strong>
 									<p>
 										<span>(+) </span> 
-										<em>3,000</em>원
+										<em class="format-money" th:text="${orderList.totalDeli}"></em>원
 									</p>
 								</li>
 								<li>
 									<strong>할인금액</strong>
 									<p>
 										<span>(-) </span> 
-										<em>0</em>원
+										<em class="format-money" th:text="${orderList.totalDiscount}">0</em>원
 									</p>
 								</li>
 								<li>
 									<strong>포인트</strong>
 									<p>
 										<span>(-) </span> 
-										<em>0</em>원
+										<em class="format-money" th:text="${orderList.totalUsedPoint}"></em>원
 									</p>
 								</li>
 							</ul>
 							<div class="total_price">
 								<strong>결제금액</strong>
 								<div class="sum">
-									<em class="format-money">99999</em>
+									<em class="format-money" th:text="${orderList.totalCost}"></em>
 									<span class="txt">원</span>
 								</div>
 							</div>
@@ -234,6 +208,7 @@
 	<script th:src="@{slick/slick.min.js}"></script>
 	<script th:src="@{js/slider.js}"></script>
 	<script th:src="@{js/sewDetail.js}"></script>
+	<script th:src="@{js/sewCheckout.js}"></script>
 	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </body>
 </html>

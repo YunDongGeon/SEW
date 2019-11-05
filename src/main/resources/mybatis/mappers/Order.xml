@@ -27,11 +27,35 @@
 	            orderList
 		</selectKey>
 		INSERT INTO 
-		orderList(orderNo, totalListCost, totalDeli, totalDiscount, totalUsedPoint, totalCost, 
+		orderList(orderNo, totalListCost, totalDeli, totalDiscount, accPoint, totalUsedPoint, totalCost, 
 			memId, receiverName, receiverContact, deliZipcode, deliAddr1, deliAddr2,
 			payType, orderDate)
-		VALUES (#{orderNo}, #{totalListCost}, #{totalDiscount}, #{totalDeli}, 
+		VALUES (#{orderNo}, #{totalListCost}, #{totalDeli}, #{totalDiscount}, #{memAccPoint}, 
 			#{totalUsedPoint}, #{totalCost}, #{memId}, #{receiverName}, #{receiverContact}, 
 			#{deliZipcode}, #{deliAddr1}, #{deliAddr2}, #{payType}, #{orderDate})	
-	</insert>	
+	</insert>
+	<resultMap type="Order" id="OrderProdMap">
+		<result column="orderProdNo" property="orderProdNo"/>
+		<result column="orderNo" property="orderNo"/>
+		<result column="prodNO" property="prodNo"/>
+		<result column="prodAmount" property="prodAmount"/>
+		<result column="prodCost" property="prodCost"/>
+	    <result column="prodName" property="prodName"/>
+	    <result column="prodThumbName" property="prodThumbName"/>
+	    <collection property="optionList" column="orderProdNo" javaType="java.util.ArrayList" ofType="OrderOption" select="getOrderOption"/>
+	</resultMap>
+	<select id="getOrderProd" parameterType="String" resultMap="OrderProdMap">
+		SELECT op.*, p.prodName,  img.prodThumbName
+		from orderProd op
+		join product p
+		on op.prodno = p.prodno
+		join prodImage img
+		on op.prodno = img.prodno
+		where op.orderNo = #{orderNo}
+	</select>
+	<select id="getOrderOption" parameterType="String" resultType="OrderOption">
+		SELECT orderProdNo, orderColor, orderSize, orderAmount
+		FROM orderOption
+		WHERE orderProdNo = #{orderProdNo};
+	</select>
 </mapper>

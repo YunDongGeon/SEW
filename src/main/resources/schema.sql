@@ -80,6 +80,7 @@ CREATE TABLE orderList(
 	totalListCost int not null,
 	totalDiscount int not null,
 	totalDeli int not null,
+	accPoint int not null,
 	totalUsedPoint int not null,
 	totalCost int not null,
 	memId varchar(20) not null,

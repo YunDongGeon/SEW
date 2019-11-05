@@ -12,6 +12,7 @@ public class OrderList {
 	private int totalCost;
 	private int totalDiscount;
 	private int totalDeli;
+	private int memAccPoint;
 	private int totalUsedPoint;
 	private String receiverName;
 	private String deliTelNo1;

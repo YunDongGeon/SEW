@@ -7,6 +7,12 @@
     border: 1px solid #e3e4e5;
 }
 
+.order_content::after {
+	content: '';
+	display: block;
+	clear: both;
+}
+
 .order_sc .order_content .orderendtxt_wrap {
     position: relative;
     padding-bottom: 44px;
@@ -36,7 +42,7 @@
     border-top: 1px solid #f0f0f0;
     border-left: 1px solid #fff;
     border-right: 1px solid #fff;
-    min-height: 400px;
+    min-height: 300px;
     background: #fafafa;
 }
 
@@ -122,7 +128,7 @@ strong {
 }
 
 .order_sc .product_item {
-    padding: 12px 0 15px;
+    padding: 25px 0 15px;
 }
 
 .order_sc .product_item a {
@@ -149,7 +155,6 @@ strong {
 }
 
 .order_sc .product_item .product_dsc a p {
-    overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
     margin-bottom: 5px;

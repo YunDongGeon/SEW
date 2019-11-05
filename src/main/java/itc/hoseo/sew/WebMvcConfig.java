@@ -20,7 +20,7 @@ public class WebMvcConfig implements WebMvcConfigurer{
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(httpInterceptor)
-			.addPathPatterns("/**/*.do");		// 인터셉터 걸리는 패턴
+			.addPathPatterns("/**/*.do", "/*.do");		// 인터셉터 걸리는 패턴
 //			.excludePathPatterns("/index.do");		
 			// 인터셉터 안걸리는 패턴	
 	}
