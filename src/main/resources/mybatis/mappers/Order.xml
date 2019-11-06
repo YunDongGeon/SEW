@@ -58,4 +58,11 @@
 		FROM orderOption
 		WHERE orderProdNo = #{orderProdNo};
 	</select>
+	<update id="updateMemPoint" parameterType="OrderPoint">
+		UPDATE user SET memPoint = #{memPoint} WHERE memId = #{memId} 	
+	</update>
+	<select id="getInven">
+		SELECT * FROM prodInven 
+		WHERE prodNo=#{prodNo} and prodColor=#{prodColor}
+	</select>
 </mapper>

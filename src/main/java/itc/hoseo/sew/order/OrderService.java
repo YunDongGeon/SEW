@@ -29,4 +29,8 @@ public class OrderService {
 	public List<OrderOption> getOrderOption(String orderProdNo) {
 		return repo.getOrderOption(orderProdNo);
 	}
+	
+	public boolean updateMemPoint(OrderPoint omp) {
+		return repo.updateMemPoint(omp)!=0;
+	}
 }

@@ -13,4 +13,5 @@ public interface OrderRepository {
 	public int addOrderList(OrderList ol);
 	public List<Order> getOrderProd(String orderNo);
 	public List<OrderOption> getOrderOption(String orderProdNo);
+	public int updateMemPoint(OrderPoint omp);
 }

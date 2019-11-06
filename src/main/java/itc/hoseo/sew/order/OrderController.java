@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +25,8 @@ import itc.hoseo.sew.cart.CartOption;
 import itc.hoseo.sew.cart.CartService;
 import itc.hoseo.sew.member.Member;
 import itc.hoseo.sew.member.MemberService;
+import itc.hoseo.sew.mypage.MyPage;
+import itc.hoseo.sew.mypage.MyPageService;
 
 @Controller
 public class OrderController {
@@ -33,6 +36,8 @@ public class OrderController {
 	MemberService mService;
 	@Autowired
 	CartService cService;
+	@Autowired
+	MyPageService mpService;
 	
 	@PostMapping("/sewDirectOrder.do")	
 	public String goDirectOrder(ModelMap m, Cart c, HttpServletRequest r, HttpSession session) {
@@ -68,77 +73,100 @@ public class OrderController {
 		m.put("member", mem);
 		
 		return "sewProduct/sewDirectOrderPage";
-	}
-	
-	@PostMapping("/sewCartOrder.do")	
+	}	
+	@PostMapping("/sewCartOrderCheck.do")
+	@Transactional
 	public String cartOrder(Cart c, Order o, OrderOption op, OrderList ol, HttpServletRequest r, HttpSession session, ModelMap m) {
-		List<Cart> buyList = new ArrayList<Cart>();
-		Member mem = (Member)session.getAttribute("mem");
-		String memId = mem.getMemId();	
-		c.setMemId(memId);
-		String [] cartNo = r.getParameterValues("cartNo");
-		
-		for(int i = 0; i < cartNo.length; i++) {
-			c.setCartNo(Integer.parseInt(cartNo[i]));
-			buyList.add(cService.getSelectCart(c));
-		}					
-		Timestamp ts = new Timestamp(System.currentTimeMillis());		
-		ol.setMemId(memId);
-		ol.setReceiverContact(ol.getDeliTelNo1()+ol.getDeliTelNo2()+ol.getDeliTelNo3());		
-		ol.setOrderDate(ts);
-		service.addOrderList(ol);
-		o.setOrderNo(ol.getOrderNo());		
-		for(int i = 0; i < buyList.size(); i++) {			
-			o.setProdNo(buyList.get(i).getProdNo());
-			o.setProdCost(buyList.get(i).getTotalPrice());
-			o.setProdAmount(buyList.get(i).getTotalAmount());
-			List<CartOption> optionList = buyList.get(i).getOptionList();
-			service.addOrder(o);						
-			for(int j = 0; j < optionList.size(); j++) {
-				op = new OrderOption();
-				op.setOrderProdNo(o.getOrderProdNo());
-				op.setOrderColor(optionList.get(j).getProdColor());
-				op.setOrderSize(optionList.get(j).getProdSize());
-				op.setOrderAmount(optionList.get(j).getProdAmount());
-				service.addOrderOption(op);				
+		try {
+			List<Cart> buyList = new ArrayList<Cart>();
+			Member mem = (Member)session.getAttribute("mem");
+			String memId = mem.getMemId();
+			
+			MyPage mp = new MyPage();		
+			mp.setMemId(memId);
+			int accPoint = Integer.parseInt(r.getParameter("memAccPoint"));
+			mp = mpService.getMemPoint(mp);
+			int memPoint = mp.getMemPoint();		
+			int sumPoint = memPoint-ol.getTotalUsedPoint()+accPoint;		
+			OrderPoint omp = new OrderPoint();
+			omp.setMemId(memId);
+			omp.setMemPoint(sumPoint);		
+			service.updateMemPoint(omp);
+			
+			c.setMemId(memId);
+			String [] cartNo = r.getParameterValues("cartNo");
+			
+			for(int i = 0; i < cartNo.length; i++) {
+				c.setCartNo(Integer.parseInt(cartNo[i]));
+				buyList.add(cService.getSelectCart(c));
+			}					
+			Timestamp ts = new Timestamp(System.currentTimeMillis());		
+			ol.setMemId(memId);
+			ol.setReceiverContact(ol.getDeliTelNo1()+ol.getDeliTelNo2()+ol.getDeliTelNo3());		
+			ol.setOrderDate(ts);
+			service.addOrderList(ol);
+			o.setOrderNo(ol.getOrderNo());		
+			for(int i = 0; i < buyList.size(); i++) {			
+				o.setProdNo(buyList.get(i).getProdNo());
+				o.setProdCost(buyList.get(i).getTotalPrice());
+				o.setProdAmount(buyList.get(i).getTotalAmount());
+				List<CartOption> optionList = buyList.get(i).getOptionList();
+				service.addOrder(o);						
+				for(int j = 0; j < optionList.size(); j++) {
+					op = new OrderOption();
+					op.setOrderProdNo(o.getOrderProdNo());
+					op.setOrderColor(optionList.get(j).getProdColor());
+					op.setOrderSize(optionList.get(j).getProdSize());
+					op.setOrderAmount(optionList.get(j).getProdAmount());
+					service.addOrderOption(op);				
+				}
 			}
-		}
-		m.put("orderList", ol);
-//		m.put("orderProdList", service.getOrderProd(ol.getOrderNo()));
-		return "sewProduct/sewCartOrderCheckout";
+			for(int z = 0; z < cartNo.length; z++) {
+				c.setCartNo(Integer.parseInt(cartNo[z]));
+				cService.delCartItem(c);
+			}
+			m.put("orderList", ol);
+	//		m.put("orderProdList", service.getOrderProd(ol.getOrderNo()));
+			return "sewProduct/sewCartOrderCheckout";
+		}catch (Exception e) {
+			throw new RuntimeException(e);
+		}		
 	}
 	@PostMapping("/sewOrder.do")	
-	public String order(Cart c, Order o, OrderOption op, OrderList ol, HttpServletRequest r, HttpSession session, ModelMap m) {
-		List<Cart> buyList = new ArrayList<Cart>();
+	public String order(Order o, OrderOption op, OrderList ol, HttpServletRequest r, HttpSession session, ModelMap m) {		
 		Member mem = (Member)session.getAttribute("mem");
-		String memId = mem.getMemId();	
-		c.setMemId(memId);
-		String [] cartNo = r.getParameterValues("cartNo");
+		String memId = mem.getMemId();
+		MyPage mp = new MyPage();		
+		mp.setMemId(memId);
+		int accPoint = Integer.parseInt(r.getParameter("memAccPoint"));
+		mp = mpService.getMemPoint(mp);
+		int memPoint = mp.getMemPoint();		
+		int sumPoint = memPoint-ol.getTotalUsedPoint()+accPoint;		
+		OrderPoint omp = new OrderPoint();
+		omp.setMemId(memId);
+		omp.setMemPoint(sumPoint);		
+		service.updateMemPoint(omp);
 		
-		for(int i = 0; i < cartNo.length; i++) {
-			c.setCartNo(Integer.parseInt(cartNo[i]));
-			buyList.add(cService.getSelectCart(c));
-		}					
-		Timestamp ts = new Timestamp(System.currentTimeMillis());		
+		String [] orderColor = r.getParameterValues("orderColor");
+		String [] orderSize = r.getParameterValues("orderSize");
+		String [] orderAmount = r.getParameterValues("orderAmount");
+		
+		Timestamp ts = new Timestamp(System.currentTimeMillis());
 		ol.setMemId(memId);
 		ol.setReceiverContact(ol.getDeliTelNo1()+ol.getDeliTelNo2()+ol.getDeliTelNo3());		
 		ol.setOrderDate(ts);
 		service.addOrderList(ol);
-		o.setOrderNo(ol.getOrderNo());		
-		for(int i = 0; i < buyList.size(); i++) {			
-			o.setProdNo(buyList.get(i).getProdNo());
-			o.setProdCost(buyList.get(i).getTotalPrice());
-			o.setProdAmount(buyList.get(i).getTotalAmount());
-			List<CartOption> optionList = buyList.get(i).getOptionList();
-			service.addOrder(o);						
-			for(int j = 0; j < optionList.size(); j++) {
-				op = new OrderOption();
-				op.setOrderProdNo(o.getOrderProdNo());
-				op.setOrderColor(optionList.get(j).getProdColor());
-				op.setOrderSize(optionList.get(j).getProdSize());
-				op.setOrderAmount(optionList.get(j).getProdAmount());
-				service.addOrderOption(op);				
-			}
+		o.setOrderNo(ol.getOrderNo());
+		
+		service.addOrder(o);
+		
+		for(int i = 0; i < orderColor.length; i++) {						
+			op = new OrderOption();
+			op.setOrderProdNo(o.getOrderProdNo());
+			op.setOrderColor(orderColor[i]);
+			op.setOrderSize(orderSize[i]);
+			op.setOrderAmount(Integer.parseInt(orderAmount[i]));
+			service.addOrderOption(op);				
 		}
 		m.put("orderList", ol);
 //		m.put("orderProdList", service.getOrderProd(ol.getOrderNo()));

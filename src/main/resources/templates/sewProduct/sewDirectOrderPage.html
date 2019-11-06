@@ -123,6 +123,7 @@
 										</td>
 										<td>
 											<span th:text="${buyList.totalAmount}"></span>개
+											<input type="hidden" name="prodAmount" th:value="${buyList.totalAmount}">
 											<input type="hidden" class="totalProdListPrice" th:value="${buyList.totalListPrice}">
 										</td>
 										<td class="col_price">
@@ -222,10 +223,10 @@
 										<div class="deliver_option">
 											<span class="zipcode_group"> 
 												<input type="text" title="우편번호" class="inp_txt2 zipcode deliZipCode" 
-													name="deliZipCode" id="postcode"
+													name="deliZipcode" id="postcode"
 													readonly="readonly" maxlength="7" style="float: none;">
 											</span>
-											<button class="btn" onClick="findPostCode()">우편번호</button>
+											<button type="button" class="btn" onClick="findPostCode()">우편번호</button>
 											<div class="addr_detail">
 												<input type="text" title="주소" class="inp_txt2 addr_input1 deliAddr1"
 													id="addr1" name="deliAddr1" value="" readonly="readonly"><br> 
@@ -245,7 +246,7 @@
 													name="deliZipcode" id="postcode" th:value="${member.memZipCode}"
 													readonly="readonly" maxlength="7" style="float: none;">
 											</span>
-											<button class="btn" onClick="findPostCode()">우편번호</button>
+											<button type="button" class="btn" onClick="findPostCode()">우편번호</button>
 											<div class="addr_detail">
 												<input type="text" title="주소" class="inp_txt2 addr_input1 _deliveryForm" th:value="${member.memAddr1}"
 													id="addr1" name="deliAddr1" value="" readonly="readonly"><br> 
@@ -327,7 +328,7 @@
 								<h4>결제금액</h4>
 								<div class="sum _lastTotalAccountPrice">
 									<em class="totalPrice"></em>
-									<input type="hidden" name="totalPrice" class="totalValue">
+									<input type="hidden" name="totalCost" class="totalValue">
 									<input type="hidden" class="oriTotalValue">							
 									<span class="txt">원</span>
 								</div>
