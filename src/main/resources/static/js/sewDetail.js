@@ -273,7 +273,7 @@ function cal(amount, price, listPrice) {
 		$("#totalListPrice").val(Number(totalListPrice));
 	} else {		
 		if($("#sizeOption option:selected").val()=="S 사이즈") {			
-			if($(amount).val()>$(".sSizeProd").val()){				
+			if(Number($(amount).val())>Number($(".sSizeProd").val())){				
 				$(amount).val($(".sSizeProd").val());
 				var total = Number($(amount).val()*$(price).val());
 				var totalList = Number($(amount).val()*$(listPrice).val());
@@ -308,7 +308,7 @@ function cal(amount, price, listPrice) {
 				$("#totalListPrice").val(Number(totalListPrice));
 			}
 		} else if($("#sizeOption option:selected").val()=="M 사이즈") {
-			if($(amount).val()>$(".mSizeProd").val()){
+			if(Number($(amount).val())>Number($(".mSizeProd").val())){
 				$(amount).val($(".mSizeProd").val());
 				var total = Number($(amount).val()*$(price).val());
 				var totalList = Number($(amount).val()*$(listPrice).val());
@@ -343,10 +343,7 @@ function cal(amount, price, listPrice) {
 				$("#totalListPrice").val(Number(totalListPrice));
 			}
 		} else if($("#sizeOption option:selected").val()=="L 사이즈") {
-			alert($("#sizeOption option:selected").val());
-			alert($(amount).val()>$(".lSizeProd").val());
-			if($(amount).val()>$(".lSizeProd").val()){
-				alert('걸림');
+			if(Number($(amount).val())>Number($(".lSizeProd").val())){
 				$(amount).val($(".lSizeProd").val());
 				var total = Number($(amount).val()*$(price).val());
 				var totalList = Number($(amount).val()*$(listPrice).val());
@@ -363,8 +360,7 @@ function cal(amount, price, listPrice) {
 				$("#totalAmount").val(curAmount);
 				$("#totalPrice").val(Number(totalPrice));
 				$("#totalListPrice").val(Number(totalListPrice));
-			} 
-			if($(amount).val()<=$(".lSizeProd").val()){
+			} else {
 				var total = Number($(amount).val()*$(price).val());
 				var totalList = Number($(amount).val()*$(listPrice).val());
 				$(amount).parent("div").parent("div").children(".itemPriceBox").children(".itemPrice").text(numberFormat(total));
@@ -382,7 +378,7 @@ function cal(amount, price, listPrice) {
 				$("#totalListPrice").val(Number(totalListPrice));
 			}
 		} else if($("#sizeOption option:selected").val()=="XL 사이즈") {
-			if($(amount).val()>$(".xlSizeProd").val()){
+			if(Number($(amount).val())>Number($(".xlSizeProd").val())) {
 				$(amount).val($(".xlSizeProd").val());
 				var total = Number($(amount).val()*$(price).val());
 				var totalList = Number($(amount).val()*$(listPrice).val());

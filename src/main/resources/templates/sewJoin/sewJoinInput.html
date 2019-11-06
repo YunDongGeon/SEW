@@ -54,7 +54,7 @@
 					<li><span>03</span> 가입완료</li>
 				</ol>
 			</div>
-			<form name="joinInputForm" id="joinInputForm" method="post" th:action="@{sewJoinFinPage.do}" th:object="${member}" onsubmit="return joinInputChk()">
+			<form name="joinInputForm" id="joinInputForm" method="post" th:action="@{sewJoinFinPage}" th:object="${member}" onsubmit="return joinInputChk()">
 				<div class="joinContainer">
 					<div class="joinBox">
 						<h3 class="inputTit">회원정보</h3>
@@ -187,6 +187,9 @@
 										<div class="addrBox">
 											<input th:field="*{memAddr1}" type="text" class="addrInput" id="addr1" name="memAddr1" readonly>
 											<input th:field="*{memAddr2}" type="text" class="addrInput" id="addr2" name="memAddr2">
+											<div class="inputChkBox" id="addrChkBox">
+												<span>상세주소를 입력해주세요.</span>
+											</div>
 										</div>																		
 									</td>
 								</tr>									

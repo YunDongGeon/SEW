@@ -43,15 +43,7 @@ public class SewLinkController {
 	@GetMapping("/joinTerms")
 	public String joinTerms() {
 		return "sewJoin/sewJoinTerms";
-	}
-	@GetMapping("/myPage.do")
-	public String myPage() {
-		return "sewMyPage/sewMyPageHome";		
-	}
-	@GetMapping("/editMember.do")
-	public String editMember() {
-		return "sewMyPage/sewEditMember";		
-	}
+	}	
 	@GetMapping("/withDrawal.do")
 	public String withDrawal() {
 		return "sewMyPage/sewWithDrawal";		

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -79,9 +80,9 @@ public class OrderController {
 		return "sewProduct/sewDirectOrderPage";
 	}	
 	@PostMapping("/sewCartOrderCheck.do")
-	@Transactional(rollbackFor = {RuntimeException.class})
+	@Transactional
 	public String cartOrder(Cart c, Order o, OrderOption op, OrderList ol, OrderInven oi, HttpServletRequest r, 
-				HttpSession session, HttpServletResponse response, ModelMap m) throws RuntimeException {
+				HttpSession session, HttpServletResponse response, ModelMap m) {
 		try {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
@@ -137,9 +138,10 @@ public class OrderController {
 											+ "location.href='myCart.do';"
 									  + "</script>");
 							out.flush();
-							throw new RuntimeException();							
+							throw new Exception();							
 						} else {
 							prodInven = prodInven - op.getOrderAmount();
+							oi.setProdSize("S 사이즈");
 							oi.setProdSsize(prodInven);
 							service.updateInven(oi);
 						}					
@@ -151,9 +153,10 @@ public class OrderController {
 									+ "location.href='myCart.do';"
 							  + "</script>");
 							out.flush();
-							throw new RuntimeException();
+							throw new Exception();
 						} else {
 							prodInven = prodInven - op.getOrderAmount();
+							oi.setProdSize("M 사이즈");
 							oi.setProdMsize(prodInven);
 							service.updateInven(oi);
 						}
@@ -165,9 +168,10 @@ public class OrderController {
 									+ "location.href='myCart.do';"
 							  + "</script>");
 							out.flush();
-							throw new RuntimeException();
+							throw new Exception();
 						} else {
 							prodInven = prodInven - op.getOrderAmount();
+							oi.setProdSize("L 사이즈");
 							oi.setProdLsize(prodInven);
 							service.updateInven(oi);
 						}
@@ -179,9 +183,10 @@ public class OrderController {
 									+ "location.href='myCart.do';"
 							  + "</script>");
 							out.flush();
-							throw new RuntimeException();
+							throw new Exception();
 						} else {
 							prodInven = prodInven - op.getOrderAmount();
+							oi.setProdSize("XL 사이즈");
 							oi.setProdXLsize(prodInven);
 							service.updateInven(oi);
 						}
@@ -194,17 +199,17 @@ public class OrderController {
 				cService.delCartItem(c);
 			}
 			m.put("orderList", ol);
-	//		m.put("orderProdList", service.getOrderProd(ol.getOrderNo()));
-			return "sewProduct/sewCartOrderCheckout";
+	//		m.put("orderProdList", service.getOrderProd(ol.getOrderNo()));			
 		} catch (Exception e) {
-			throw new RuntimeException(e);
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();			
 		}
+		return "sewProduct/sewCartOrderCheckout";
 	}
 	
 	@PostMapping("/sewOrder.do")
-	@Transactional(rollbackFor = {RuntimeException.class})
+	@Transactional
 	public String order(Order o, OrderOption op, OrderList ol, OrderInven oi, HttpServletRequest r, HttpSession session, 
-			HttpServletResponse response, ModelMap m) throws RuntimeException {
+			HttpServletResponse response, ModelMap m){
 		try {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
@@ -236,6 +241,7 @@ public class OrderController {
 			
 			for(int i = 0; i < orderColor.length; i++) {						
 				op = new OrderOption();
+				op.setProdNo(o.getProdNo());
 				op.setOrderProdNo(o.getOrderProdNo());
 				op.setOrderColor(orderColor[i]);
 				op.setOrderSize(orderSize[i]);
@@ -249,9 +255,10 @@ public class OrderController {
 										+ "location.href='myCart.do';"
 								  + "</script>");
 						out.flush();
-						throw new RuntimeException();							
+						throw new Exception();							
 					} else {
 						prodInven = prodInven - op.getOrderAmount();
+						oi.setProdSize("S 사이즈");
 						oi.setProdSsize(prodInven);
 						service.updateInven(oi);
 					}					
@@ -263,9 +270,10 @@ public class OrderController {
 								+ "location.href='myCart.do';"
 						  + "</script>");
 						out.flush();
-						throw new RuntimeException();
+						throw new Exception();
 					} else {
 						prodInven = prodInven - op.getOrderAmount();
+						oi.setProdSize("M 사이즈");
 						oi.setProdMsize(prodInven);
 						service.updateInven(oi);
 					}
@@ -277,9 +285,10 @@ public class OrderController {
 								+ "location.href='myCart.do';"
 						  + "</script>");
 						out.flush();
-						throw new RuntimeException();
+						throw new Exception();
 					} else {
 						prodInven = prodInven - op.getOrderAmount();
+						oi.setProdSize("L 사이즈");
 						oi.setProdLsize(prodInven);
 						service.updateInven(oi);
 					}
@@ -291,9 +300,10 @@ public class OrderController {
 								+ "location.href='myCart.do';"
 						  + "</script>");
 						out.flush();
-						throw new RuntimeException();
+						throw new Exception();
 					} else {
 						prodInven = prodInven - op.getOrderAmount();
+						oi.setProdSize("XL 사이즈");
 						oi.setProdXLsize(prodInven);
 						service.updateInven(oi);
 					}
@@ -301,10 +311,10 @@ public class OrderController {
 				service.addOrderOption(op);				
 			}
 			m.put("orderList", ol);
-	//		m.put("orderProdList", service.getOrderProd(ol.getOrderNo()));
-			return "sewProduct/sewCartOrderCheckout";
+	//		m.put("orderProdList", service.getOrderProd(ol.getOrderNo()));			
 		} catch (Exception e) {
-			throw new RuntimeException();
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
+		return "sewProduct/sewDirectOrderCheckout";
 	}
 }

@@ -54,7 +54,7 @@
 					<div class="findIdBox">
 						<h5 class="mb-4">비밀번호 입력</h5>	
 						<div>
-							<form id="findPwForm" name="findPwForm" method="post">
+							<form method="post" action="withDrawal.do">
 								<div class="loginInputSec">
 									<input type="password" id="withdrawalPw" name="memId" placeholder="비밀번호" >
 								</div>
@@ -73,6 +73,16 @@
 						</div>				
 					</div>
 				</div>
+			</div>
+			<div class="_layer_cart_add layerpop_wrap goCartPop" style="display: none; z-index: 10000; left: 791.5px; top: 400px;" tabindex="-1">
+			    <div class="layer_inner">
+			        <strong class="title"><span style="color: red;">회원탈퇴</span>를<br> 진행하시겠습니까?</strong>
+			        <div class="button_wrap">
+			            <a href="#" class="btn bg_white withDrawal" role="button">회원탈퇴</a>
+			            <a href="#" class="btn bg_white closeCartPop" role="button">취소</a>
+			        </div>
+			        <button type="button" class="button_close closeCartPop"></button>
+			    </div>
 			</div>
 		</div>
 	</section>
@@ -111,9 +121,10 @@
 	<script th:src="@{js/sewJoin.js}"></script>
 	<script th:src="@{js/sewMyPage.js}"></script>
 	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script th:src="@{js/updateLater.js}"></script>
 	<script type="text/javascript">
 		$("form").submit(function(e){
-			var findId = document.findPwForm.memId.value;
+			var findId = $('#withdrawalPw').val();
 			e.preventDefault();
 			
 			if (findId==""){						
@@ -124,23 +135,23 @@
 					async: true,
 				    type : 'POST',
 				    data : JSON.stringify({"memPw": findId}),
-				    url : "",
+				    url : "validMem.do",
 				    dataType : "json",
 				    contentType: "application/json; charset=UTF-8",
 				    success : function(data) {
-				        if (data.sendEmail) {
-				        	$("#idChkBox1").hide()							
-							$("#idChkBox3").hide()
-				        } else {
-				        	$("#idChkBox1").hide()							
-							$("#idChkBox3").show()
-				        }
+				    	$('.goCartPop').css("display", "block");
+				    	$('.withDrawal').click(function () {
+							$("form").unbind("submit").submit();				    		
+				    	});
 				    },
 				    error : function(error) {
 				        alert("error : " + error);
 				    }
 				});								
 			}	   			
+		});
+		$('.closeCartPop').click(function () {
+			$('.goCartPop').css("display", "none");
 		});
 	</script>
 </body>

@@ -1,6 +1,7 @@
 package itc.hoseo.sew.order;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import lombok.Data;
 
@@ -24,4 +25,6 @@ public class OrderList {
 	private String deliAddr2;
 	private String payType;
 	private Timestamp orderDate;
+	private String orderStat;
+	private List<Order> orderProdList;
 }

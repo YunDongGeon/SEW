@@ -42,6 +42,7 @@ var nameChk = 0;
 var birthChk = 0;
 var phoneChk = 0;
 var emailChk = 0;
+var addrChk = 1;
 
 // onsubmit
 function updatePw(){
@@ -57,6 +58,56 @@ function updatePw(){
 	}else if(rePwChk==1){		
 		return false;
 	}
+}
+
+function editInputChk(){
+	if($("#memName").val!=null){
+		nameChk=1;
+	}
+	if($("#memEmail").val!=null){
+		emailChk=1;
+	}
+	if($("#memPhone").val!=null){
+		phoneChk=1;
+	}
+	if(addrChk==0){
+		$("#addrChkBox").show();
+		return false;
+	}else{
+		$("#addrChkBox").hide();
+	}
+	// 비밀번호 체크
+	if(pwChk==0){
+		$("#pwChkBox").show();
+		return false;
+	}
+	// 비밀번호 확인 체크
+	if(rePwChk==0){
+		$("#rePwChkBox1").show();
+    	$("#rePwChkBox2").hide();
+		return false;
+	}else if(rePwChk==1){		
+		return false;
+	}
+	// 이름 체크
+	if(nameChk==0){
+		$("#nameChkBox").show();
+		return false;
+	}
+	// 이메일 체크
+	if(emailChk==0){
+		$("#emailChkBox").show();
+		return false;
+	}
+	// 휴대폰 체크
+	if(phoneChk==0){
+		$("#phoneChkBox").show();
+		return false;
+	}
+	if(pwChk && rePwChk && nameChk && emailChk && phoneChk && addrChk){
+		return true;
+	}
+	return false;
 }
 
 function joinInputChk(){
@@ -97,7 +148,18 @@ function joinInputChk(){
 		$("#emailChkBox").show();
 		return false;
 	}
-	if(idChk && pwChk && rePwChk && nameChk && birthChk && emailChk && phoneChk){
+	// 휴대폰 체크
+	if(phoneChk==0){
+		$("#phoneChkBox").show();
+		return false;
+	}
+	if(addrChk==0){
+		$("#addrChkBox").show();
+		return false;
+	}else{
+		$("#addrChkBox").hide();
+	}
+	if(idChk && pwChk && rePwChk && nameChk && birthChk && emailChk && phoneChk && addrChk){
 		return true;
 	}
 	return false;
@@ -127,7 +189,7 @@ $("#memId").on("change keyup paste", function() {
 	        async: true,
 	        type : 'POST',
 	        data : memId,
-	        url : "memInputIdChk.do",
+	        url : "memInputIdChk",
 	        dataType : "json",
 	        contentType: "application/json; charset=UTF-8",
 	        success : function(data) {
@@ -290,6 +352,17 @@ $("#cellPhone").on("change keyup paste", function() {
 	}
 });
 
+$("#addr2").on("change keyup paste", function() {
+	if($('#postcode').val()!=null){
+		if($(this).val!=null){		
+			addrChk=1;
+		} else {
+			addrChk=0;
+		}
+	}else{
+		addrChk=0;
+	}
+});
 //Daum postCode api
 function findPostCode() {
     new daum.Postcode({
@@ -327,8 +400,11 @@ function findPostCode() {
             } 
 
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
-            document.getElementById('postcode').value = data.zonecode;
-            document.getElementById("addr1").value = addr;
+            $('#postcode').val(data.zonecode);
+            $('#addr1').val(addr);
+            addrChk=0;
+//            document.getElementById('postcode').value = data.zonecode;
+//            document.getElementById("addr1").value = addr;
             // 커서를 상세주소 필드로 이동한다.
             document.getElementById("addr2").focus();
         }

@@ -271,7 +271,20 @@
 								</tbody>
 							</table>
 						</div>
-						<div class="sub_sc" style="min-height: 895px;">
+						<div th:if="${orderList==0}" class="sub_sc" style="min-height: 895px;">
+							<div id="_listContentArea">
+								<div class="goods_pay_section ">
+									<div class="goods_group">
+										<ul class="goods_group_list">
+											<li class="goods_pay_item" style="text-align: center;">
+												구매 내역이 없습니다.
+											</li>
+										</ul>
+									</div>		
+								</div>								
+							</div>
+						</div>
+						<div th:unless="${orderList==0}" class="sub_sc" style="min-height: 895px;">
 							<div id="_listContentArea">
 								<div class="tit_month">
 									<hr>
@@ -279,121 +292,41 @@
 										2019.10
 									</span>									
 								</div>
-								<div class="goods_pay_section ">
+								<div class="goods_pay_section" th:each="ol : ${orderList}">
 									<div class="goods_group">
 										<ul class="goods_group_list">
-											<li id="_rowLi20191009190749CHK2019100965088491" class="goods_pay_item ">
+											<li class="goods_pay_item ">
 												<div class="goods_item">
-													<a href="/orderStatus/2019100968115301" class="goods_thumb">
-														<img src="https://order.pay.naver.com/proxy/phinf/shop1/20190814_293/spigen_15657686928889LU1j_JPEG/101638_1.jpg?type=m90_90"
-															alt="갤럭시노트10플러스 케이스 울트라하이브리드" width="90" height="90">
+													<a href="#" class="goods_thumb">
+														<img th:src="@{'/prodThumb/'+${ol.orderProdList[0].prodThumbName}}" width="90" height="90">
 													</a>
-													<!--N=a:lst.detail-->
 													<div class="goods_info">
-														<!-- NV_MID:82171529987 -->
-														<a href="/orderStatus/2019100968115301" class="goods">
-															<p class="name">
-																<span class="ico_pointplus"><span class="blind">포인트플러스</span></span>
-																갤럭시노트10플러스 케이스 울트라하이브리드
-															</p>
+														<a href="#" class="goods">
+															<p class="name" th:if="${ol.orderProdList.size()==1}" th:text="${ol.orderProdList[0].prodName}"></p>
+															<p class="name" th:unless="${ol.orderProdList.size()==1}">
+																<span th:text="${ol.orderProdList[0].prodName}"></span>(외 <span th:text="${ol.orderProdList.size()-1}"></span>건)
+															</p>														
 															<ul class="info">
 																<li>
-																	<span>17,900<span>
-																	<span class="won">원</span>
+																	<span class="format-money" th:text="${ol.totalCost}"></span><span class="won">원</span>
 																</li>
 																<li class="date">
-																	<span>2019.10.09<span>
+																	<span th:text="${#strings.replace(#strings.substring(ol.orderDate, 0, 11), '-', '.')}"><span>
 																</li>
 															</ul>
 														</a>														
-														<p class="guide">
-															구매가 완료되었습니다. 이용해주셔서 감사합니다.															
-														</p>
+														<p class="guide" th:text="${ol.orderStat}"></p>
 													</div>
 												</div>
-												<div class="button_item">
+												<div class="button_item" th:if="${ol.orderStat=='배송 완료'}">
 													<button class="writeReviewBtn">리뷰쓰기</button>
 												</div>
 											</li>
 										</ul>
 									</div>		
-									<div class="goods_group">
-										<ul class="goods_group_list">
-											<li id="_rowLi20191009190749CHK2019100965088491" class="goods_pay_item ">
-												<div class="goods_item">
-													<a href="/orderStatus/2019100968115301" class="goods_thumb">
-														<img src="https://order.pay.naver.com/proxy/phinf/shop1/20190814_293/spigen_15657686928889LU1j_JPEG/101638_1.jpg?type=m90_90"
-															alt="갤럭시노트10플러스 케이스 울트라하이브리드" width="90" height="90">
-													</a>
-													<!--N=a:lst.detail-->
-													<div class="goods_info">
-														<!-- NV_MID:82171529987 -->
-														<a href="/orderStatus/2019100968115301" class="goods">
-															<p class="name">
-																<span class="ico_pointplus"><span class="blind">포인트플러스</span></span>
-																갤럭시노트10플러스 케이스 울트라하이브리드
-															</p>
-															<ul class="info">
-																<li>
-																	<span>17,900<span>
-																	<span class="won">원</span>
-																</li>
-																<li class="date">
-																	<span>2019.10.09<span>
-																</li>
-															</ul>
-														</a>														
-														<p class="guide">
-															구매가 완료되었습니다. 이용해주셔서 감사합니다.															
-														</p>
-													</div>
-												</div>
-												<div class="button_item">
-													<button class="writeReviewBtn">리뷰쓰기</button>
-												</div>
-											</li>
-										</ul>
-									</div>
-									<div class="goods_group">
-										<ul class="goods_group_list">
-											<li id="_rowLi20191009190749CHK2019100965088491" class="goods_pay_item ">
-												<div class="goods_item">
-													<a href="/orderStatus/2019100968115301" class="goods_thumb">
-														<img src="https://order.pay.naver.com/proxy/phinf/shop1/20190814_293/spigen_15657686928889LU1j_JPEG/101638_1.jpg?type=m90_90"
-															alt="갤럭시노트10플러스 케이스 울트라하이브리드" width="90" height="90">
-													</a>
-													<!--N=a:lst.detail-->
-													<div class="goods_info">
-														<!-- NV_MID:82171529987 -->
-														<a href="/orderStatus/2019100968115301" class="goods">
-															<p class="name">
-																<span class="ico_pointplus"><span class="blind">포인트플러스</span></span>
-																갤럭시노트10플러스 케이스 울트라하이브리드
-															</p>
-															<ul class="info">
-																<li>
-																	<span>17,900<span>
-																	<span class="won">원</span>
-																</li>
-																<li class="date">
-																	<span>2019.10.09<span>
-																</li>
-															</ul>
-														</a>														
-														<p class="guide">
-															구매가 완료되었습니다. 이용해주셔서 감사합니다.															
-														</p>
-													</div>
-												</div>
-												<div class="button_item">
-													<button class="writeReviewBtn">리뷰쓰기</button>
-												</div>
-											</li>
-										</ul>
-									</div>												
 								</div>								
 							</div>
-							<div class="viewmore_btn_section" id="_moreButton">
+							<div class="viewmore_btn_section" id="_moreButton" th:if="${orderList.size()>4}">
 								<button id="addColor" type="button" class="btn btn-outline-dark">더보기</button>
 							</div>							
 						</div>
@@ -428,8 +361,7 @@
 	<script th:src="@{js/jquery.animateNumber.min.js}"></script>
 	<script th:src="@{js/bootstrap-datepicker.js}"></script>
 	<script th:src="@{js/scrollax.min.js}"></script>
-	<script
-		th:src="@{https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false}"></script>
+	<script th:src="@{https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false}"></script>
 	<script th:src="@{js/google-map.js}"></script>
 	<script th:src="@{js/main.js}"></script>
 	<script th:src="@{slick/slick.js}"></script>
@@ -437,8 +369,30 @@
 	<script th:src="@{js/slider.js}"></script>
 	<script th:src="@{js/sewJoin.js}"></script>
 	<script th:src="@{js/sewMyPage.js}"></script>
-	<script
-		src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script th:src="@{js/updateLater.js}"></script>
+	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script type="text/javascript">
+		Number.prototype.format = function(){
+		    if(this==0) return 0;
+	
+		    var reg = /(^[+-]?\d+)(\d{3})/;
+		    var n = (this + '');
+	
+		    while (reg.test(n)) n = n.replace(reg, '$1' + ',' + '$2');
+	
+		    return n;
+		};
+		String.prototype.format = function(){
+		    var num = parseFloat(this);
+		    if( isNaN(num) ) return "0";
 
+		    return num.format();
+		};
+		jQuery('.format-money').text(function() {
+		    jQuery(this).text(
+		        jQuery(this).text().format()
+		    );
+		});
+	</script> 
 </body>
 </html>

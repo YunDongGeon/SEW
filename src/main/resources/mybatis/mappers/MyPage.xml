@@ -6,4 +6,60 @@
 	<select id="getMemPoint" parameterType="MyPage" resultType="MyPage">
 		select memPoint from user where memId = #{memId} 
 	</select>
+	<select id="getEditMemInfo" parameterType="Member" resultType="Member">
+		SELECT memId, memName, memBirth, memEmail, memPhone, memZipcode, memAddr1, memAddr2
+		FROM user
+		WHERE memId = #{memId};
+	</select>
+	<update id="editMemInfo" parameterType="Member">
+		UPDATE user
+		set memPw = #{memPw}, 
+			memName = #{memName}, 
+			memEmail = #{memEmail}, 
+			memPhone = #{memPhone}, 
+			memZipcode = #{memZipCode}, 
+			memAddr1 = #{memAddr1}, 
+			memAddr2 = #{memAddr2}
+		WHERE memId = #{memId}
+	</update>
+	<delete id="withDrawal" parameterType="Member">
+		DELETE FROM user
+		WHERE memId=#{memId};
+	</delete>
+	<resultMap type="OrderList" id="OrderProdMap">
+		<result column="orderNo" property="orderNo"/>		
+		<result column="totalCost" property="totalCost"/>
+		<result column="orderDate" property="orderDate"/>
+		<result column="orderStat" property="orderStat"/>		
+	    <collection property="orderProdList" column="orderNo" javaType="java.util.ArrayList" ofType="Order" select="getOrderProd"/>
+	</resultMap>
+	<select id="getOrderList" parameterType="Member" resultMap="OrderProdMap">
+		SELECT orderNo, totalCost, orderDate, orderStat 
+		FROM orderList
+		WHERE memId = #{memId};
+	</select>
+	<resultMap type="Order" id="OrderMap">
+		<result column="orderProdNo" property="orderProdNo"/>
+		<result column="orderNo" property="orderNo"/>		
+		<result column="prodNo" property="prodNo"/>
+		<result column="prodAmount" property="prodAmount"/>
+		<result column="prodCost" property="prodCost"/>		
+		<result column="prodName" property="prodName"/>
+	    <result column="prodThumbName" property="prodThumbName"/>
+	    <collection property="optionList" column="orderProdNo" javaType="java.util.ArrayList" ofType="OrderOption" select="getOption"/>
+	</resultMap>
+	<select id="getOrderProd" parameterType="String" resultMap="OrderMap">
+		 SELECT o.orderProdNo, o.orderNo, o.prodNo, o.prodAmount, o.prodCost, p.prodName, img.prodThumbName
+		 FROM orderProd o
+		 JOIN product p
+		 ON o.prodNo = p.prodNo
+                 JOIN prodImage img
+                 ON o.prodNo = img.prodNo
+		 WHERE o.orderNo = #{orderNo}
+	</select>
+	<select id="getOption" parameterType="String" resultType="OrderOption">
+		SELECT orderProdNo, orderColor, orderSize, orderAmount
+		FROM orderOption
+		WHERE orderProdNo = #{orderProdNo}
+	</select>
 </mapper>
