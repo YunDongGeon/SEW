@@ -16,6 +16,7 @@ import itc.hoseo.sew.member.Member;
 import itc.hoseo.sew.member.MemberService;
 import itc.hoseo.sew.order.OrderOption;
 import itc.hoseo.sew.order.Order;
+import itc.hoseo.sew.order.OrderInven;
 import itc.hoseo.sew.order.OrderList;
 import itc.hoseo.sew.order.OrderService;
 
@@ -25,34 +26,14 @@ public class SewApplicationTests {
 	@Autowired
 	OrderService service;
 	@Test
-	public void addOrder() {
-		Timestamp ts = new Timestamp(System.currentTimeMillis());
-		Order o = new Order();
+	public void test() {
 		OrderOption op = new OrderOption();
-		OrderList ol = new OrderList();
-		o.setProdNo(1);
-		o.setProdAmount(2);
-		o.setProdCost(29900);
-		service.addOrder(o);
-		op.setOrderProdNo(o.getOrderProdNo());
+		OrderInven oi = new OrderInven();
+		op.setProdNo(1);
 		op.setOrderColor("화이트");
-		op.setOrderSize("M 사이즈");
+		op.setOrderSize("S 사이즈");
 		op.setOrderAmount(1);
-		service.addOrderOption(op);
-		ol.setTotalListCost(69900);
-		ol.setTotalDiscount(40000);
-		ol.setTotalDeli(2500);
-		ol.setTotalUsedPoint(0);
-		ol.setTotalCost(29900);
-		ol.setMemId("test");
-		ol.setReceiverContact("테스터");
-		ol.setReceiverContact("01012345678");
-		ol.setDeliZipcode("07583");
-		ol.setDeliAddr1("서울특별시 강서구 강서로 420");
-		ol.setDeliAddr2("서울호서전문학교 1호관 705호");
-		ol.setPayType("신용카드");
-		ol.setOrderDate(ts);
-		service.addOrderList(ol);
+		oi = service.getInven(op);
 	}
 	
 //	@Autowired

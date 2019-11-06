@@ -1,5 +1,7 @@
 package itc.hoseo.sew.order;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import itc.hoseo.sew.cart.Cart;
 import itc.hoseo.sew.cart.CartOption;
@@ -75,9 +79,13 @@ public class OrderController {
 		return "sewProduct/sewDirectOrderPage";
 	}	
 	@PostMapping("/sewCartOrderCheck.do")
-	@Transactional
-	public String cartOrder(Cart c, Order o, OrderOption op, OrderList ol, HttpServletRequest r, HttpSession session, ModelMap m) {
+	@Transactional(rollbackFor = {RuntimeException.class})
+	public String cartOrder(Cart c, Order o, OrderOption op, OrderList ol, OrderInven oi, HttpServletRequest r, 
+				HttpSession session, HttpServletResponse response, ModelMap m) throws RuntimeException {
 		try {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			
 			List<Cart> buyList = new ArrayList<Cart>();
 			Member mem = (Member)session.getAttribute("mem");
 			String memId = mem.getMemId();
@@ -100,6 +108,7 @@ public class OrderController {
 				c.setCartNo(Integer.parseInt(cartNo[i]));
 				buyList.add(cService.getSelectCart(c));
 			}					
+			
 			Timestamp ts = new Timestamp(System.currentTimeMillis());		
 			ol.setMemId(memId);
 			ol.setReceiverContact(ol.getDeliTelNo1()+ol.getDeliTelNo2()+ol.getDeliTelNo3());		
@@ -114,10 +123,69 @@ public class OrderController {
 				service.addOrder(o);						
 				for(int j = 0; j < optionList.size(); j++) {
 					op = new OrderOption();
+					op.setProdNo(o.getProdNo());
 					op.setOrderProdNo(o.getOrderProdNo());
 					op.setOrderColor(optionList.get(j).getProdColor());
 					op.setOrderSize(optionList.get(j).getProdSize());
 					op.setOrderAmount(optionList.get(j).getProdAmount());
+					oi = service.getInven(op);
+					if(op.getOrderSize().equals("S 사이즈")) {
+						int prodInven = oi.getProdSsize();
+						if(prodInven == 0 || prodInven < op.getOrderAmount()) {
+							out.println("<script>"
+											+ "alert('품절된 상품입니다.'); "
+											+ "location.href='myCart.do';"
+									  + "</script>");
+							out.flush();
+							throw new RuntimeException();							
+						} else {
+							prodInven = prodInven - op.getOrderAmount();
+							oi.setProdSsize(prodInven);
+							service.updateInven(oi);
+						}					
+					} else if(op.getOrderSize().equals("M 사이즈")) {
+						int prodInven = oi.getProdMsize();
+						if(prodInven == 0 || prodInven < op.getOrderAmount()) {
+							out.println("<script>"
+									+ "alert('품절된 상품입니다.'); "
+									+ "location.href='myCart.do';"
+							  + "</script>");
+							out.flush();
+							throw new RuntimeException();
+						} else {
+							prodInven = prodInven - op.getOrderAmount();
+							oi.setProdMsize(prodInven);
+							service.updateInven(oi);
+						}
+					} else if(op.getOrderSize().equals("L 사이즈")) {
+						int prodInven = oi.getProdLsize();
+						if(prodInven == 0 || prodInven < op.getOrderAmount()) {
+							out.println("<script>"
+									+ "alert('품절된 상품입니다.'); "
+									+ "location.href='myCart.do';"
+							  + "</script>");
+							out.flush();
+							throw new RuntimeException();
+						} else {
+							prodInven = prodInven - op.getOrderAmount();
+							oi.setProdLsize(prodInven);
+							service.updateInven(oi);
+						}
+					} else if(op.getOrderSize().equals("XL 사이즈")) {
+						int prodInven = oi.getProdXLsize();
+						if(prodInven == 0 || prodInven < op.getOrderAmount()) {
+							out.println("<script>"
+									+ "alert('품절된 상품입니다.'); "
+									+ "location.href='myCart.do';"
+							  + "</script>");
+							out.flush();
+							throw new RuntimeException();
+						} else {
+							prodInven = prodInven - op.getOrderAmount();
+							oi.setProdXLsize(prodInven);
+							service.updateInven(oi);
+						}
+					}
 					service.addOrderOption(op);				
 				}
 			}
@@ -128,48 +196,115 @@ public class OrderController {
 			m.put("orderList", ol);
 	//		m.put("orderProdList", service.getOrderProd(ol.getOrderNo()));
 			return "sewProduct/sewCartOrderCheckout";
-		}catch (Exception e) {
+		} catch (Exception e) {
 			throw new RuntimeException(e);
-		}		
-	}
-	@PostMapping("/sewOrder.do")	
-	public String order(Order o, OrderOption op, OrderList ol, HttpServletRequest r, HttpSession session, ModelMap m) {		
-		Member mem = (Member)session.getAttribute("mem");
-		String memId = mem.getMemId();
-		MyPage mp = new MyPage();		
-		mp.setMemId(memId);
-		int accPoint = Integer.parseInt(r.getParameter("memAccPoint"));
-		mp = mpService.getMemPoint(mp);
-		int memPoint = mp.getMemPoint();		
-		int sumPoint = memPoint-ol.getTotalUsedPoint()+accPoint;		
-		OrderPoint omp = new OrderPoint();
-		omp.setMemId(memId);
-		omp.setMemPoint(sumPoint);		
-		service.updateMemPoint(omp);
-		
-		String [] orderColor = r.getParameterValues("orderColor");
-		String [] orderSize = r.getParameterValues("orderSize");
-		String [] orderAmount = r.getParameterValues("orderAmount");
-		
-		Timestamp ts = new Timestamp(System.currentTimeMillis());
-		ol.setMemId(memId);
-		ol.setReceiverContact(ol.getDeliTelNo1()+ol.getDeliTelNo2()+ol.getDeliTelNo3());		
-		ol.setOrderDate(ts);
-		service.addOrderList(ol);
-		o.setOrderNo(ol.getOrderNo());
-		
-		service.addOrder(o);
-		
-		for(int i = 0; i < orderColor.length; i++) {						
-			op = new OrderOption();
-			op.setOrderProdNo(o.getOrderProdNo());
-			op.setOrderColor(orderColor[i]);
-			op.setOrderSize(orderSize[i]);
-			op.setOrderAmount(Integer.parseInt(orderAmount[i]));
-			service.addOrderOption(op);				
 		}
-		m.put("orderList", ol);
-//		m.put("orderProdList", service.getOrderProd(ol.getOrderNo()));
-		return "sewProduct/sewCartOrderCheckout";
+	}
+	
+	@PostMapping("/sewOrder.do")
+	@Transactional(rollbackFor = {RuntimeException.class})
+	public String order(Order o, OrderOption op, OrderList ol, OrderInven oi, HttpServletRequest r, HttpSession session, 
+			HttpServletResponse response, ModelMap m) throws RuntimeException {
+		try {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			Member mem = (Member)session.getAttribute("mem");
+			String memId = mem.getMemId();
+			MyPage mp = new MyPage();		
+			mp.setMemId(memId);
+			int accPoint = Integer.parseInt(r.getParameter("memAccPoint"));
+			mp = mpService.getMemPoint(mp);
+			int memPoint = mp.getMemPoint();		
+			int sumPoint = memPoint-ol.getTotalUsedPoint()+accPoint;		
+			OrderPoint omp = new OrderPoint();
+			omp.setMemId(memId);
+			omp.setMemPoint(sumPoint);		
+			service.updateMemPoint(omp);
+			
+			String [] orderColor = r.getParameterValues("orderColor");
+			String [] orderSize = r.getParameterValues("orderSize");
+			String [] orderAmount = r.getParameterValues("orderAmount");
+			
+			Timestamp ts = new Timestamp(System.currentTimeMillis());
+			ol.setMemId(memId);
+			ol.setReceiverContact(ol.getDeliTelNo1()+ol.getDeliTelNo2()+ol.getDeliTelNo3());		
+			ol.setOrderDate(ts);
+			service.addOrderList(ol);
+			o.setOrderNo(ol.getOrderNo());
+			
+			service.addOrder(o);
+			
+			for(int i = 0; i < orderColor.length; i++) {						
+				op = new OrderOption();
+				op.setOrderProdNo(o.getOrderProdNo());
+				op.setOrderColor(orderColor[i]);
+				op.setOrderSize(orderSize[i]);
+				op.setOrderAmount(Integer.parseInt(orderAmount[i]));
+				oi = service.getInven(op);
+				if(op.getOrderSize().equals("S 사이즈")) {
+					int prodInven = oi.getProdSsize();
+					if(prodInven == 0 || prodInven < op.getOrderAmount()) {
+						out.println("<script>"
+										+ "alert('품절된 상품입니다.'); "
+										+ "location.href='myCart.do';"
+								  + "</script>");
+						out.flush();
+						throw new RuntimeException();							
+					} else {
+						prodInven = prodInven - op.getOrderAmount();
+						oi.setProdSsize(prodInven);
+						service.updateInven(oi);
+					}					
+				} else if(op.getOrderSize().equals("M 사이즈")) {
+					int prodInven = oi.getProdMsize();
+					if(prodInven == 0 || prodInven < op.getOrderAmount()) {
+						out.println("<script>"
+								+ "alert('품절된 상품입니다.'); "
+								+ "location.href='myCart.do';"
+						  + "</script>");
+						out.flush();
+						throw new RuntimeException();
+					} else {
+						prodInven = prodInven - op.getOrderAmount();
+						oi.setProdMsize(prodInven);
+						service.updateInven(oi);
+					}
+				} else if(op.getOrderSize().equals("L 사이즈")) {
+					int prodInven = oi.getProdLsize();
+					if(prodInven == 0 || prodInven < op.getOrderAmount()) {
+						out.println("<script>"
+								+ "alert('품절된 상품입니다.'); "
+								+ "location.href='myCart.do';"
+						  + "</script>");
+						out.flush();
+						throw new RuntimeException();
+					} else {
+						prodInven = prodInven - op.getOrderAmount();
+						oi.setProdLsize(prodInven);
+						service.updateInven(oi);
+					}
+				} else if(op.getOrderSize().equals("XL 사이즈")) {
+					int prodInven = oi.getProdXLsize();
+					if(prodInven == 0 || prodInven < op.getOrderAmount()) {
+						out.println("<script>"
+								+ "alert('품절된 상품입니다.'); "
+								+ "location.href='myCart.do';"
+						  + "</script>");
+						out.flush();
+						throw new RuntimeException();
+					} else {
+						prodInven = prodInven - op.getOrderAmount();
+						oi.setProdXLsize(prodInven);
+						service.updateInven(oi);
+					}
+				}
+				service.addOrderOption(op);				
+			}
+			m.put("orderList", ol);
+	//		m.put("orderProdList", service.getOrderProd(ol.getOrderNo()));
+			return "sewProduct/sewCartOrderCheckout";
+		} catch (Exception e) {
+			throw new RuntimeException();
+		}
 	}
 }

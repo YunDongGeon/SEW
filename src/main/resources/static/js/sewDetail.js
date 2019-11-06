@@ -32,16 +32,27 @@ $('#colorOption').click(function() {
 	            arr.push(data.prodInven.prodMsize);
 	            arr.push(data.prodInven.prodLsize);
 	            arr.push(data.prodInven.prodXLsize);
+	            
+	            $(".sSizeProd").val(arr[0]);
+	            $(".mSizeProd").val(arr[1]);
+	            $(".lSizeProd").val(arr[2]);
+	            $(".xlSizeProd").val(arr[3]);
+	            
 	            for (var i=0; i<4; i++){
 	            	if(arr[i]==0){
 	            		arr[i]="품절";	            		
 	            	}
 	            }
-
+	            
+	            $(".sSizeProd").val(arr[0]);
+	            $(".mSizeProd").val(arr[1]);
+	            $(".lSizeProd").val(arr[2]);
+	            $(".xlSizeProd").val(arr[3]);
+	            
 	            $("#sizeOption").append(
 	            	`
 	            	<option value="" selected disabled> = 사이즈 = </option>
-            		<option value="S 사이즈" id="sSize">재고 : ${arr[0]} (S 사이즈)</option>
+            		<option value="S 사이즈" id="sSize">재고 : ${arr[0]} (S 사이즈)</option>     		
             		<option value="M 사이즈" id="mSize">재고 : ${arr[1]} (M 사이즈)</option>
             		<option value="L 사이즈" id="lSize">재고 : ${arr[2]} (L 사이즈)</option>
             		<option value="XL 사이즈" id="xlSize">재고 : ${arr[3]} (XL 사이즈)</option>
@@ -260,22 +271,152 @@ function cal(amount, price, listPrice) {
 		$("#totalAmount").val(curAmount);
 		$("#totalPrice").val(Number(totalPrice));
 		$("#totalListPrice").val(Number(totalListPrice));
-	}else{
-		var total = Number($(amount).val()*$(price).val());
-		var totalList = Number($(amount).val()*$(listPrice).val());
-		$(amount).parent("div").parent("div").children(".itemPriceBox").children(".itemPrice").text(numberFormat(total));
-		$(amount).parent("div").parent("div").children(".itemPriceBox").children(".sumPrice").val(total);
-		$(amount).parent("div").parent("div").children(".itemPriceBox").children(".sumListPrice").val(totalList);
-		for(var n=0;n<optionCount;n++){		
-			totalAmount += Number(document.getElementsByClassName('itemAmount')[n].value);
-			totalPrice += Number(document.getElementsByClassName('sumPrice')[n].value);
-			totalListPrice += Number(document.getElementsByClassName('sumListPrice')[n].value);
-		}
-		$(".totalAmount").text(totalAmount);
-		$(".totalPriceTxt").text(numberFormat(totalPrice));
-		$("#totalAmount").val(curAmount);
-		$("#totalPrice").val(Number(totalPrice));
-		$("#totalListPrice").val(Number(totalListPrice));
+	} else {		
+		if($("#sizeOption option:selected").val()=="S 사이즈") {			
+			if($(amount).val()>$(".sSizeProd").val()){				
+				$(amount).val($(".sSizeProd").val());
+				var total = Number($(amount).val()*$(price).val());
+				var totalList = Number($(amount).val()*$(listPrice).val());
+				$(amount).parent("div").parent("div").children(".itemPriceBox").children(".itemPrice").text(numberFormat(total));
+				$(amount).parent("div").parent("div").children(".itemPriceBox").children(".sumPrice").val(total);
+				$(amount).parent("div").parent("div").children(".itemPriceBox").children(".sumListPrice").val(totalList);
+				for(var n=0;n<optionCount;n++){		
+					totalAmount += Number(document.getElementsByClassName('itemAmount')[n].value);
+					totalPrice += Number(document.getElementsByClassName('sumPrice')[n].value);
+					totalListPrice += Number(document.getElementsByClassName('sumListPrice')[n].value);
+				}
+				$(".totalAmount").text(totalAmount);
+				$(".totalPriceTxt").text(numberFormat(totalPrice));
+				$("#totalAmount").val(curAmount);
+				$("#totalPrice").val(Number(totalPrice));
+				$("#totalListPrice").val(Number(totalListPrice));
+			} else {
+				var total = Number($(amount).val()*$(price).val());
+				var totalList = Number($(amount).val()*$(listPrice).val());
+				$(amount).parent("div").parent("div").children(".itemPriceBox").children(".itemPrice").text(numberFormat(total));
+				$(amount).parent("div").parent("div").children(".itemPriceBox").children(".sumPrice").val(total);
+				$(amount).parent("div").parent("div").children(".itemPriceBox").children(".sumListPrice").val(totalList);
+				for(var n=0;n<optionCount;n++){		
+					totalAmount += Number(document.getElementsByClassName('itemAmount')[n].value);
+					totalPrice += Number(document.getElementsByClassName('sumPrice')[n].value);
+					totalListPrice += Number(document.getElementsByClassName('sumListPrice')[n].value);
+				}
+				$(".totalAmount").text(totalAmount);
+				$(".totalPriceTxt").text(numberFormat(totalPrice));
+				$("#totalAmount").val(curAmount);
+				$("#totalPrice").val(Number(totalPrice));
+				$("#totalListPrice").val(Number(totalListPrice));
+			}
+		} else if($("#sizeOption option:selected").val()=="M 사이즈") {
+			if($(amount).val()>$(".mSizeProd").val()){
+				$(amount).val($(".mSizeProd").val());
+				var total = Number($(amount).val()*$(price).val());
+				var totalList = Number($(amount).val()*$(listPrice).val());
+				$(amount).parent("div").parent("div").children(".itemPriceBox").children(".itemPrice").text(numberFormat(total));
+				$(amount).parent("div").parent("div").children(".itemPriceBox").children(".sumPrice").val(total);
+				$(amount).parent("div").parent("div").children(".itemPriceBox").children(".sumListPrice").val(totalList);
+				for(var n=0;n<optionCount;n++){		
+					totalAmount += Number(document.getElementsByClassName('itemAmount')[n].value);
+					totalPrice += Number(document.getElementsByClassName('sumPrice')[n].value);
+					totalListPrice += Number(document.getElementsByClassName('sumListPrice')[n].value);
+				}
+				$(".totalAmount").text(totalAmount);
+				$(".totalPriceTxt").text(numberFormat(totalPrice));
+				$("#totalAmount").val(curAmount);
+				$("#totalPrice").val(Number(totalPrice));
+				$("#totalListPrice").val(Number(totalListPrice));
+			} else {
+				var total = Number($(amount).val()*$(price).val());
+				var totalList = Number($(amount).val()*$(listPrice).val());
+				$(amount).parent("div").parent("div").children(".itemPriceBox").children(".itemPrice").text(numberFormat(total));
+				$(amount).parent("div").parent("div").children(".itemPriceBox").children(".sumPrice").val(total);
+				$(amount).parent("div").parent("div").children(".itemPriceBox").children(".sumListPrice").val(totalList);
+				for(var n=0;n<optionCount;n++){		
+					totalAmount += Number(document.getElementsByClassName('itemAmount')[n].value);
+					totalPrice += Number(document.getElementsByClassName('sumPrice')[n].value);
+					totalListPrice += Number(document.getElementsByClassName('sumListPrice')[n].value);
+				}
+				$(".totalAmount").text(totalAmount);
+				$(".totalPriceTxt").text(numberFormat(totalPrice));
+				$("#totalAmount").val(curAmount);
+				$("#totalPrice").val(Number(totalPrice));
+				$("#totalListPrice").val(Number(totalListPrice));
+			}
+		} else if($("#sizeOption option:selected").val()=="L 사이즈") {
+			alert($("#sizeOption option:selected").val());
+			alert($(amount).val()>$(".lSizeProd").val());
+			if($(amount).val()>$(".lSizeProd").val()){
+				alert('걸림');
+				$(amount).val($(".lSizeProd").val());
+				var total = Number($(amount).val()*$(price).val());
+				var totalList = Number($(amount).val()*$(listPrice).val());
+				$(amount).parent("div").parent("div").children(".itemPriceBox").children(".itemPrice").text(numberFormat(total));
+				$(amount).parent("div").parent("div").children(".itemPriceBox").children(".sumPrice").val(total);
+				$(amount).parent("div").parent("div").children(".itemPriceBox").children(".sumListPrice").val(totalList);
+				for(var n=0;n<optionCount;n++){		
+					totalAmount += Number(document.getElementsByClassName('itemAmount')[n].value);
+					totalPrice += Number(document.getElementsByClassName('sumPrice')[n].value);
+					totalListPrice += Number(document.getElementsByClassName('sumListPrice')[n].value);
+				}
+				$(".totalAmount").text(totalAmount);
+				$(".totalPriceTxt").text(numberFormat(totalPrice));
+				$("#totalAmount").val(curAmount);
+				$("#totalPrice").val(Number(totalPrice));
+				$("#totalListPrice").val(Number(totalListPrice));
+			} 
+			if($(amount).val()<=$(".lSizeProd").val()){
+				var total = Number($(amount).val()*$(price).val());
+				var totalList = Number($(amount).val()*$(listPrice).val());
+				$(amount).parent("div").parent("div").children(".itemPriceBox").children(".itemPrice").text(numberFormat(total));
+				$(amount).parent("div").parent("div").children(".itemPriceBox").children(".sumPrice").val(total);
+				$(amount).parent("div").parent("div").children(".itemPriceBox").children(".sumListPrice").val(totalList);
+				for(var n=0;n<optionCount;n++){		
+					totalAmount += Number(document.getElementsByClassName('itemAmount')[n].value);
+					totalPrice += Number(document.getElementsByClassName('sumPrice')[n].value);
+					totalListPrice += Number(document.getElementsByClassName('sumListPrice')[n].value);
+				}
+				$(".totalAmount").text(totalAmount);
+				$(".totalPriceTxt").text(numberFormat(totalPrice));
+				$("#totalAmount").val(curAmount);
+				$("#totalPrice").val(Number(totalPrice));
+				$("#totalListPrice").val(Number(totalListPrice));
+			}
+		} else if($("#sizeOption option:selected").val()=="XL 사이즈") {
+			if($(amount).val()>$(".xlSizeProd").val()){
+				$(amount).val($(".xlSizeProd").val());
+				var total = Number($(amount).val()*$(price).val());
+				var totalList = Number($(amount).val()*$(listPrice).val());
+				$(amount).parent("div").parent("div").children(".itemPriceBox").children(".itemPrice").text(numberFormat(total));
+				$(amount).parent("div").parent("div").children(".itemPriceBox").children(".sumPrice").val(total);
+				$(amount).parent("div").parent("div").children(".itemPriceBox").children(".sumListPrice").val(totalList);
+				for(var n=0;n<optionCount;n++){		
+					totalAmount += Number(document.getElementsByClassName('itemAmount')[n].value);
+					totalPrice += Number(document.getElementsByClassName('sumPrice')[n].value);
+					totalListPrice += Number(document.getElementsByClassName('sumListPrice')[n].value);
+				}
+				$(".totalAmount").text(totalAmount);
+				$(".totalPriceTxt").text(numberFormat(totalPrice));
+				$("#totalAmount").val(curAmount);
+				$("#totalPrice").val(Number(totalPrice));
+				$("#totalListPrice").val(Number(totalListPrice));
+			} else {
+				var total = Number($(amount).val()*$(price).val());
+				var totalList = Number($(amount).val()*$(listPrice).val());
+				$(amount).parent("div").parent("div").children(".itemPriceBox").children(".itemPrice").text(numberFormat(total));
+				$(amount).parent("div").parent("div").children(".itemPriceBox").children(".sumPrice").val(total);
+				$(amount).parent("div").parent("div").children(".itemPriceBox").children(".sumListPrice").val(totalList);
+				for(var n=0;n<optionCount;n++){		
+					totalAmount += Number(document.getElementsByClassName('itemAmount')[n].value);
+					totalPrice += Number(document.getElementsByClassName('sumPrice')[n].value);
+					totalListPrice += Number(document.getElementsByClassName('sumListPrice')[n].value);
+				}
+				$(".totalAmount").text(totalAmount);
+				$(".totalPriceTxt").text(numberFormat(totalPrice));
+				$("#totalAmount").val(curAmount);
+				$("#totalPrice").val(Number(totalPrice));
+				$("#totalListPrice").val(Number(totalListPrice));
+			}
+		} 
 	}	
 }
 

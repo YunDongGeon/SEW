@@ -33,4 +33,12 @@ public class OrderService {
 	public boolean updateMemPoint(OrderPoint omp) {
 		return repo.updateMemPoint(omp)!=0;
 	}
+	
+	public OrderInven getInven(OrderOption op) {
+		return repo.getInven(op);
+	}
+	
+	public boolean updateInven(OrderInven oi) {
+		return repo.updateInven(oi)!=0;
+	}
 }

@@ -61,8 +61,37 @@
 	<update id="updateMemPoint" parameterType="OrderPoint">
 		UPDATE user SET memPoint = #{memPoint} WHERE memId = #{memId} 	
 	</update>
-	<select id="getInven">
-		SELECT * FROM prodInven 
-		WHERE prodNo=#{prodNo} and prodColor=#{prodColor}
+	<select id="getInven" parameterType="OrderOption" resultType="OrderInven">		
+		SELECT 
+		<if test="orderSize.equals('S 사이즈')">
+			prodNo, prodColor, prodSsize
+		</if>
+		<if test="orderSize.equals('M 사이즈')">
+			prodNo, prodColor, prodMsize
+		</if>
+		<if test="orderSize.equals('L 사이즈')">
+			prodNo, prodColor, prodLsize
+		</if>
+		<if test="orderSize.equals('XL 사이즈')">
+			prodNo, prodColor, prodXLsize
+		</if>
+		FROM prodInven 
+		WHERE prodNo=#{prodNo} and prodColor=#{orderColor}
 	</select>
+	<update id="updateInven" parameterType="OrderInven">
+		UPDATE prodInven 
+		<if test="prodSize.equals('S 사이즈')">
+			SET prodSsize = #{prodSsize}
+		</if>
+		<if test="prodSize.equals('M 사이즈')">
+			SET prodMsize = #{prodMsize}
+		</if>
+		<if test="prodSize.equals('L 사이즈')">
+			SET prodLsize = #{prodLsize}
+		</if>
+		<if test="prodSize.equals('XL 사이즈')">
+			SET prodXLsize = #{prodXLsize}
+		</if>
+		WHERE prodNo = #{prodNo} and prodColor = #{prodColor}
+	</update>
 </mapper>
