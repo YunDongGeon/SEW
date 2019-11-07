@@ -36,7 +36,16 @@
 	<select id="getOrderList" parameterType="Member" resultMap="OrderProdMap">
 		SELECT orderNo, totalCost, orderDate, orderStat 
 		FROM orderList
-		WHERE memId = #{memId};
+		WHERE memId = #{memId}
+		ORDER BY orderDate DESC
+		LIMIT 4;
+	</select>
+	<select id="addOrderList" parameterType="Member" resultMap="OrderProdMap">
+		SELECT orderNo, totalCost, orderDate, orderStat 
+		FROM orderList
+		WHERE memId = #{memId}
+		ORDER BY orderDate DESC
+		LIMIT #{start}, #{end};
 	</select>
 	<resultMap type="Order" id="OrderMap">
 		<result column="orderProdNo" property="orderProdNo"/>

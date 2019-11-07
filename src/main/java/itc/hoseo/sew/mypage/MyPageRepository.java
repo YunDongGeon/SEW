@@ -16,5 +16,6 @@ public interface MyPageRepository {
 	public int editMemInfo(Member mem);	
 	public int withDrawal(Member mem);
 	public List<OrderList> getOrderList(Member mem);
+	public List<OrderList> addOrderList(Member mem);
 	public List<Order> getOrderProd(String s);
 }

@@ -37,6 +37,10 @@ public class MyPageService {
 	public List<OrderList> getOrderList(Member mem) {
 		return repo.getOrderList(mem);
 	}
+
+	public List<OrderList> addOrderList(Member mem) {
+		return repo.addOrderList(mem);
+	}
 	
 	public List<Order> getOrderProd(String s) {
 		return repo.getOrderProd(s);

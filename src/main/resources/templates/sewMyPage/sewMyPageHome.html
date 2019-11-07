@@ -1,19 +1,14 @@
-<!DOCTYPE html>
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>Sew</title>
 <meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link
-	href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap"
-	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css?family=Teko:300&display=swap&subset=devanagari,latin-ext"
-	rel="stylesheet">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Teko:300&display=swap&subset=devanagari,latin-ext" rel="stylesheet">
 <link rel="icon" th:href="@{img/logo/favicon.png}">
-<link th:href="@{vendor/fontawesome-free/css/all.min.css}"
-	rel="stylesheet" type="text/css">
+<link th:href="@{vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
 <link rel="stylesheet" th:href="@{css/open-iconic-bootstrap.min.css}">
 <link rel="stylesheet" th:href="@{css/animate.css}">
 <link rel="stylesheet" th:href="@{css/owl.carousel.min.css}">
@@ -270,9 +265,9 @@
 									</tr>
 								</tbody>
 							</table>
-						</div>
-						<div th:if="${orderList==0}" class="sub_sc" style="min-height: 895px;">
-							<div id="_listContentArea">
+						</div>					
+						<div th:if="${orderList==0}" class="sub_sc" style="height: auto;">
+							<div id="listContentArea">
 								<div class="goods_pay_section ">
 									<div class="goods_group">
 										<ul class="goods_group_list">
@@ -284,51 +279,10 @@
 								</div>								
 							</div>
 						</div>
-						<div th:unless="${orderList==0}" class="sub_sc" style="min-height: 895px;">
-							<div id="_listContentArea">
-								<div class="tit_month">
-									<hr>
-									<span>
-										2019.10
-									</span>									
-								</div>
-								<div class="goods_pay_section" th:each="ol : ${orderList}">
-									<div class="goods_group">
-										<ul class="goods_group_list">
-											<li class="goods_pay_item ">
-												<div class="goods_item">
-													<a href="#" class="goods_thumb">
-														<img th:src="@{'/prodThumb/'+${ol.orderProdList[0].prodThumbName}}" width="90" height="90">
-													</a>
-													<div class="goods_info">
-														<a href="#" class="goods">
-															<p class="name" th:if="${ol.orderProdList.size()==1}" th:text="${ol.orderProdList[0].prodName}"></p>
-															<p class="name" th:unless="${ol.orderProdList.size()==1}">
-																<span th:text="${ol.orderProdList[0].prodName}"></span>(외 <span th:text="${ol.orderProdList.size()-1}"></span>건)
-															</p>														
-															<ul class="info">
-																<li>
-																	<span class="format-money" th:text="${ol.totalCost}"></span><span class="won">원</span>
-																</li>
-																<li class="date">
-																	<span th:text="${#strings.replace(#strings.substring(ol.orderDate, 0, 11), '-', '.')}"><span>
-																</li>
-															</ul>
-														</a>														
-														<p class="guide" th:text="${ol.orderStat}"></p>
-													</div>
-												</div>
-												<div class="button_item" th:if="${ol.orderStat=='배송 완료'}">
-													<button class="writeReviewBtn">리뷰쓰기</button>
-												</div>
-											</li>
-										</ul>
-									</div>		
-								</div>								
-							</div>
-							<div class="viewmore_btn_section" id="_moreButton" th:if="${orderList.size()>4}">
-								<button id="addColor" type="button" class="btn btn-outline-dark">더보기</button>
-							</div>							
+						<div th:unless="${orderList==0}" class="sub_sc" style="height: auto;">
+							<div id="listContentArea"></div>
+						</div>
+						<div class="viewmore_btn_section" id="moreButton">							
 						</div>
 					</div>
 				</div>
@@ -370,27 +324,182 @@
 	<script th:src="@{js/sewJoin.js}"></script>
 	<script th:src="@{js/sewMyPage.js}"></script>
 	<script th:src="@{js/updateLater.js}"></script>
-	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script type="text/javascript">
+	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>	
+	<script type="text/javascript">	
+		String.prototype.replaceAll = function(org, dest) {
+		    return this.split(org).join(dest);
+		}		
+		/*<![CDATA[*/
+			var json = '[[${orderList}]]';
+			json = json.replaceAll('&quot;', '"');
+			var ol = JSON.parse(json);		
+		/*]]>*/
+		for(var i=0; i<ol.length; i++){
+			var prodThumbName = ol[i].orderProdList[0].prodThumbName;
+			var prodName = ol[i].orderProdList[0].prodName;
+			var orderStat = ol[i].orderStat;			
+			var orderDate = ol[i].orderDate;
+			if(ol[i].orderProdList.length>1){
+				var other = ol[i].orderProdList.length-1;
+				if(orderStat=="배송 완료"){
+					$("#listContentArea").append(									
+						'<div class="goods_pay_section">'+
+							'<div class="goods_group">'+
+								'<ul class="goods_group_list">'+
+									'<li class="goods_pay_item ">'+
+										'<div class="goods_item">'+
+											'<a href="#" class="goods_thumb">'+
+												'<img src="/prodThumb/'+prodThumbName+'" width="90" height="90">'+										
+											'</a>'+
+											'<div class="goods_info">'+
+												'<a href="#" class="goods">'+												
+													'<p class="name">'+
+														'<span>'+prodName+'</span>(외 <span>'+other+'</span>건)'+
+													'</p>'+														
+													'<ul class="info">'+
+														'<li>'+
+															'<span class="format-money">'+ol[i].totalCost+'</span><span class="won">원</span>'+
+														'</li>'+
+														'<li class="date">'+
+															'<span>'+orderDate+'<span>'+
+														'</li>'+
+													'</ul>'+
+												'</a>'+														
+												'<p class="guide">'+orderStat+'</p>'+
+											'</div>'+
+										'</div>'+
+										'<div class="button_item">'+
+											'<button class="writeReviewBtn">리뷰쓰기</button>'+
+										'</div>'+
+									'</li>'+
+								'</ul>'+
+							'</div>'+
+						'</div>'
+					);	
+				} else {
+					$("#listContentArea").append(									
+						'<div class="goods_pay_section">'+
+							'<div class="goods_group">'+
+								'<ul class="goods_group_list">'+
+									'<li class="goods_pay_item ">'+
+										'<div class="goods_item">'+
+											'<a href="#" class="goods_thumb">'+
+												'<img src="/prodThumb/'+prodThumbName+'" width="90" height="90">'+										
+											'</a>'+
+											'<div class="goods_info">'+
+												'<a href="#" class="goods">'+												
+													'<p class="name">'+
+														'<span>'+prodName+'</span>(외 <span>'+other+'</span>건)'+
+													'</p>'+														
+													'<ul class="info">'+
+														'<li>'+
+															'<span class="format-money">'+ol[i].totalCost+'</span><span class="won">원</span>'+
+														'</li>'+
+														'<li class="date">'+
+															'<span>'+orderDate+'<span>'+
+														'</li>'+
+													'</ul>'+
+												'</a>'+														
+												'<p class="guide">'+orderStat+'</p>'+
+											'</div>'+
+										'</div>'+										
+									'</li>'+
+								'</ul>'+
+							'</div>'+
+						'</div>'
+					);		
+				}
+			} else {
+				if(orderStat=="배송 완료"){
+					$("#listContentArea").append(									
+						'<div class="goods_pay_section">'+
+							'<div class="goods_group">'+
+								'<ul class="goods_group_list">'+
+									'<li class="goods_pay_item ">'+
+										'<div class="goods_item">'+
+											'<a href="#" class="goods_thumb">'+
+												'<img src="/prodThumb/'+prodThumbName+'" width="90" height="90">'+										
+											'</a>'+
+											'<div class="goods_info">'+
+												'<a href="#" class="goods">'+
+													'<p class="name">'+prodName+'</p>'+
+													'<ul class="info">'+
+														'<li>'+
+															'<span class="format-money">'+ol[i].totalCost+'</span><span class="won">원</span>'+
+														'</li>'+
+														'<li class="date">'+
+															'<span>'+orderDate+'<span>'+
+														'</li>'+
+													'</ul>'+
+												'</a>'+														
+												'<p class="guide">'+orderStat+'</p>'+
+											'</div>'+
+										'</div>'+	
+										'<div class="button_item">'+
+											'<button class="writeReviewBtn">리뷰쓰기</button>'+
+										'</div>'+
+									'</li>'+
+								'</ul>'+
+							'</div>'+
+						'</div>'
+					);	
+				}else{
+					$("#listContentArea").append(									
+						'<div class="goods_pay_section">'+
+							'<div class="goods_group">'+
+								'<ul class="goods_group_list">'+
+									'<li class="goods_pay_item ">'+
+										'<div class="goods_item">'+
+											'<a href="#" class="goods_thumb">'+
+												'<img src="/prodThumb/'+prodThumbName+'" width="90" height="90">'+										
+											'</a>'+
+											'<div class="goods_info">'+
+												'<a href="#" class="goods">'+
+													'<p class="name">'+prodName+'</p>'+
+													'<ul class="info">'+
+														'<li>'+
+															'<span class="format-money">'+ol[i].totalCost+'</span><span class="won">원</span>'+
+														'</li>'+
+														'<li class="date">'+
+															'<span>'+orderDate+'<span>'+
+														'</li>'+
+													'</ul>'+
+												'</a>'+														
+												'<p class="guide">'+orderStat+'</p>'+
+											'</div>'+
+										'</div>'+										
+									'</li>'+
+								'</ul>'+
+							'</div>'+
+						'</div>'
+					);	
+				}					
+			}
+		}
+		if(ol.length==4){
+			$("#moreButton").append(
+				'<button onclick="addOrderList()" type="button" class="btn btn-outline-dark moreBtn">더보기</button>'
+			);
+		}
 		Number.prototype.format = function(){
 		    if(this==0) return 0;
-	
+		
 		    var reg = /(^[+-]?\d+)(\d{3})/;
 		    var n = (this + '');
-	
+		
 		    while (reg.test(n)) n = n.replace(reg, '$1' + ',' + '$2');
-	
+		
 		    return n;
 		};
 		String.prototype.format = function(){
 		    var num = parseFloat(this);
 		    if( isNaN(num) ) return "0";
-
+		
 		    return num.format();
 		};
-		jQuery('.format-money').text(function() {
-		    jQuery(this).text(
-		        jQuery(this).text().format()
+		$('.format-money').text(function() {
+		    $(this).text(
+		        $(this).text().format()
 		    );
 		});
 	</script> 

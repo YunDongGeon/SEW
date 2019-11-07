@@ -22,4 +22,6 @@ public class Member {
 	private String subject;
 	private String content;
 	private String receiver;
+	private int start;
+	private int end;
 }

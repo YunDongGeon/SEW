@@ -9,12 +9,22 @@ import javax.mail.Session;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.gson.GsonAutoConfiguration;
+import org.springframework.boot.autoconfigure.gson.GsonBuilderCustomizer;
+import org.springframework.boot.autoconfigure.gson.GsonProperties;
+import org.springframework.boot.jackson.JsonObjectSerializer;
+import org.springframework.boot.json.GsonJsonParser;
+import org.springframework.http.converter.json.GsonFactoryBean;
+import org.springframework.http.converter.json.GsonHttpMessageConverter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import itc.hoseo.sew.member.Member;
 import itc.hoseo.sew.member.MemberService;
@@ -42,15 +52,36 @@ public class MyPageController {
 	
 	@GetMapping("/myPage.do")
 	public String myPage(ModelMap m, Member mem, HttpSession session) {
-		List<OrderList> orderList = new ArrayList<OrderList>();
+		List<OrderList> orderList = new ArrayList<OrderList>();		
 		mem = (Member)session.getAttribute("mem");
 		if(service.getOrderList(mem).isEmpty()) {
 			m.put("orderList", 0);
 		} else {
 			orderList = service.getOrderList(mem);
-			m.put("orderList", orderList);
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-mm-dd").create();
+			String jArray = gson.toJson(orderList);
+			String json = jArray.replaceAll("&quot;", "\"");
+			m.put("orderList", json);
 		}
 		return "sewMyPage/sewMyPageHome";		
+	}
+	@PostMapping("/addOrderList.do")
+	@ResponseBody
+	public Map<Object, Object> addOrderList(@RequestBody Member mem, HttpSession session) {
+		List<OrderList> orderList = new ArrayList<OrderList>();		
+		Member member = (Member)session.getAttribute("mem");
+		mem.setMemId(member.getMemId());
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		if(service.addOrderList(mem).isEmpty()) {
+			map.put("orderList", 0);
+		} else {
+			orderList = service.addOrderList(mem);
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-mm-dd").create();
+			String jArray = gson.toJson(orderList);
+			String json = jArray.replaceAll("&quot;", "\"");
+			map.put("orderList", json);
+		}
+		return map;
 	}
 	
 	@GetMapping("/editMember.do")
