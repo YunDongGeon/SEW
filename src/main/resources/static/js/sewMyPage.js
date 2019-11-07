@@ -40,7 +40,6 @@ $(document).ready(function(){
 var start=4;
 var end=8;
 function addOrderList(){
-	var prevLength;
 	$.ajax({
 		async: true,
 	    type : 'POST',			
@@ -49,18 +48,11 @@ function addOrderList(){
 	    dataType : "json",
 	    contentType: "application/json; charset=UTF-8",
 	    success : function(data) {	
-	    	prevLength = ol.length;
-	    	var ol = JSON.parse(data.orderList);
-			if(data.orderList==0){				
+	    	var ol = JSON.parse(data.orderList);			
+			if(ol==0){				
 				start=Number(start-4);
 				end=Number(end-4);
 			}else{
-				start += 4;
-		    	end += 4;
-			}
-			if(ol.length==prevLength){
-				
-			} else {
 				for(var i=0; i<ol.length; i++){
 					var prodThumbName = ol[i].orderProdList[0].prodThumbName;
 					var prodName = ol[i].orderProdList[0].prodName;
@@ -203,11 +195,12 @@ function addOrderList(){
 						}					
 					}
 				}
-			}
-			
+			}			
 	    },
 	    error : function(error) {
 	        alert("error : " + error);
 	    }
 	});
+	start = start + 4;
+	end = end + 4;
 }
